@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>技术部</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/table.css">
+	<link rel="stylesheet" type="text/css" href="../css/dialog.css">
+	<script src="../js/jquery.min.js" type="text/javascript"></script> 
+	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
+	<script src="../js/jquery-ui.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	    /*$(document).ready( function() {
+	      $('#tab-container').easytabs();
+	    });*/
+  </script>
+</head>
+<body>
+	<div id="tab-container" class="tab-container">
+		<ul class="tabs">
+			<li class="tab"><a href="#price-order" id="price-table-enter">定价表</a></li>
+			<li class="tab"><a href="#order-table" id="order-table-enter">下单表</a></li>
+			<li class="tab"><a href="#order-table1" id="order-table-enter1">下单表</a></li>
+			<li class="tab"><a href="#wear-in" id="wear-in-enter">成衣入库</a></li>
+			<li class="tab"><a href="#wear-send" id="wear-send-enter">成衣发出</a></li>
+			<li class="tab"><a href="#outbuy" id="outbuy-enter">外采</a></li>
+			<li class="tab"><a href="#outbuy-in" id="outbuy-in-enter">外采入库</a></li>
+			<li class="tab"><a href="#outbuy-send" id="outbuy-send-enter">外采发出</a></li>
+			<li class="tab"><a href="#replenishment" id="replenishment-enter">补货</a></li>
+			<li class="tab"><a href="#replenishment1" id="replenishment-enter1">补货</a></li>
+			<li class="tab"><a href="#reduce-apply" id="reduce-apply-enter">加裁申请</a></li>
+		</ul>
+	
+		<div class="panel-container">
+			<div class="tool-list"></div>
+			<div class="close-list">
+				<div class="table-box">
+					<p class="box-title">
+						
+					</p>
+					<div class="table-title">
+						<table>
+							<tr></tr>
+						</table>
+					</div>
+					<div class="table-body">
+					</div>
+				</div>
+			</div>
+			
+			<!-- <div id="price-order">
+				<div class="half-top" id="price-table">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="25%">变更信息</td>
+							<td width="15%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">待审批</div>
+				<div class="half-bottom" id="price-done">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="15%">
+							<input list="status" value="状态">
+							</td>
+							<td width="20%">变更信息</td>
+							<td width="15%">完成定价</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="order-table">
+				<div class="half-top" id="order-examine">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="30%">变更信息</td>
+							<td width="15%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="30%"></td>
+								<td width="15%">
+									<div class="button1">申请</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">待审批</div>
+				<div id="season-done" class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="30%">变更信息</td>
+							<td width="15%">完成下单</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="30%"></td>
+								<td width="15%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="order-table1">
+				<div class="third-top" id="order-examine">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="30%">变更信息</td>
+							<td width="15%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="30%"></td>
+								<td width="15%">
+									<div class="button1">申请</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title3">加盟下单</div>
+				<div id="" class="third-center">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="30%">变更信息</td>
+							<td width="15%">完成下单</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="30%"></td>
+								<td width="15%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title4">待审批</div>
+				<div id="order-done" class="third-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="单据编号">
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="30%">变更信息</td>
+							<td width="15%">完成下单</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="30%"></td>
+								<td width="15%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="wear-in">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">入库时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="25%">注意信息</td>
+							<td width="20%">备注</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="25%"></td>
+								<td width="20%">备注</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="wear-send">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">入库时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+							</td>
+							<td width="25%">注意信息</td>
+							<td width="20%">备注</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="25%"></td>
+								<td width="20%">备注</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="单据编号">
+								<datalist id="no">
+									<option value="单据编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">建档时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+								<datalist id="status">
+									<option value="状态"></option>
+									<option value="1"></option>
+									<option value="2"></option>
+								</datalist>
+							</td>
+							<td width="15%">下单表</td>
+							<td width="15%">供应商</td>
+							<td width="15%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">贵尚</td>
+								<td width="15%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="15%"></td>
+								<td width="15%">
+									<div class="button1">申请</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">待审批</div>
+				<div id="season-done" class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="单据编号">
+								<datalist id="no">
+									<option value="单据编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">接收时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+							<input list="status" value="状态">
+								<datalist id="status">
+									<option value="状态"></option>
+									<option value="1"></option>
+									<option value="2"></option>
+								</datalist>
+							</td>
+							<td width="15%">下单表</td>
+							<td width="15%">供应商</td>
+							<td width="15%">完成下单</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">贵尚</td>
+								<td width="15%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="15%"></td>
+								<td width="15%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy-in">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">入库时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="状态">
+							</td>
+							<td width="15%">供应商</td>
+							<td width="10%">订单数</td>
+							<td width="10%">入库数</td>
+							<td width="15%">处理结果</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%"></td>
+								<td width="15%">供应商</td>
+								<td width="10%">1</td>
+								<td width="10%">1</td>
+								<td width="15%">
+									<input type="text" placeholder="填写输入" />
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy-send">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">出库时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="状态">
+							</td>
+							<td width="10%">订单数</td>
+							<td width="10%">入库数</td>
+							<td width="30%">备注</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%"></td>
+								<td width="15%">1</td>
+								<td width="10%">1</td>
+								<td width="30%"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="replenishment">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">补货时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">补货数量</td>
+							<td width="25%">补货仓</td>
+							<td width="25%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%"></td>
+								<td width="25%"></td>
+								<td width="25%">
+									<div class="button1">申请</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="reduce-apply">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">
+							<input list="apply-department" value="申请部门">
+								<datalist id="apply-department">
+									<option value="申请部门"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">申请原因</td>
+							<td width="10%">下单表</td>
+							<td width="10%">多裁数</td>
+							<td width="30%">审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">买手部</td>
+								<td width="10%">女装</td>
+								<td width="10%"></td>
+								<td width="10%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="10%">1</td>
+								<td width="25%">
+									<div class="button1">不同意</div>
+									<div class="button1">同意</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+<div id="dialog">
+	<div class="pwd-container">
+		<span class="pwd-title">款号：</span>
+		<input type="text" id="design_no" value="">
+	</div>
+	<!-- <div class="pwd-container">
+		<span class="pwd-title">女/男装：</span>
+		<input type="text" id="d_gender" id="d_gender" value="" readonly="readonly">
+	</div> -->
+	<div class="pwd-container">
+		<span class="pwd-title">补货数量：</span>
+		<input type="text" id="reple_count" id="reple_count"value="">
+	</div>
+	<div class="pwd-container">
+		<span class="pwd-title">补货仓：</span>
+		<input type="text" id="reple_storage" id="reple_storage" value="">
+	</div>
+</div>
+<datalist id="no">
+	<option value="款号"></option>
+</datalist>
+<script src="../js/global.js"></script>
+<script src="../js/table.js" type="text/javascript"></script>
+<script src="../js/dialog.js" type="text/javascript"></script>
+<script src="js/buyer.js"></script>
+</body>
+</html>

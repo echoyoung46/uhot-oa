@@ -1,0 +1,93 @@
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+	display: block;
+}
+html,body{font-family: 'Microsoft YaHei';background: #32323a; width: 100%; height: 100%;overflow: hidden;min-width: 960px;}
+/* ul{list-style: none;}
+ul li{float: left;} */
+.round {border-radius: 50%}
+.h1 {text-shadow: 1px 2px #22c3aa,2px 4px #aee2d9; font-weight: bold; font-size: 4.25em;font-family: 'SimHei';margin: 40px 0;}
+.h2 {font-weight: bold; font-size: 3.25em; font-family: 'Microsoft YaHei';}
+.h3 {font-weight: bold; font-family: 'Microsoft YaHei'; font-size: 2.55em;margin: 17px 0;}
+.h4 {font-weight: bold; opacity: 0.7;font-family: 'Microsoft YaHei'; font-size: 1.5em;}
+.color1 {color: #fff;}
+.color2 {color: #008080;}
+.color3 {color: #7DEC0F;margin-bottom: 21px;}
+.bg1{background: #008080;}
+.bg2{background: #ddd;}
+.bg-blue {background: #65bee6;}
+
+.panel-title1{position: absolute; width: 93%; border-bottom: 2px solid #ccc;}
+.panel-title2{position: absolute; width: 100%; border-bottom: 2px solid #ccc;top: 52%;}
+.panel-title3{position: absolute; width: 100%; border-bottom: 2px solid #ccc;top: 40%;}
+.panel-title4{position: absolute; width: 100%; border-bottom: 2px solid #ccc;top: 66%;}
+.table-body{overflow-y: auto;}
+.table-title{width: 100%; table-layout: fixed; border-bottom: 1px solid #ccc; z-index: 2;}
+.table-list{width: 100%;}
+.panel-container .table-body{width: 100%;}
+
+.dress-list {
+	float: left;
+	width: 93%;
+}
+.toollist {
+	float: right;
+	width: 7%;
+}
+.toollist ul {
+	list-style: none;
+}	
+.toollist ul li {
+	height: 35px;
+	cursor: pointer;
+}
+.toollist .operator{
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+.one{/* position: absolute;height: 82%; */}
+.half-bottom{position: absolute; height: 34%; top: 57%;overflow-y: auto;}
+.half-top{position: absolute; height: 34%; top: 17%;overflow-y: auto;}
+.third-top{padding-top:30px; height: 23%;overflow-y: auto;}
+.third-center{position: absolute;top: 45%; height: 20%;overflow-y: auto;}
+.third-bottom{position: absolute;top: 71%; height: 20%overflow-y: auto;}
+
+.section{position: relative;height: 100%; width: 100%; display: inline-block;border: none;overflow: hidden;}
+.tabs { margin: 0; padding: 0; }
+.tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; }
+.tab a {color: #337ab7; font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }
+.tab a:hover { text-decoration: underline; }
+.tab.active { background: #fff; padding-top: 6px; position: relative; top: 1px; border-color: #666; }
+.tab a.active { font-weight: bold; }
+.tab-container { height: 96%; padding: 11px; -moz-border-radius: 0 4px 4px 4px; -webkit-border-radius: 0 4px 4px 4px;}
+.panel-container { height: 96%; width: 100%; background: #fff; border: solid #666 1px; padding-left: 11px; -moz-border-radius: 0 4px 4px 4px; -webkit-border-radius: 0 4px 4px 4px; margin-bottom: 10px;overflow-y: auto;}
+
+.left{position: absolute; top: 0; ;left: 0; height: 100%; width: 20%;}
+.left div{width: 90%; height: 46%; border-radius: 5%;margin: 10px 20px;}
+.helpReq{background: #65bee6;}
+.changeNotice{background: #65d482;}
+
+.right{position: absolute; top: 0; ;left: 20%; height: 100%; width: 80%;}
+
+table tr{height: 27px; line-height: 27px;}
+table td{position: relative; text-align: left;}
+table td input{display: inline-block; border: none;}
+table td:nth-child(1) input{width: 60%;}
+table td .options {position: absolute;width: 0; height: 0; overflow: hidden;   border: 5px solid transparent;border-top-color: #000;left: 41%;top: 36%;margin-left: -3px;}
+
+#setGrade{width: 20%;}
+.sample-grade{float: right; margin-right: 15px;}
+.button1{ background: #ffb400; display: inline; padding: 2px 8px; cursor: pointer; margin-right: 10px;}
+.sheetLink img{width: 33px; height: 30px;}
+
+.operator,.list-button,.apply_dubversion{background: #65bee6;padding: 5px;border-radius: 5px; font-size: 12px;cursor: pointer;margin-right: 10px;}
+.check-box {
+	width: 17px; 
+	height: 16px;
+	display: inline-block;
+	background: url(../image/checkbox.png);
+	background-position: 0 0;
+}
+.check-box.select {
+	background-position: 0 16px;
+}

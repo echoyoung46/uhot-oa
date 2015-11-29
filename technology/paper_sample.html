@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>技术部</title>
+	<script src="../js/jquery.min.js" type="text/javascript"></script> 
+	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
+	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
+	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<script type="text/javascript">
+	    $(document).ready( function() {
+	      $('#tab-container').easytabs();
+	    });
+  </script>
+</head>
+<body>
+	<div id="tab-container" class="tab-container">
+		<ul class="tabs">
+			<li class="tab"><a href="#sample" id="sample-enter">纸样制作</a></li>
+			<li class="tab"><a href="#process-sheet" id="process-sheet-enter">工艺单</a></li>
+			<li class="tab"><a href="#marker" id="marker-enter">唛架</a></li>
+		</ul>
+		<div class="panel-container">
+			<div id="sample">
+				<div id="applyManu" class="half-top">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="20%">
+								<input list="no" value="设计款号">
+								<datalist id="no">
+									<option value="设计款号"></option>
+								</datalist>
+							</td>
+							<td width="20%">申请时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="15%">
+								<input list="series" value="系列">
+								<datalist id="series">
+									<option value="系列"></option>
+									<option value="贵尚"></option>
+									<option value="雅尚"></option>
+									<option value="器尚"></option>
+									<option value="风尚"></option>
+								</datalist>
+							</td>
+							<td width="25%">制作完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="20%">111</td>
+								<td width="20%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="20%">贵尚</td>
+								<td width="25%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">纸样修改</div>
+				<div id="sampleDone" class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="20%">
+								<input list="no" value="设计款号">
+								<datalist id="no">
+									<option value="设计款号"></option>
+								</datalist>
+							</td>
+							<td width="20%">申请时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="20%">
+							<input list="series" value="系列">
+								<datalist id="series">
+									<option value="系列"></option>
+									<option value="贵尚"></option>
+									<option value="雅尚"></option>
+									<option value="器尚"></option>
+									<option value="风尚"></option>
+								</datalist>
+							</td>
+							<td width="25%">制作完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="20%">111</td>
+								<td width="20%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="20%">贵尚</td>
+								<td width="25%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="process-sheet">
+				<div class="panel-title1">工艺单</div>
+				<div id="sheet" class="half-top">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="设计款号">
+								<datalist id="no">
+									<option value="设计款号"></option>
+								</datalist>
+							</td>
+							<td width="20%">完成时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+							<input list="series" value="系列">
+								<datalist id="series">
+									<option value="系列"></option>
+									<option value="贵尚"></option>
+									<option value="雅尚"></option>
+									<option value="器尚"></option>
+									<option value="风尚"></option>
+								</datalist>
+							</td>
+							<td width="20%">申请审批</td>
+							<td width="20%">备注</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="20%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">贵尚</td>
+								<td width="20%"><div class="button1">申请</div></td>
+								<td width="20%">备注</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">修改工艺单</div>
+				<div id="editSheet" class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="设计款号">
+								<datalist id="no">
+									<option value="设计款号"></option>
+								</datalist>
+							</td>
+							<td width="20%">完成时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+							<input list="series" value="系列">
+								<datalist id="series">
+									<option value="系列"></option>
+									<option value="贵尚"></option>
+									<option value="雅尚"></option>
+									<option value="器尚"></option>
+									<option value="风尚"></option>
+								</datalist>
+							</td>
+							<td width="20%">修改原因</td>
+							<td width="20%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="20%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">贵尚</td>
+								<td width="20%">修改原因</td>
+								<td width="20%"><div class="button1">申请</div></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="marker">
+				<div class="panel-title1">唛架</div>
+				<div id="sheet" class="half-top">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="设计款号">
+							</td>
+							<td width="20%">完成时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+							<input list="series" value="系列">
+							</td>
+							<td width="20%">申请审批</td>
+							<td width="20%">备注</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">修改唛架</div>
+				<div id="editSheet" class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="设计款号">
+							</td>
+							<td width="20%">申请时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="系列">
+							</td>
+							<td width="20%">修改原因</td>
+							<td width="20%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<datalist id="no">
+		<option value="设计款号"></option>
+	</datalist>
+	<datalist id="gender">
+		<option value="女/男装"></option>
+		<option value="女装"></option>
+		<option value="男装"></option>
+	</datalist>
+	<datalist id="series">
+		<option value="系列"></option>
+		<option value="贵尚"></option>
+		<option value="雅尚"></option>
+		<option value="器尚"></option>
+		<option value="风尚"></option>
+	</datalist>
+<script src="../js/global.js"></script>
+<script src="js/paper_sample.js"></script>	
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>预采任务单</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/purchase_sheet.css">
+</head>
+<body>
+	<div class="toolbar">
+		<ul class="toolBtn">
+			<li class="saveBtn">保存</li>
+			<li class="closeBtn">取消</li>
+		</ul>
+	</div>
+	<div class="sheet">
+		<div class="sheet-title">预采任务单</div>
+		<div class="sheet-body">
+			<div class="sheet-tr">
+				<div class="design-no sheet-td">
+					<span>设计款号：</span><input id="design_no" type="text" name="design_no" value="">
+				</div>
+				<div class="sheet-td">
+					<span>男/女装：</span>
+					<select name="gender" id="gender">
+						<option value="2">女装</option>
+						<option value="1">男装</option>
+					</select>
+				</div>
+				<div class="sheet-td">
+					<span>系列：</span>
+					<select name="series" id="series">
+						<option value="1">贵尚</option>
+						<option value="2">雅尚</option>
+						<option value="3">器尚</option>
+						<option value="4">风尚</option>
+						<option value="5">外采</option>
+					</select>
+				</div>
+				<div class="sheet-td">
+					<span>品类：</span>
+					<input type="text" name="style" id="style" value="">
+				</div>
+				<div class="sheet-td">
+					<span>投产编号：</span><input type="text" name="producct_no" id="product_no" value="">
+				</div>
+				<div class="sheet-td">
+					<span>自产/外采：</span>
+					<select name="source" id="source">
+						<option value="1">自产</option>
+						<option value="2">外采</option>
+					</select>
+				</div>
+				<div class="sheet-td">
+					<span>波段：</span>
+					<input type="text" name="band" id="band" value="">
+				</div>
+			</div>
+			<div class="sheet-tr">
+				<div class="sheet-td close-img"></div>
+				<div class="sheet-td">
+					<div class="close-list">
+						<div class="clost-list-tr">
+							<div class="close-list-td">
+								<span>颜色</span>
+								<span>尺码</span>
+							</div>
+							<div class="close-list-td">S</div>
+							<div class="close-list-td">M</div>
+							<div class="close-list-td">L</div>
+							<div class="close-list-td">XL</div>
+							<div class="close-list-td">XXL</div>
+							<div class="close-list-td">合计：</div>
+						</div>
+						<div class="clost-list-tr">
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+						</div>
+						<div class="clost-list-tr">
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+						</div>
+						<div class="clost-list-tr">
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+						</div>
+						<div class="clost-list-tr">
+							<div class="close-list-td">小计：</div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+							<div class="close-list-td"><input type="text" class="close-detail" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="sheet-td remark">
+					<div class="remark-title">备注</div>
+					<div class="remark-detail">
+						<textarea name="" id="remark-detail"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="sheet-tr">
+				<table class="fabric-table">
+					<tr class="fabric-table-title">
+						<td class="fabric-table-td green-bg">材料类别</td>
+						<td class="fabric-table-td green-bg">所用部位</td>
+						<td class="fabric-table-td green-bg">厂家名称及编号</td>
+						<td class="fabric-table-td green-bg">厂家色号及颜色形容</td>
+						<td class="fabric-table-td green-bg">材料规格M</td>
+						<td class="fabric-table-td green-bg">材料有效规格M</td>
+						<td class="fabric-table-td green-bg">单位</td>
+						<td class="fabric-table-td green-bg">预估单件用量</td>
+						<td class="fabric-table-td yellow-bg">单间损耗</td>
+						<td class="fabric-table-td yellow-bg">调样单价/元</td>
+						<td class="fabric-table-td yellow-bg">咨询大货价/元</td>
+						<td class="fabric-table-td yellow-bg">样衣用量总价/元</td>
+						<td class="fabric-table-td yellow-bg">备注</td>
+					</tr>
+					<tr>
+							<td rowspan="10"><input type="text" class="fabric-input" />面料</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>M</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>3%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>M</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>3%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>M</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>3%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>M</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>	
+						<tr class="subtotal">
+							<td>小计</td>
+							<td colspan="7"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>-</td>
+							<td></td>
+						</tr>
+				</table>
+			</div>
+			<div class="sheet-tr">
+				<table class="fabric-table">
+					<tr>
+							<td rowspan="10"><input type="text" class="fabric-input" />辅料</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>条</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>1%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" />个</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>1%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>M</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>1%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>	
+						<tr class="subtotal">
+							<td>小计</td>
+							<td colspan="7"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>-</td>
+							<td></td>
+						</tr>
+				</table>
+			</div>
+			<div class="sheet-tr">
+				<table class="fabric-table">
+					<tr>
+							<td rowspan="3"><input type="text" class="fabric-input" />工艺类</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>条</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>1%</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" />-</td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" />-</td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td>个</td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" /></td>
+							<td><input type="text" class="fabric-input" />-</td>
+							<td><input type="text" class="fabric-input" /></td>
+						</tr>
+						<tr class="subtotal">
+							<td>小计</td>
+							<td colspan="7"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>-</td>
+							<td></td>
+						</tr>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+<script src="../js/jquery.min.js"></script>
+<script>
+var newObj = {};
+$(function() {
+	$(".saveBtn").bind('click', function() {
+		newObj.designNo = parseInt($("#design_no").val());
+		newObj.gender = parseInt($("#gender").val());
+		newObj.series = parseInt($("#series").val());
+		newObj.style = $("#style").val();
+		newObj.source = parseInt($("#source").val());
+		var nowTime = new Date();
+		newObj.newTime = nowTime.getTime();
+		newObj.timeType = "filing_time";
+		console.log(newObj);
+
+		$.ajax({
+			url: '../include/schedule/add_dress.php',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {designNo: newObj.designNo, series: newObj.series, gender: newObj.gender, style: newObj.style,  source: newObj.source, newTime: newObj.newTime, timeType: newObj.timeType}
+		})
+		.done(function(data) {
+			console.log(data);
+			if(data.ret==0){
+				console.log(data.design_no);
+			}else if(data.ret==1001){
+			}else if(data.ret==1002){
+			}else{
+			}	
+
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+	});
+
+
+	$(".closeBtn").bind('click', function() {
+
+	});
+})
+</script>
+</body>
+</html>

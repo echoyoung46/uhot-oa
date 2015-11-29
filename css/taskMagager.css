@@ -1,0 +1,23 @@
+html,body{background: #32323a; width: 100%; height: 100%; color: #eee;}
+
+section{height: 100%;display: inline-block;border: none;} 
+div{border-radius: 5%; text-align: center;/* display: block; */}
+#msgManager{position: absolute;top: 0;left: 0;width: 20%;}
+#msg{ margin: 17px 21px 0 21px; height: 44%; width: 83%; background: #8ba3fe;}
+#mail{ margin: 35px 21px; height: 43%; width: 83%; background: #6bdeeb;}
+
+#season{position: absolute;left: 20%;width: 59%;}
+#season div{width: 27%; height: 44%; float: left;margin: 17px 25px; text-align: center;font-size: 2.2em;font-weight: bold;}
+#spring{background: #c4a9ff;}
+#summer1{background: #b99bfd;}
+#summer2{background: #b392fe;}
+#autumn{background: #CCF27C;}
+#winter1{background: #C7F267;}
+#winter2{background: #C1F94C;}
+
+#helper{position: absolute;left: 79%;width: 20%;}
+#helper div{width: 80%; margin: 28px 10px; text-align: center; font-size: 2.2em;}
+#helper #notices{height: 19%; background: #fd6f6f;}
+#helper #overtimeJobs{height: 17%; background: #fd8080;margin-bottom: 38px;}
+#helper #helpReq{height: 23%; background: #fdc485;}
+#helper #schedule{height: 15%; background: #fecd99;}

@@ -1,0 +1,336 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>财务部</title>
+	<script src="../js/jquery.min.js" type="text/javascript"></script> 
+	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
+	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
+	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<script type="text/javascript">
+	    $(document).ready( function() {
+	      $('#tab-container').easytabs();
+	    });
+  </script>
+</head>
+<body>
+	<div id="tab-container" class="tab-container">
+		<ul class="tabs">
+			<li class="tab"><a href="#cost-accounting" id="cost-accounting-enter">成本核算</a></li>
+			<li class="tab"><a href="#cost-accounting1" id="cost-accounting-enter1">成本核算</a></li>
+			<li class="tab"><a href="#purchase-contract" id="purchase-contract-enter">采购合同</a></li>
+			<li class="tab"><a href="#produce-contract" id="produce-contract-enter">生产合同</a></li>
+			<li class="tab"><a href="#purchase-contract-handle" id="purchase-contract-handle-enter">采购合同处理</a></li>
+			<li class="tab"><a href="#produce-contract-handle" id="produce-contract-handle-enter">生产合同处理</a></li>
+			<li class="tab"><a href="#outbuy-contract" id="outbuy-contract-enter">外采合同</a></li>
+			<li class="tab"><a href="#outbuy-contract-handle" id="outbuy-contract-handle-enter">外采合同处理</a></li>
+			<li class="tab"><a href="#reduce-examine" id="reduce-examine-enter">多裁审批</a></li>
+		</ul>
+		<div class="panel-container">
+			<div id="cost-accounting">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="list-no" value="单据编号">
+								
+							</td>
+							<td width="15%">移交时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="15%">核算表</td>
+							<td width="15%">核算完成</td>
+							<td width="20%">申请审批</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="cost-accounting1">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="list-no" value="单据编号">
+								
+							</td>
+							<td width="15%">移交时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="15%">核算表</td>
+							<td width="15%">核算完成</td>
+							<td width="20%">确认移交</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="purchase-contract">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="合同编号">
+								<datalist id="no">
+									<option value="合同编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">提交时间</td>
+							<td width="40%">合同</td>
+							<td width="30%">审核完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">12.1</td>
+								<td width="40%">
+									<div class="button1">下载</div>
+								</td>
+								<td width="30%">
+									<div class="button1">上传</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="produce-contract">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="合同编号">
+								<datalist id="no">
+									<option value="合同编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">提交时间</td>
+							<td width="40%">合同</td>
+							<td width="30%">审核完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">12.1</td>
+								<td width="40%">
+									<div class="button1">下载</div>
+								</td>
+								<td width="30%">
+									<div class="button1">上传</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="purchase-contract-handle">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="合同编号">
+								<datalist id="no">
+									<option value="合同编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">签订时间</td>
+							<td width="40%">合同</td>
+							<td width="30%">状态</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">12.1</td>
+								<td width="40%">
+									<div class="button1">下载</div>
+								</td>
+								<td width="30%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="produce-contract-handle">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="合同编号">
+								<datalist id="no">
+									<option value="合同编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">签订时间</td>
+							<td width="40%">合同</td>
+							<td width="30%">状态</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">12.1</td>
+								<td width="40%">
+									<div class="button1">下载</div>
+								</td>
+								<td width="30%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy-contract">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="合同编号">
+								<datalist id="no">
+									<option value="合同编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">提交时间</td>
+							<td width="40%">合同</td>
+							<td width="30%">审核完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">12.1</td>
+								<td width="40%">
+									<div class="button1">下载</div>
+								</td>
+								<td width="30%">
+									<div class="button1">上传</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy-contract-handle">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="合同编号">
+								<datalist id="no">
+									<option value="合同编号"></option>
+								</datalist>
+							</td>
+							<td width="15%">提交时间</td>
+							<td width="40%">合同</td>
+							<td width="30%">状态</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">12.1</td>
+								<td width="40%">
+									<div class="button1">下载</div>
+								</td>
+								<td width="30%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="reduce-examine">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="10%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+								<input list="no" value="申请部门">
+								<datalist id="no">
+									<option value="申请部门"></option>
+									<option value="财务部"></option>
+									<option value="生产部"></option>
+									<option value="采购部"></option>
+									<option value="生产部"></option>
+									<option value="技术部"></option>
+									<option value="买手部"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="15%">申请原因</td>
+							<td width="10%">下单表</td>
+							<td width="10%">订单数</td>
+							<td width="10%">多裁数</td>
+							<td width="15%">买手审批意见</td>
+							<td width="10%">审核完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="10%">111</td>
+								<td width="10%">买手部</td>
+								<td width="10%">男装</td>
+								<td width="15%">申请原因</td>
+								<td width="10%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="10%">1</td>
+								<td width="10%">1</td>
+								<td width="15%">买手审批意见</td>
+								<td width="10%">
+									<div class="button1">完成</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+	</div>
+	<datalist id="list-no">
+		<option value="单据编号"></option>
+	</datalist>
+<script src="../js/global.js"></script>
+<script src="js/finance.js"></script>	
+</body>
+</html>

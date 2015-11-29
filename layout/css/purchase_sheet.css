@@ -1,0 +1,108 @@
+*{padding: 0;margin:0;}
+html,body {
+	width: 100%;
+	height: auto;
+	background: #fff;
+	overflow: auto;
+}
+input{border: none;outline: none;width: 110px;}
+.toolbar {
+	width: 100%;
+	height: 100px;
+	background: #555A61;
+}
+.sheet {
+	width: 100%;
+	height: auto;
+}
+.toolBtn {
+	list-style: none;
+	width: 200px;
+	height: 30px;
+	margin: 0 auto;
+}
+.toolBtn li {
+	float: left;
+	width: 50px;
+	color: #fff;
+	border-radius: 5px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.saveBtn {
+	background: #ffb400;
+}
+.closeBtn {
+	background: #68ECD3;
+}
+.sheet-title{
+	width: 100%;
+	height: 50px;
+	font-size: 16px;
+	text-align: center;
+}
+.sheet-body{
+	width: 100%;
+	font-size: 14px;
+}
+.sheet-tr{
+	width: 100%;
+}
+.sheet-td{
+	border: #ddd 1px solid;
+	display: inline-block;
+	border: 1px solid #ddd;
+	padding: 5px;
+}
+.close-list-td{
+	display: inline-block;
+	border: 1px solid #ddd;
+	text-align: center;
+	width: 82px;
+	height: 20px;
+	line-height: 20px;
+}
+.close-img{
+	width: 180px;
+}
+.close-detail{
+	width: 80px;
+}
+.remark{
+	width: 310px;
+	height: 100%;
+}
+.remark-title{
+	width: 100%;
+	background: #ff0000;
+	text-align: center;
+}
+.remark-detail{
+	width: 100%;
+	height: 100%;
+}
+#remark-detail{
+	width: 100%;
+	height:85px;
+	margin: 7px 0;
+}
+/* .material-title .sheet-td{
+	background: #65EAEA;
+}
+.material-td-content{
+	width: 66px;
+} */
+.fabric-table td{
+	border: #ddd 1px solid;
+	text-align: center;
+}
+.fabric-table-title td{
+	background: #24BBB0;
+}
+.fabric-table-title td:nth-child(n+9),.subtotal{
+	background: yellow;
+};

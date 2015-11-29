@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>总经办</title>
+	<script src="../js/jquery.min.js" type="text/javascript"></script> 
+	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
+	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
+	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<script type="text/javascript">
+	    $(document).ready( function() {
+	      $('#tab-container').easytabs();
+	    });
+  </script>
+</head>
+<body>
+	<div class="section">
+		<div id="tab-container" class="tab-container">
+			<ul class="tabs">
+				<li class="tab"><a href="#filing" id="filing-enter">建档</a></li>
+				<li class="tab"><a href="#drawing-in" id="drawingin-enter">入图</a></li>
+				<li class="tab"><a href="#front-sample" id="frontsample-enter">头版样衣</a></li>
+				<li class="tab"><a href="#trial-version" id="trialversion-enter">审版</a></li>
+				<li class="tab"><a href="#color-sample-done" id="colorsampledone-enter">齐色样完成</a></li>
+				<li class="tab"><a href="#materials-in-store" id="materialsinstore-enter">面辅料入仓</a></li>
+				<li class="tab"><a href="#materials-in" id="materialsin-enter">面辅料入库</a></li>
+				<li class="tab"><a href="#wear-in" id="wearin-enter">成衣入库</a></li>
+			</ul>
+			<div class="panel-container">
+				<div id="filing">
+					<div class="dress-list one">
+						<table class="table-title">
+							<tr>
+								<td width="5%">
+									<span class="check-box"></span>
+								</td>
+								<td width="15%">
+									<input list="no" value="设计款号">
+								</td>
+								<td width="15%">建档时间</td>
+								<td width="15%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="10%">
+									<input list="series" value="系列">
+								</td>
+								<td width="10%">
+									<input list="series" value="生产类型">
+								</td>
+								<td width="20%">详细内容</td>
+								<td width="10%">建档完成</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+							</table>
+						</div>
+					</div>
+					<div class="toollist">
+						<ul>
+							<li><div class="operator bg-blue" id="new-file"><p>建档</p></div></li>
+						</ul>
+					</div>
+				</div>
+				<div id="drawing-in">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="5%">
+									<span class="check-box"></span>
+								</td>
+								<td width="20%">
+									<input list="no" value="设计款号">
+								</td>
+								<td width="20%">入图时间</td>
+								<td width="20%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="15%">
+									<input list="series" value="系列">
+								</td>
+								<td width="20%">详细内容</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="front-sample">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="25%">
+									<input list="no" value="设计款号">
+								</td>
+								<td width="25%">完成时间</td>
+								<td width="25%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="25%">
+									<input list="series" value="系列">
+								</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="25%">111</td>
+									<td width="25%">建档时间</td>
+									<td width="25%">女装</td>
+									<td width="25%">风尚</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="trial-version">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="25%">
+									<input list="no" value="设计款号">
+									<datalist id="no">
+										<option value="设计款号"></option>
+									</datalist>
+								</td>
+								<td width="25%">完成时间</td>
+								<td width="25%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="25%">
+									<input list="series" value="系列">
+								</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="25%">111</td>
+									<td width="25%">建档时间</td>
+									<td width="25%">女装</td>
+									<td width="25%">风尚</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="color-sample-done">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="25%">
+									<input list="no" value="设计款号">
+									<datalist id="no">
+										<option value="设计款号"></option>
+									</datalist>
+								</td>
+								<td width="25%">完成时间</td>
+								<td width="25%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="25%">
+									<input list="series" value="系列">
+								</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="25%">111</td>
+									<td width="25%">建档时间</td>
+									<td width="25%">女装</td>
+									<td width="25%">风尚</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="materials-in-store">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="25%">
+									<input list="no" value="设计款号">
+									<datalist id="no">
+										<option value="设计款号"></option>
+									</datalist>
+								</td>
+								<td width="25%">入仓时间</td>
+								<td width="25%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="25%">组别</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="25%">111</td>
+									<td width="25%">12.1</td>
+									<td width="25%">女装</td>
+									<td width="25%">一组</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="materials-in">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="25%">
+									<input list="no" value="设计款号">
+									<datalist id="no">
+										<option value="设计款号"></option>
+									</datalist>
+								</td>
+								<td width="25%">入仓时间</td>
+								<td width="25%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="25%">组别</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="25%">111</td>
+									<td width="25%">12.1</td>
+									<td width="25%">女装</td>
+									<td width="25%">一组</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="wear-in">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="25%">
+									<input list="no" value="款号">
+									<datalist id="no">
+										<option value="款号"></option>
+									</datalist>
+								</td>
+								<td width="25%">入仓时间</td>
+								<td width="25%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="25%">组别</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="25%">111</td>
+									<td width="25%">12.1</td>
+									<td width="25%">女装</td>
+									<td width="25%">一组</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<datalist id="no">
+	<option value="设计款号"></option>
+</datalist>
+<datalist id="gender">
+	<option value="女/男装"></option>
+	<option value="女装"></option>
+	<option value="男装"></option>
+</datalist>
+<datalist id="series">
+	<option value="系列"></option>
+	<option value="贵尚"></option>
+	<option value="雅尚"></option>
+	<option value="器尚"></option>
+	<option value="风尚"></option>
+</datalist>
+<datalist id="source">
+	<option value="生产类型"></option>
+	<option value="自产"></option>
+	<option value="外采"></option>
+</datalist>
+<script src="../js/global.js"></script>
+<script src="js/gmo.js"></script>
+</body>
+</html>

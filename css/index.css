@@ -1,0 +1,75 @@
+html,body{background-color: #32323a; width: 100%; height: 100%; color: #eee;}
+header{height: 10%;}
+.nav-box{width: 5%; height: 100%;}
+.nav-box a{
+	position: absolute;
+	top: 30px;
+	left: 23px;
+}
+.nav-box a span,.nav-box a span:before,.nav-box a span:after{
+	cursor: pointer;
+	height: 2px;
+	width: 18px;
+	background-color: #eee;
+	position: absolute;
+	display: block;
+	content: '';
+}
+.nav-box a span:before{
+	top: -6px;
+}
+.nav-box a span:after{
+	top: 6px;
+}
+
+.menu{
+	height: 6%;
+	background: #28282e;
+}
+.menu-list{
+	height: 100%;
+	list-style: none;
+}
+.menu-list li{
+	height: 100%;
+	width: 9%;
+	float: left;
+}
+.menu-list li.select{
+}
+.menu-list li div{float: left;}
+.menu-list li .l{height: 100%; width: 75%; padding-left: 14px;padding-top: 17px;background: url(../image/bg.png) left -40px no-repeat;color: #606675;}
+.menu-list li .r{height: 100%; width: 25%; background: url(../image/bg.png) right -40px no-repeat;}
+.menu-list li .l.select{background: url(../image/bg.png) left 2px no-repeat;font-weight: bold;color: #64bee6;}
+.menu-list li .r.select{background: url(../image/bg.png) right 2px no-repeat;}
+
+#container{
+	height: 90%;
+}
+#mainFrame{
+	width: 100%;
+	height: 100%;
+	border: none; 
+}
+#fullscreenFrame {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+#layout-div {
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	top: 30%;
+	left: 40$;
+	display: none;
+
+}
+#layoutFrame {
+	border: none;
+	width: 100%;
+	height: 100%;
+}

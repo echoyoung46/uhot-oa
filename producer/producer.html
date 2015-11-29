@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生产部</title>
+	<script src="../js/jquery.min.js" type="text/javascript"></script> 
+	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
+	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
+	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<script type="text/javascript">
+	    $(document).ready( function() {
+	      $('#tab-container').easytabs();
+	    });
+  </script>
+</head>
+<body>
+	<div id="tab-container" class="tab-container">
+		<ul class="tabs">
+			<li class="tab"><a href="#apply-no" id="apply-no-enter">申请款号</a></li>
+			<li class="tab"><a href="#repurchase-list" id="repurchase-list-enter">预采任务单</a></li>
+			<li class="tab"><a href="#craftmaterial-list" id="craftmaterial-list-enter">工艺配料单</a></li>
+			<li class="tab"><a href="#process-sheet" id="process-sheet-enter">工艺单</a></li>
+			<li class="tab"><a href="#order-table" id="order-table-enter">下单表</a></li>
+			<li class="tab"><a href="#prenatal-issue" id="prenatal-issue-enter">产前版发料</a></li>
+			<li class="tab"><a href="#cargo-issue" id="cargo-issue-enter">大货发料</a></li>
+			<li class="tab"><a href="#producing" id="producing-enter">生产中</a></li>
+			<li class="tab"><a href="#replenishment" id="replenishment-enter">补货</a></li>
+			<li class="tab"><a href="#marker" id="marker-enter">唛架</a></li>
+			<li class="tab"><a href="#amount-adjust" id="amount-adjust-enter">幅宽及用量变更</a></li>
+			<li class="tab"><a href="#cost-check" id="cost-check-enter">成本核算</a></li>
+			<li class="tab"><a href="#outbuy-send" id="outbuy-send-enter">外采/FOB发料</a></li>
+		</ul>
+	
+		<div class="panel-container">
+			<div id="apply-no">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="设计款号">
+							</td>
+							<td width="15%">申请时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="系列">
+							</td>
+							<td width="15%">预采任务单</td>
+							<td width="15%">大货款号</td>
+							<td width="15%">完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="repurchase-list">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">移交时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="系列">
+							</td>
+							<td width="15%">预采任务单</td>
+							<td width="15%">变更信息</td>
+							<td width="15%">系统录入</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="craftmaterial-list">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">移交时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="系列">
+							</td>
+							<td width="15%">预采任务单</td>
+							<td width="15%">变更信息</td>
+							<td width="15%">系统录入</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="process-sheet">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="10%">
+								<input list="no" value="款号">
+							</td>
+							<td width="10%">移交时间</td>
+							<td width="5%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="5%">
+								<input list="series" value="系列">
+							</td>
+							<td width="10%">工艺单</td>
+							<td width="15%">变更信息</td>
+							<td width="10%">申请唛架</td>
+							<td width="10%">申请修改工艺单</td>
+							<td width="10%">申请纸样</td>
+							<td width="10%">申请修改唛架</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="order-table">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="list-no" value="单据号">
+							</td>
+							<td width="15%">下单时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								生产方式
+							</td>
+							<td width="10%">
+								<input list="status" value="状态">
+							</td>
+							<td width="25%">变更信息</td>
+							<td width="10%">系统录入</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="prenatal-issue">
+				<div class="third-top" id="send-material">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">到料时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="15%">
+								状态
+							</td>
+							<td width="40%">通知发料</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+				<div class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">到料时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">面料状态</td>
+							<td width="15%">辅料状态</td>
+							<td width="30%">纸样</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="15%">1</td>
+								<td width="30%">
+									<div class="button1">发出</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="cargo-issue">
+				<div class="half-top" id="notice-issue">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">到料时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="status" value="产前版状态">
+							</td>
+							<td width="20%">注意信息</td>
+							<td width="25%">通知发料</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+				<div class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">到料时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">面料状态</td>
+							<td width="15%">辅料状态</td>
+							<td width="30%">纸样、唛架、吊牌等</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="15%">1</td>
+								<td width="30%">
+									<div class="button1">发出</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="producing">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="设计款号">
+							</td>
+							<td width="15%">投产时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">
+								<input list="series" value="状态">
+							</td>
+							<td width="45%">入仓检验</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="replenishment">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">补货时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+								<input list="status" value="产前版状态">
+							</td>
+							<td width="20%">注意信息</td>
+							<td width="25%">发料</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">1</td>
+								<td width="20%"></td>
+								<td width="25%">
+									<input list="send-type" value="聚一佳">
+									<datalist id="send-type">
+										<option value="聚一佳"></option>
+									</datalist>
+									<div class="button1">发出</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="marker">
+				<div class="half-top">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">移交时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+								<input list="series" value="系列">
+								<datalist id="series">
+									<option value="系列"></option>
+									<option value="贵尚"></option>
+									<option value="雅尚"></option>
+									<option value="器尚"></option>
+									<option value="风尚"></option>
+								</datalist>	
+							</td>
+							<td width="15%">工艺单</td>
+							<td width="30%">状态</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">风尚</td>
+								<td width="15%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="30%">唛架已完</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel-title2">唛架修改</div>
+				<div class="half-bottom">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">移交时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">
+								<input list="series" value="系列">
+								<datalist id="series">
+									<option value="系列"></option>
+									<option value="贵尚"></option>
+									<option value="雅尚"></option>
+									<option value="器尚"></option>
+									<option value="风尚"></option>
+								</datalist>	
+							</td>
+							<td width="15%">工艺单</td>
+							<td width="30%">状态</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">风尚</td>
+								<td width="15%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="30%">唛架修改完</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="amount-adjust">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="15%">
+								<input list="no" value="款号">
+								<datalist id="no">
+									<option value="款号"></option>
+								</datalist>
+							</td>
+							<td width="15%">变更时间</td>
+							<td width="15%">
+								<input list="gender" value="女/男装">
+								<datalist id="gender">
+									<option value="女/男装"></option>
+									<option value="女装"></option>
+									<option value="男装"></option>
+								</datalist>
+							</td>
+							<td width="10%">变更原因</td>
+							<td width="15%">预采任务单</td>
+							<td width="10%">原幅宽</td>
+							<td width="10%">新幅宽</td>
+							<td width="10%">
+								<input list="gender" value="新唛架">
+								<datalist id="gender">
+									<option value="新唛架"></option>
+									<option value="已完成"></option>
+									<option value="制作中"></option>
+								</datalist>
+							</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+							<tr>
+								<td width="15%">111</td>
+								<td width="15%">2015 8.24 10:00</td>
+								<td width="15%">女装</td>
+								<td width="10%">原因</td>
+								<td width="15%">
+									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								</td>
+								<td width="10%">1</td>
+								<td width="10%">1</td>
+								<td width="10%">已完成</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="cost-check">
+				<div class="half-top" id="cost-checking">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">完成时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">系列</td>
+							<td width="10%">生产方式</td>
+							<td width="15%">预采任务单</td>
+							<td width="20%">核算完成</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+				<div class="half-bottom" id="cost-transfer">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">完成时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="10%">系列</td>
+							<td width="10%">生产方式</td>
+							<td width="35%">确认移交</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy-send">
+				<div class="one">
+					<table class="table-title">
+						<tr>
+							<td width="5%">
+								<span class="check-box"></span>
+							</td>
+							<td width="15%">
+								<input list="no" value="款号">
+							</td>
+							<td width="15%">到料时间</td>
+							<td width="10%">
+								<input list="gender" value="女/男装">
+							</td>
+							<td width="15%">生产方式</td>
+							<td width="20%">产前版系列</td>
+							<td width="20%">发料</td>
+						</tr>
+					</table>
+					<div class="table-body">
+						<table class="table-list">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<datalist id="gender">
+	<option value="女/男装"></option>
+	<option value="女装"></option>
+	<option value="男装"></option>
+</datalist>
+<datalist id="series">
+	<option value="系列"></option>
+	<option value="贵尚"></option>
+	<option value="雅尚"></option>
+	<option value="器尚"></option>
+	<option value="风尚"></option>
+</datalist>
+<datalist id="list-no">
+	<option value="单据号"></option>
+</datalist>
+<datalist id="send-type">
+	<option value="聚一佳"></option>
+</datalist>
+<script src="../js/global.js"></script>
+<script src="js/producer.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+/*dialog*/
+.ui-dialog{
+    border: #dadada 1px solid;
+}
+
+#dialog{
+    font-size: 1em;
+    background: #fff;
+    padding: 10px 20px 0;
+    border-bottom: none;
+}
+
+.ui-dialog-title{
+    font-size: 16px;
+    height: 35px;
+}
+.pwd-container{
+    display: block;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.pwd-title{
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 5px;
+}
+.pwd-container input{
+    height: 30px;
+    width: 220px;
+    float: right;
+   
+}
+.pwd-title input:focus{
+    outline: none;
+}
+        
+    
+
+.ui-dialog-titlebar{
+    background: #25bcef;
+    border-bottom: #dadada 1px solid;
+    border-bottom: none;
+    height: 35px;
+    color: #fff;
+}
+
+.ui-dialog-title{
+    padding-left: 20px;
+    padding-top: 10px;
+    float: left;
+}
+.ui-button{
+    float: right;
+    border: none;
+    background: #25bcef;
+    color: #fff;
+}
+
+.ui-button-text{
+    font-size: 14px;
+}       
+        
+    
+.ui-dialog-buttonpane{
+    background: #fff;
+    border-top: none;
+    height: 39px;
+    padding-bottom: 30px;
+}
+
+.ui-dialog-buttonset button{
+    margin-right: 15px;
+}
+button{
+    width: 83px;
+    height: 32px;
+    background: #25bcef;
+    color: #fff;
+    font-size: 1.143em;
+    border: none;
+    margin-right: 5px;
+}
+        

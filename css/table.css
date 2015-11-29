@@ -1,0 +1,27 @@
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+.table-box{
+    width: 100%;
+    padding: 0 10px;
+}
+
+.table-box .table-title{
+    width: 100%;
+}
+
+.table-box .table-body{
+    width: 100%;
+    overflow: auto;
+}
+.table-title table,.table-body table{
+	width: 100%;
+}
+.tool-list{
+	margin-top: 10px;
+}
+.box-title{
+	margin: 10px 0 0;
+}
