@@ -34,7 +34,7 @@
 		<iframe src="#" id="fullscreenFrame" name="fullscreenFrame"></iframe>
 	</div>
 	<div id="layout-div">
-		<iframe src="layout/layout.html" id="layoutFrame" name="layoutFrame"></iframe>
+		<iframe src="gmo/gmo.html" id="layoutFrame" name="layoutFrame"></iframe>
 	</div>
 <script src="js/jquery.min.js"></script>
 <script src="js/global.js"></script>
@@ -43,7 +43,8 @@
 $(function() {
 	var url = window.location.href;
 	var user_id = url.split("?")[1];
-	var url_config = ["storage/storage.html"];
+	var url_config = ["gmo/gmo.html"];
+	$(window.frames["mainFrame"].document).find("#departmentFrame").attr("src", url_config[0]);
 
 	$.ajax({
 		url: 'include/getUserInfo.php',
