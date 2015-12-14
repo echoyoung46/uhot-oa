@@ -11,8 +11,11 @@ $(function() {
 
 	initAction();
 
-	$('#save-button').on('click', function(){
+	$('#filing-save-button').on('click', function(){
 		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	});
+	$('#season-save-button').on('click', function(){
+		updateDressStatus(4, selectNoArr, "apply_makefront_time");
 	})
 });
 
@@ -36,96 +39,28 @@ function  initAction() {
 		}
 	});
 
-	//调料入口
-	$("#season-enter").bind('click', function() {
-		//调料中
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 2}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.apply_transmaterial_time) + '</td>'
-							+	'<td width="15%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+   '<td width="15%">申请调料</td>'
-							+	'<td width="30%"><input type="text" id="input_' + val.design_no + '" /></td>'
-							+'</tr>';
-				});
-				$("#seasoning .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
+	/***************************调料入口******************************/
+	$("#season-enter").on('click', function(event) {
+		event.preventDefault();
+		var reqData1 = getDressByStatus(2);
+		var season1 = avalon.define({
+			$id: "season1",
+			dress: reqData1
 		});
 
-		//完成调料
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 3}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.finish_transmaterial_time) + '</td>'
-							+	'<td width="15%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+   '<td width="15%">调料完成</td>'
-							+	'<td width="30%"><span class="list-button" id="button_' + val.design_no + '">申请</spam></td>'
-							+'</tr>';
-				});
-				$("#season-done .table-list").html(domStr);
-			}else{
-				console.log("没有调料完成");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
+		var reqData2 = getDressByStatus(3);
+		var season2 = avalon.define({
+			$id: "season2",
+			dress: reqData2
 		});
 	});
 	//调料-申请样衣制作
-	$("#season-done .table-list").on('click', '.list-button', function() {
+	$("#season2 .list-detail").on('click', '.operator-button', function() {
 		var $this = $(this);
-		var dress_id = parseInt($this.attr('id').split('_')[1]);
-		if($.inArray(dress_id, selectNoArr) == -1) {
+		var dress_id = parseInt($this.closest('dl').find('.design-no').html());
+		if($.inArray(dress_id, selectNoArr) == -1){
 			selectNoArr.push(dress_id);
 		}
-		$.confirm({
-			"words": "确定申请头版样衣制作吗？",
-			"yesCallback": function(){
-				top.updateDressStatus(4, selectNoArr, "apply_makefront_time");
-			}
-		});	
 	});
 	//头版样衣制作入口
 	$("#sample-enter").bind('click', function() {

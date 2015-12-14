@@ -3,33 +3,263 @@
 <head>
 	<meta charset="UTF-8">
 	<title>技术部</title>
-	<script src="../js/jquery.min.js" type="text/javascript"></script> 
-	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
-	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
-	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/common.css">
-	<style>
-		.dubversion_advice{overflow:hidden;text-overflow: hidden;}
-	</style>
-	<script type="text/javascript">
-	    $(document).ready( function() {
-	      $('#tab-container').easytabs();
-	    });
-  </script>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="design/css/design.css">
 </head>
 <body>
-	<div id="tab-container" class="tab-container">
-		<ul class="tabs">
-			<li class="tab"><a href="#sample" id="sample-enter">头版样衣制作</a></li>
-			<li class="tab"><a href="#viewer" id="viewer-enter">审版</a></li>
-			<li class="tab"><a href="#dubviewer" id="dubviewer-enter">复版</a></li>
-			<li class="tab"><a href="#process-sheet" id="process-enter">工艺单</a></li>
-			<li class="tab"><a href="#paper-sample" id="paper-sample-enter">纸样</a></li>
-			<li class="tab"><a href="#marker" id="marker-enter">唛架</a></li>
-			<li class="tab sample-grade"><a href="#sample-grade" id="grade-enter">样衣分数</a></li>
-		</ul>
-	
+	<div id="page-container" ms-controller="menu">
+		<div class="page-content">
+			<div class="page-menu">
+				<ul class="list-inline nav nav-tabs">
+					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  ms-click="toggle(0)">头版样衣制作</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter"  ms-click="toggle(1)">审版</a></li>
+					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  ms-click="toggle(2)">复版</a></li>
+					<li role="presentation"><a href="#process-sheet" id="process-enter"  ms-click="toggle(3)">工艺单</a></li>
+					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  ms-click="toggle(4)">纸样</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter"  ms-click="toggle(5)">唛架</a></li>
+					<li role="presentation"><a href="#sample-grade" id="grade-enter"  ms-click="toggle(6)">样衣分数</a></li>
+				</ul>
+			</div>
+			<div class="page-list">
+				<div id="sample" class="list-box" ms-visible="currentIndex === 0">
+					<div class="status-box" ms-controller="sample1">
+						<div class="status-title">申请制作</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">纸样分配</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.apply_makefront_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<input list="sampler" value="纸样师——汤胜辉">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal1" data-target="#sampleModal1">分配</button>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="status-box" ms-controller="sample2">
+						<div class="status-title">完成纸样</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="sample">纸样师</dd>
+								<dd class="carversion">车版分配</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.apply_makefront_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="source">{{el.sampler}}</dd>
+								<dd class="details">
+									<input list="sampler" value="车版师——李思">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal2" data-target="#sampleModal2">分配</button>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="status-box" ms-controller="sample3">
+						<div class="status-title">制作完成</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="carversion">车版师</dd>
+								<dd class="carversion-score">车版计分</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.apply_makefront_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="carversion">{{el.carversioner}}</dd>
+								<dd class="carversion-score">
+									<input list="sampler" value="车版师——李思">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal3" data-target="#sampleModal3">分配</button>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<!--弹出框-->
+					<div class="sample-modal1 fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+					      </div>
+					      <div class="modal-body">
+					        确定分配纸样师吗?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <button type="button" class="btn btn-primary" id="sample1-save-button">确定</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<div class="sample-modal1 fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+					      </div>
+					      <div class="modal-body">
+					        确定分配车版师吗?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <button type="button" class="btn btn-primary" id="sample2-save-button">确定</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<div class="sample-modal1 fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+					      </div>
+					      <div class="modal-body">
+					        确定计分吗?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <button type="button" class="btn btn-primary" id="sample3-save-button">确定</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<div id="viewer" class="list-box" ms-visible="currentIndex === 1">
+					<div class="status-box" ms-controller="viewer1" id="viewer1">
+						<div class="status-title">审版通过</div>
+						<div class="list-title">
+							<dt class="design-no">设计款号</dt>
+							<dd class="operator-time">申请时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="status">状态</dd>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.finish_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="status">&nbsp;</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="status-box" ms-controller="viewer2" id="viewer2">
+						<div class="status-title">申请复版</div>
+						<div class="list-title">
+							<dt class="design-no">设计款号</dt>
+							<dd class="operator-time">申请时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="dub-option">复版意见</dd>
+							<dd class="operator">同意复版</dd>
+							<dd class="dub-time">复版次数</dd>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.finish_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="dub-option">{{el.source}}</dd>
+								<dd class="operator">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="viewer2-modal" data-target="#viewer2Modal">同意</button>
+								</dd>
+								<dd class="dub-time">{{el.source}}</dd>
+							</dl>
+						</div>
+					</div>
+					
+					<div class="panel-title2">申请复版</div>
+					<div class="half-bottom" id="applyDubVersion">
+						<table class="table-title">
+							<tr>
+								<td width="5%">
+									<span class="check-box"></span>
+								</td>
+								<td width="15%">
+									<input list="no" value="设计款号">
+								</td>
+								<td width="15%">申请时间</td>
+								<td width="10%">
+									<input list="gender" value="女/男装">
+								</td>
+								<td width="10%">
+								<input list="series" value="系列">
+								</td>
+								<td width="20%">复版意见</td>
+								<td width="15%">同意复版</td>
+								<td width="10%">复版次数</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div id="tab-container" class="tab-container">
 		<div class="panel-container">
 			<div id="sample">
 				<div class="panel-title1">申请制作</div>
@@ -534,7 +764,10 @@
 				
 			</div>
 		</div>
-	</div>
+	</div> -->
+
+
+
 	<datalist id="no">
 		<option value="设计款号"></option>
 	</datalist>
@@ -564,7 +797,9 @@
 		<option value="器尚"></option>
 		<option value="风尚"></option>
 	</datalist>
-<script src="../js/global.js"></script>
-<script src="js/tech_monitor.js"></script>
+
+<script src="js/avalon.js"></script>
+<script src="js/global.js"></script>
+<script src="tech/js/tech.js"></script> 
 </body>
 </html>

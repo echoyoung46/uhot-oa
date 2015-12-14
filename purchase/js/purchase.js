@@ -12,7 +12,7 @@ $(function() {
 	initAction();
 
 	$('#save-button').on('click', function(){
-		updateDressStatus(1, selectNoArr, "filing_time");
+		updateDressStatus(3, selectNoArr, "finish_transmaterial_time");
 	})
 });
 

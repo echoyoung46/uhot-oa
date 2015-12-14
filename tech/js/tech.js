@@ -1,4 +1,62 @@
-$(function() {
+$(function(){
+	var bodymodel = avalon.define({
+        $id: "menu",
+        currentIndex: 0,
+        toggle: function(index) {
+            bodymodel.currentIndex = index;
+        }
+    })
+
+	initAction();
+
+	initSave();
+});
+
+
+function initAction(){
+	/**************头版样衣制作*************/
+	$('#sample-enter').on('click', function(event) {
+		var reqData1 = getDressByStatus(4);
+		var sample1 = avalon.define({
+			$id: "sample1",
+			dress: reqData1
+		});
+
+		var reqData2 = getDressByStatus(4);
+		var sample2 = avalon.define({
+			$id: "sample2",
+			dress: reqData2
+		});
+
+		var reqData3 = getDressByStatus(4);
+		var sample3 = avalon.define({
+			$id: "sample3",
+			dress: reqData3
+		});
+	}).click();
+}
+
+function initSave() {
+	//头版样衣制作
+	$('#sample1-save-button').on('click', function(){
+		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	});
+	$('#sample1-save-button').on('click', function(){
+		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	});
+	$('#sample1-save-button').on('click', function(){
+		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	});
+
+	//审版
+	//复版
+	//工艺单
+	//纸样
+	//唛架
+	//样衣分数
+}
+
+/*$(function() {
 	initList();
 	initAction();
 });
@@ -53,10 +111,10 @@ function initAction() {
 				top.updateDressStatus(9, selectNoArr, "scoring_time");
 			}
 		});	
-	});
+	});*/
 
 	/*****************审版入口*****************/
-	$("#viewer-enter").bind('click', function(event) {
+	/*$("#viewer-enter").bind('click', function(event) {
 		//审版通过
 		$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
@@ -159,9 +217,9 @@ function initAction() {
 				top.updateDressStatus(17, selectNoArr, "dub_agreeversion_time");
 			}
 		});	
-	});
+	});*/
 	/*****************复版入口*****************/
-	$("#dubviewer-enter").bind('click', function(event) {
+	/*$("#dubviewer-enter").bind('click', function(event) {
 		//复版制作
 		$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
@@ -333,9 +391,9 @@ function initAction() {
 				top.updateDressStatus(19, selectNoArr, "dub_scoring_time");
 			}
 		});	
-	});
+	});*/
 	/*********************纸样入口*********************/
-	$("#paper-sample-enter").bind('click', function(event) {
+	/*$("#paper-sample-enter").bind('click', function(event) {
 		$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
 			type: 'GET',
@@ -394,10 +452,10 @@ function initAction() {
 				top.updateDressStatus(35, selectNoArr, "pattern_trans_time");
 			}
 		});	
-	});
+	});*/
 
 	/******************唛架入口********************/
-	$("#marker-enter").bind('click', function(event) {
+	/*$("#marker-enter").bind('click', function(event) {
 		$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
 			type: 'GET',
@@ -638,4 +696,4 @@ function initList() {
 	.always(function() {
 		console.log("complete");
 	});
-}
+}*/

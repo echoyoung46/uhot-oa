@@ -17,7 +17,7 @@ var selectNoArr = [];
  * @param  {[type]} _iframe [iframe容器]
  * @return {[type]}         [description]
  */
-function refreshIframe(_url){
+function $ajaxUrl(_url){
 	$.get(_url,function(data){ 
 　　　　$('#index-page').html(data);
 　　}); 
@@ -49,38 +49,42 @@ function getDressByStatus(_status) {
 	return ajaxData;
 }
 
-function getGender(_num){
-	return _num == 1? '男装' : '女装';
-}
-function getSeries(_num){
-	switch(_num){
-		case 1:
-			return '贵尚';
-			break;
-		case 2:
-			return '雅尚';
-			break;
-		case 3:
-			return '器尚';
-			break;
-		case 4:
-			return '风尚';
-			break;
-		case 5:
-			return '外采';
-			break;
-		default:
-			return '其他';
-			break;
-	}	
-
-}
-function getSource(_num){
-	return _num == 1? '自产' : '外采';
-}
-function showConfirmLayout(_str, _func) {
-
-}
+//avalon filters
+var filters = avalon.filters = {
+    getGender: function(num) {
+        if(num == 1){
+            return '男装'
+        }else if(num == 2){
+            return '女装'
+        }else {
+        	return '其他'
+        }
+    },
+    getSeries: function(num) {
+        if(num==1){
+            return '贵尚'
+        }else if(num==2){
+            return '雅尚'
+        }else if(num==3){
+            return '器尚'
+        }else if(num==4){
+            return '风尚'
+        }else if(num==5){
+            return '外采'
+        }else {
+            return '其他'
+        }
+    },
+    getSource: function(num) {
+    	if(num == 1){
+            return '自产'
+        }else if(num == 2){
+            return '外采'
+        }else {
+        	return '其他'
+        }
+    }
+};
 
 function updateDressStatus(_status, _idArr, _timeType) {
 	var nowTime = new Date();
