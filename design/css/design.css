@@ -1,25 +1,43 @@
-/* html,body{background: #32323a; width: 100%; height: 100%;}
-section{height: 100%; width: 98%; display: inline-block;border: none;}
-.tabs { margin: 0; padding: 0; }
-.tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; }
-.tab a { font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }
-.tab a:hover { text-decoration: underline; }
-.tab.active { background: #fff; padding-top: 6px; position: relative; top: 1px; border-color: #666; }
-.tab a.active { font-weight: bold; }
-.tab-container { height: 97%; padding: 11px; -moz-border-radius: 0 4px 4px 4px; -webkit-border-radius: 0 4px 4px 4px;}
-.panel-container { height: 96%; width: 100%; background: #fff; border: solid #666 1px; padding: 11px; -moz-border-radius: 0 4px 4px 4px; -webkit-border-radius: 0 4px 4px 4px; margin-bottom: 10px;}
-.panel-container div { width: 93%; }
+#basic-file .list-checkbox{
+	width: 5%;
+}
+#basic-file .design-no{
+	width: 15%;
+}
+#basic-file .operator-time{
+	width: 15%;
+}
+#basic-file .gender{
+	width: 15%;
+}
+#basic-file .series{
+	width: 10%;
+}
+#basic-file .source{
+	width: 10%;
+}
+#basic-file .details{
+	width: 20%;
+}
+#basic-file .operator{
+	width: 10%;
+}
 
-.left{position: absolute; top: 0; ;left: 0; height: 100%; width: 20%;}
-.left div{width: 90%; height: 46%; border-radius: 5%;margin: 10px 20px;}
-.helpReq{background: #65bee6;}
-.changeNotice{background: #65d482;}
-
-.right{position: absolute; top: 0; ;left: 20%; height: 100%; width: 80%;}
-
-table td{position: relative;}
-table td input{display: inline-block; width: 54%; border: none;}
-table td:nth-child(1) input{width: 60%;}
-table td span{position: absolute;width: 0; height: 0; overflow: hidden;   border: 5px solid transparent;border-top-color: #000;left: 41%;top: 36%;margin-left: -3px;}
-
- */
+#drawing-in .design-no{
+	width: 15%;
+}
+#drawing-in .operator-time{
+	width: 15%;
+}
+#drawing-in .gender{
+	width: 15%;
+}
+#drawing-in .series{
+	width: 10%;
+}
+#drawing-in .source{
+	width: 10%;
+}
+#drawing-in .details{
+	width: 35%;
+}

@@ -2,78 +2,34 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>UHOT自动化系统</title>
+	<title>uhot-oa</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-	<div id="header">
-		<div class="nav-box">
-			<a href="#">
-				<span></span>
-			</a>
+	<div class="uhot-container">
+		<div class="index-menu">
+			<div class="menu-logo">
+				<p>UHOT 诱货</p>
+			</div>
+			<div class="menu-notice">
+				
+			</div>
+		</div>
+		<div class="index-content">
+			<div class="index-sidenav">
+				<ul class="sidenav-first">
+					<li>
+						<a href="#" id="view-process">查看进度</a>
+					</li>
+				</ul>
+			</div>
+			<div id="index-page"></div>
 		</div>
 	</div>
-	<div class="menu">
-		<ul class="menu-list">
-			<li>
-				<div class="l select">首页</div>
-				<div class="r select"></div>
-			</li>
-			<li>
-				<div class="l">模板</div>
-				<div class="r"></div>
-			</li>
-		</ul>
-	</div>
-	<div id="container">
-		<iframe src="main.html" id="mainFrame" name="mainFrame"></iframe>
-	</div>
-	<div id="fullscreen">
-		<iframe src="#" id="fullscreenFrame" name="fullscreenFrame"></iframe>
-	</div>
-	<div id="layout-div">
-		<iframe src="gmo/gmo.html" id="layoutFrame" name="layoutFrame"></iframe>
-	</div>
-<script src="js/jquery.min.js"></script>
+<script src="js/plugin/jquery.min.js"></script>
+<script src="js/plugin/bootstrap.min.js"></script>
 <script src="js/global.js"></script>
 <script src="js/index.js"></script>
-<script>
-$(function() {
-	var url = window.location.href;
-	var user_id = url.split("?")[1];
-	var url_config = ["gmo/gmo.html"];
-	$(window.frames["mainFrame"].document).find("#departmentFrame").attr("src", url_config[0]);
-
-	$.ajax({
-		url: 'include/getUserInfo.php',
-		type: 'GET',
-		dataType: 'JSON',
-		data: {userid: user_id},
-	})
-	.done(function(data) {
-		console.log(data);
-		if(data.ret==0){
-			top.globalObj.userid = data.user_id;
-			top.globalObj.username = data.user_name;
-			top.globalObj.department = data.user_department;
-			top.globalObj.position = data.user_position;
-
-			if ( top.globalObj.department == "1") {
-				$(window.frames["mainFrame"].document).find("#departmentFrame").attr("src", url_config[0]);
-			};
-		}else if(data.ret==1002){
-			conosle.log("用户名不存在");
-		}
-	})
-	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		console.log("complete");
-	});
-})	
-</script>
 </body>
 </html>

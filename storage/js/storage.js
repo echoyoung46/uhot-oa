@@ -165,18 +165,22 @@ function initAction(){
 	/********************成衣检验入口********************/
 	$("#readymade-check-enter").bind('click', function(){
 		var closeTable = new Table();
-		closeTable.init({
-        	tableTitle: '<td width="5%"><span class="check-box"></span></td><td width="15%">款号</td><td width="10%">女/男装</td><td width="10%">系列</td><td width="15%">补货时间</td><td width="15%">补货数量</td><td width="15%">补货仓</td><td width="15%">完成下单</td>',
-        	tableBody: [{"width": "5%", "val": "", "type" : "checkbox"},{"width": "15%", "val": "design_no", "type" : "data"},{"width": "10%", "val": "d_gender", "type" : "data"},{"width": "10%", "val": "series_id", "type" : "data"},{"width": "15%", "val": "refle_apply_time", "type" : "data"},{"width": "15%", "val": "reple_count", "type" : "data"},{"width": "15%", "val": "reple_storage", "type" : "data"},{"width": "15%", "val": "完成", "type" : "button"}],
-        	currStatus: 46,
-        	currStatus1: 58,
-	        currTimeType: "product_applycheck_time",
-	        currTimeType1: "reple_instore_time",
-	        submitStatus: 47,
-	        submitStatus1: 59,
-        	submitTimeType: "product_inrecord_time",
-        	submitTimeType1: "reple_inrecord_time"
-		});
+		closeTable.init([{
+		        	tableTitle: '<td width="5%"><span class="check-box"></span></td><td width="15%">款号</td><td width="15%">申请时间</td><td width="10%">女/男装</td><td width="15%">检验合格</td><td width="15%">检验不合格</td><td width="15%">入库</td><td width="10%">确认入库</td>',
+		        	tableBody: [{"width": "5%", "val": "", "type" : "checkbox"},{"width": "15%", "val": "design_no", "type" : "data"},{"width": "15%", "val": "reple_instore_time", "type" : "data"},{"width": "10%", "val": "d_gender", "type" : "data"},{"width": "15%", "val": "check_pass_count", "type" : "data"},{"width": "15%", "val": "check_fail_count", "type" : "data"},{"width": "15%", "val": "请输入个数", "type" : "input"},{"width": "10%", "val": "入库", "type" : "button"}],
+		        	currStatus: 46,
+		        	currStatus1: 58,
+			        currTimeType: "product_applycheck_time",
+			        currTimeType1: "reple_instore_time",
+			        submitStatus: 47,
+			        submitStatus1: 59,
+		        	submitTimeType: "product_inrecord_time",
+		        	submitTimeType1: "reple_inrecord_time",
+		        	secondFunc: function(){
+						var fail_in_count = parseInt($this.closest('tr').find('#fail_in_count').val())||0;
+							top.submitFailInCount(selectNoArr, fail_in_count);
+		        	}
+				}]);
 
 		/*$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',

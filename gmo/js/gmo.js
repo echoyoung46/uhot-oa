@@ -1,14 +1,50 @@
+var selectNoArr = [];
+
 $(function() {
-	initList();
+	var bodymodel = avalon.define({
+        $id: "menu",
+        currentIndex: 0,
+        toggle: function(index) {
+            bodymodel.currentIndex = index;
+        }
+    })
+
 	initAction();
+
+	$('#save-button').on('click', function(){
+		updateDressStatus(1, selectNoArr, "filing_time");
+	})
 });
 
 function initAction() {
-	//建档入口
-	$("#filing-enter").bind('click', function() {
-		initList();
+	$('#filing-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData = getDressByStatus(0);
+		var filing = avalon.define({
+			$id: "filing",
+			dress: reqData
+		})
+	}).click();
+
+	//建档-建档完成
+	$("#filing .list-detail").on('click', '.operator-button', function() {
+		var $this = $(this);
+		var dress_id = parseInt($this.closest('dl').find('.design-no').html());
+		if($.inArray(dress_id, selectNoArr) == -1){
+			selectNoArr.push(dress_id);
+		}
 	});
-	//建档-建档按钮
+
+	$('#drawingin-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData = getDressByStatus(1);
+		var drawingin = avalon.define({
+			$id: "drawingin",
+			dress: reqData
+		})
+	}).click();
+	
+	/*//建档-建档按钮
 	$("#new-file").bind('click', function() {
 		$("#fullscreenFrame",top.document).get(0).src = "/uhot/layout/purchase_sheet.html";
 		$("#fullscreenFrame",top.document).fadeIn("normal");
@@ -20,20 +56,8 @@ function initAction() {
 		$("#fullscreenFrame",top.document).get(0).src = "/uhot/layout/purchase_sheet.html?" + dress_id;
 		$("#fullscreenFrame",top.document).fadeIn("normal");
 	});
-	//建档-建档完成
-	$("#filing .table-list").on('click', '.list-button', function() {
-		var $this = $(this);
-		var dress_id = parseInt($this.attr('id').split("_")[1]);
-		if($.inArray(dress_id, selectNoArr) == -1){
-			selectNoArr.push(dress_id);
-		}
-		$.confirm({
-			"words": "确定提交预采任务单吗？",
-			"yesCallback": function(){
-				top.updateDressStatus(1, selectNoArr, "filing_time");
-			}
-		});	
-	});
+	
+	
 
 	//入图入口
 	$("#drawingin-enter").bind('click', function() {
@@ -114,5 +138,5 @@ function initList() {
 	})
 	.always(function() {
 		console.log("complete");
-	});
+	});*/
 }

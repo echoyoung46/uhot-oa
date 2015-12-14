@@ -1,75 +1,41 @@
-html,body{background-color: #32323a; width: 100%; height: 100%; color: #eee;}
-header{height: 10%;}
-.nav-box{width: 5%; height: 100%;}
-.nav-box a{
-	position: absolute;
-	top: 30px;
-	left: 23px;
-}
-.nav-box a span,.nav-box a span:before,.nav-box a span:after{
-	cursor: pointer;
-	height: 2px;
-	width: 18px;
-	background-color: #eee;
-	position: absolute;
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
 	display: block;
-	content: '';
 }
-.nav-box a span:before{
-	top: -6px;
+html,body{font-family: 'Microsoft YaHei';background: #32323a; width: 100%; height: 100%;overflow: hidden;min-width: 960px;}
+
+ul{list-style: none;}
+.index-menu{
+	height: 50px;
+	background: #3c8dbc;
 }
-.nav-box a span:after{
-	top: 6px;
+.menu-logo{
+	background: #367fa9;
+	display: inline-block;
+	width: 12%;
+	height: 100%;
+	color: #fff;
+	text-align: center;
+}
+.menu-logo p{
+	padding: 9px 0;
+	font-size: 20px;
 }
 
-.menu{
-	height: 6%;
-	background: #28282e;
+.index-content{
+	/*height: 600px;*/
+	overflow: hidden;
 }
-.menu-list{
-	height: 100%;
-	list-style: none;
-}
-.menu-list li{
-	height: 100%;
-	width: 9%;
+.index-sidenav{
+	width: 12%;
+	background: #333;
 	float: left;
+	/*height: 100%;*/
 }
-.menu-list li.select{
-}
-.menu-list li div{float: left;}
-.menu-list li .l{height: 100%; width: 75%; padding-left: 14px;padding-top: 17px;background: url(../image/bg.png) left -40px no-repeat;color: #606675;}
-.menu-list li .r{height: 100%; width: 25%; background: url(../image/bg.png) right -40px no-repeat;}
-.menu-list li .l.select{background: url(../image/bg.png) left 2px no-repeat;font-weight: bold;color: #64bee6;}
-.menu-list li .r.select{background: url(../image/bg.png) right 2px no-repeat;}
 
-#container{
-	height: 90%;
-}
-#mainFrame{
-	width: 100%;
-	height: 100%;
-	border: none; 
-}
-#fullscreenFrame {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: none;
-}
-#layout-div {
-	width: 300px;
-	height: 200px;
-	position: absolute;
-	top: 30%;
-	left: 40$;
-	display: none;
-
-}
-#layoutFrame {
-	border: none;
-	width: 100%;
-	height: 100%;
+#index-page{
+	float: left;
+	background: #ecf0f5;
+	display: inline-block;
+	/*height: 500px;*/
+	width: 88%;
 }

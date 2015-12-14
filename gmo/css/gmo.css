@@ -1,0 +1,43 @@
+#filing .list-checkbox{
+	width: 5%;
+}
+#filing .design-no{
+	width: 15%;
+}
+#filing .operator-time{
+	width: 15%;
+}
+#filing .gender{
+	width: 15%;
+}
+#filing .series{
+	width: 10%;
+}
+#filing .source{
+	width: 10%;
+}
+#filing .details{
+	width: 20%;
+}
+#filing .operator{
+	width: 10%;
+}
+
+#drawing-in .design-no{
+	width: 15%;
+}
+#drawing-in .operator-time{
+	width: 15%;
+}
+#drawing-in .gender{
+	width: 15%;
+}
+#drawing-in .series{
+	width: 10%;
+}
+#drawing-in .source{
+	width: 10%;
+}
+#drawing-in .details{
+	width: 35%;
+}

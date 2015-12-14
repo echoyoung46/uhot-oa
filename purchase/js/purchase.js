@@ -1,4 +1,35 @@
+var selectNoArr = [];
+
 $(function() {
+	var bodymodel = avalon.define({
+        $id: "menu",
+        currentIndex: 0,
+        toggle: function(index) {
+            bodymodel.currentIndex = index;
+        }
+    })
+
+	initAction();
+
+	$('#save-button').on('click', function(){
+		updateDressStatus(1, selectNoArr, "filing_time");
+	})
+});
+
+function initAction(){
+	$('#spicesApply-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData = getDressByStatus(2);
+		var filing = avalon.define({
+			$id: "spices",
+			dress: reqData
+		})
+	}).click();
+}
+
+
+
+/*$(function() {
 	initList();
 	initAction();
 });
@@ -34,9 +65,9 @@ function  initAction() {
 				top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
 			}
 		});	
-	});
+	});*/
 	/***********************预采任务单入口***********************/
-	$("#repurchase-list-enter").bind('click',function(){
+	/*$("#repurchase-list-enter").bind('click',function(){
 		$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
 			type: 'GET',
@@ -90,9 +121,9 @@ function  initAction() {
 				top.updateDressStatus(32, selectNoArr, "instore_finish_time");
 			}
 		});	
-	});
+	});*/
 	/********************成本核算入口*******************/
-	$("#cost-accounting-enter").bind('click', function(){
+	/*$("#cost-accounting-enter").bind('click', function(){
 		$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
 			type: 'GET',
@@ -202,4 +233,4 @@ function initList() {
         	operatorWords: "确定整款入仓吗？"
 		});
 	});
-}
+}*/

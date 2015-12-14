@@ -1,66 +1,41 @@
+var selectNoArr = [];
 
 $(function() {
+	var bodymodel = avalon.define({
+        $id: "menu",
+        currentIndex: 0,
+        toggle: function(index) {
+            bodymodel.currentIndex = index;
+        }
+    })
+
 	initAction();
+
+	$('#save-button').on('click', function(){
+		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	})
 });
 
 function  initAction() {
 	/***************************基础档案入口******************************/
-	$("#basic-file-enter").bind('click', function(){
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 1, source: 1}
+	$("#basic-file-enter").on('click', function(){
+		event.preventDefault();
+		var reqData = getDressByStatus(1);
+		var basic = avalon.define({
+			$id: "basic",
+			dress: reqData
 		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.filing_time) + '</td>'
-							+	'<td width="10%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+   '<td width="15%">建档完成</td>'
-							+	'<td width="15%">'
-							+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-							+	'</td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">申请调料</sapn></td>'
-							+'</tr>';
-				});
-				$("#basic-file .table-list").html(domStr);
-			}else{
-				console.log("没有款式建档完成");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
 	}).click();
+
 	//基础档案-申请调料按钮
-	$("#basic-file .table-list").on('click', '.list-button', function() {
+	$("#basic-file .list-detail").on('click', '.operator-button', function() {
 		var $this = $(this);
-		var dress_id = parseInt($this.attr('id').split('_')[1]);
-		if($.inArray(dress_id, selectNoArr) == -1) {
+		var dress_id = parseInt($this.closest('dl').find('.design-no').html());
+		if($.inArray(dress_id, selectNoArr) == -1){
 			selectNoArr.push(dress_id);
 		}
-		$.confirm({
-			"words": "确定申请调料吗？",
-			"yesCallback": function(){
-				top.updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
-			}
-		});	
 	});
+
 	//调料入口
 	$("#season-enter").bind('click', function() {
 		//调料中
