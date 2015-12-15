@@ -23,21 +23,166 @@
 	width: 10%;
 }
 
-#drawing-in .design-no{
+#season .list-checkbox{
+	width: 5%;
+}
+#season .design-no{
 	width: 15%;
 }
-#drawing-in .operator-time{
+#season .operator-time{
 	width: 15%;
 }
-#drawing-in .gender{
+#season .gender{
 	width: 15%;
 }
-#drawing-in .series{
+#season .series{
 	width: 10%;
 }
-#drawing-in .source{
+#season .source{
 	width: 10%;
 }
-#drawing-in .details{
-	width: 35%;
+#season .details{
+	width: 30%;
 }
+
+#sample .list-checkbox{
+	width: 5%;
+}
+#sample .design-no{
+	width: 15%;
+}
+#sample .operator-time{
+	width: 15%;
+}
+#sample .gender{
+	width: 10%;
+}
+#sample .series{
+	width: 10%;
+}
+#sample .source{
+	width: 15%;
+}
+#sample .details{
+	width: 30%;
+}
+#sample .operator{
+	width: 15%;
+}
+
+#viewer .list-checkbox{
+	width: 5%;
+}
+#viewer .design-no{
+	width: 15%;
+}
+#viewer .operator-time{
+	width: 15%;
+}
+#viewer .gender{
+	width: 15%;
+}
+#viewer .series{
+	width: 10%;
+}
+#viewer .source{
+	width: 10%;
+}
+#viewer .details{
+	width: 20%;
+}
+#viewer .operator{
+	width: 10%;
+}
+
+#dubviewer .list-checkbox{
+	width: 5%;
+}
+#dubviewer .design-no{
+	width: 15%;
+}
+#dubviewer .operator-time{
+	width: 15%;
+}
+#dubviewer .gender{
+	width: 10%;
+}
+#dubviewer .series{
+	width: 10%;
+}
+#dubviewer .source{
+	width: 15%;
+}
+#dubviewer .details{
+	width: 30%;
+}
+#dubviewer .operator{
+	width: 15%;
+}
+
+#repurchase-list .design-no{
+	width: 15%;
+}
+#repurchase-list .operator-time{
+	width: 15%;
+}
+#repurchase-list .gender{
+	width: 10%;
+}
+#repurchase-list .series{
+	width: 10%;
+}
+#repurchase-list .source{
+	width: 15%;
+}
+#repurchase-list .details{
+	width: 30%;
+}
+#repurchase-list .operator{
+	width: 15%;
+}
+
+#repurchase-list1 .design-no{
+	width: 15%;
+}
+#repurchase-list1 .operator-time{
+	width: 15%;
+}
+#repurchase-list1 .gender{
+	width: 10%;
+}
+#repurchase-list1 .series{
+	width: 10%;
+}
+#repurchase-list1 .source{
+	width: 15%;
+}
+#repurchase-list1 .details{
+	width: 30%;
+}
+#repurchase-list1 .operator{
+	width: 15%;
+}
+
+#repurchase-list2 .design-no{
+	width: 15%;
+}
+#repurchase-list2 .operator-time{
+	width: 15%;
+}
+#repurchase-list2 .gender{
+	width: 10%;
+}
+#repurchase-list2 .series{
+	width: 10%;
+}
+#repurchase-list2 .source{
+	width: 15%;
+}
+#repurchase-list2 .details{
+	width: 30%;
+}
+#repurchase-list2 .operator{
+	width: 15%;
+}
+

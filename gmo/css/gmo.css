@@ -41,3 +41,21 @@
 #drawing-in .details{
 	width: 35%;
 }
+
+#wear-in .design-no, #material-in .design-no, #materials-in-store .design-no, #color-sample-done .design-no ,#trial-version .design-no,#front-sample .design-no{
+	width: 20%;
+}
+#wear-in .operator-time, #material-in .operator-time, #materials-in-store .operator-time, #color-sample-done .operator-time ,#trial-version .operator-time,#front-sample .operator-time{
+	width: 20%;
+}
+#wear-in .gender, #material-in .gender, #materials-in-store .gender, #color-sample-done .gender ,#trial-version .gender,#front-sample .gender{
+	width: 15%;
+}
+#wear-in .series, #material-in .series, #materials-in-store .series, #color-sample-done .series ,#trial-version .series,#front-sample .series{
+	width: 15%;
+}
+#wear-in .source, #material-in .source, #materials-in-store .source, #color-sample-done .source ,#trial-version .source,#front-sample .source{
+	width: 30%;
+}
+
+

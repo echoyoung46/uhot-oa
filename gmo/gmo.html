@@ -11,14 +11,14 @@
 		<div class="page-content">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li  role="presentation" class="active"><a href="#filing" id="filing-enter" ms-click="toggle(0)">建档</a></li>
-					<li  role="presentation"><a href="#drawing-in" id="drawingin-enter" ms-click="toggle(1)">入图</a></li>
-					<li  role="presentation"><a href="#front-sample" id="frontsample-enter" ms-click="toggle(2)">头版样衣</a></li>
-					<li  role="presentation"><a href="#trial-version" id="trialversion-enter" ms-click="toggle(3)">审版</a></li>
-					<li  role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" ms-click="toggle(4)">齐色样完成</a></li>
-					<li  role="presentation"><a href="#materials-in-store" id="materialsinstore-enter" ms-click="toggle(5)">面辅料入仓</a></li>
-					<li  role="presentation"><a href="#materials-in" id="materialsin-enter" ms-click="toggle(6)">面辅料入库</a></li>
-					<li  role="presentation"><a href="#wear-in" id="wearin-enter" ms-click="toggle(7)">成衣入库</a></li>
+					<li role="presentation" class="active"><a href="#filing" id="filing-enter" ms-click="toggle(0)">建档</a></li>
+					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" ms-click="toggle(1)">入图</a></li>
+					<li role="presentation"><a href="#front-sample" id="frontsample-enter" ms-click="toggle(2)">头版样衣</a></li>
+					<li role="presentation"><a href="#trial-version" id="trialversion-enter" ms-click="toggle(3)">审版</a></li>
+					<li role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" ms-click="toggle(4)">齐色样完成</a></li>
+					<li role="presentation"><a href="#materials-in-store" id="materialsinstore-enter" ms-click="toggle(5)">面辅料入仓</a></li>
+					<li role="presentation"><a href="#materials-in" id="materialsin-enter" ms-click="toggle(6)">面辅料入库</a></li>
+					<li role="presentation"><a href="#wear-in" id="wearin-enter" ms-click="toggle(7)">成衣入库</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
@@ -85,179 +85,134 @@
 					</div>
 				</div>
 				<div class="list-box" id="front-sample" ms-visible="currentIndex === 2">
-					<div class="one">
-						<table class="table-title">
-							<tr>
-								<td width="25%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="25%">完成时间</td>
-								<td width="25%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="25%">
-									<input list="series" value="系列">
-								</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="25%">111</td>
-									<td width="25%">建档时间</td>
-									<td width="25%">女装</td>
-									<td width="25%">风尚</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="front-sample">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">完成时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div class="list-box" id="trial-version" ms-visible="currentIndex === 3">
-					<div class="one">
-						<table class="table-title">
-							<tr>
-								<td width="25%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="25%">完成时间</td>
-								<td width="25%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="25%">
-									<input list="series" value="系列">
-								</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="25%">111</td>
-									<td width="25%">建档时间</td>
-									<td width="25%">女装</td>
-									<td width="25%">风尚</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="trial">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">完成时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div class="list-box" id="color-sample-done" ms-visible="currentIndex === 4">
-					<div class="one">
-						<table class="table-title">
-							<tr>
-								<td width="25%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="25%">完成时间</td>
-								<td width="25%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="25%">
-									<input list="series" value="系列">
-								</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="25%">111</td>
-									<td width="25%">建档时间</td>
-									<td width="25%">女装</td>
-									<td width="25%">风尚</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="trial">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">完成时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div class="list-box" id="materials-in-store" ms-visible="currentIndex === 5">
-					<div class="one">
-						<table class="table-title">
-							<tr>
-								<td width="25%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="25%">入仓时间</td>
-								<td width="25%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="25%">组别</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="25%">111</td>
-									<td width="25%">12.1</td>
-									<td width="25%">女装</td>
-									<td width="25%">一组</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="trial">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">完成时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div class="list-box" id="materials-in" ms-visible="currentIndex === 6">
-					<div class="one">
-						<table class="table-title">
-							<tr>
-								<td width="25%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="25%">入仓时间</td>
-								<td width="25%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="25%">组别</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="25%">111</td>
-									<td width="25%">12.1</td>
-									<td width="25%">女装</td>
-									<td width="25%">一组</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="trial">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">完成时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div class="list-box" id="wear-in" ms-visible="currentIndex === 7">
-					<div class="one">
-						<table class="table-title">
-							<tr>
-								<td width="25%">
-									<input list="no" value="款号">
-									<datalist id="no">
-										<option value="款号"></option>
-									</datalist>
-								</td>
-								<td width="25%">入仓时间</td>
-								<td width="25%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="25%">组别</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="25%">111</td>
-									<td width="25%">12.1</td>
-									<td width="25%">女装</td>
-									<td width="25%">一组</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="trial">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">完成时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+							</dl>
 						</div>
 					</div>
 				</div>

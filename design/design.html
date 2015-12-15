@@ -55,6 +55,23 @@
 							</dl>
 						</div>
 					</div>
+					<div class="filing-modal fade" id="filingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+								</div>
+								<div class="modal-body">
+									确定申请调料吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="filing-save-button">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 						
 				<div id="season" class="list-box" ms-visible="currentIndex === 1">
@@ -62,7 +79,10 @@
 						<div class="status-title">调料中</div>
 						<div class="list-title">
 							<dl>
-								<dt class="design-no">设计款号</dt>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
 								<dd class="operator-time">申请时间</dd>
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
@@ -72,7 +92,10 @@
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
 								<dd class="operator-time">{{el.apply_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
@@ -114,516 +137,448 @@
 							</dl>
 						</div>
 					</div>
-					<!-- <div class="panel-title1">调料中</div>
-					<div id="seasoning" class="half-top">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">备注</td>
-								</tr>
-							</table>
+					<div class="season-modal fade" id="seasonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+								</div>
+								<div class="modal-body">
+									确定申请样衣制作吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="season-save-button">确定</button>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="panel-title2">调料完成</div>
-					<div id="season-done" class="half-bottom">
-						<table class="table-title">
-							<tr>
-								<td width="5%">
-									<span class="check-box"></span>
-								</td>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="25%">申请头版样衣制作</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">申请</td>
-								</tr>
-							</table>
-						</div>
-					</div> -->
 				</div>
 				<div id="sample" class="list-box" ms-visible="currentIndex === 2">
-					<div class="panel-title1">制作中</div>
-					<div id="producting" class="half-top">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-									<datalist id="gender">
-										<option value="女/男装"></option>
-										<option value="女装"></option>
-										<option value="男装"></option>
-									</datalist>
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-									<datalist id="series">
-										<option value="系列"></option>
-										<option value="贵尚"></option>
-										<option value="雅尚"></option>
-										<option value="器尚"></option>
-										<option value="风尚"></option>
-									</datalist>
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">备注</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="sample1">
+						<div class="status-title">制作中</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">&nbsp;</dd>
+							</dl>
 						</div>
 					</div>
-					<div class="panel-title2">制作完成</div>
-					<div id="producting-done" class="half-bottom">
-						<table class="table-title">
-							<tr>
-								<td width="5%">
-									<span class="check-box"></span>
-								</td>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="10%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="15%">审版通过</td>
-								<td width="15%">申请复版</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="15%">审版通过</td>
-									<td width="15%">审版意见</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="sample2">
+						<div class="status-title">制作完成</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="operator">审版通过</dd>
+								<dd class="operator">审版意见</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">入图时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="operator">
+									<button class="btn btn-default btn-primary sample-pass-button" type="submit" data-toggle="pass-modal" data-target="#passModal">审版通过</button>
+								</dd>
+								<dd class="operator">
+									<input type="text" id="dubview-option-input">
+									<button class="btn btn-default btn-primary sample-dubview-button" type="submit" data-toggle="dubview-modal" data-target="#dubviewModal">申请复版</button>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="pass-modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+								</div>
+								<div class="modal-body">
+									确定审版通过吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="save-button">提交</button>
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="dubview-modal fade" id="dubviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+								</div>
+								<div class="modal-body">
+									确定申请复版吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="save-button">提交</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div id="viewer" class="list-box" ms-visible="currentIndex === 3">
-					<!-- <div class="panel-title1">制作中</div> -->
-					<div id="viewlist" class="one">
-						<table class="table-title">
-							<tr>
-								<td width="5%">
-									<span class="check-box"></span>
-								</td>
-								<td width="15%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="15%">通过时间</td>
-								<td width="10%">
-									<input list="gender" value="女/男装">
-									<datalist id="gender">
-										<option value="女/男装"></option>
-										<option value="女装"></option>
-										<option value="男装"></option>
-									</datalist>
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-									<datalist id="series">
-									</datalist>
-								</td>
-								<td width="15%">状态</td>
-								<td width="15%">制作预采任务单</td>
-								<td width="15%">完成预采单</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-							</table>
+					<div class="status-box" ms-controller="viewer">
+						<div class="status-title">制作中</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">通过时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">制作预采任务单</dd>
+								<dd class="operator">完成预采单</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+								<dd class="operator">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="viewer-modal" data-target="#viewerModal">提交审批</button>
+								</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div id="dubviewer" class="list-box" ms-visible="currentIndex === 4">
-					<div class="panel-title1">制作中</div>
-					<div id="seasoning" class="half-top">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-									<datalist id="gender">
-										<option value="女/男装"></option>
-										<option value="女装"></option>
-										<option value="男装"></option>
-									</datalist>
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-									<datalist id="series">
-										<option value="系列"></option>
-										<option value="贵尚"></option>
-										<option value="雅尚"></option>
-										<option value="器尚"></option>
-										<option value="风尚"></option>
-									</datalist>
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">备注</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="dubviewer1">
+						<div class="status-title">制作中</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
 						</div>
 					</div>
-					<div class="panel-title2">制作完成</div>
-					<div id="season-done" class="half-bottom">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="15%">审版通过</td>
-								<td width="15%">申请复版</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="15%">审版通过</td>
-									<td width="15%">审版意见</td>
-								</tr>
-							</table>
+					
+					<div class="status-box" ms-controller="dubviewer2">
+						<div class="status-title">制作完成</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="operator">审版通过</dd>
+								<dd class="operator">审版意见</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">入图时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="operator">
+									<button class="btn btn-default btn-primary sample-pass-button" type="submit" data-toggle="pass-modal" data-target="#passModal">审版通过</button>
+								</dd>
+								<dd class="operator">
+									<input type="text" id="dubview-option-input">
+									<button class="btn btn-default btn-primary sample-dubview-button" type="submit" data-toggle="dubview-modal" data-target="#dubviewModal">申请复版</button>
+								</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div id="repurchase-list" class="list-box" ms-visible="currentIndex === 5">
-					<div class="panel-title1">审批中</div>
-					<div id="seasoning" class="half-top">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">备注</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="repurchase1">
+						<div class="status-title">审批中</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
 						</div>
 					</div>
-					<div class="panel-title2">已移交</div>
-					<div id="season-done" class="half-bottom">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">备注</td>
-								</tr>
-							</table>
+					
+					<div class="status-box" ms-controller="repurchase2">
+						<div class="status-title">已移交</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
 				<div id="repurchase-list1" class="list-box" ms-visible="currentIndex === 6">
-					<div class="panel-title1">待审批</div>
-					<div id="examine" class="third-top">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-							</table>
+					<div class="status-box" ms-controller="repurchase1">
+						<div class="status-title">待审批</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
 						</div>
 					</div>
-					<div class="panel-title3">审批中</div>
-					<div id="examining" class="third-center">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">贵尚</td>
-								<td width="15%">建档完成</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
+					
+					<div class="status-box" ms-controller="repurchase2">
+						<div class="status-title">审批中</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
+						</div>
 					</div>
-					<div class="panel-title4">已移交</div>
-					<div id="transfer"  class="third-bottom">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">贵尚</td>
-								<td width="15%">建档完成</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
+					<div class="status-box" ms-controller="repurchase3">
+						<div class="status-title">已移交</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
+						</div>
 					</div>
 				</div>
 				<div id="repurchase-list2" class="list-box" ms-visible="currentIndex === 7">
-					<div class="panel-title1">审批中</div>
-					<div id="examine" class="third-top">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-								<tr>
-									<td width="15%">111</td>
-									<td width="15%">2015 8.24 10:00</td>
-									<td width="15%">女装</td>
-									<td width="10%">贵尚</td>
-									<td width="15%">建档完成</td>
-									<td width="30%">备注</td>
-								</tr>
-							</table>
+					<div class="status-box" ms-controller="repurchase1">
+						<div class="status-title">审批中</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
 						</div>
 					</div>
-					<div class="panel-title3">待审批</div>
-					<div id="examining" class="third-center">
-						<table class="table-title">
-							<tr>
-								<td width="5%">
-									<span class="check-box"></span>
-								</td>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="10%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="15%">预采单</td>
-								<td width="15%">移交</td>
-							</tr>
-						</table>
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">贵尚</td>
-								<td width="15%">建档完成</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
+					<div class="status-box" ms-controller="repurchase2">
+						<div class="status-title">待审批</div>
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">预采单</dd>
+								<dd class="operator">移交</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+								<dd class="operator">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+								</dd>
+							</dl>
+						</div>
 					</div>
-					<div class="panel-title4">已移交</div>
-					<div id="transfer"  class="third-bottom">
-						<table class="table-title">
-							<tr>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="15%">状态</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">贵尚</td>
-								<td width="15%">建档完成</td>
-								<td width="30%">备注</td>
-							</tr>
-						</table>
+					<div class="status-box" ms-controller="repurchase3">
+						<div class="status-title">已移交</div>
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">申请时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="details">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+							</dl>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -631,43 +586,6 @@
 		
 	
 	</div>
-
-<!--基础档案-->
-<div class="filing-modal fade" id="filingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">完成建档</h4>
-      </div>
-      <div class="modal-body">
-        确定申请调料吗?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="filing-save-button">确定</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--调料-->
-<div class="season-modal fade" id="seasonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">完成建档</h4>
-      </div>
-      <div class="modal-body">
-        确定申请样衣制作吗?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="season-save-button">确定</button>
-      </div>
-    </div>
-  </div>
-</div>
 <script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
 <script src="design/js/design.js"></script> 
