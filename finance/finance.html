@@ -140,216 +140,113 @@
 				</div>
 			</div>
 			<div id="produce-contract" class="list-box" ms-visible="currentIndex === 3">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="合同编号">
-								<datalist id="no">
-									<option value="合同编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">提交时间</td>
-							<td width="40%">合同</td>
-							<td width="30%">审核完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">12.1</td>
-								<td width="40%">
-									<div class="button1">下载</div>
-								</td>
-								<td width="30%">
-									<div class="button1">上传</div>
-								</td>
-							</tr>
-						</table>
+				<div class="status-box" ms-controller="contract">
+					<div class="list-title">
+						<dl>
+							<dt class="design-no">合同编号</dt>
+							<dd class="operator-time">提交时间</dd>
+							<dd class="contract">合同</dd>
+							<dd class="operator">审核完成</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="design-no">{{el.contract_no}}</dt>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="contract">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">上传</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
 			<div id="purchase-contract-handle" class="list-box" ms-visible="currentIndex === 4">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="合同编号">
-								<datalist id="no">
-									<option value="合同编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">签订时间</td>
-							<td width="40%">合同</td>
-							<td width="30%">状态</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">12.1</td>
-								<td width="40%">
-									<div class="button1">下载</div>
-								</td>
-								<td width="30%">
-									<div class="button1">完成</div>
-								</td>
-							</tr>
-						</table>
+				<div class="status-box" ms-controller="handle">
+					<div class="list-title">
+						<dl>
+							<dt class="design-no">合同编号</dt>
+							<dd class="operator-time">签订时间</dd>
+							<dd class="contract">合同</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dt class="design-no">{{el.contract_no}}</dt>
+						<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+						<dd class="contract">
+							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+						</dd>
 					</div>
 				</div>
 			</div>
-			<div id="produce-contract-handle" class="list-box" ms-visible="currentIndex === 5">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="合同编号">
-								<datalist id="no">
-									<option value="合同编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">签订时间</td>
-							<td width="40%">合同</td>
-							<td width="30%">状态</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">12.1</td>
-								<td width="40%">
-									<div class="button1">下载</div>
-								</td>
-								<td width="30%">
-									<div class="button1">完成</div>
-								</td>
-							</tr>
-						</table>
+			</div>
+			<div id="outbuy-contract" class="list-box" ms-visible="currentIndex === 5">
+				<div class="status-box" ms-controller="outbuy">
+					<div class="list-title">
+						<dt class="design-no">合同编号</dt>
+						<dd class="operator-time">提交时间</dd>
+						<dd class="contract">合同</dd>
+						<dd class="operator">审核完成</dd>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dt class="design-no">{{el.contract_no}}</dt>
+						<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+						<dd class="contract">
+							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+						</dd>
+						<dd class="operator">
+							<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
+						</dd>
 					</div>
 				</div>
 			</div>
-			<div id="outbuy-contract" class="list-box" ms-visible="currentIndex === 6">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="合同编号">
-								<datalist id="no">
-									<option value="合同编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">提交时间</td>
-							<td width="40%">合同</td>
-							<td width="30%">审核完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">12.1</td>
-								<td width="40%">
-									<div class="button1">下载</div>
-								</td>
-								<td width="30%">
-									<div class="button1">上传</div>
-								</td>
-							</tr>
-						</table>
+			<div id="outbuy-contract-handle" class="list-box" ms-visible="currentIndex === 6">
+				<div class="status-box" ms-controller="outbuy-handle">
+					<div class="list-title">
+						<dl>
+							<dt class="design-no">合同编号</dt>
+							<dd class="operator-time">提交时间</dd>
+							<dd class="contract">合同</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dt class="design-no">{{el.contract_no}}</dt>
+						<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+						<dd class="contract">
+							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+						</dd>
 					</div>
 				</div>
 			</div>
-			<div id="outbuy-contract-handle" class="list-box" ms-visible="currentIndex === 7">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="合同编号">
-								<datalist id="no">
-									<option value="合同编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">提交时间</td>
-							<td width="40%">合同</td>
-							<td width="30%">状态</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">12.1</td>
-								<td width="40%">
-									<div class="button1">下载</div>
-								</td>
-								<td width="30%">
-									<div class="button1">完成</div>
-								</td>
-							</tr>
-						</table>
+			<div id="reduce-examine" class="list-box" ms-visible="currentIndex === 7">
+				<div class="status-box" ms-controller="reduce">
+					<div class="list-title">
+						<dl>
+							<dt class="design-no">设计款号</dt>
+							<dd class="operator-time">申请原因</dd>
+							<dd class="detail">下单表</dd>
+							<dd class="ordernum">订单数</dd>
+							<dd class="cutnum">多裁数</dd>
+							<dd class="option">买手审批意见</dd>
+							<dd class="operator">审核完成</dd>
+						</dl>
 					</div>
-				</div>
-			</div>
-			<div id="reduce-examine" class="list-box" ms-visible="currentIndex === 8">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="10%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-								<input list="no" value="申请部门">
-								<datalist id="no">
-									<option value="申请部门"></option>
-									<option value="财务部"></option>
-									<option value="生产部"></option>
-									<option value="采购部"></option>
-									<option value="生产部"></option>
-									<option value="技术部"></option>
-									<option value="买手部"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="15%">申请原因</td>
-							<td width="10%">下单表</td>
-							<td width="10%">订单数</td>
-							<td width="10%">多裁数</td>
-							<td width="15%">买手审批意见</td>
-							<td width="10%">审核完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="10%">111</td>
-								<td width="10%">买手部</td>
-								<td width="10%">男装</td>
-								<td width="15%">申请原因</td>
-								<td width="10%">
-									<a class="sheetLink"><img src="../image/sheet.png"></a>
-								</td>
-								<td width="10%">1</td>
-								<td width="10%">1</td>
-								<td width="15%">买手审批意见</td>
-								<td width="10%">
-									<div class="button1">完成</div>
-								</td>
-							</tr>
-						</table>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="design-no">{{el.design_no}}</dt>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="detail">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="ordernum">{{el.design_no}}</dd>
+							<dd class="cutnum">{{el.design_no}}</dd>
+							<dd class="option">&nbs;</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
