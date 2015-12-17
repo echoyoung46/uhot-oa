@@ -3,224 +3,221 @@
 <head>
 	<meta charset="UTF-8">
 	<title>财务部</title>
-	<script src="../js/jquery.min.js" type="text/javascript"></script> 
-	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
-	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
-	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="../css/common.css">
-	<script type="text/javascript">
-	    $(document).ready( function() {
-	      $('#tab-container').easytabs();
-	    });
-  </script>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="finance/css/sys_clerk.css">
 </head>
 <body>
-	<div id="tab-container" class="tab-container">
-		<ul class="tabs">
-			<li class="tab"><a href="#goods-info" id="goods-info-enter">商品信息</a></li>
-			<li class="tab"><a href="#price-list" id="price-list-enter">定价单</a></li>
-			<li class="tab"><a href="#ingredient-entering" id="ingredient-entering-enter">成分录入</a></li>
-			<li class="tab"><a href="#outbuy-goods-info" id="goos-info-enter">外采商品信息</a></li>
-			<li class="tab"><a href="#order-price-entering" id="goos-info-enter">外采价格录入</a></li>
-		</ul>
-		<div class="panel-container">
-			<div id="goods-info">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">设计款号</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-								
-							</td>
-							<td width="10%">生产方式</td>
-							<td width="15%">预采任务单</td>
-							<td width="25%">录入完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
+	<div id="page-container" ms-controller="menu">
+		<div class="page-content">
+			<div class="page-menu">
+				<ul class="list-inline nav nav-tabs">
+					<li role="presentation" class="active"><a href="#basic-file" id="basic-file-enter"  ms-click="toggle(0)">商品信息</a></li>
+					<li role="presentation"><a href="#season" id="season-enter"  ms-click="toggle(1)">定价单</a></li>
+					<li role="presentation"><a href="#sample" id="sample-enter"  ms-click="toggle(2)">成分录入</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter"  ms-click="toggle(3)">外采商品信息</a></li>
+					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  ms-click="toggle(4)">外采价格录入</a></li>
+				</ul>
+			</div>
+			<div class="page-list">
+				<div id="goods-info" class="list-box" ms-visible="currentIndex === 0">
+					<div class="one">
+						<table class="table-title">
 							<tr>
-								<td width="15%">111</td>
-								<td width="15%">111</td>
-								<td width="15%">女装</td>
-								<td width="25%">
-									<a class="sheetLink"><img src="../image/sheet.png"></a>
+								<td width="5%">
+									<span class="check-box"></span>
 								</td>
-								<td width="30%">
-									<div class="button1">完成</div>
+								<td width="15%">
+									<input list="no" value="款号">
 								</td>
+								<td width="15%">设计款号</td>
+								<td width="10%">
+									<input list="gender" value="女/男装">
+									
+								</td>
+								<td width="10%">生产方式</td>
+								<td width="15%">预采任务单</td>
+								<td width="25%">录入完成</td>
 							</tr>
 						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="15%">111</td>
+									<td width="15%">111</td>
+									<td width="15%">女装</td>
+									<td width="25%">
+										<a class="sheetLink"><img src="../image/sheet.png"></a>
+									</td>
+									<td width="30%">
+										<div class="button1">完成</div>
+									</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div>
-				<div class="one" id="price-list">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="单据编号">
-								<datalist id="no">
-									<option value="单据编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">接收时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-								<input list="status" value="状态">
-								<datalist id="status">
-									<option value="状态"></option>
-									<option value="1"></option>
-									<option value="2"></option>
-								</datalist>
-							</td>
-							<td width="20%">变更信息</td>
-							<td width="25%">录入完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
-					</div>
-				</div>
-			</div>
-			<div id="ingredient-entering">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="15%">设计款号</td>
-							<td width="15%">申请时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="15%">预采任务单</td>
-							<td width="25%">录入完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
-					</div>
-				</div>
-			</div>
-			<div id="outbuy-goods-info">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="15%">设计款号</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="25%">下单表</td>
-							<td width="35%">录入完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
+				<div>
+					<div class="one" id="price-list">
+						<table class="table-title">
 							<tr>
-								<td width="15%">111</td>
-								<td width="15%">111</td>
-								<td width="15%">女装</td>
+								<td width="5%">
+									<span class="check-box"></span>
+								</td>
 								<td width="15%">
-									<a class="sheetLink"><img src="../image/sheet.png"></a>
+									<input list="no" value="单据编号">
+									<datalist id="no">
+										<option value="单据编号"></option>
+									</datalist>
+								</td>
+								<td width="15%">接收时间</td>
+								<td width="10%">
+									<input list="gender" value="女/男装">
+									<datalist id="gender">
+										<option value="女/男装"></option>
+										<option value="女装"></option>
+										<option value="男装"></option>
+									</datalist>
 								</td>
 								<td width="10%">
-									<div class="button1">完成</div>
+									<input list="status" value="状态">
+									<datalist id="status">
+										<option value="状态"></option>
+										<option value="1"></option>
+										<option value="2"></option>
+									</datalist>
 								</td>
+								<td width="20%">变更信息</td>
+								<td width="25%">录入完成</td>
 							</tr>
 						</table>
+						<div class="table-body">
+							<table class="table-list">
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="order-price-entering">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="单据编号">
-								<datalist id="no">
-									<option value="单据编号"></option>
-								</datalist>
-							</td>
-							<td width="15%">接收时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-							<input list="status" value="状态">
-								<datalist id="status">
-									<option value="状态"></option>
-									<option value="1"></option>
-									<option value="2"></option>
-								</datalist>
-							</td>
-							<td width="30%">变更信息</td>
-							<td width="15%">录入完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
+				<div id="ingredient-entering" class="list-box" ms-visible="currentIndex === 1">
+					<div class="one">
+						<table class="table-title">
 							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">1</td>
-								<td width="30%"></td>
-								<td width="15%">
-									<div class="button1">完成</div>
+								<td width="5%">
+									<span class="check-box"></span>
 								</td>
+								<td width="15%">
+									<input list="no" value="款号">
+									<datalist id="no">
+										<option value="款号"></option>
+									</datalist>
+								</td>
+								<td width="15%">设计款号</td>
+								<td width="15%">申请时间</td>
+								<td width="10%">
+									<input list="gender" value="女/男装">
+									<datalist id="gender">
+										<option value="女/男装"></option>
+										<option value="女装"></option>
+										<option value="男装"></option>
+									</datalist>
+								</td>
+								<td width="15%">预采任务单</td>
+								<td width="25%">录入完成</td>
 							</tr>
 						</table>
+						<div class="table-body">
+							<table class="table-list">
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="outbuy-goods-info" class="list-box" ms-visible="currentIndex === 2">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="15%">
+									<input list="no" value="款号">
+									<datalist id="no">
+										<option value="款号"></option>
+									</datalist>
+								</td>
+								<td width="15%">设计款号</td>
+								<td width="15%">
+									<input list="gender" value="女/男装">
+									<datalist id="gender">
+										<option value="女/男装"></option>
+										<option value="女装"></option>
+										<option value="男装"></option>
+									</datalist>
+								</td>
+								<td width="25%">下单表</td>
+								<td width="35%">录入完成</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="15%">111</td>
+									<td width="15%">111</td>
+									<td width="15%">女装</td>
+									<td width="15%">
+										<a class="sheetLink"><img src="../image/sheet.png"></a>
+									</td>
+									<td width="10%">
+										<div class="button1">完成</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="order-price-entering" class="list-box" ms-visible="currentIndex === 3">
+					<div class="one">
+						<table class="table-title">
+							<tr>
+								<td width="15%">
+									<input list="no" value="单据编号">
+									<datalist id="no">
+										<option value="单据编号"></option>
+									</datalist>
+								</td>
+								<td width="15%">接收时间</td>
+								<td width="15%">
+									<input list="gender" value="女/男装">
+									<datalist id="gender">
+										<option value="女/男装"></option>
+										<option value="女装"></option>
+										<option value="男装"></option>
+									</datalist>
+								</td>
+								<td width="10%">
+								<input list="status" value="状态">
+									<datalist id="status">
+										<option value="状态"></option>
+										<option value="1"></option>
+										<option value="2"></option>
+									</datalist>
+								</td>
+								<td width="30%">变更信息</td>
+								<td width="15%">录入完成</td>
+							</tr>
+						</table>
+						<div class="table-body">
+							<table class="table-list">
+								<tr>
+									<td width="15%">111</td>
+									<td width="15%">2015 8.24 10:00</td>
+									<td width="15%">女装</td>
+									<td width="10%">1</td>
+									<td width="30%"></td>
+									<td width="15%">
+										<div class="button1">完成</div>
+									</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</div>
 <datalist id="no">
 	<option value="款号"></option>
