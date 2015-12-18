@@ -11,14 +11,14 @@
 		<div class="page-content">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#basic-file" id="basic-file-enter"  ms-click="toggle(0)">基础档案</a></li>
-					<li role="presentation"><a href="#season" id="season-enter"  ms-click="toggle(1)">调料</a></li>
-					<li role="presentation"><a href="#sample" id="sample-enter"  ms-click="toggle(2)">头版样衣制作</a></li>
-					<li role="presentation"><a href="#viewer" id="viewer-enter"  ms-click="toggle(3)">审版</a></li>
-					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  ms-click="toggle(4)">复版</a></li>
-					<li role="presentation"><a href="#repurchase-list" id="repurchase-enter"  ms-click="toggle(5)">预采任务单</a></li>
-					<li role="presentation"><a href="#repurchase-list1" id="repurchase1-enter"  ms-click="toggle(6)">预采任务单</a></li>
-					<li role="presentation"><a href="#repurchase-list2" id="repurchase2-enter"  ms-click="toggle(7)">预采任务单</a></li>
+					<li role="presentation" class="active"><a href="#basic-file" id="basic-file-enter" ms-click="toggle(0)">基础档案</a></li>
+					<li role="presentation"><a href="#season" id="season-enter" ms-click="toggle(1)">调料</a></li>
+					<li role="presentation"><a href="#sample" id="sample-enter" ms-click="toggle(2)">头版样衣制作</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter" ms-click="toggle(3)">审版</a></li>
+					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter" ms-click="toggle(4)">复版</a></li>
+					<li role="presentation"><a href="#repurchase-list" id="repurchase-enter" ms-click="toggle(5)">预采任务单</a></li>
+					<li role="presentation"><a href="#repurchase-list1" id="repurchase1-enter" ms-click="toggle(6)">预采任务单</a></li>
+					<li role="presentation"><a href="#repurchase-list2" id="repurchase2-enter" ms-click="toggle(7)">预采任务单</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
@@ -349,11 +349,11 @@
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">设计款号</dd>
-								<dd class="operator-time">入图时间</dd>
-								<dd class="gender">女/男装</dd>
-								<dd class="series">系列</dd>
-								<dd class="source">生产类型</dd>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.design_no}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
 								<dd class="operator">
 									<button class="btn btn-default btn-primary sample-pass-button" type="submit" data-toggle="pass-modal" data-target="#passModal">审版通过</button>
 								</dd>
@@ -378,7 +378,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -404,7 +404,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -431,7 +431,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -457,7 +457,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -482,7 +482,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -509,7 +509,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -538,7 +538,7 @@
 								<dd class="operator">移交</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -569,7 +569,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail">
+						<div class="list-detail table table-hover" ms-each="dress">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>

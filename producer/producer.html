@@ -3,609 +3,655 @@
 <head>
 	<meta charset="UTF-8">
 	<title>生产部</title>
-	<script src="../js/jquery.min.js" type="text/javascript"></script> 
-	<script src="../js/jquery.hashchange.min.js" type="text/javascript"></script>
-	<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
-	<script src="../js/plugin/jquery.layout.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="../css/common.css">
-	<script type="text/javascript">
-	    $(document).ready( function() {
-	      $('#tab-container').easytabs();
-	    });
-  </script>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="producer/css/producer.css">
 </head>
 <body>
-	<div id="tab-container" class="tab-container">
-		<ul class="tabs">
-			<li class="tab"><a href="#apply-no" id="apply-no-enter">申请款号</a></li>
-			<li class="tab"><a href="#repurchase-list" id="repurchase-list-enter">预采任务单</a></li>
-			<li class="tab"><a href="#craftmaterial-list" id="craftmaterial-list-enter">工艺配料单</a></li>
-			<li class="tab"><a href="#process-sheet" id="process-sheet-enter">工艺单</a></li>
-			<li class="tab"><a href="#order-table" id="order-table-enter">下单表</a></li>
-			<li class="tab"><a href="#prenatal-issue" id="prenatal-issue-enter">产前版发料</a></li>
-			<li class="tab"><a href="#cargo-issue" id="cargo-issue-enter">大货发料</a></li>
-			<li class="tab"><a href="#producing" id="producing-enter">生产中</a></li>
-			<li class="tab"><a href="#replenishment" id="replenishment-enter">补货</a></li>
-			<li class="tab"><a href="#marker" id="marker-enter">唛架</a></li>
-			<li class="tab"><a href="#amount-adjust" id="amount-adjust-enter">幅宽及用量变更</a></li>
-			<li class="tab"><a href="#cost-check" id="cost-check-enter">成本核算</a></li>
-			<li class="tab"><a href="#outbuy-send" id="outbuy-send-enter">外采/FOB发料</a></li>
-		</ul>
+	<div id="page-container" ms-controller="menu">
+		<div class="page-content">
+			<div class="page-menu">
+				<ul class="list-inline nav nav-tabs">
+					<li role="presentation" class="active"><a href="#apply-no" id="apply-no-enter" ms-click="toggle(0)">申请款号</a></li>
+					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" ms-click="toggle(1)">预采任务单</a></li>
+					<li role="presentation"><a href="#craftmaterial-list" id="craftmaterial-list-enter" ms-click="toggle(2)">工艺配料单</a></li>
+					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" ms-click="toggle(3)">工艺单</a></li>
+					<li role="presentation"><a href="#order-table" id="order-table-enter" ms-click="toggle(4)">下单表</a></li>
+					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" ms-click="toggle(5)">产前版发料</a></li>
+					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" ms-click="toggle(6)">大货发料</a></li>
+					<li role="presentation"><a href="#producing" id="producing-enter" ms-click="toggle(7)">生产中</a></li>
+					<li role="presentation"><a href="#replenishment" id="replenishment-enter" ms-click="toggle(8)">补货</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter" ms-click="toggle(9)">唛架</a></li>
+					<li role="presentation"><a href="#amount-adjust" id="amount-adjust-enter" ms-click="toggle(10)">幅宽及用量变更</a></li>
+					<li role="presentation"><a href="#cost-check" id="cost-check-enter" ms-click="toggle(11)">成本核算</a></li>
+					<li role="presentation"><a href="#outbuy-send" id="outbuy-send-enter" ms-click="toggle(12)">外采/FOB发料</a></li>
+				</ul>
+			</div>
+		</div>
 	
-		<div class="panel-container">
-			<div id="apply-no">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="设计款号">
-							</td>
-							<td width="15%">申请时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">
-								<input list="series" value="系列">
-							</td>
-							<td width="15%">预采任务单</td>
-							<td width="15%">大货款号</td>
-							<td width="15%">完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+		<div class="page-list">
+			<div id="apply-no" class="list-box" ms-visible="currentIndex === 0">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">申请时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">预采任务单</dd>
+							<dd class="cargo-no">大货款号</dd>
+							<dd class="operator">完成</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="cargo-no">{{el.cargo_no}}</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="repurchase-list">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">移交时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">
-								<input list="series" value="系列">
-							</td>
-							<td width="15%">预采任务单</td>
-							<td width="15%">变更信息</td>
-							<td width="15%">系统录入</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="repurchase-list" class="list-box" ms-visible="currentIndex === 1">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">移交时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">预采任务单</dd>
+							<dd class="update-info">变更信息</dd>
+							<dd class="operator">系统录入</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<div class="update-info">
+								<input type="text">
+							</div>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="craftmaterial-list">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">移交时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">
-								<input list="series" value="系列">
-							</td>
-							<td width="15%">预采任务单</td>
-							<td width="15%">变更信息</td>
-							<td width="15%">系统录入</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="craftmaterial-list" class="list-box" ms-visible="currentIndex === 2">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">移交时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">预采任务单</dd>
+							<dd class="update-info">变更信息</dd>
+							<dd class="operator">系统录入</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<div class="update-info">
+								<input type="text">
+							</div>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">录入</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="process-sheet">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="10%">
-								<input list="no" value="款号">
-							</td>
-							<td width="10%">移交时间</td>
-							<td width="5%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="5%">
-								<input list="series" value="系列">
-							</td>
-							<td width="10%">工艺单</td>
-							<td width="15%">变更信息</td>
-							<td width="10%">申请唛架</td>
-							<td width="10%">申请修改工艺单</td>
-							<td width="10%">申请纸样</td>
-							<td width="10%">申请修改唛架</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="process-sheet" class="list-box" ms-visible="currentIndex === 3">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">移交时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">工艺单</dd>
+							<dd class="update-info">变更信息</dd>
+							<dd class="apply-maker">申请唛架</dd>
+							<dd class="update-craft">申请修改工艺单</dd>
+							<dd class="apply-sample">申请纸样</dd>
+							<dd class="apply-update-maker">申请修改唛架</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">{{el.no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="update-info">
+								<input type="text">
+							</dd>
+							<dd class="apply-maker">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请唛架</button>
+							</dd>
+							<dd class="update-craft">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改工艺单</button>
+							</dd>
+							<dd class="apply-sample">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请纸样</button>
+							</dd>
+							<dd class="apply-update-maker">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改唛架</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="order-table">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="list-no" value="单据号">
-							</td>
-							<td width="15%">下单时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">
-								生产方式
-							</td>
-							<td width="10%">
-								<input list="status" value="状态">
-							</td>
-							<td width="25%">变更信息</td>
-							<td width="10%">系统录入</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="order-table" class="list-box" ms-visible="currentIndex === 4">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="receipt-no">单据号</dd>
+							<dd class="operator-time">下单时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="update-info">变更信息</dd>
+							<dd class="operator">系统录入</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="receipt-no">{{el.receipt_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="update-info">
+								<input type="text">
+							</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">录入</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="prenatal-issue">
-				<div class="third-top" id="send-material">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">到料时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="15%">
-								状态
-							</td>
-							<td width="40%">通知发料</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="prenatal-issue" class="list-box" ms-visible="currentIndex === 5">
+				<div class="status-box" ms-controller="apply1" id="prenatal-issue1">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">到料时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="operator">通知发料</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
-				<div class="half-bottom">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">到料时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">面料状态</td>
-							<td width="15%">辅料状态</td>
-							<td width="30%">纸样</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">1</td>
-								<td width="15%">1</td>
-								<td width="30%">
-									<div class="button1">发出</div>
-								</td>
-							</tr>
-						</table>
+				<div class="status-box" ms-controller="apply2" id="prenatal-issue2">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">到料时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="fabric-status">面料状态</dd>
+							<dd class="accessory-status">辅料状态</dd>
+							<dd class="operator">纸样</dd>
+						</dl>
 					</div>
-				</div>
-			</div>
-			<div id="cargo-issue">
-				<div class="half-top" id="notice-issue">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">到料时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">
-								<input list="status" value="产前版状态">
-							</td>
-							<td width="20%">注意信息</td>
-							<td width="25%">通知发料</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
-					</div>
-				</div>
-				<div class="half-bottom">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">到料时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">面料状态</td>
-							<td width="15%">辅料状态</td>
-							<td width="30%">纸样、唛架、吊牌等</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">1</td>
-								<td width="15%">1</td>
-								<td width="30%">
-									<div class="button1">发出</div>
-								</td>
-							</tr>
-						</table>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="fabric-status">面料状态</dd>
+							<dd class="accessory-status">辅料状态</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="producing">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="设计款号">
-							</td>
-							<td width="15%">投产时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">
-								<input list="series" value="状态">
-							</td>
-							<td width="45%">入仓检验</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="cargo-issue" class="list-box" ms-visible="currentIndex === 6">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">到料时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="notice">注意信息</dd>
+							<dd class="operator">通知发料</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">{{el.no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">到料时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="fabric-status">面料状态</dd>
+							<dd class="accessory-status">辅料状态</dd>
+							<dd class="operator">纸样、唛架、吊牌等</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">{{el.no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="fabric-status">面料状态</dd>
+							<dd class="accessory-status">辅料状态</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="replenishment">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="15%">补货时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-								<input list="status" value="产前版状态">
-							</td>
-							<td width="20%">注意信息</td>
-							<td width="25%">发料</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">1</td>
-								<td width="20%"></td>
-								<td width="25%">
-									<input list="send-type" value="聚一佳">
-									<datalist id="send-type">
-										<option value="聚一佳"></option>
-									</datalist>
-									<div class="button1">发出</div>
-								</td>
-							</tr>
-						</table>
+			<div id="producing" class="list-box" ms-visible="currentIndex === 7">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">投产时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="operator">入仓检验</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">检验</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="marker">
-				<div class="half-top">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="15%">移交时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-								<input list="series" value="系列">
-								<datalist id="series">
-									<option value="系列"></option>
-									<option value="贵尚"></option>
-									<option value="雅尚"></option>
-									<option value="器尚"></option>
-									<option value="风尚"></option>
-								</datalist>	
-							</td>
-							<td width="15%">工艺单</td>
-							<td width="30%">状态</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">风尚</td>
-								<td width="15%">
-									<a class="sheetLink"><img src="../image/sheet.png"></a>
-								</td>
-								<td width="30%">唛架已完</td>
-							</tr>
-						</table>
+			<div id="replenishment" class="list-box" ms-visible="currentIndex === 8">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">补货时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="notice">注意信息</dd>
+							<dd class="operator">发料</dd>
+						</dl>
 					</div>
-				</div>
-				<div class="panel-title2">唛架修改</div>
-				<div class="half-bottom">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="15%">移交时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="10%">
-								<input list="series" value="系列">
-								<datalist id="series">
-									<option value="系列"></option>
-									<option value="贵尚"></option>
-									<option value="雅尚"></option>
-									<option value="器尚"></option>
-									<option value="风尚"></option>
-								</datalist>	
-							</td>
-							<td width="15%">工艺单</td>
-							<td width="30%">状态</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">风尚</td>
-								<td width="15%">
-									<a class="sheetLink"><img src="../image/sheet.png"></a>
-								</td>
-								<td width="30%">唛架修改完</td>
-							</tr>
-						</table>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="notice">注意信息</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发料</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="amount-adjust">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="15%">
-								<input list="no" value="款号">
-								<datalist id="no">
-									<option value="款号"></option>
-								</datalist>
-							</td>
-							<td width="15%">变更时间</td>
-							<td width="15%">
-								<input list="gender" value="女/男装">
-								<datalist id="gender">
-									<option value="女/男装"></option>
-									<option value="女装"></option>
-									<option value="男装"></option>
-								</datalist>
-							</td>
-							<td width="10%">变更原因</td>
-							<td width="15%">预采任务单</td>
-							<td width="10%">原幅宽</td>
-							<td width="10%">新幅宽</td>
-							<td width="10%">
-								<input list="gender" value="新唛架">
-								<datalist id="gender">
-									<option value="新唛架"></option>
-									<option value="已完成"></option>
-									<option value="制作中"></option>
-								</datalist>
-							</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-							<tr>
-								<td width="15%">111</td>
-								<td width="15%">2015 8.24 10:00</td>
-								<td width="15%">女装</td>
-								<td width="10%">原因</td>
-								<td width="15%">
-									<a class="sheetLink"><img src="../image/sheet.png"></a>
-								</td>
-								<td width="10%">1</td>
-								<td width="10%">1</td>
-								<td width="10%">已完成</td>
-							</tr>
-						</table>
+			<div id="marker" class="list-box" ms-visible="currentIndex === 9">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">移交时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="craft">工艺单</dd>
+							<dd class="status">状态</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">{{el.no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="craft">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="status">唛架已完</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="status-box" ms-controller="apply">
+					<div class="status-title">唛架修改</div>
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">移交时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="craft">工艺单</dd>
+							<dd class="status">状态</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">{{el.no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="craft">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="status">唛架修改完</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="cost-check">
-				<div class="half-top" id="cost-checking">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">完成时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">系列</td>
-							<td width="10%">生产方式</td>
-							<td width="15%">预采任务单</td>
-							<td width="20%">核算完成</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="amount-adjust" class="list-box" ms-visible="currentIndex === 10">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">设计款号</dd>
+							<dd class="operator-time">变更时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="update-reason">变更原因</dd>
+							<dd class="details">预采任务单</dd>
+							<dd class="last-width">原幅宽</dd>
+							<dd class="new-width">新幅宽</dd>
+							<dd class="status">移交</dd>
+						</dl>
 					</div>
-				</div>
-				<div class="half-bottom" id="cost-transfer">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">完成时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="10%">系列</td>
-							<td width="10%">生产方式</td>
-							<td width="35%">确认移交</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="update-reason">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="last-width">{{el.source}}</dd>
+							<dd class="new-width">{{el.source}}</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div id="outbuy-send">
-				<div class="one">
-					<table class="table-title">
-						<tr>
-							<td width="5%">
-								<span class="check-box"></span>
-							</td>
-							<td width="15%">
-								<input list="no" value="款号">
-							</td>
-							<td width="15%">到料时间</td>
-							<td width="10%">
-								<input list="gender" value="女/男装">
-							</td>
-							<td width="15%">生产方式</td>
-							<td width="20%">产前版系列</td>
-							<td width="20%">发料</td>
-						</tr>
-					</table>
-					<div class="table-body">
-						<table class="table-list">
-						</table>
+			<div id="cost-check" class="list-box" ms-visible="currentIndex === 11">
+				<div class="status-box" ms-controller="apply1" id="cost-check1">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">完成时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">预采任务单</dd>
+							<dd class="operator">核算完成</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">完成</button>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="status-box" ms-controller="apply2" id="cost-check2">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">完成时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="operator">确认移交</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div id="outbuy-send" class="list-box" ms-visible="currentIndex === 12">
+				<div class="status-box" ms-controller="apply">
+					<div class="list-title">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">款号</dd>
+							<dd class="operator-time">申请时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">预采单</dd>
+							<dd class="operator">移交</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="no">{{el.no}}</dd>
+							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<datalist id="gender">
-	<option value="女/男装"></option>
-	<option value="女装"></option>
-	<option value="男装"></option>
-</datalist>
-<datalist id="series">
-	<option value="系列"></option>
-	<option value="贵尚"></option>
-	<option value="雅尚"></option>
-	<option value="器尚"></option>
-	<option value="风尚"></option>
-</datalist>
-<datalist id="list-no">
-	<option value="单据号"></option>
-</datalist>
-<datalist id="send-type">
-	<option value="聚一佳"></option>
-</datalist>
-<script src="../js/global.js"></script>
-<script src="js/producer.js"></script>
+<script src="js/avalon.js"></script>
+<script src="js/global.js"></script>
+<script src="producer/js/producer.js"></script> 
 </body>
 </html>
