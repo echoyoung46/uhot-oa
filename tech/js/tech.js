@@ -1,3 +1,5 @@
+var selectNoArr = [];
+
 $(function(){
 	var bodymodel = avalon.define({
         $id: "menu",
@@ -47,6 +49,7 @@ function initSave() {
 	$('#sample1-save-button').on('click', function(){
 		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
 	});
+}
 
 	//审版
 	//复版
@@ -54,7 +57,7 @@ function initSave() {
 	//纸样
 	//唛架
 	//样衣分数
-}
+
 
 /*$(function() {
 	initList();
@@ -250,7 +253,7 @@ function initAction() {
 							/*+   '<td width="25%">'
 							+		'<input list="car-version" value="车版师——汤胜辉">'
 							+		'<span class="list-button" id="button_' + val.design_no + '">分配</spam>'
-							+	'</td>'*/
+							+	'</td>'
 							+'</tr>';
 				});
 				$("#dubviewer #dubversioning .table-list").html(domStr);

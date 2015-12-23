@@ -58,6 +58,23 @@
 							</dl>
 						</div>
 					</div>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  	<div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      	<div class="modal-header">
+						        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        	<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+						      	</div>
+						     	<div class="modal-body">
+						       	 确定提交建档吗?
+						      	</div>
+						      	<div class="modal-footer">
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        	<button type="button" class="btn btn-primary" id="filing-save-button">提交</button>
+						      	</div>
+						    </div>
+						</div>
+					</div>
 				</div>
 				<div class="list-box" id="drawing-in" ms-visible="currentIndex === 1">
 					<div class="tool-list"></div>
@@ -220,43 +237,8 @@
 		</div>		
 	</div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">完成建档</h4>
-      </div>
-      <div class="modal-body">
-        确定提交建档吗?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="save-button">提交</button>
-      </div>
-    </div>
-  </div>
-</div>
-<datalist id="no">
-	<option value="设计款号"></option>
-</datalist>
-<datalist id="gender">
-	<option value="女/男装"></option>
-	<option value="女装"></option>
-	<option value="男装"></option>
-</datalist>
-<datalist id="series">
-	<option value="系列"></option>
-	<option value="贵尚"></option>
-	<option value="雅尚"></option>
-	<option value="器尚"></option>
-	<option value="风尚"></option>
-</datalist>
-<datalist id="source">
-	<option value="生产类型"></option>
-	<option value="自产"></option>
-	<option value="外采"></option>
-</datalist>
+
+
 <script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
 <script src="gmo/js/gmo.js"></script> 

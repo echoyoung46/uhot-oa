@@ -11,7 +11,7 @@ $(function() {
 
 	initAction();
 
-	$('#save-button').on('click', function(){
+	$('#filing-save-button').on('click', function(){
 		updateDressStatus(1, selectNoArr, "filing_time");
 	})
 });
