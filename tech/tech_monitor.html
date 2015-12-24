@@ -22,7 +22,7 @@
 			</div>
 			<div class="page-list">
 				<div id="sample" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="sample1">
+					<div class="status-box" ms-controller="sample1" id="sample1">
 						<div class="status-title">申请制作</div>
 						<div class="list-title">
 							<dl>
@@ -34,7 +34,7 @@
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
-								<dd class="details">纸样分配</dd>
+								<dd class="operator">纸样分配</dd>
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
@@ -47,7 +47,7 @@
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
-								<dd class="details">
+								<dd class="operator">
 									<input list="sampler" value="纸样师——汤胜辉">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal1" data-target="#sampleModal1">分配</button>
 								</dd>
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 
-					<div class="status-box" ms-controller="sample2">
+					<div class="status-box" ms-controller="sample2" id="sample2">
 						<div class="status-title">完成纸样</div>
 						<div class="list-title">
 							<dl>
@@ -67,8 +67,8 @@
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
-								<dd class="sample">纸样师</dd>
-								<dd class="carversion">车版分配</dd>
+								<dd class="detail">纸样师</dd>
+								<dd class="operator">车版分配</dd>
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
@@ -81,16 +81,25 @@
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
-								<dd class="source">{{el.sampler}}</dd>
-								<dd class="details">
-									<input list="sampler" value="车版师——李思">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal2" data-target="#sampleModal2">分配</button>
+								<dd class="detail">{{el.sampler}}</dd>
+								<dd class="operator dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							         Java <span class="caret"></span>
+							      </a>
+							      <ul class="dropdown-menu">
+							         <li><a href="#">Swing</a></li>
+							         <li><a href="#">jMeter</a></li>
+							         <li><a href="#">EJB</a></li>
+							         <li class="divider"></li>
+							         <li><a href="#">分离的链接</a></li>
+							      </ul>
+									<!-- <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal2" data-target="#sampleModal2">分配</button> -->
 								</dd>
 							</dl>
 						</div>
 					</div>
 
-					<div class="status-box" ms-controller="sample3">
+					<div class="status-box" ms-controller="sample3" id="sample3">
 						<div class="status-title">制作完成</div>
 						<div class="list-title">
 							<dl>
@@ -102,8 +111,8 @@
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
-								<dd class="carversion">车版师</dd>
-								<dd class="carversion-score">车版计分</dd>
+								<dd class="detail">车版师</dd>
+								<dd class="operator">车版计分</dd>
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
@@ -116,8 +125,8 @@
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
-								<dd class="carversion">{{el.carversioner}}</dd>
-								<dd class="carversion-score">
+								<dd class="detail">{{el.carversioner}}</dd>
+								<dd class="operator">
 									<input list="sampler" value="车版师——李思">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal3" data-target="#sampleModal3">分配</button>
 								</dd>
@@ -598,6 +607,7 @@
 			</div>
 		</div>
 	</div>
+<script src="js/plugin/bootstrap.min.js"></script>
 <script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
 <script src="tech/js/tech.js"></script> 

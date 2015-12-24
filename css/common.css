@@ -43,7 +43,7 @@
 	background: #f7f7f9;
 }
 .status-box dl{
-	overflow: hidden;
+	/*overflow: hidden;*/
 	margin-bottom: 0;
 	height: 40px;
 }
