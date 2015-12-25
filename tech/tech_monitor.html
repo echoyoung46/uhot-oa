@@ -48,8 +48,19 @@
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
 								<dd class="operator">
-									<input list="sampler" value="纸样师——汤胜辉">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal1" data-target="#sampleModal1">分配</button>
+                                    <div class="btn-group">
+										<button type="button" class="btn btn-danger">选择</button>
+										<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="#">纸样师——汤胜辉1</a></li>
+											<li><a href="#">纸样师——汤胜辉2</a></li>
+											<li><a href="#">纸样师——汤胜辉3</a></li>
+										</ul>
+									</div>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal1" data-target="#sampleModal1">纸样分配</button>
 								</dd>
 							</dl>
 						</div>
@@ -82,18 +93,20 @@
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
 								<dd class="detail">{{el.sampler}}</dd>
-								<dd class="operator dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							         Java <span class="caret"></span>
-							      </a>
-							      <ul class="dropdown-menu">
-							         <li><a href="#">Swing</a></li>
-							         <li><a href="#">jMeter</a></li>
-							         <li><a href="#">EJB</a></li>
-							         <li class="divider"></li>
-							         <li><a href="#">分离的链接</a></li>
-							      </ul>
-									<!-- <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal2" data-target="#sampleModal2">分配</button> -->
+								<dd class="operator">
+									<div class="btn-group">
+										<button type="button" class="btn btn-danger">选择</button>
+										<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="#">车版师——李四</a></li>
+											<li><a href="#">车版师——张三</a></li>
+											<li><a href="#">车版师——王五</a></li>
+										</ul>
+									</div>
+									 <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal2" data-target="#sampleModal2">分配</button> 
 								</dd>
 							</dl>
 						</div>
@@ -607,7 +620,6 @@
 			</div>
 		</div>
 	</div>
-<script src="js/plugin/bootstrap.min.js"></script>
 <script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
 <script src="tech/js/tech.js"></script> 

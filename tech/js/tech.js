@@ -43,7 +43,7 @@ function initAction(){
 function initSave() {
 	//头版样衣制作
 	$('#sample1-save-button').on('click', function(){
-		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+		updateDressStatus(5, selectNoArr, "allotpattern_time");
 	});
 	$('#sample1-save-button').on('click', function(){
 		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
