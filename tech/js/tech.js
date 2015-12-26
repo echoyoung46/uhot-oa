@@ -1,8 +1,6 @@
 var selectNoArr = [];
 
 $(function(){
-	// $(".dropdown-toggle").dropdown('toggle');
-
 	var bodymodel = avalon.define({
         $id: "menu",
         currentIndex: 0,
@@ -12,7 +10,6 @@ $(function(){
     })
 
 	initAction();
-
 	initSave();
 });
 

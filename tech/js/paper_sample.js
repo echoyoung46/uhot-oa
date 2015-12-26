@@ -1,11 +1,34 @@
+var selectNoArr = [];
+
 $(function() {
+	var bodymodel = avalon.define({
+		$id: "menu",
+		currentIndex: 0,
+		toggle: function(index) {
+			bodymodel.currentIndex = index;
+		}
+	});
+
 	initAction();
+	initSave();
 });
+
+function initSave(){
+	$('#sample .sample-save-button').on('click', function(){
+		updateDressStatus(6, selectNoArr, "finishpattern_time");
+	});
+}
 
 function initAction() {
 	/*******************纸样制作入口********************/
 	$("#sample-enter").bind('click', function(event) {
-		$.ajax({
+		var reqData = getDressByStatus(5);
+		var sample1 = avalon.define({
+			$id: "sample",
+			dress: reqData
+		});
+
+		/*$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
 			type: 'GET',
 			dataType: 'JSON',
@@ -42,7 +65,7 @@ function initAction() {
 		})
 		.always(function() {
 			console.log("complete");
-		});
+		});*/
 	}).click();
 	//纸样制作-纸样完成
 	$("#applyManu .table-list").on('click', '.list-button', function() {
