@@ -56,6 +56,10 @@
 	/*margin: 0!important;*/
 	/*padding: 0!important;*/
 }
+select{
+	padding: 5px 0;
+	border-radius: 5px;
+}
 /* article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
 	display: block;
 }

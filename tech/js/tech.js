@@ -1,5 +1,4 @@
-var selectNoArr = [];
-
+var chosenId = null;
 $(function(){
 	var bodymodel = avalon.define({
         $id: "menu",
@@ -8,11 +7,44 @@ $(function(){
             bodymodel.currentIndex = index;
         }
     })
-
+	
 	initAction();
 	initSave();
+	bindEvent();
 });
 
+function bindEvent(){
+	$('.page-menu').on('click','li',function(){
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+	
+	$('.list-title .checkAll').on('click', function(){
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if($this.is(':checked')){
+			$list.each(function(i, el){
+				$(el).attr('checked','true');
+			});
+		}else{
+			$list.each(function(i, el){
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+	$('#sampleModal1').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+	$('#sampleModal2').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+	$('#sampleModal3').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+}
 
 function initAction(){
 	/**************头版样衣制作*************/
@@ -23,13 +55,13 @@ function initAction(){
 			dress: reqData1
 		});
 
-		var reqData2 = getDressByStatus(4);
+		var reqData2 = getDressByStatus(6);
 		var sample2 = avalon.define({
 			$id: "sample2",
 			dress: reqData2
 		});
 
-		var reqData3 = getDressByStatus(4);
+		var reqData3 = getDressByStatus(8);
 		var sample3 = avalon.define({
 			$id: "sample3",
 			dress: reqData3
@@ -40,13 +72,46 @@ function initAction(){
 function initSave() {
 	//头版样衣制作
 	$('#sample1-save-button').on('click', function(){
+		selectNoArr = [];
+		var carversionName = $('.sampler-select').val();
+		$('#sample1 .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		adoptSampler(selectNoArr, samplerName);
 		updateDressStatus(5, selectNoArr, "allotpattern_time");
 	});
-	$('#sample1-save-button').on('click', function(){
-		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	$('#carversion-save-button').on('click', function(){
+		selectNoArr = [];
+		var carversionName = $('.carversion-select').val();
+		$('#sample2 .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		adoptCarversion(selectNoArr, carversionName);
+		updateDressStatus(8, selectNoArr, "allotcarversion_time");
 	});
-	$('#sample1-save-button').on('click', function(){
-		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
+	$('#score-save-button').on('click', function(){
+		selectNoArr = [];
+		var carversionScore = $('.carversion-score').val();
+		$('#sample3 .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		setCarversionScore(selectNoArr, carversionScore);
+		updateDressStatus(9, selectNoArr, "scoring_time");
 	});
 }
 

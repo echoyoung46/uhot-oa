@@ -1,4 +1,4 @@
-var selectNoArr = [];
+var chosenId = null;
 
 $(function() {
 	var bodymodel = avalon.define({
@@ -10,14 +10,143 @@ $(function() {
     })
 
 	initAction();
+	initSave();
+	bindEvent();
+});
 
+function bindEvent(){
+	$('.page-menu').on('click','li',function(){
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+
+	$('.list-title .checkAll').on('click', function(){
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if($this.is(':checked')){
+			$list.each(function(i, el){
+				$(el).attr('checked','true');
+			});
+		}else{
+			$list.each(function(i, el){
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+
+	$('#passModal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+
+	$('#viewerModal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+
+	$('#designerModal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+
+	$('#designer-transmit-Modal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+}
+
+function initSave(){
 	$('#filing-save-button').on('click', function(){
+		selectNoArr = [];
+		var carversionName = $('.sampler-select').val();
+		$('#basic-file .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		adoptSampler(selectNoArr, samplerName);
 		updateDressStatus(2, selectNoArr, "apply_transmaterial_time");
 	});
 	$('#season-save-button').on('click', function(){
+		selectNoArr = [];
+		var carversionName = $('.sampler-select').val();
+		$('#season .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		adoptSampler(selectNoArr, samplerName);
 		updateDressStatus(4, selectNoArr, "apply_makefront_time");
-	})
-});
+	});
+
+	//样衣审版通过
+	$('#sample-pass-button').on('click', function(){
+		selectNoArr = [];
+		var checkOption = $('.check-option').val();
+		$('#sample .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		submitDubVersionAdvice(selectNoArr, checkOption);
+		updateDressStatus(10, selectNoArr, "passversion_time");
+	});
+
+	//提交审批
+	$('#viewer-button').on('click', function(){
+		selectNoArr = [];
+		var checkOption = $('.check-option').val();
+		$('#sample .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		submitDubVersionAdvice(selectNoArr, checkOption);
+		updateDressStatus(11, selectNoArr, "adopt_admitcheck_time");
+	});
+
+	//提交审批
+	$('#designer-check-button').on('click', function(){
+		selectNoArr = [];
+		var checkOption = $('.check-option').val();
+		$('#designer-check1 .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		updateDressStatus(12, selectNoArr, "adopt_checked_time");
+	});
+
+	//移交
+	$('#transmit-button').on('click', function(){
+		selectNoArr = [];
+		var checkOption = $('.check-option').val();
+		$('#designmonitor-repurchase2 .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		updateDressStatus(13, selectNoArr, "adopt_transfer_time");
+	});
+}
 
 function  initAction() {
 	/***************************基础档案入口******************************/
@@ -53,7 +182,7 @@ function  initAction() {
 			$id: "season2",
 			dress: reqData2
 		});
-	});
+	}).click();
 	//调料-申请样衣制作
 	$("#season2 .list-detail").on('click', '.operator-button', function() {
 		var $this = $(this);
@@ -62,85 +191,68 @@ function  initAction() {
 			selectNoArr.push(dress_id);
 		}
 	});
-	//头版样衣制作入口
-	$("#sample-enter").bind('click', function() {
-		//制作中
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 4}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.apply_transmaterial_time) + '</td>'
-							+	'<td width="15%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+   '<td width="15%">申请头版样衣制作</td>'
-							+	'<td width="30%"><input type="text" id="input_' + val.design_no + '" /></td>'
-							+'</tr>';
-				});
-				$("#producting .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
+
+	/*********************头版样衣制作入口***********************/
+	$('#sample-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData1 = getDressByStatus(4);
+		var sample1 = avalon.define({
+			$id: "sample1",
+			dress: reqData1
 		});
 
-		//制作完成
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 9, status1: 19}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.finish_transmaterial_time) + '</td>'
-							+	'<td width="10%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+   '<td width="15%">制作完成</td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">审版通过</span></td>'
-							+	'<td width="15%"><span class="apply_dubversion" id="apply_' + val.design_no + '">申请复版</span></td>'
-							+'</tr>';
-				});
-				$("#producting-done .table-list").html(domStr);
-			}else{
-				console.log("没有制作完成");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
+		var reqData2 = getDressByStatus(9);
+		var sample2 = avalon.define({
+			$id: "sample2",
+			dress: reqData2
 		});
-	});
-	//审版通过
+	}).click();
+
+	/*********************审版入口***********************/
+	$('#viewer-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData1 = getDressByStatus(10);
+		var sample1 = avalon.define({
+			$id: "viewer",
+			dress: reqData1
+		});
+	}).click();
+
+	/*********************设计师预采单入口***********************/
+	$('#repurchase1-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData1 = getDressByStatus(11);
+		var repurchase1 = avalon.define({
+			$id: "designer-repurchase1",
+			dress: reqData1
+		});
+	}).click();
+
+	/*********************设计主管预采单入口***********************/
+	$('#repurchase1-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData1 = getDressByStatus(11);
+		var repurchase1 = avalon.define({
+			$id: "designmonitor-repurchase1",
+			dress: reqData1
+		});
+
+		var reqData2 = getDressByStatus(12);
+		var repurchase2 = avalon.define({
+			$id: "designmonitor-repurchase2",
+			dress: reqData2
+		});
+
+		var reqData3 = getDressByStatus(13);
+		var repurchase3 = avalon.define({
+			$id: "designmonitor-repurchase3",
+			dress: reqData3
+		});
+	}).click();
+
+
+
+	/*//审版通过
 	$("#producting-done .table-list").on('click', '.list-button', function() {
 		var $this = $(this);
 		var dress_id = parseInt($this.attr('id').split('_')[1]);
@@ -171,7 +283,7 @@ function  initAction() {
 				top.updateDressStatus(14, selectNoArr, "dub_applyversion_time");
 			}
 		});	
-	});
+	});*/
 
 	//审版入口
 	$("#viewer-enter").bind('click', function() {

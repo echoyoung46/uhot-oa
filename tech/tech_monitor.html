@@ -27,7 +27,7 @@
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
+									<input type="checkbox" name="" value="" class="checkAll">
 								</dt>
 								<dd class="design-no">设计款号</dd>
 								<dd class="operator-time">申请时间</dd>
@@ -48,30 +48,41 @@
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
 								<dd class="operator">
-                                    <div class="btn-group">
-										<button type="button" class="btn btn-danger">选择</button>
-										<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">纸样师——汤胜辉1</a></li>
-											<li><a href="#">纸样师——汤胜辉2</a></li>
-											<li><a href="#">纸样师——汤胜辉3</a></li>
-										</ul>
-									</div>
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal1" data-target="#sampleModal1">纸样分配</button>
+									<select class="sampler-select">
+										<option value="汤胜辉1">纸样师——汤胜辉1</option>
+										<option value="汤胜辉2">纸样师——汤胜辉2</option>
+										<option value="汤胜辉3">纸样师——汤胜辉3</option>
+									</select>
+									
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal1">纸样分配</button>
 								</dd>
 							</dl>
 						</div>
 					</div>
-
+					<!-- Modal -->
+					<div class="modal fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+								</div>
+								<div class="modal-body">
+								确定分配纸样师吗?
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="sample1-save-button">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="status-box" ms-controller="sample2" id="sample2">
 						<div class="status-title">完成纸样</div>
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
+									<input type="checkbox" name="" value="" class="checkAll">
 								</dt>
 								<dd class="design-no">设计款号</dd>
 								<dd class="operator-time">申请时间</dd>
@@ -88,27 +99,38 @@
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.apply_makefront_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="operator-time">{{el.allotpattern_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
-								<dd class="detail">{{el.sampler}}</dd>
+								<dd class="detail">{{el.sampler_name}}</dd>
 								<dd class="operator">
-									<div class="btn-group">
-										<button type="button" class="btn btn-danger">选择</button>
-										<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#">车版师——李四</a></li>
-											<li><a href="#">车版师——张三</a></li>
-											<li><a href="#">车版师——王五</a></li>
-										</ul>
-									</div>
-									 <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal2" data-target="#sampleModal2">分配</button> 
+									<select class="carversion-select">
+										<option value="李四">车版师——李四</option>
+										<option value="张三">车版师——张三/option>
+										<option value="王五">车版师——王五</option>
+									</select>
+									 <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal2">车版分配</button>
 								</dd>
 							</dl>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="sampleModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+							</div>
+							<div class="modal-body">
+							确定分配车版师吗?
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" id="carversion-save-button">确定</button>
+							</div>
+						</div>
 						</div>
 					</div>
 
@@ -117,7 +139,7 @@
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
+									<input type="checkbox" name="" value="" class="checkAll">
 								</dt>
 								<dd class="design-no">设计款号</dd>
 								<dd class="operator-time">申请时间</dd>
@@ -134,55 +156,24 @@
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.apply_makefront_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="operator-time">{{el.allotcarversion_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
-								<dd class="detail">{{el.carversioner}}</dd>
+								<dd class="detail">{{el.carversion_name}}</dd>
 								<dd class="operator">
-									<input list="sampler" value="车版师——李思">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal3" data-target="#sampleModal3">分配</button>
+									<div class="input-group">
+										<input type="text" class="form-control carversion-score" placeholder="请输入分数">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal3">计分</button>
+										</span>
+									</div>
 								</dd>
 							</dl>
 						</div>
 					</div>
-
-					<!--弹出框-->
-					<div class="sample-modal1 fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
-					      </div>
-					      <div class="modal-body">
-					        确定分配纸样师吗?
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					        <button type="button" class="btn btn-primary" id="sample1-save-button">确定</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					<div class="sample-modal1 fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
-					      </div>
-					      <div class="modal-body">
-					        确定分配车版师吗?
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					        <button type="button" class="btn btn-primary" id="sample2-save-button">确定</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					<div class="sample-modal1 fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<!--Modal-->
+					<div class="modal fade" id="sampleModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -194,7 +185,7 @@
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					        <button type="button" class="btn btn-primary" id="sample3-save-button">确定</button>
+					        <button type="button" class="btn btn-primary" id="score-save-button">确定</button>
 					      </div>
 					    </div>
 					  </div>
@@ -620,6 +611,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
 <script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
 <script src="tech/js/tech.js"></script> 

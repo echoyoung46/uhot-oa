@@ -142,6 +142,9 @@
 	width: 15%;
 }
 
+#repurchase-list1 .list-checkbox{
+	width: 5%;
+}
 #repurchase-list1 .design-no{
 	width: 15%;
 }
@@ -158,12 +161,15 @@
 	width: 15%;
 }
 #repurchase-list1 .details{
-	width: 30%;
+	width: 15%;
 }
 #repurchase-list1 .operator{
 	width: 15%;
 }
 
+#repurchase-list2 .list-checkbox{
+	width: 5%;
+}
 #repurchase-list2 .design-no{
 	width: 15%;
 }
@@ -180,7 +186,7 @@
 	width: 15%;
 }
 #repurchase-list2 .details{
-	width: 30%;
+	width: 15%;
 }
 #repurchase-list2 .operator{
 	width: 15%;

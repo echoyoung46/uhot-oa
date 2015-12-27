@@ -8,7 +8,7 @@ var globalObj = {
 var listNoArr = [];
 var selectNoArr = [];
 (function() {
-
+	
 })()
 
 /**
@@ -45,7 +45,6 @@ function getDressByStatus(_status) {
 	.always(function() {
 		console.log("complete");
 	});
-	console.log(ajaxData);
 	return ajaxData;
 }
 
@@ -89,7 +88,6 @@ var filters = avalon.filters = {
 function updateDressStatus(_status, _idArr, _timeType) {
 	var nowTime = new Date();
 	var _newTime = nowTime.getTime();
-	console.log(_idArr);
 	$.each(_idArr, function(i, val) {
 		$.ajax({
 			url: 'include/schedule/update_schedule.php',
@@ -100,7 +98,7 @@ function updateDressStatus(_status, _idArr, _timeType) {
 		})
 		.done(function(data) {
 	        if(data.ret == 0) {
-	        	$('#myModal').modal('hide');
+	        	$('.modal').modal('hide');
 	        	$('.page-menu ul').find('.active').click();
 	        }
 		})
