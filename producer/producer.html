@@ -42,11 +42,10 @@
 							<dd class="series">系列</dd>
 							<dd class="source">生产类型</dd>
 							<dd class="details">预采任务单</dd>
-							<dd class="cargo-no">大货款号</dd>
-							<dd class="operator">完成</dd>
+							<dd class="operator">大货款号</dd>
 						</dl>
 					</div>
-					<div class="list-detail table table-hover" ms-each="dress">
+					<div class="list-detail table table-hover" ms-each="dress" id="apply">
 						<dl>
 							<dt class="list-checkbox">
 								<input type="checkbox" name="" value="">
@@ -59,7 +58,6 @@
 							<dd class="details">
 								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 							</dd>
-							<dd class="cargo-no">{{el.cargo_no}}</dd>
 							<dd class="operator">
 								<div class="input-group">
 									<input type="text" class="form-control cargo-no" placeholder="请输入大货款号">

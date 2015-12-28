@@ -35,7 +35,7 @@
 								<dd class="operator">录入完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover" ms-each="dress" id="info">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -49,9 +49,27 @@
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
+								<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#goodsModal">完成</button>
 								</dd>
 							</dl>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="goodsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">商品信息</h4>
+								</div>
+								<div class="modal-body">
+								确定完成信息录入吗?
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="info-input-button">确定</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

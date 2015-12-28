@@ -1,49 +1,60 @@
+var chosenId = null;
 $(function(){
+	var bodymodel = avalon.define({
+        $id: "menu",
+        currentIndex: 0,
+        toggle: function(index) {
+            bodymodel.currentIndex = index;
+        }
+    })
+	
 	initAction();
+	initSave();
+	bindEvent();
 });
+
+function bindEvent(){
+	$('.page-menu').on('click','li',function(){
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+	
+	$('.list-title .checkAll').on('click', function(){
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if($this.is(':checked')){
+			$list.each(function(i, el){
+				$(el).attr('checked','true');
+			});
+		}else{
+			$list.each(function(i, el){
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+	$('#infoModal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+}
+
+function initSave(){
+	//商品信息-录入
+	$('#info-input-button').on('click', function(){
+		var selectArr = getSelectArr("info");
+		updateDressStatus(21, selectNoArr, "typein_product_time");
+	});
+}
 
 function initAction(){
 	/********************商品信息入口************************/
 	$("#goods-info-enter").bind('click',function(){
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 1,source: 2}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + val.product_no + '</td>'
-							+	'<td width="10%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSource(val.source) + '</td>'
-							+	'<td width="15%">'
-							+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-							+	'</td>'
-							+	'<td width="25%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
-							+'</tr>';
-				});
-				$("#goods-info .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
+		var reqData = getDressByStatus(20);
+		var info = avalon.define({
+			$id: "goods",
+			dress: reqData
 		});
+		
 	}).click();
 
 	//录入完成
