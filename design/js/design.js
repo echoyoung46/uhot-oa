@@ -89,6 +89,21 @@ function initSave(){
 	$('#sample-pass-button').on('click', function(){
 		selectNoArr = [];
 		var checkOption = $('.check-option').val();
+		$('#sample2 .list-checkbox input:checked').each(function(i, el){
+			var $el = $(el);
+			var dressId = $el.closest('dl').find('.design-no').html();
+			selectNoArr.push(parseInt(dressId));
+		});
+		if(selectNoArr.length == 0) {
+			selectNoArr.push(parseInt(chosenId));
+		}
+		updateDressStatus(10, selectNoArr, "passversion_time");
+	});
+
+	//样衣申请复版
+	$('#sample-dubview-button').on('click', function(){
+		selectNoArr = [];
+		var checkOption = $('.check-opinion').val();
 		$('#sample .list-checkbox input:checked').each(function(i, el){
 			var $el = $(el);
 			var dressId = $el.closest('dl').find('.design-no').html();
@@ -98,7 +113,7 @@ function initSave(){
 			selectNoArr.push(parseInt(chosenId));
 		}
 		submitDubVersionAdvice(selectNoArr, checkOption);
-		updateDressStatus(10, selectNoArr, "passversion_time");
+		updateDressStatus(14, selectNoArr, "dub_applyversion_time");
 	});
 
 	//提交审批
@@ -132,7 +147,7 @@ function initSave(){
 		updateDressStatus(12, selectNoArr, "adopt_checked_time");
 	});
 
-	//移交
+	//设计主管预采单移交
 	$('#transmit-button').on('click', function(){
 		selectNoArr = [];
 		var checkOption = $('.check-option').val();

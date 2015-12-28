@@ -209,7 +209,7 @@
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
-								<dd class="status">&nbsp;</dd>
+								<dd class="status">审版通过</dd>
 							</dl>
 						</div>
 					</div>
@@ -234,43 +234,33 @@
 								<dd class="source">{{el.source}}</dd>
 								<dd class="dub-option">{{el.source}}</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="viewer2-modal" data-target="#viewer2Modal">同意</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewModal">同意复版</button>
 								</dd>
 								<dd class="dub-time">{{el.source}}</dd>
 							</dl>
 						</div>
 					</div>
-					
-					<div class="panel-title2">申请复版</div>
-					<div class="half-bottom" id="applyDubVersion">
-						<table class="table-title">
-							<tr>
-								<td width="5%">
-									<span class="check-box"></span>
-								</td>
-								<td width="15%">
-									<input list="no" value="设计款号">
-								</td>
-								<td width="15%">申请时间</td>
-								<td width="10%">
-									<input list="gender" value="女/男装">
-								</td>
-								<td width="10%">
-								<input list="series" value="系列">
-								</td>
-								<td width="20%">复版意见</td>
-								<td width="15%">同意复版</td>
-								<td width="10%">复版次数</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list">
-							</table>
+					<div class="modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+								</div>
+								<div class="modal-body">
+									确定同意审版吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="dubview-pass-button">确定</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+
 				<div id="dubviewer" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="dubviewer1">
+					<div class="status-box" ms-controller="dubviewer1" id="dubviewer1">
 						<div class="status-title">复版制作</div>
 						<div class="list-title">
 							<dl>
@@ -283,6 +273,8 @@
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
 								<dd class="operator">纸样分配</dd>
+								<dd class="operator">车版分配</dd>
+
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
@@ -296,13 +288,62 @@
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">分配</button>
+									<select class="dub-sampler-select">
+										<option value="汤胜辉1">纸样师——汤胜辉1</option>
+										<option value="汤胜辉2">纸样师——汤胜辉2</option>
+										<option value="汤胜辉3">纸样师——汤胜辉3</option>
+									</select>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewerModal1">分配</button>
+								</dd>
+								<dd class="operator">
+									<select class="dub-carversion-select">
+										<option value="李四">车版师——李四</option>
+										<option value="张三">车版师——张三/option>
+										<option value="王五">车版师——王五</option>
+									</select>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewerModal2">分配</button>
 								</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="dubviewer2">
-						<div class="status-title">申请时间</div>
+					<!--Modal-->
+					<div class="modal fade" id="dubviewerModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">复版</h4>
+								</div>
+								<div class="modal-body">
+									确定分配纸样师吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="dubsampler-button">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--Modal-->
+					<div class="modal fade" id="dubviewerModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">复版</h4>
+								</div>
+								<div class="modal-body">
+									确定分配车版师吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="dubcarversion-button2">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="status-box" ms-controller="dubviewer2" id="dubviewer2">
+						<div class="status-title">完成纸样</div>
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -329,13 +370,35 @@
 								<dd class="source">{{el.source}}</dd>
 								<dd class="sampler">{{el.source}}</dd>
 								<dd class="operator">
-									<input id="setGrade" value="">分
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">分配</button>
+									<select class="dub-carversion-select">
+										<option value="李四">车版师——李四</option>
+										<option value="张三">车版师——张三/option>
+										<option value="王五">车版师——王五</option>
+									</select>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewerModal3">分配</button>
 								</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="dubviewer3">
+					<!--Modal-->
+					<div class="modal fade" id="dubviewerModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">复版</h4>
+								</div>
+								<div class="modal-body">
+									确定分配车版师吗?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="dubcarversion-button2">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="status-box" ms-controller="dubviewer3" id="dubviewer3">
 						<div class="status-title">复版完成</div>
 						<div class="list-title">
 							<dl>

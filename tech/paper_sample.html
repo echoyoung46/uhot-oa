@@ -17,11 +17,11 @@
 			</div>
 			<div class="page-list">
 				<div id="sample" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="sample">
+					<div class="status-box" ms-controller="sample1" id="sample1">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
+									<input type="checkbox" name="" value="" class="checkAll">
 								</dt>
 								<dd class="design-no">设计款号</dd>
 								<dd class="operator-time">申请时间</dd>
@@ -42,13 +42,13 @@
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="sample-modal" data-target="#sampleModal">完成</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal1">完成</button>
 								</dd>
 							</dl>
 						</div>
 
 						<!--弹出框-->
-						<div class="sample-modal1 fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -66,12 +66,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="sample">
+					<div class="status-box" ms-controller="sample2" id="sample2">
 						<div class="status-title">纸样修改</div>
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
+									<input type="checkbox" name="" value="" class="checkAll">
 								</dt>
 								<dd class="design-no">设计款号</dd>
 								<dd class="operator-time">申请时间</dd>

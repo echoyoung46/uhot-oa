@@ -52,7 +52,7 @@
 								<input type="checkbox" name="" value="">
 							</dt>
 							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="operator-time">{{el.adopt_transfer_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 							<dd class="gender">{{el.d_gender}}</dd>
 							<dd class="series">{{el.series_id}}</dd>
 							<dd class="source">{{el.source}}</dd>
@@ -61,12 +61,35 @@
 							</dd>
 							<dd class="cargo-no">{{el.cargo_no}}</dd>
 							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+								<div class="input-group">
+									<input type="text" class="form-control cargo-no" placeholder="请输入大货款号">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#cargoModal">提交</button>
+										</span>
+								</div>
 							</dd>
 						</dl>
 					</div>
 				</div>
+				<div class="modal fade" id="cargoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">申请款号</h4>
+							</div>
+							<div class="modal-body">
+								确定提交款号吗?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="cargono-save-button">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<div id="repurchase-list" class="list-box" ms-visible="currentIndex === 1">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -199,6 +222,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="order-table" class="list-box" ms-visible="currentIndex === 4">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -235,6 +259,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="prenatal-issue" class="list-box" ms-visible="currentIndex === 5">
 				<div class="status-box" ms-controller="apply1" id="prenatal-issue1">
 					<div class="list-title">
@@ -301,6 +326,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="cargo-issue" class="list-box" ms-visible="currentIndex === 6">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -371,6 +397,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="producing" class="list-box" ms-visible="currentIndex === 7">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -403,6 +430,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="replenishment" class="list-box" ms-visible="currentIndex === 8">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -437,6 +465,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="marker" class="list-box" ms-visible="currentIndex === 9">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -504,6 +533,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="amount-adjust" class="list-box" ms-visible="currentIndex === 10">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">
@@ -546,6 +576,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="cost-check" class="list-box" ms-visible="currentIndex === 11">
 				<div class="status-box" ms-controller="apply1" id="cost-check1">
 					<div class="list-title">
@@ -612,6 +643,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="outbuy-send" class="list-box" ms-visible="currentIndex === 12">
 				<div class="status-box" ms-controller="apply">
 					<div class="list-title">

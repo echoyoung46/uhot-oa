@@ -1,67 +1,60 @@
+var chosenId = null;
+
 $(function() {
+	var bodymodel = avalon.define({
+		$id: "menu",
+		currentIndex: 0,
+		toggle: function(index) {
+			bodymodel.currentIndex = index;
+		}
+	})
+
 	initAction();
+	initSave();
+	bindEvent();
 });
+
+function bindEvent() {
+	$('.page-menu').on('click', 'li', function () {
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+
+	$('.list-title .checkAll').on('click', function () {
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if ($this.is(':checked')) {
+			$list.each(function (i, el) {
+				$(el).attr('checked', 'true');
+			});
+		} else {
+			$list.each(function (i, el) {
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+}
+
+function initSave() {
+	$('#cargono-save-button').on('click', function () {
+		var selectArr = getSelectArr("apply");
+		var cargoNo = $('.cargo-no').val();
+		submitStyleNo(selectArr, cargoNo);
+		updateDressStatus(20, selectArr, "finish_styleno_time");
+	});
+}
 
 function initAction() {
 	/*******************申请款号入口*******************/
-	$("#apply-no-enter").bind('click', function(){
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 13}
+	$("#apply-no-enter").on('click', function(){
+		var reqData = getDressByStatus(13);
+		var apply = avalon.define({
+			$id: "apply",
+			dress: reqData
 		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.adopt_transfer_time) + '</td>'
-							+	'<td width="10%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+	'<td width="15%">'
-							+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-							+	'</td>'
-							+	'<td width="15%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
-							+'</tr>';
-				});
-				$("#apply-no .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
 	}).click();
 
-	$("#apply-no .table-list").on('click', '.list-button', function() {
-		var $this = $(this);
-		var dress_id = parseInt($this.attr('id').split('_')[1]);
-		var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
-		if($.inArray(dress_id, selectNoArr) == -1) {
-			selectNoArr.push(dress_id);
-		}
-		$.confirm({
-			"words": "确定提交大货款号吗？",
-			"yesCallback": function(){
-				top.submitStyleNo(selectNoArr, styleNo);
-				top.updateDressStatus(20, selectNoArr, "finish_styleno_time");
-			}
-		});	
-	});
+
 	//录入完成
 	$("#repurchase-list .table-list").on('click', '.list-button', function() {
 		var $this = $(this);
@@ -76,7 +69,7 @@ function initAction() {
 				top.submitStyleNo(selectNoArr, styleNo);
 				top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
 			}
-		});	
+		});
 	});
 	/********************预采任务单入口**********************/
 	$("#repurchase-list-enter").bind('click', function(){
@@ -111,7 +104,7 @@ function initAction() {
 				$("#repurchase-list .table-list").html(domStr);
 			}else{
 				console.log("没有款式申请调料");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -119,7 +112,7 @@ function initAction() {
 		.always(function() {
 			console.log("complete");
 		});
-		
+
 	});
 	//录入完成
 	$("#repurchase-list .table-list").on('click', '.list-button', function() {
@@ -135,7 +128,7 @@ function initAction() {
 				top.submitStyleNo(selectNoArr, styleNo);
 				top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
 			}
-		});	
+		});
 	});
 	/********************外采预采任务单入口**********************/
 	$("#craftmaterial-list-enter").bind('click', function(){
@@ -170,7 +163,7 @@ function initAction() {
 				$("#craftmaterial-list .table-list").html(domStr);
 			}else{
 				console.log("没有款式申请调料");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -178,7 +171,7 @@ function initAction() {
 		.always(function() {
 			console.log("complete");
 		});
-		
+
 	});
 	//录入完成
 	$("#craftmaterial-list .table-list").on('click', '.list-button', function() {
@@ -192,7 +185,7 @@ function initAction() {
 			"yesCallback": function(){
 				top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
 			}
-		});	
+		});
 	});
 	/********************工艺单入口****************/
 	$("#process-sheet-enter").bind('click', function(){
@@ -230,7 +223,7 @@ function initAction() {
 				$("#process-sheet .table-list").html(processStr);
 			}else{
 				console.log("没有款式申请调料");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -273,7 +266,7 @@ function initAction() {
 				$("#process-sheet .table-list").html(processStr);
 			}else{
 				console.log("没有款式申请调料");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -316,7 +309,7 @@ function initAction() {
 				$("#process-sheet .table-list").html(processStr);
 			}else{
 				console.log("没有款式申请调料");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -339,7 +332,7 @@ function initAction() {
 				top.submitStyleNo(selectNoArr, styleNo);
 				top.updateDressStatus(34, selectNoArr, "pattern_apply_time");
 			}
-		});	
+		});
 	});
 	//申请唛架
 	$("#process-sheet .table-list").on('click', '.list-button.maker-button', function() {
@@ -353,7 +346,7 @@ function initAction() {
 			"yesCallback": function(){
 				top.updateDressStatus(39, selectNoArr, "marker_apply_time");
 			}
-		});	
+		});
 	});
 	//申请修改唛架
 	$("#process-sheet .table-list").on('click', '.list-button.editmaker-button', function() {
@@ -367,7 +360,7 @@ function initAction() {
 			"yesCallback": function(){
 				top.updateDressStatus(50, selectNoArr, "marker_applyadjust_time");
 			}
-		});	
+		});
 	});
 	/******************下单表入口******************/
 	$("#order-table-enter").bind('click',function(){
@@ -400,7 +393,7 @@ function initAction() {
 				$("#order-table .table-list").html(domStr);
 			}else{
 				console.log("没有款式申请调料");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -423,7 +416,7 @@ function initAction() {
 				top.submitStyleNo(selectNoArr, styleNo);
 				top.updateDressStatus(31, selectNoArr, "order_typein_time");
 			}
-		});	
+		});
 	});
 	/*********************产前版发料入口***********************/
 	$("#prenatal-issue-enter").bind('click',function(){
@@ -454,7 +447,7 @@ function initAction() {
 				$("#prenatal-issue #send-material .table-list").html(domStr);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -477,7 +470,7 @@ function initAction() {
 				top.submitSendType(selectNoArr, sendType);
 				top.updateDressStatus(36, selectNoArr, "noticeexstore_time");
 			}
-		});	
+		});
 	});
 	/*************************大货发料入口**************************/
 	$("#cargo-issue-enter").bind('click',function(){
@@ -509,7 +502,7 @@ function initAction() {
 				$("#cargo-issue  #notice-issue .table-list").html(cargoDom);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -545,7 +538,7 @@ function initAction() {
 				$("#cargo-issue  #notice-issue .table-list").html(cargoDom);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -568,7 +561,7 @@ function initAction() {
 				top.submitSendType(selectNoArr, sendType);
 				top.updateDressStatus(42, selectNoArr, "product_noticesend_time");
 			}
-		});	
+		});
 	});
 	/********************生产中入口**********************/
 	$("#producing-enter").bind('click',function(){
@@ -599,7 +592,7 @@ function initAction() {
 				$("#producing .table-list").html(domStr);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -622,7 +615,7 @@ function initAction() {
 				top.submitSendType(selectNoArr, sendType);
 				top.updateDressStatus(45, selectNoArr, "instorecheck_time");
 			}
-		});	
+		});
 	});
 	/******************成本核算入口*********************/
 	$("#cost-check-enter").bind('click', function(){
@@ -657,7 +650,7 @@ function initAction() {
 				$("#cost-check #cost-checking .table-list").html(domStr);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -694,7 +687,7 @@ function initAction() {
 				$("#cost-check #cost-transfer .table-list").html(domStr);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -715,7 +708,7 @@ function initAction() {
 			"yesCallback": function(){
 				top.updateDressStatus(53, selectNoArr, "outcost_check_time");
 			}
-		});	
+		});
 	});
 	//成本移交
 	$("#cost-check #cost-transfer .table-list").on('click', '.list-button', function() {
@@ -729,7 +722,7 @@ function initAction() {
 			"yesCallback": function(){
 				top.updateDressStatus(54, selectNoArr, "cost_check_time");
 			}
-		});	
+		});
 	});
 	/********************外采发料入口**********************/
 	$("#outbuy-send-enter").bind('click',function(){
@@ -761,7 +754,7 @@ function initAction() {
 				$("#outbuy-send .table-list").html(domStr);
 			}else{
 				console.log("暂无数据");
-			}	
+			}
 		})
 		.fail(function() {
 			console.log("error");
@@ -784,6 +777,6 @@ function initAction() {
 				top.submitSendType(selectNoArr, sendType);
 				top.updateDressStatus(44, selectNoArr, "production_time");
 			}
-		});	
+		});
 	});
 }

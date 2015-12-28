@@ -44,6 +44,22 @@ function bindEvent(){
 		var $button = $(event.relatedTarget);
 		chosenId = $button.closest('dl').find('.design-no').html();
 	});
+	$('#viewer1').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+	$('#viewer2').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+	$('#dubviewer1').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+	$('#dubviewer2').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
 }
 
 function initAction(){
@@ -67,6 +83,47 @@ function initAction(){
 			dress: reqData3
 		});
 	}).click();
+
+	/*****************审版*****************/
+	$('#viewer-enter').on('click', function(){
+		//审版通过
+		var reqData1 = getDressByStatus(10);
+		var viewer1 = avalon.define({
+			$id: "viewer1",
+			dress: reqData1
+		});
+
+		//申请复版
+		var reqData2 = getDressByStatus(14);
+		var viewer2 = avalon.define({
+			$id: "viewer2",
+			dress: reqData2
+		});
+	}).click();
+
+	/*************复版**************/
+	$('#dubviewer-enter').on('click', function(){
+		//复版制作
+		var reqData1 = getDressByStatus(15);
+		var dubviewer1 = avalon.define({
+			$id: "dubviewer1",
+			dress: reqData1
+		});
+
+		//完成纸样
+		var reqData2 = getDressByStatus(17);
+		var dubviewer2 = avalon.define({
+			$id: "dubviewer2",
+			dress: reqData2
+		});
+
+		//复版完成
+		var reqData3 = getDressByStatus(18);
+		var dubviewer3 = avalon.define({
+			$id: "dubviewer3",
+			dress: reqData3
+		});
+	})
 }
 
 function initSave() {
@@ -112,6 +169,43 @@ function initSave() {
 		}
 		setCarversionScore(selectNoArr, carversionScore);
 		updateDressStatus(9, selectNoArr, "scoring_time");
+	});
+
+	//审版-同意复版
+	$('#dubviewer-pass-button').on('click', function(){
+		var selectArr = getSelectArr("sample3");
+		var carversionScore = $('.carversion-score').val();
+		setCarversionScore(selectArr, carversionScore);
+		updateDressStatus(15, selectArr, "dub_agreeversion_time");
+	});
+
+	//复版-复版制作-分配纸样师
+	$('#dubsampler-button').on('click', function(){
+		var selectArr = getSelectArr("sample3");
+		var carversionScore = $('.dub-sampler-select').val();
+		setCarversionScore(selectArr, carversionScore);
+		updateDressStatus(16, selectArr, "dub_allotpattern_time");
+	});
+	//复版-复版制作-分配车版师
+	$('#dubcarversion-button1').on('click', function(){
+		var selectArr = getSelectArr("sample3");
+		var carversionScore = $('.dub-carversion-select').val();
+		setCarversionScore(selectArr, carversionScore);
+		updateDressStatus(18, selectArr, "dub_allotcarversion_time");
+	});
+	//复版-完成纸样-分配车版师
+	$('#dubcarversion-button2').on('click', function(){
+		var selectArr = getSelectArr("sample3");
+		var carversionScore = $('.dub-carversion-select').val();
+		setCarversionScore(selectArr, carversionScore);
+		updateDressStatus(18, selectArr, "dub_allotcarversion_time");
+	});
+	//复版-复版完成-车版计分
+	$('#dubcarversion-button2').on('click', function(){
+		var selectArr = getSelectArr("sample3");
+		var carversionScore = $('.dub-carversion-select').val();
+		setCarversionScore(selectArr, carversionScore);
+		updateDressStatus(19, selectArr, "dub_scoring_time");
 	});
 }
 

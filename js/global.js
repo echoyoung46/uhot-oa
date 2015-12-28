@@ -23,14 +23,19 @@ function $ajaxUrl(_url){
 　　}); 
 }
 
-function getDressByStatus(_status) {
+function getDressByStatus(_status, _status1) {
 	var ajaxData = null;
+	if(_status1){
+		var reqData = {status: _status, status1: _status1};
+	}else{
+		var reqData = {status: _status};
+	}
 	$.ajax({
 		url: 'include/schedule/get_dress_by_status.php',
 		type: 'GET',
 		dataType: 'JSON',
 		async: false,
-		data: {status: _status}
+		data: reqData
 	})
 	.done(function(data) {
 		if(data.ret==0){
@@ -84,6 +89,20 @@ var filters = avalon.filters = {
         }
     }
 };
+
+function getSelectArr(_dom){
+	selectNoArr = [];
+	$('#' + _dom + ' .list-checkbox input:checked').each(function(i, el){
+		var $el = $(el);
+		var dressId = $el.closest('dl').find('.design-no').html();
+		selectNoArr.push(parseInt(dressId));
+	});
+	if(selectNoArr.length == 0) {
+		selectNoArr.push(parseInt(chosenId));
+	};
+
+	return selectNoArr;
+}
 
 function updateDressStatus(_status, _idArr, _timeType) {
 	var nowTime = new Date();

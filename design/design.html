@@ -159,7 +159,7 @@
 				</div>
 
 				<div id="sample" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="sample1">
+					<div class="status-box" ms-controller="sample1" id="sample1">
 						<div class="status-title">制作中</div>
 						<div class="list-title">
 							<dl>
@@ -188,7 +188,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="sample2">
+					<div class="status-box" ms-controller="sample2" id="sample2">
 						<div class="status-title">制作完成</div>
 						<div class="list-title">
 							<dl>
@@ -219,7 +219,7 @@
 								</dd>
 								<dd class="operator">
 									<div class="input-group">
-										<input type="text" class="form-control check-option" placeholder="请输入审版意见">
+										<input type="text" class="form-control check-opinion" placeholder="请输入审版意见">
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewModal">申请复版</button>
 										</span>
@@ -257,7 +257,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="save-button">提交</button>
+									<button type="button" class="btn btn-primary" id="sample-dubview-button">提交</button>
 								</div>
 							</div>
 						</div>
@@ -389,6 +389,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div id="repurchase-list" class="list-box" ms-visible="currentIndex === 5">
 					<div class="status-box" ms-controller="repurchase1">
 						<div class="status-title">审批中</div>
