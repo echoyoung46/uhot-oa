@@ -32,7 +32,7 @@ function bindEvent(){
 			});
 		}
 	});
-	$('#infoModal').on('show.bs.modal', function (event) {
+	$('#goodsModal').on('show.bs.modal', function (event) {
 		var $button = $(event.relatedTarget);
 		chosenId = $button.closest('dl').find('.design-no').html();
 	});
@@ -42,7 +42,7 @@ function initSave(){
 	//商品信息-录入
 	$('#info-input-button').on('click', function(){
 		var selectArr = getSelectArr("info");
-		updateDressStatus(21, selectNoArr, "typein_product_time");
+		updateDressStatus(21, selectArr, "typein_product_time");
 	});
 }
 

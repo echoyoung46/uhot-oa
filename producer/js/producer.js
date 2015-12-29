@@ -38,6 +38,11 @@ function bindEvent() {
 		var $button = $(event.relatedTarget);
 		chosenId = $button.closest('dl').find('.design-no').html();
 	});
+
+	$('#repurchaseModal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
 }
 
 function initSave() {
@@ -46,6 +51,11 @@ function initSave() {
 		var cargoNo = $('.cargo-no').val();
 		submitStyleNo(selectArr, cargoNo);
 		updateDressStatus(20, selectArr, "finish_styleno_time");
+	});
+
+	$('#repurchase-save-button').on('click', function () {
+		var selectArr = getSelectArr("apply");
+		updateDressStatus(21, selectArr, "typein_materialsheet_time");
 	});
 }
 
@@ -59,64 +69,13 @@ function initAction() {
 		})
 	}).click();
 
-
-	//录入完成
-	$("#repurchase-list .table-list").on('click', '.list-button', function() {
-		var $this = $(this);
-		var dress_id = parseInt($this.attr('id').split('_')[1]);
-		var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
-		if($.inArray(dress_id, selectNoArr) == -1) {
-			selectNoArr.push(dress_id);
-		}
-		$.confirm({
-			"words": "确定系统录入完成吗？",
-			"yesCallback": function(){
-				top.submitStyleNo(selectNoArr, styleNo);
-				top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
-			}
-		});
-	});
 	/********************预采任务单入口**********************/
 	$("#repurchase-list-enter").bind('click', function(){
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 21}
+		var reqData = getDressByStatus(21);
+		var apply = avalon.define({
+			$id: "repurchase",
+			dress: reqData
 		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.typein_product_time) + '</td>'
-							+	'<td width="10%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+	'<td width="15%">'
-							+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-							+	'</td>'
-							+	'<td width="15%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
-							+'</tr>';
-				});
-				$("#repurchase-list .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
 
 	});
 	//录入完成
