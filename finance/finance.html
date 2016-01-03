@@ -10,7 +10,7 @@
 	<div id="page-container" ms-controller="menu">
 		<div class="page-content">
 			<div class="page-menu">
-				<ul class="tabs">
+				<ul class="list-inline nav nav-tabs">
 					<li role="presentation" class="active"><a href="#cost-accounting" id="cost-accounting-enter"  ms-click="toggle(0)">成本核算</a></li>
 					<li role="presentation"><a href="#cost-accounting1" id="cost-accounting-enter1"  ms-click="toggle(1)">成本核算</a></li>
 					<li role="presentation"><a href="#purchase-contract" id="purchase-contract-enter"  ms-click="toggle(2)">采购合同</a></li>
@@ -26,13 +26,13 @@
 		
 		<div class="page-list">
 			<div id="cost-accounting" class="list-box" ms-visible="currentIndex === 0">
-				<div class="status-box" ms-controller="cost">
+				<div class="status-box" ms-controller="costs">
 					<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="receipt-no">单据编号</dd>
+								<dd class="design-no">单据编号</dd>
 								<dd class="operator-time">移交时间</dd>
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
@@ -42,12 +42,12 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover" ms-each="dress" id="costs">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="receipt-no">{{el.design_no}}</dd>
+								<dd class="design-no">{{el.design_no}}</dd>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
@@ -56,53 +56,89 @@
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">完成</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">上传</button>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#costsModal">申请</button>
 								</dd>
 							</dl>
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="costsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">成本核算</h4>
+									</div>
+									<div class="modal-body">
+									确定申请审批吗?
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="costs-save-button">确定</button>
+									</div>
+								</div>
+							</div>
 						</div>
 				</div>
 			</div>
 			<div id="cost-accounting1" class="list-box" ms-visible="currentIndex === 1">
-				<div class="status-box" ms-controller="cost1">
+				<div class="status-box" ms-controller="costTransfer">
 					<div class="list-title">
-							<dl>
-								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
-								</dt>
-								<dd class="receipt-no">单据编号</dd>
-								<dd class="operator-time">移交时间</dd>
-								<dd class="gender">女/男装</dd>
-								<dd class="series">系列</dd>
-								<dd class="source">生产类型</dd>
-								<dd class="details">核算表</dd>
-								<dd class="operator">核算完成</dd>
-								<dd class="operator">确认移交</dd>
-							</dl>
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">单据编号</dd>
+							<dd class="operator-time">移交时间</dd>
+							<dd class="gender">女/男装</dd>
+							<dd class="series">系列</dd>
+							<dd class="source">生产类型</dd>
+							<dd class="details">核算表</dd>
+							<dd class="operator">核算完成</dd>
+							<dd class="operator">确认移交</dd>
+						</dl>
+					</div>
+					<div class="list-detail table table-hover" ms-each="dress" id="costTransfer">
+						<dl>
+							<dt class="list-checkbox">
+								<input type="checkbox" name="" value="">
+							</dt>
+							<dd class="design-no">{{el.design_no}}</dd>
+							<dd class="operator-time">{{el.cost_check_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+							<dd class="gender">{{el.d_gender}}</dd>
+							<dd class="series">{{el.series_id}}</dd>
+							<dd class="source">{{el.source}}</dd>
+							<dd class="details">
+								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+							</dd>
+							<dd class="operator">
+								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">下载</button>
+							</dd>
+							<dd class="operator">
+								<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#costsTransferModal">移交</button>
+							</dd>
+						</dl>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="costsTransferModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">成本核算</h4>
+								</div>
+								<div class="modal-body">
+								确定移交吗?
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="costsTransfer-save-button">确定</button>
+								</div>
+							</div>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
-								</dt>
-								<dd class="receipt-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="details">
-									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-								</dd>
-								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">完成</button>
-								</dd>
-								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
-								</dd>
-							</dl>
-						</div>
+					</div>
 				</div>
 			</div>
 			<div id="purchase-contract" class="list-box" ms-visible="currentIndex === 2">

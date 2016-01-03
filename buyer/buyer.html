@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>技术部</title>
 	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="gmo/css/gmo.css">
+	<link rel="stylesheet" type="text/css" href="buyer/css/buyer.css">
 </head>
 <body>
 	<div class="page-container" ms-controller="menu">
@@ -26,7 +26,60 @@
 			</div>
 			<div class="page-list">
 				<div class="list-box" id="price-order" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="price">
+					<div class="status-box" ms-controller="price1">
+						<div class="list-title">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">设计款号</dd>
+								<dd class="operator-time">接收时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="update-info">变更信息</dd>
+								<dd class="operator">申请审批</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress" id="price1">
+							<dl>
+								<dt class="list-checkbox">
+									<input type="checkbox" name="" value="">
+								</dt>
+								<dd class="design-no">{{el.design_no}}</dd>
+								<dd class="operator-time">{{el.cost_trans_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="update-info">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</dd>
+								<dd class="operator">
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#priceModal">申请</button>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">定价表</h4>
+								</div>
+								<div class="modal-body">
+								确定申请审批吗?
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="price-save-button">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="status-box" ms-controller="price2">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -41,13 +94,13 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover" ms-each="dress" id="price2">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="operator-time">{{el.cost_trans_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
@@ -58,7 +111,6 @@
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
 								</dd>
 							</dl>
-						</div>
 						</div>
 					</div>
 				</div>

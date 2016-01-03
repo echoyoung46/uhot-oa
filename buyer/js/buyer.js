@@ -1,77 +1,70 @@
-var dialogBox = {};
-$(function() {
-	dialogBox = new Dialog();
-	dialogBox.init();
+var chosenId = null;
+$(function(){
+	var bodymodel = avalon.define({
+        $id: "menu",
+        currentIndex: 0,
+        toggle: function(index) {
+            bodymodel.currentIndex = index;
+        }
+    })
+	
 	initAction();
+	initSave();
+	bindEvent();
 });
+
+function bindEvent(){
+	$('.page-menu').on('click','li',function(){
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+	
+	$('.list-title .checkAll').on('click', function(){
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if($this.is(':checked')){
+			$list.each(function(i, el){
+				$(el).attr('checked','true');
+			});
+		}else{
+			$list.each(function(i, el){
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+
+	$('#priceModal').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+}
+
+function initSave(){
+	//定价表申请审批
+	$('#price-save-button').on('click', function(){
+		var selectArr = getSelectArr("price1");
+		updateDressStatus(26, selectArr, "price_applycheck_time");
+	});
+}
 
 function initAction(){
 	/******************买手助理定价表入口*****************/
-	$("#price-table-enter").bind('click',function(){
-		//待审批
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 25}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.confirmtrans_time) + '</td>'
-							+	'<td width="15%">' + getGender(val.gender) + '</td>'
-							+	'<td width="15%">财务确认移交</td>'
-							+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">申请</span></td>'
-							+'</tr>';
-				});
-				$("#price-table .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}
+	//待审批
+	$('#price-table-enter').on('click', function(){
+		var reqData1 = getDressByStatus(25);
+		var price1 = avalon.define({
+			$id: "price1",
+			dress: reqData1
 		});
-		//待审批
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 26}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.confirmtrans_time) + '</td>'
-							+	'<td width="15%">' + getGender(val.gender) + '</td>'
-							+	'<td width="15%">财务确认移交</td>'
-							+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
-							+'</tr>';
-				});
-				$("#price-done .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}
-		})
-		
+
+		var reqData2 = getDressByStatus(26);
+		var price2 = avalon.define({
+			$id: "price2",
+			dress: reqData2
+		});
 	}).click();
+	//待审批
+	
 	//确认定价
 	$("#price-table .table-list").on('click', '.list-button', function() {
 		var $this = $(this);

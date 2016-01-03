@@ -1,27 +1,24 @@
-#outbuy-in .design-no{
+#price-order .list-checkbox{
+	width: 5%;
+}
+#price-order .design-no{
     width: 15%;
 }
-#outbuy-in .operator-time{
+#price-order .operator-time{
     width: 15%;
 }
-#outbuy-in .gender{
+#price-order .gender{
     width: 10%;
 }
-#outbuy-in .series{
+#price-order .series{
     width: 10%;
 }
-#outbuy-in .source{
+#price-order .source{
     width: 10%;
 }
-#outbuy-in .details{
-    width: 10%;
+#price-order .update-info{
+    width: 20%;
 }
-#outbuy-in .order{
-    width: 10%;
-}
-#outbuy-in .instore{
-    width: 10%;
-}
-#outbuy-in .operator{
-    width: 10%;
+#price-order .operator{
+    width: 15%;
 }

@@ -335,7 +335,7 @@
 					</div>
 				</div>
 				<div id="cost-accounting" class="list-box" ms-visible="currentIndex === 7">
-					<div class="status-box" ms-controller="order" id="cost-accounting1">
+					<div class="status-box" ms-controller="costs1" id="cost-accounting1">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -369,13 +369,13 @@
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="order" id="cost-accounting2">
+					<div class="status-box" ms-controller="costs2" id="cost-accounting2">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="no">款号</dd>
+								<dd class="design-no">款号</dd>
 								<dd class="operator-time">完成时间</dd>
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
@@ -384,13 +384,13 @@
 								<dd class="operator">确认移交</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover" ms-each="dress" id="costs2">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="operator-time">{{el.typein_materialsheet_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
@@ -398,9 +398,27 @@
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="viewer-modal" data-target="#viewerModal">移交</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#costsModal2">移交</button>
 								</dd>
 							</dl>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="costsModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">成本核算</h4>
+								</div>
+								<div class="modal-body">
+								确定移交吗?
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary" id="costs2-save-button">确定</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -41,3 +41,28 @@
 #drawing-in .details{
 	width: 35%;
 }
+
+#cost-accounting2 .list-checkbox{
+	width: 5%;
+}
+#cost-accounting2 .design-no{
+	width: 15%;
+}
+#cost-accounting2 .operator-time{
+	width: 15%;
+}
+#cost-accounting2 .gender{
+	width: 15%;
+}
+#cost-accounting2 .series{
+	width: 10%;
+}
+#cost-accounting2 .source{
+	width: 10%;
+}
+#cost-accounting2 .details{
+	width: 20%;
+}
+#cost-accounting2 .operator{
+	width: 10%;
+}

@@ -54,8 +54,8 @@ function initSave() {
 	});
 
 	$('#repurchase-save-button').on('click', function () {
-		var selectArr = getSelectArr("apply");
-		updateDressStatus(21, selectArr, "typein_materialsheet_time");
+		var selectArr = getSelectArr("repurchase");
+		updateDressStatus(22, selectArr, "typein_materialsheet_time");
 	});
 }
 
@@ -77,7 +77,7 @@ function initAction() {
 			dress: reqData
 		})
 
-	});
+	}).click();
 	//录入完成
 	$("#repurchase-list .table-list").on('click', '.list-button', function() {
 		var $this = $(this);

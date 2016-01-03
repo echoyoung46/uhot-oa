@@ -1,4 +1,4 @@
-var selectNoArr = [];
+var chosenId = null;
 
 $(function() {
 	var bodymodel = avalon.define({
@@ -10,19 +10,62 @@ $(function() {
     })
 
 	initAction();
-
-	$('#save-button').on('click', function(){
-		updateDressStatus(3, selectNoArr, "finish_transmaterial_time");
-	})
+	initSave();
+	bindEvent();
 });
 
+function bindEvent(){
+	$('.page-menu').on('click','li',function(){
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+	
+	$('.list-title .checkAll').on('click', function(){
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if($this.is(':checked')){
+			$list.each(function(i, el){
+				$(el).attr('checked','true');
+			});
+		}else{
+			$list.each(function(i, el){
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+
+	$('#costsModal2').on('show.bs.modal', function (event) {
+		var $button = $(event.relatedTarget);
+		chosenId = $button.closest('dl').find('.design-no').html();
+	});
+}
+
+function initSave() {
+	//成本核算-移交
+	$('#costs2-save-button').on('click', function(){
+		var selectArr = getSelectArr("costs2");
+		updateDressStatus(23, selectArr, "confirmtrans_time");
+	});
+}
+
 function initAction(){
+	/******************调料申请入口******************/
 	$('#spicesApply-enter').on('click', function(event) {
 		event.preventDefault();
 		var reqData = getDressByStatus(2);
 		var filing = avalon.define({
 			$id: "spices",
 			dress: reqData
+		})
+	}).click();
+
+	/*****************成本核算入口*******************/
+	$('#cost-accounting-enter').on('click', function(event) {
+		event.preventDefault();
+		var reqData2 = getDressByStatus(22);
+		var costs2 = avalon.define({
+			$id: "costs2",
+			dress: reqData2
 		})
 	}).click();
 }
