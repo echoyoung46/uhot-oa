@@ -57,11 +57,11 @@ function initAction(){
 			dress: reqData1
 		});
 
-		var reqData2 = getDressByStatus(26);
+		/*var reqData2 = getDressByStatus(26);
 		var price2 = avalon.define({
 			$id: "price2",
 			dress: reqData2
-		});
+		});*/
 	}).click();
 	//待审批
 	
@@ -98,7 +98,7 @@ function initAction(){
 	});
 	/*********************下单表入口********************/
 	$("#order-table-enter").bind('click', function(event) {
-		$.ajax({
+		/*$.ajax({
 			url: '../include/schedule/get_dress_by_status.php',
 			type: 'GET',
 			dataType: 'JSON',
@@ -127,7 +127,7 @@ function initAction(){
 			}else{
 				console.log("没有款式申请调料");
 			}
-		})
+		})*/
 	});
 	//下单表提交审批
 	$("#order-table #order-examine .table-list").on('click', '.list-button', function() {
@@ -147,36 +147,28 @@ function initAction(){
 	});
 	/*********************买手主管下单表入口********************/
 	$("#order-table-enter1").bind('click', function(event) {
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 29}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				var domStr = "";
-				listNoArr = [];
-				$.each(dressList, function(i, val) {
-					listNoArr.push(val.design_no);
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box" id="' + val.design_no + '"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.order_applycheck_time) + '</td>'
-							+	'<td width="10%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">定价录入完成</td>'
-							+	'<td width="30%"><input type="text" id="input_' + val.design_no + '" /></td>'
-							+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">申请</span></td>'
-							+'</tr>';
-				});
-				$("#order-table1 #order-done .table-list").html(domStr);
-			}else{
-				console.log("没有款式申请调料");
-			}
-		})
+		//待审批
+		var mOrderData1 = getDressByStatus(26);
+        var arrText = doT.template($("#mordertmpl1").text());
+        $("#morder1").html(arrText(mOrderData1));
+		// var mOrder1 = avalon.define({
+		// 	$id: "mOrder1",
+		// 	dress: mOrderData1
+		// });
+        
+        // //待审批
+		// var mOrderdata2 = getDressByStatus(26);
+		// var mOrder2 = avalon.define({
+		// 	$id: "mOrder2",
+		// 	dress: mOrderdata2
+		// });
+        
+        // //待审批
+		// var mOrderData3 = getDressByStatus(26);
+		// var mOrder3 = avalon.define({
+		// 	$id: "mOrder3",
+		// 	dress: mOrderData3
+		// });
 	});
 	//下单表提交审批
 	$("#order-table1 #order-done .table-list").on('click', '.list-button', function() {
@@ -198,8 +190,7 @@ function initAction(){
 	 * 补货入口
 	 */
 	$('#replenishment-enter').bind('click',function(){
-		var closeTable = new Table();
-		// $('.table-title tr').html('<span class="operator" id="reply-replenishment-button">申请补货</span>');
+		/*var closeTable = new Table();
 		closeTable.init({
 			toolList: '<span class="operator" id="reply-replenishment-button">申请补货</span>',
         	tableTitle: '<td width="15%">款号</td><td width="10%">女/男装</td><td width="10%">系列</td><td width="20%">补货时间</td><td width="20%">补货数量</td><td width="25%">补货仓</td>',
@@ -227,20 +218,14 @@ function initAction(){
 			            }
 			        }
 				})
-		})
-
-		
-		/*closeTable.init({
-			tableTitle: '<td width="5%"><span class="check-box"></span></td><td width="15">款号</td><td width="20">补货时间</td><td width="10">女/男装</td><td width="10">补货数量</td><td width="20">补货仓</td><td width="20"><span>申请审批</span></td>',
-			tableBody: [{"width":"100%","val":"","type":"button"}]
-		});*/
+		})*/
 	})
 	
 	/**
 	 * 主管补货入口
 	 */
 	$('#replenishment-enter1').bind('click',function(){
-		var closeTable = new Table();
+		/*var closeTable = new Table();
 		closeTable.init({
 			toolList: '<span class="operator" id="reply-replenishment-button">申请补货</span>',
 			boxTitle: "待审批",
@@ -269,7 +254,7 @@ function initAction(){
 			            }
 			        }
 				})
-		})
+		})*/
 
 		
 	})

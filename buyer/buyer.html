@@ -13,15 +13,15 @@
 				<ul class="list-inline nav nav-tabs">
 					<li role="presentation"  class="active"><a href="#price-order" id="price-table-enter" ms-click="toggle(0)">定价表</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" ms-click="toggle(1)">下单表</a></li>
-					<li role="presentation"><a href="#order-table1" id="order-table-enter1">下单表</a></li>
-					<li role="presentation"><a href="#wear-in" id="wear-in-enter" ms-click="toggle(2)">成衣入库</a></li>
-					<li role="presentation"><a href="#wear-send" id="wear-send-enter" ms-click="toggle(3)">成衣发出</a></li>
-					<li role="presentation"><a href="#outbuy" id="outbuy-enter" ms-click="toggle(4)">外采</a></li>
-					<li role="presentation"><a href="#outbuy-in" id="outbuy-in-enter" ms-click="toggle(5)">外采入库</a></li>
-					<li role="presentation"><a href="#outbuy-send" id="outbuy-send-enter" ms-click="toggle(6)">外采发出</a></li>
-					<li role="presentation"><a href="#replenishment" id="replenishment-enter" ms-click="toggle(7)">补货</a></li>
-					<li role="presentation"><a href="#replenishment1" id="replenishment-enter1"ms-click="toggle(8)">补货</a></li>
-					<li role="presentation"><a href="#reduce-apply" id="reduce-apply-enter" ms-click="toggle(9)">加裁申请</a></li>
+					<li role="presentation"><a href="#order-table1" id="order-table-enter1" ms-click="toggle(2)">下单表</a></li>
+					<li role="presentation"><a href="#wear-in" id="wear-in-enter" ms-click="toggle(3)">成衣入库</a></li>
+					<li role="presentation"><a href="#wear-send" id="wear-send-enter" ms-click="toggle(4)">成衣发出</a></li>
+					<li role="presentation"><a href="#outbuy" id="outbuy-enter" ms-click="toggle(5)">外采</a></li>
+					<li role="presentation"><a href="#outbuy-in" id="outbuy-in-enter" ms-click="toggle(6)">外采入库</a></li>
+					<li role="presentation"><a href="#outbuy-send" id="outbuy-send-enter" ms-click="toggle(7)">外采发出</a></li>
+					<li role="presentation"><a href="#replenishment" id="replenishment-enter" ms-click="toggle(8)">补货</a></li>
+					<li role="presentation"><a href="#replenishment1" id="replenishment-enter1" ms-click="toggle(9)">补货</a></li>
+					<li role="presentation"><a href="#reduce-apply" id="reduce-apply-enter" ms-click="toggle(10)">加裁申请</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
@@ -116,7 +116,7 @@
 				</div>
 
 				<div class="list-box" id="order-table" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="order">
+					<!--<div class="status-box" ms-controller="order">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -150,11 +150,11 @@
 							</dl>
 						</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
-				<div class="list-box" id="order-table" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="order">
+				<div class="list-box" id="order-table1" ms-visible="currentIndex === 2">
+					<div class="status-box" ms-controller="mOrder1">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -169,27 +169,31 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="list-checkbox">
-									<input type="checkbox" name="" value="">
-								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="details">
-									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-								</dd>
-								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
-								</dd>
-							</dl>
+						<div class="list-detail table table-hover" id="morder1">
+							
 						</div>
-						</div>
+                        <script id="mordertmpl1" type="text/x-dot-template">
+                        {{~it.list:value:index}}
+                        <dl>
+                            <dt class="list-checkbox">
+                                <input type="checkbox" name="" value="">
+                            </dt>
+                            <dd class="design-no">{{= value[index].design_no}}</dd>
+                            <dd class="operator-time">{{= value[index].filing_time}}</dd>
+                            <dd class="gender">{{= value[index].d_gender}}</dd>
+                            <dd class="series">{{= value[index].series_id}}</dd>
+                            <dd class="source">{{= value[index].source}}</dd>
+                            <dd class="details">
+                                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            </dd>
+                            <dd class="operator">
+                                <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
+                            </dd>
+                        </dl>
+                        {{~}}
+                        </script>
 					</div>
-					<div class="status-box" ms-controller="order">
+					<div class="status-box" ms-controller="mOrder2">
 						<div class="status-title">加盟下单</div>
 						<div class="list-title">
 							<dl>
@@ -223,9 +227,8 @@
 								</dd>
 							</dl>
 						</div>
-						</div>
 					</div>
-					<div class="status-box" ms-controller="order">
+					<div class="status-box" ms-controller="mOrder3">
 						<div class="status-title">待审批</div>
 						<div class="list-title">
 							<dl>
@@ -259,12 +262,11 @@
 								</dd>
 							</dl>
 						</div>
-						</div>
 					</div>
 				</div>
 
 				<div class="list-box" id="wear-in" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="wearin">
+					<!--<div class="status-box" ms-controller="wearin">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -285,11 +287,11 @@
 								<dd class="details">&nbsp;</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
 				<div class="list-box" id="wear-send" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="wearsend">
+					<!--<div class="status-box" ms-controller="wearsend">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -310,11 +312,11 @@
 								<dd class="details">&nbsp;</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
 				<div class="list-box" id="outbuy" ms-visible="currentIndex === 5">
-					<div class="status-box" ms-controller="outbuy">
+					<!--<div class="status-box" ms-controller="outbuy">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -343,11 +345,11 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
 				<div class="list-box" id="outbuy-in" ms-visible="currentIndex === 6">
-					<div class="status-box" ms-controller="outbuyin">
+					<!--<div class="status-box" ms-controller="outbuyin">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -374,11 +376,11 @@
 								<dd class="operator">&nbsp;</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
 				<div class="list-box" id="outbuy-send" ms-visible="currentIndex === 7">
-					<div class="status-box" ms-controller="outbuysend">
+					<!--<div class="status-box" ms-controller="outbuysend">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -403,11 +405,11 @@
 								<dd class="remark">{{el.source}}</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 
 				<div class="list-box" id="replenishment" ms-visible="currentIndex === 8">
-					<div class="status-box" ms-controller="wear">
+					<!--<div class="status-box" ms-controller="wear">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -432,11 +434,40 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
+				</div>
+
+				<div class="list-box" id="replenishment1" ms-visible="currentIndex === 8">
+					<!--<div class="status-box" ms-controller="wear">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">入图时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="replenum">补货数量</dd>
+								<dd class="replehouse">补货仓</dd>
+								<dd class="operator">申请审批</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover" ms-each="dress">
+							<dl>
+								<dt class="design-no">{{el.design_no}}</dt>
+								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{el.d_gender}}</dd>
+								<dd class="series">{{el.series_id}}</dd>
+								<dd class="source">{{el.source}}</dd>
+								<dd class="replenum">补货数量</dd>
+								<dd class="replehouse">补货仓</dd>
+								<dd class="operator">申请审批</dd>
+							</dl>
+						</div>
+					</div>-->
 				</div>
 
 				<div class="list-box" id="reduce-apply" ms-visible="currentIndex === 9">
-					<div class="status-box" ms-controller="wear">
+					<!--<div class="status-box" ms-controller="wear">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -466,13 +497,14 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
 
 <script src="js/avalon.js"></script>
+<script src="js/plugin/doT.min.js"></script>
 <script src="js/global.js"></script>
 <script src="buyer/js/buyer.js"></script> 
 </body>

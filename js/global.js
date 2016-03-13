@@ -39,7 +39,7 @@ function getDressByStatus(_status, _status1) {
 	})
 	.done(function(data) {
 		if(data.ret==0){
-			ajaxData = data.list;
+			ajaxData = data;
 		}else{
 			console.log("没有款式建档完成");
 		}	
