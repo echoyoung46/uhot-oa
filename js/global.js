@@ -31,11 +31,12 @@ function getDressByStatus(_status, _status1) {
 		var reqData = {status: _status};
 	}
 	$.ajax({
-		url: 'include/schedule/get_dress_by_status.php',
+		url: '/js/dress.json',
+		// url: 'include/schedule/get_dress_by_status.php',
 		type: 'GET',
 		dataType: 'JSON',
 		async: false,
-		data: reqData
+		// data: reqData
 	})
 	.done(function(data) {
 		if(data.ret==0){

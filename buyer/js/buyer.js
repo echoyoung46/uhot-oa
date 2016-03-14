@@ -51,12 +51,12 @@ function initAction(){
 	/******************买手助理定价表入口*****************/
 	//待审批
 	$('#price-table-enter').on('click', function(){
-		var reqData1 = getDressByStatus(25);
+		/*var reqData1 = getDressByStatus(25);
 		var price1 = avalon.define({
 			$id: "price1",
 			dress: reqData1
 		});
-
+*/
 		/*var reqData2 = getDressByStatus(26);
 		var price2 = avalon.define({
 			$id: "price2",
@@ -149,26 +149,18 @@ function initAction(){
 	$("#order-table-enter1").bind('click', function(event) {
 		//待审批
 		var mOrderData1 = getDressByStatus(26);
-        var arrText = doT.template($("#mordertmpl1").text());
-        $("#morder1").html(arrText(mOrderData1));
-		// var mOrder1 = avalon.define({
-		// 	$id: "mOrder1",
-		// 	dress: mOrderData1
-		// });
-        
-        // //待审批
-		// var mOrderdata2 = getDressByStatus(26);
-		// var mOrder2 = avalon.define({
-		// 	$id: "mOrder2",
-		// 	dress: mOrderdata2
-		// });
-        
-        // //待审批
-		// var mOrderData3 = getDressByStatus(26);
-		// var mOrder3 = avalon.define({
-		// 	$id: "mOrder3",
-		// 	dress: mOrderData3
-		// });
+        var evalText = doT.template($("#mordertmpl1").text());
+        $("#morder1").append(evalText(mOrderData1.list));
+
+        //待审批
+		var mOrderData1 = getDressByStatus(26);
+        var evalText = doT.template($("#mordertmpl2").text());
+        $("#morder2").append(evalText(mOrderData1.list));
+
+        //待审批
+		var mOrderData1 = getDressByStatus(26);
+        var evalText = doT.template($("#mordertmpl3").text());
+        $("#morder3").append(evalText(mOrderData1.list));
 	});
 	//下单表提交审批
 	$("#order-table1 #order-done .table-list").on('click', '.list-button', function() {

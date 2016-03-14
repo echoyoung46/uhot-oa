@@ -22,3 +22,29 @@
 #price-order .operator{
     width: 15%;
 }
+
+/*下单表1*/
+#order-table1 .list-checkbox{
+    width: 5%;
+}
+#order-table1 .design-no{
+    width: 15%;
+}
+#order-table1 .operator-time{
+    width: 15%;
+}
+#order-table1 .gender{
+    width: 10%;
+}
+#order-table1 .series{
+    width: 10%;
+}
+#order-table1 .source{
+    width: 10%;
+}
+#order-table1 .updateinfo{
+    width: 20%;
+}
+#order-table1 .operator{
+    width: 15%;
+}
