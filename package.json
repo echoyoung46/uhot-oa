@@ -1,0 +1,29 @@
+{
+  "name": "uhot-oa",
+  "version": "1.0.0",
+  "description": "uhot oa",
+  "main": "demo.js",
+  "dependencies": {
+    "vue": "^1.0.17"
+  },
+  "devDependencies": {
+    "webpack": "^1.12.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echoyoung46/uhot-oa.git"
+  },
+  "keywords": [
+    "uhot",
+    "oa"
+  ],
+  "author": "echoyoung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/echoyoung46/uhot-oa/issues"
+  },
+  "homepage": "https://github.com/echoyoung46/uhot-oa#readme"
+}
