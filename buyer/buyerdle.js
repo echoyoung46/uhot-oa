@@ -44,8 +44,6 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
 	var Vue = __webpack_require__(1);
 
 	var chosenId = null;
@@ -199,18 +197,30 @@
 		$("#order-table-enter1").bind('click', function(event) {
 			//待审批
 			var mOrderData1 = getDressByStatus(26);
-	        var evalText = doT.template($("#mordertmpl1").text());
-	        $("#morder1").append(evalText(mOrderData1.list));
+	        var morder1 = new Vue({
+	            el: '#morder1',
+	            data:{
+	                item: mOrderData1.list
+	            }
+	        });
 
 	        //待审批
-			var mOrderData1 = getDressByStatus(26);
-	        var evalText = doT.template($("#mordertmpl2").text());
-	        $("#morder2").append(evalText(mOrderData1.list));
+			var mOrderData2 = getDressByStatus(26);
+	        var morder2 = new Vue({
+	            el: '#morder2',
+	            data:{
+	                item: mOrderData2.list
+	            }
+	        });
 
 	        //待审批
-			var mOrderData1 = getDressByStatus(26);
-	        var evalText = doT.template($("#mordertmpl3").text());
-	        $("#morder3").append(evalText(mOrderData1.list));
+	        var mOrderData3 = getDressByStatus(26);
+	        var morder3 = new Vue({
+	            el: '#morder3',
+	            data:{
+	                item: mOrderData3.list
+	            }
+	        });
 		});
 		//下单表提交审批
 		$("#order-table1 #order-done .table-list").on('click', '.list-button', function() {

@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>技术部</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./buyer/buyer.css">
 </head>
 <body>
 	<div class="page-container" ms-controller="menu">
@@ -152,7 +154,7 @@
 				</div>
 
 				<div class="list-box" id="order-table1" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="mOrder1">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -168,28 +170,23 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" id="morder1">
-							
+							<dl v-for="item in items">
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.filing_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
+                                <dd class="updateinfo">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
+                                </dd>
+                            </dl>
 						</div>
-                        <script id="mordertmpl1" type="text/x-dot-template">
-						{{ for(var key in it) { }}
-						<dl>
-						    <dt class="list-checkbox">
-						        <input type="checkbox" name="" value="">
-						    </dt>
-						    <dd class="design-no">{{= it[key].design_no}}</dd>
-						    <dd class="operator-time">{{= it[key].filing_time}}</dd>
-						    <dd class="gender">{{= it[key].d_gender}}</dd>
-						    <dd class="series">{{= it[key].series_id}}</dd>
-						    <dd class="source">{{= it[key].source}}</dd>
-						    <dd class="updateinfo">
-						        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-						    </dd>
-						    <dd class="operator">
-						        <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
-						    </dd>
-						</dl>
-						{{ } }}
-						</script>
 					</div>
 					<div class="status-box" ms-controller="mOrder2">
 						<div class="status-title">加盟下单</div>
@@ -207,44 +204,24 @@
 								<dd class="operator">完成下单</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress" id="morder2">
-							<!-- <dl>
+						<div class="list-detail table table-hover" id="morder2">
+							<dl v-for="item in items">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">下单</button>
 								</dd>
-							</dl> -->
+							</dl>
 						</div>
-						<script id="mordertmpl2" type="text/x-dot-template">
-						{{ for(var key in it) { }}
-						<dl>
-						    <dt class="list-checkbox">
-						        <input type="checkbox" name="" value="">
-						    </dt>
-						    <dd class="design-no">{{= it[key].design_no}}</dd>
-						    <dd class="operator-time">{{= it[key].filing_time}}</dd>
-						    <dd class="gender">{{= it[key].d_gender}}</dd>
-						    <dd class="series">{{= it[key].series_id}}</dd>
-						    <dd class="source">{{= it[key].source}}</dd>
-						    <dd class="updateinfo">
-						        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-						    </dd>
-						    <dd class="operator">
-						        <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
-						    </dd>
-						</dl>
-						{{ } }}
-						</script>
 					</div>
 					<div class="status-box" ms-controller="mOrder3">
 						<div class="status-title">待审批</div>
@@ -262,44 +239,24 @@
 								<dd class="operator">完成下单</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress" id="morder3">
-							<!-- <dl>
+						<div class="list-detail table table-hover" id="morder3">
+							<dl v-for="item in items">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">下单</button>
 								</dd>
-							</dl> -->
+							</dl> 
 						</div>
-						<script id="mordertmpl3" type="text/x-dot-template">
-						{{ for(var key in it) { }}
-						<dl>
-						    <dt class="list-checkbox">
-						        <input type="checkbox" name="" value="">
-						    </dt>
-						    <dd class="design-no">{{= it[key].design_no}}</dd>
-						    <dd class="operator-time">{{= it[key].filing_time}}</dd>
-						    <dd class="gender">{{= it[key].d_gender}}</dd>
-						    <dd class="series">{{= it[key].series_id}}</dd>
-						    <dd class="source">{{= it[key].source}}</dd>
-						    <dd class="updateinfo">
-						        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-						    </dd>
-						    <dd class="operator">
-						        <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
-						    </dd>
-						</dl>
-						{{ } }}
-						</script>
 					</div>
 				</div>
 
@@ -543,7 +500,7 @@
 
 <script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
-<script src="bundle.js"></script> 
+<script src="./buyer/buyerdle.js"></script> 
 
 </body>
 </html>
