@@ -154,7 +154,7 @@ function initAction(){
         var morder1 = new Vue({
             el: '#morder1',
             data:{
-                item: mOrderData1.list
+                items: mOrderData1.list
             }
         });
 
@@ -163,7 +163,7 @@ function initAction(){
         var morder2 = new Vue({
             el: '#morder2',
             data:{
-                item: mOrderData2.list
+                items: mOrderData2.list
             }
         });
 
@@ -172,7 +172,7 @@ function initAction(){
         var morder3 = new Vue({
             el: '#morder3',
             data:{
-                item: mOrderData3.list
+                items: mOrderData3.list
             }
         });
 	});
