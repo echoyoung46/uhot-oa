@@ -5,12 +5,19 @@
     <title>Document</title>
 </head>
 <body>
-<div id="order">
-    <button class="test">click</button>
-    <ul v-for="item in items">
-        <li>{{ item.design_no }}</li>
-        <li>{{ item.d_gender }}</li>
-    </ul>
+    <div id="container">
+        <button v-on:click="toggle(0)"></button>
+        <button v-on:click="toggle(1)"></button>
+        
+        <div id="test" v-show="index === 0">
+        Sorry
+        </div>
+        <div v-else>not sorry</div>
+        
+        <button id="clickme">clickme</button>
+        <div id="subbox">{{ name }}</div>
+    </div>
+
 <script src="bundle.js"></script>
 </body>
 </html>

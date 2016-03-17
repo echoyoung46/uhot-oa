@@ -1,12 +1,31 @@
 var Vue = require('vue');
 
-var chosenId = null;
+var chosenId = null,
+	selectNoArr = [],
+    buyerModel = null;
+    
 $(function(){
-	var bodymodel = avalon.define({
-        $id: "menu",
-        currentIndex: 0,
-        toggle: function(index) {
-            bodymodel.currentIndex = index;
+	buyerModel = new Vue({
+        el: "#menu",
+        data: {
+            currentIndex: 0,
+            morder1: [],
+            morder2: [],
+            morder3: [],
+        },
+        methods: {
+            toggle: function(index) {
+                this.currentIndex = index;
+            },
+            updateStatus: function(_status, _time){
+            	console.log('confirm');
+            	updateDressStatus(_status, selectNoArr, _time);
+            },
+            getChosenId: function(_id){
+            	if($.inArray(_id, selectNoArr) < 0){
+					selectNoArr.push(_id);
+				}
+            }
         }
     })
 	
@@ -150,31 +169,10 @@ function initAction(){
 	/*********************买手主管下单表入口********************/
 	$("#order-table-enter1").bind('click', function(event) {
 		//待审批
-		var mOrderData1 = getDressByStatus(26);
-        var morder1 = new Vue({
-            el: '#morder1',
-            data:{
-                items: mOrderData1.list
-            }
-        });
-
-        //待审批
-		var mOrderData2 = getDressByStatus(26);
-        var morder2 = new Vue({
-            el: '#morder2',
-            data:{
-                items: mOrderData2.list
-            }
-        });
-
-        //待审批
-        var mOrderData3 = getDressByStatus(26);
-        var morder3 = new Vue({
-            el: '#morder3',
-            data:{
-                items: mOrderData3.list
-            }
-        });
+		buyerModel.morder1 = getDressByStatus(26);
+		buyerModel.morder2 = getDressByStatus(26);
+		buyerModel.morder3 = getDressByStatus(26);
+        
 	});
 	//下单表提交审批
 	$("#order-table1 #order-done .table-list").on('click', '.list-button', function() {

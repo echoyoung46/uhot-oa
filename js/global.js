@@ -39,10 +39,11 @@ function getDressByStatus(_status, _status1) {
 		// data: reqData
 	})
 	.done(function(data) {
-		if(data.ret==0){
-			ajaxData = data;
+		if(data.ret==0 && data.msg == "success"){
+			ajaxData = data.list;
 		}else{
-			console.log("没有款式建档完成");
+            ajaxData = [];
+			console.log("error result");
 		}	
 	})
 	.fail(function() {
@@ -108,9 +109,11 @@ function getSelectArr(_dom){
 function updateDressStatus(_status, _idArr, _timeType) {
 	var nowTime = new Date();
 	var _newTime = nowTime.getTime();
+	console.log('global update');
+	console.log(_idArr);
 	$.each(_idArr, function(i, val) {
 		$.ajax({
-			url: 'include/schedule/update_schedule.php',
+			url: './include/schedule/update_schedule.php',
 			type: 'GET',
 			dataType: 'json',
 			async: false,

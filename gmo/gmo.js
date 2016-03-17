@@ -1,11 +1,31 @@
-var selectNoArr = [];
+var Vue = require('vue');
+
+var chosenId = null,
+	selectNoArr = [],
+	gmoModel = null;
 
 $(function() {
-	var bodymodel = avalon.define({
-        $id: "menu",
-        currentIndex: 0,
-        toggle: function(index) {
-            bodymodel.currentIndex = index;
+	gmoModel = new Vue({
+        el: "#menu",
+        data: {
+            currentIndex: 0,
+            morder1: [],
+            morder2: [],
+            morder3: [],
+        },
+        methods: {
+            toggle: function(index) {
+                this.currentIndex = index;
+            },
+            updateStatus: function(_status, _time){
+            	console.log('confirm');
+            	updateDressStatus(_status, selectNoArr, _time);
+            },
+            getChosenId: function(_id){
+            	if($.inArray(_id, selectNoArr) < 0){
+					selectNoArr.push(_id);
+				}
+            }
         }
     })
 
