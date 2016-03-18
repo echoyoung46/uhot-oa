@@ -9,29 +9,59 @@ $(function(){
         el: "#menu",
         data: {
             currentIndex: 0,
+            
+            //定价表
+            price1: [],
+            price2: [],
+            
+            //买手助理下单表
+            order1: [],
+            order2: [],
+            
+            //买手主管下单表
             morder1: [],
             morder2: [],
             morder3: [],
+            
+            //成衣入库
         },
         methods: {
-            toggle: function(index) {
+            
+            //显示或隐藏面板
+            toggle: function(index, _statusArr, _dataArr) {
                 this.currentIndex = index;
+                this.getDress(_statusArr, _dataArr);
             },
+            
+            //提交dress新的状态值
             updateStatus: function(_status, _time){
-            	console.log('confirm');
             	updateDressStatus(_status, selectNoArr, _time);
             },
+            
+            //点击操作按钮获取衣服的id
             getChosenId: function(_id){
             	if($.inArray(_id, selectNoArr) < 0){
 					selectNoArr.push(_id);
 				}
+            },
+            
+            //根据status获取dress列表，填充对应的model
+            getDress: function(_statusArr, _dataArr){
+            	$.each(_dataArr, function(i, val){
+            		var data = getDressByStatus(_statusArr[i]);
+                    console.log(data);
+                    buyerModel[val] = data;
+            	})
             }
         }
     })
 	
-	initAction();
+	// initAction();
 	initSave();
 	bindEvent();
+    
+    //初始时获取第一项数据
+    buyerModel.toggle(0, [25,26], ['price1','price2']);
 });
 
 function bindEvent(){

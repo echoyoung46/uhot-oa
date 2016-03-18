@@ -55,29 +55,40 @@
 	        el: "#menu",
 	        data: {
 	            currentIndex: 0,
+	            price1: [],
+	            price2: [],
 	            morder1: [],
 	            morder2: [],
 	            morder3: [],
 	        },
 	        methods: {
-	            toggle: function(index) {
+	            toggle: function(index, _statusArr, _dataArr) {
 	                this.currentIndex = index;
+	                this.getDress(_statusArr, _dataArr);
 	            },
 	            updateStatus: function(_status, _time){
-	            	console.log('confirm');
 	            	updateDressStatus(_status, selectNoArr, _time);
 	            },
 	            getChosenId: function(_id){
 	            	if($.inArray(_id, selectNoArr) < 0){
 						selectNoArr.push(_id);
 					}
+	            },
+	            getDress: function(_statusArr, _dataArr){
+	            	$.each(_dataArr, function(i, val){
+	            		var data = getDressByStatus(_statusArr[i]);
+	                    console.log(data);
+	                    buyerModel[val] = data;
+	            	})
 	            }
 	        }
 	    })
 		
-		initAction();
+		// initAction();
 		initSave();
 		bindEvent();
+	    
+	    buyerModel.toggle(0, [25,26], ['price1','price2']);
 	});
 
 	function bindEvent(){

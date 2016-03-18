@@ -11,9 +11,9 @@
 		<div class="page-content"  id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation"  class="active"><a href="#price-order" id="price-table-enter" v-on:click="toggle(0)">定价表</a></li>
+					<li role="presentation"  class="active"><a href="#price-order" id="price-table-enter" v-on:click="toggle(0, [25,26], ['price1','price2'])">定价表</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(1)">下单表</a></li>
-					<li role="presentation"><a href="#order-table1" id="order-table-enter1" v-on:click="toggle(2)">下单表</a></li>
+					<li role="presentation"><a href="#order-table1" id="order-table-enter1" v-on:click="toggle(2,[26,26,26],['morder1','morder2','morder3'])">下单表</a></li>
 					<li role="presentation"><a href="#wear-in" id="wear-in-enter" v-on:click="toggle(3)">成衣入库</a></li>
 					<li role="presentation"><a href="#wear-send" id="wear-send-enter" v-on:click="toggle(4)">成衣发出</a></li>
 					<li role="presentation"><a href="#outbuy" id="outbuy-enter" v-on:click="toggle(5)">外采</a></li>
@@ -41,23 +41,23 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress" id="price1">
-							<!-- <dl>
+						<div class="list-detail table table-hover" id="price1">
+							 <dl v-for="item in price1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.cost_trans_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.cost_trans_time | date("yyyy/MM/dd HH:mm:ss") }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="update-info">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
 									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#priceModal">申请</button>
 								</dd>
-							</dl> -->
+							</dl> 
 						</div>
 					</div>
 					<!-- Modal -->
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 
-					<div class="status-box" ms-controller="price2">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -94,23 +94,23 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress" id="price2">
-							<!-- <dl>
+						<div class="list-detail table table-hover" id="price2">
+							 <dl v-for="item in price2">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.cost_trans_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.cost_trans_time | date("yyyy/MM/dd HH:mm:ss") }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
 								</dd>
-							</dl> -->
+							</dl> 
 						</div>
 					</div>
 				</div>

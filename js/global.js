@@ -56,7 +56,7 @@ function getDressByStatus(_status, _status1) {
 }
 
 //avalon filters
-var filters = avalon.filters = {
+/*var filters = avalon.filters = {
     getGender: function(num) {
         if(num == 1){
             return '男装'
@@ -90,7 +90,7 @@ var filters = avalon.filters = {
         	return '其他'
         }
     }
-};
+};*/
 
 function getSelectArr(_dom){
 	selectNoArr = [];

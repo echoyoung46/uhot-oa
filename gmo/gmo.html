@@ -11,18 +11,18 @@
 		<div class="page-content">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#filing" id="filing-enter" ms-click="toggle(0)">建档</a></li>
-					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" ms-click="toggle(1)">入图</a></li>
-					<li role="presentation"><a href="#front-sample" id="frontsample-enter" ms-click="toggle(2)">头版样衣</a></li>
-					<li role="presentation"><a href="#trial-version" id="trialversion-enter" ms-click="toggle(3)">审版</a></li>
-					<li role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" ms-click="toggle(4)">齐色样完成</a></li>
-					<li role="presentation"><a href="#materials-in-store" id="materialsinstore-enter" ms-click="toggle(5)">面辅料入仓</a></li>
-					<li role="presentation"><a href="#materials-in" id="materialsin-enter" ms-click="toggle(6)">面辅料入库</a></li>
-					<li role="presentation"><a href="#wear-in" id="wearin-enter" ms-click="toggle(7)">成衣入库</a></li>
+					<li role="presentation" class="active"><a href="#filing" id="filing-enter" v-on:click="toggle(0)">建档</a></li>
+					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" v-on:click="toggle(1)">入图</a></li>
+					<li role="presentation"><a href="#front-sample" id="frontsample-enter" v-on:click="toggle(2)">头版样衣</a></li>
+					<li role="presentation"><a href="#trial-version" id="trialversion-enter" v-on:click="toggle(3)">审版</a></li>
+					<li role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" v-on:click="toggle(4)">齐色样完成</a></li>
+					<li role="presentation"><a href="#materials-in-store" id="materialsinstore-enter" v-on:click="toggle(5)">面辅料入仓</a></li>
+					<li role="presentation"><a href="#materials-in" id="materialsin-enter" v-on:click="toggle(6)">面辅料入库</a></li>
+					<li role="presentation"><a href="#wear-in" id="wearin-enter" v-on:click="toggle(7)">成衣入库</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div class="list-box" id="filing" ms-visible="currentIndex === 0">
+				<div class="list-box" id="filing" v-show="currentIndex === 0">
 					<div class="tool-list"></div>
 					<div class="status-box" ms-controller="filing">
 						<div class="list-title">
@@ -76,7 +76,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="drawing-in" ms-visible="currentIndex === 1">
+				<div class="list-box" id="drawing-in" v-show="currentIndex === 1">
 					<div class="tool-list"></div>
 					<div class="status-box" ms-controller="drawingin">
 						<div class="list-title">
@@ -101,7 +101,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="front-sample" ms-visible="currentIndex === 2">
+				<div class="list-box" id="front-sample" v-show="currentIndex === 2">
 					<div class="status-box" ms-controller="front-sample">
 						<div class="list-title">
 							<dl>
@@ -123,7 +123,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="trial-version" ms-visible="currentIndex === 3">
+				<div class="list-box" id="trial-version" v-show="currentIndex === 3">
 					<div class="status-box" ms-controller="trial">
 						<div class="list-title">
 							<dl>
@@ -145,7 +145,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="color-sample-done" ms-visible="currentIndex === 4">
+				<div class="list-box" id="color-sample-done" v-show="currentIndex === 4">
 					<div class="status-box" ms-controller="trial">
 						<div class="list-title">
 							<dl>
@@ -167,7 +167,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="materials-in-store" ms-visible="currentIndex === 5">
+				<div class="list-box" id="materials-in-store" v-show="currentIndex === 5">
 					<div class="status-box" ms-controller="trial">
 						<div class="list-title">
 							<dl>
@@ -189,7 +189,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="materials-in" ms-visible="currentIndex === 6">
+				<div class="list-box" id="materials-in" v-show="currentIndex === 6">
 					<div class="status-box" ms-controller="trial">
 						<div class="list-title">
 							<dl>
@@ -211,7 +211,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="list-box" id="wear-in" ms-visible="currentIndex === 7">
+				<div class="list-box" id="wear-in" v-show="currentIndex === 7">
 					<div class="status-box" ms-controller="trial">
 						<div class="list-title">
 							<dl>
