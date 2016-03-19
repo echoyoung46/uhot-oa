@@ -23,34 +23,47 @@ function $ajaxUrl(_url){
 　　}); 
 }
 
-function getDressByStatus(_status, _status1) {
-	var ajaxData = null;
-	if(_status1){
-		var reqData = {status: _status, status1: _status1};
-	}else{
-		var reqData = {status: _status};
+function getDressByStatus(_status, _source) {
+	var ajaxData = null,        //结果
+        reqData = {             //请求参数
+            status: [],
+            source: []
+        };     
+    
+	if(typeof _status == 'object'){
+        
+        //参数为数组
+        reqData.status = _status;
+	}else {
+        
+        //参数为单个数
+        reqData.status[0] = _status;
 	}
+    
+    if( typeof _source == 'undefined' || typeof _source != 'object ') {
+        reqData.source = [1];
+    }else {
+        reqData.source = _source;
+    }
+    
 	$.ajax({
-		url: './js/dress.json',
-		// url: 'include/schedule/get_dress_by_status.php',
+		// url: './js/dress.json',
+		url: 'include/schedule/get_dress_by_status.php',
 		type: 'GET',
 		dataType: 'JSON',
 		async: false,
-		// data: reqData
+		data: reqData
 	})
 	.done(function(data) {
 		if(data.ret==0 && data.msg == "success"){
 			ajaxData = data.list;
 		}else{
             ajaxData = [];
-			console.log("error result");
 		}	
 	})
 	.fail(function() {
-		console.log("error");
 	})
 	.always(function() {
-		console.log("complete");
 	});
 	return ajaxData;
 }

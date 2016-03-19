@@ -1,16 +1,58 @@
-var chosenId = null;
+var Vue = require('vue');
+
+var chosenId = null,
+	selectNoArr = [],
+    producerModel = null;
 
 $(function() {
-	var bodymodel = avalon.define({
-		$id: "menu",
-		currentIndex: 0,
-		toggle: function(index) {
-			bodymodel.currentIndex = index;
-		}
-	})
+	producerModel = new Vue({
+        el: "#menu",
+        data: {
+            currentIndex: 4,
+            
+            //下单表 
+            order1: [],
+            
+        },
+        methods: {
+            
+            //显示或隐藏面板
+            toggle: function(index, _statusArr, _dataArr) {
+                this.currentIndex = index;
+                this.getDress(_statusArr, _dataArr);
+            },
+            
+            //提交dress新的状态值
+            updateStatus: function(_status, _time){
+            	updateDressStatus(_status, selectNoArr, _time);
+            },
+            
+            //点击操作按钮获取衣服的id
+            getChosenId: function(_id){
+            	if($.inArray(_id, selectNoArr) < 0){
+					selectNoArr.push(_id);
+				}
+            },
+            
+            //根据status获取dress列表，填充对应的model
+            getDress: function(_statusArr, _dataArr){
+                
+            	$.each(_dataArr, function(i, val){
+            		var data = getDressByStatus(_statusArr[i]);
+                    console.log(val);
+                    console.log(data);
+                    producerModel[val] = data;
+            	})
+            }
+        }
+    })
 
-	initAction();
-	initSave();
+	// initAction();
+    
+    //初始时获取第一项数据
+    producerModel.toggle(4, [27], ['order1']);
+    
+	// initSave();
 	bindEvent();
 });
 

@@ -4,27 +4,27 @@
 	<meta charset="UTF-8">
 	<title>总经办</title>
 	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="gmo/css/gmo.css">
+	<link rel="stylesheet" type="text/css" href="gmo/gmo.css">
 </head>
 <body>
-	<div class="page-container"  ms-controller="menu">
-		<div class="page-content">
+	<div class="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#filing" id="filing-enter" v-on:click="toggle(0)">建档</a></li>
-					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" v-on:click="toggle(1)">入图</a></li>
-					<li role="presentation"><a href="#front-sample" id="frontsample-enter" v-on:click="toggle(2)">头版样衣</a></li>
-					<li role="presentation"><a href="#trial-version" id="trialversion-enter" v-on:click="toggle(3)">审版</a></li>
-					<li role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" v-on:click="toggle(4)">齐色样完成</a></li>
-					<li role="presentation"><a href="#materials-in-store" id="materialsinstore-enter" v-on:click="toggle(5)">面辅料入仓</a></li>
-					<li role="presentation"><a href="#materials-in" id="materialsin-enter" v-on:click="toggle(6)">面辅料入库</a></li>
-					<li role="presentation"><a href="#wear-in" id="wearin-enter" v-on:click="toggle(7)">成衣入库</a></li>
+					<li role="presentation" class="active"><a href="#filing" id="filing-enter" v-on:click="toggle(0, [0], ['filing'])">建档</a></li>
+					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" v-on:click="toggle(1, [], [''])">入图</a></li>
+					<li role="presentation"><a href="#front-sample" id="frontsample-enter" v-on:click="toggle(2, [], [''])">头版样衣</a></li>
+					<li role="presentation"><a href="#trial-version" id="trialversion-enter" v-on:click="toggle(3, [], [''])">审版</a></li>
+					<li role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" v-on:click="toggle(4, [], [''])">齐色样完成</a></li>
+					<li role="presentation"><a href="#materials-in-store" id="materialsinstore-enter" v-on:click="toggle(5, [], [''])">面辅料入仓</a></li>
+					<li role="presentation"><a href="#materials-in" id="materialsin-enter" v-on:click="toggle(6, [], [''])">面辅料入库</a></li>
+					<li role="presentation"><a href="#wear-in" id="wearin-enter" v-on:click="toggle(7, [], [''])">成衣入库</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
 				<div class="list-box" id="filing" v-show="currentIndex === 0">
 					<div class="tool-list"></div>
-					<div class="status-box" ms-controller="filing">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -39,16 +39,16 @@
 								<dd class="operator">建档完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in filing">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss") }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -78,7 +78,7 @@
 				</div>
 				<div class="list-box" id="drawing-in" v-show="currentIndex === 1">
 					<div class="tool-list"></div>
-					<div class="status-box" ms-controller="drawingin">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -89,7 +89,7 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -102,7 +102,7 @@
 					</div>
 				</div>
 				<div class="list-box" id="front-sample" v-show="currentIndex === 2">
-					<div class="status-box" ms-controller="front-sample">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -112,7 +112,7 @@
 								<dd class="source">生产类型</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -124,7 +124,7 @@
 					</div>
 				</div>
 				<div class="list-box" id="trial-version" v-show="currentIndex === 3">
-					<div class="status-box" ms-controller="trial">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -146,7 +146,7 @@
 					</div>
 				</div>
 				<div class="list-box" id="color-sample-done" v-show="currentIndex === 4">
-					<div class="status-box" ms-controller="trial">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -168,7 +168,7 @@
 					</div>
 				</div>
 				<div class="list-box" id="materials-in-store" v-show="currentIndex === 5">
-					<div class="status-box" ms-controller="trial">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -190,7 +190,7 @@
 					</div>
 				</div>
 				<div class="list-box" id="materials-in" v-show="currentIndex === 6">
-					<div class="status-box" ms-controller="trial">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -212,7 +212,7 @@
 					</div>
 				</div>
 				<div class="list-box" id="wear-in" v-show="currentIndex === 7">
-					<div class="status-box" ms-controller="trial">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -239,8 +239,7 @@
 
 
 
-<script src="js/avalon.js"></script>
-<script src="js/global.js"></script>
-<script src="gmo/js/gmo.js"></script> 
+<script src="js/common.js"></script>
+<script src="./gmo/gmodle.js"></script> 
 </body>
 </html>

@@ -47,8 +47,10 @@ $(function(){
             
             //根据status获取dress列表，填充对应的model
             getDress: function(_statusArr, _dataArr){
+                
             	$.each(_dataArr, function(i, val){
             		var data = getDressByStatus(_statusArr[i]);
+                    console.log(val);
                     console.log(data);
                     buyerModel[val] = data;
             	})
@@ -57,7 +59,7 @@ $(function(){
     })
 	
 	// initAction();
-	initSave();
+	// initSave();
 	bindEvent();
     
     //初始时获取第一项数据

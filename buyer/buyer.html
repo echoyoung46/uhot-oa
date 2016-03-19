@@ -26,7 +26,7 @@
 			</div>
 			<div class="page-list">
 				<div class="list-box" id="price-order" v-show="currentIndex === 0">
-					<div class="status-box" ms-controller="price1">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -90,7 +90,7 @@
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
-								<dd class="updateinfo">变更信息</dd>
+								<dd class="update-info">变更信息</dd>
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
@@ -104,7 +104,7 @@
 								<dd class="gender">{{ item.d_gender }}</dd>
 								<dd class="series">{{ item.series_id }}</dd>
 								<dd class="source">{{ item.source }}</dd>
-								<dd class="details">
+								<dd class="update-info">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
@@ -188,7 +188,7 @@
                             </dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="mOrder2">
+					<div class="status-box">
 						<div class="status-title">加盟下单</div>
 						<div class="list-title">
 							<dl>
@@ -223,7 +223,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="mOrder3">
+					<div class="status-box">
 						<div class="status-title">待审批</div>
 						<div class="list-title">
 							<dl>

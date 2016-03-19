@@ -2,24 +2,16 @@
 
     include("../conn.php");          // 引入数据库连接
 
+    //获取参数
     $status = $_GET["status"];
-    // $source = $_GET["source"];
-    if(isset($_GET['status1'])){
-        $status1 = $_GET["status1"];
-        if(isset($_GET['source'])){
-            $source = $_GET["source"];
-            $sql2 = "SELECT * FROM dress WHERE status = $status OR status = $status1 AND source = $source";
-        }else{
-            $sql2 = "SELECT * FROM dress WHERE status = $status OR status = $status1";
-        }
-    }else{
-        if(isset($_GET['source'])){
-            $source = $_GET["source"];
-            $sql2 = "SELECT * FROM dress WHERE status = $status AND source = $source";
-        }else{
-            $sql2 = "SELECT * FROM dress WHERE status = $status";
-        }
-    }
+    $source = $_GET["source"];
+    
+    //参数转化为可识别的数组
+    $status = implode($status);
+    $source = implode($source);
+    
+    $sql2 = "SELECT * FROM dress WHERE status IN ($status) AND source IN ($source)";
+        
  
     $sql1 = "SELECT COUNT(*) AS count FROM dress";
     
