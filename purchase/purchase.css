@@ -23,6 +23,32 @@
 	width: 10%;
 }
 
+/*预采任务单*/
+#repurchase-list .list-checkbox{
+	width: 5%;
+}
+#repurchase-list .design-no{
+	width: 15%;
+}
+#repurchase-list .operator-time{
+	width: 15%;
+}
+#repurchase-list .gender{
+	width: 15%;
+}
+#repurchase-list .series{
+	width: 10%;
+}
+#repurchase-list .source{
+	width: 10%;
+}
+#repurchase-list .details{
+	width: 20%;
+}
+#repurchase-list .operator{
+	width: 10%;
+}
+
 #drawing-in .design-no{
 	width: 15%;
 }

@@ -50,3 +50,29 @@
 #repurchase-list .operator{
 	width: 10%;
 }
+
+/*下单表*/
+#order-table .list-checkbox{
+	width: 5%;
+}
+#order-table .receipt-no{
+	width: 15%;
+}
+#order-table .operator-time{
+	width: 15%;
+}
+#order-table .gender{
+	width: 10%;
+}
+#order-table .series{
+	width: 10%;
+}
+#order-table .source{
+	width: 10%;
+}
+#order-table .update-info{
+	width: 15%;
+}
+#order-table .operator{
+	width: 20%;
+}

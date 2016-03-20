@@ -3,27 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>采购部</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="purchase/css/purchase.css">
+	<link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./purchase/purchase.css">
 </head>
 <body>
-	<div class="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div class="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#spicesApply" id="spicesApply-enter" ms-click="toggle(0)">调料申请</a></li>
-					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" ms-click="toggle(1)">预采任务单</a></li>
-					<li role="presentation"><a href="#orderSheet" id="orderSheet-enter" ms-click="toggle(2)">下单表</a></li>
-					<li role="presentation"><a href="#checkIn" id="checkIn-enter" ms-click="toggle(3)">检验入库</a></li>
-					<li role="presentation"><a href="#handling" id="handling-enter" ms-click="toggle(4)">需处理</a></li>
-					<li role="presentation"><a href="#replenishment" id="replenishment-enter" ms-click="toggle(5)">补货</a></li>
-					<li role="presentation"><a href="#replenishment-in" id="replenishment-in-enter" ms-click="toggle(6)">补货入库</a></li>
-					<li role="presentation"><a href="#cost-accounting" id="cost-accounting-enter" ms-click="toggle(7)">成本核算</a></li>
+					<li role="presentation" class="active"><a href="#spicesApply" id="spicesApply-enter" v-on:click="toggle(0)">调料申请</a></li>
+					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" v-on:click="toggle(1, [31], ['purchase'])">预采任务单</a></li>
+					<li role="presentation"><a href="#orderSheet" id="orderSheet-enter" v-on:click="toggle(2)">下单表</a></li>
+					<li role="presentation"><a href="#checkIn" id="checkIn-enter" v-on:click="toggle(3)">检验入库</a></li>
+					<li role="presentation"><a href="#handling" id="handling-enter" v-on:click="toggle(4)">需处理</a></li>
+					<li role="presentation"><a href="#replenishment" id="replenishment-enter" v-on:click="toggle(5)">补货</a></li>
+					<li role="presentation"><a href="#replenishment-in" id="replenishment-in-enter" v-on:click="toggle(6)">补货入库</a></li>
+					<li role="presentation"><a href="#cost-accounting" id="cost-accounting-enter" v-on:click="toggle(7)">成本核算</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div id="spicesApply" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="spices">
+				<div id="spicesApply" class="list-box" v-show="currentIndex === 0">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -38,16 +38,16 @@
 								<dd class="operator">调料完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.apply_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.apply_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -56,86 +56,63 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
-
-					<!--<div id="applyMenu" class="one">
-						<table class="table-title">
-							<tr>
-								<td width="5%">
-									<span class="check-box"></span>
-								</td>
-								<td width="15%">
-									<input list="no" value="设计款号">
-									<datalist id="no">
-										<option value="设计款号"></option>
-									</datalist>
-								</td>
-								<td width="20%">申请时间</td>
-								<td width="15%">
-									<input list="gender" value="女/男装">
-									<datalist id="gender">
-										<option value="女/男装"></option>
-										<option value="女装"></option>
-										<option value="男装"></option>
-									</datalist>
-								</td>
-								<td width="15%">
-								<input list="series" value="系列">
-									<datalist id="series">
-										<option value="系列"></option>
-										<option value="贵尚"></option>
-										<option value="雅尚"></option>
-										<option value="器尚"></option>
-										<option value="风尚"></option>
-									</datalist>
-								</td>
-								<td width="15%">预采任务单</td>
-								<td width="15%">调料完成</td>
-							</tr>
-						</table>
-						<div class="table-body">
-							<table class="table-list"></table>
-						</div>
 					</div>-->
 				</div>
-				<div id="repurchase-list" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="repurchase">
+				<div id="repurchase-list" class="list-box" v-show="currentIndex === 1">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="no">款号</dd>
+								<dd class="design-no">款号</dd>
 								<dd class="operator-time">完成时间</dd>
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
-								<dd class="detail">预采任务单</dd>
+								<dd class="details">预采任务单</dd>
 								<dd class="operator">整款入仓</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in purchase">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="no">{{el.no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.order_typein_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="viewer-modal" data-target="#viewerModal">入仓</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#purchaseModal" v-on:click="getChosenId( item.design_no )">入仓</button>
 								</dd>
 							</dl>
 						</div>
+                        <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">整款入仓</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定整款入仓吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(32, 'instore_finish_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
-				<div id="orderSheet" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="order">
+				<div id="orderSheet" class="list-box" v-show="currentIndex === 2">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -150,26 +127,26 @@
 								<dd class="operator">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="receipt-no">{{el.receipt_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="receipt-no">{{ item.receipt_no}}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="update-info">变更信息</dd>
 								<dd class="operator">
 									<input type="text">
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="checkIn" class="list-box" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="checkin">
+				<div id="checkIn" class="list-box" v-show="currentIndex === 3">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -184,16 +161,16 @@
 								<dd class="remark">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="update-info">
 									<input type="text">
 								</dd>
@@ -202,10 +179,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="handling" class="list-box" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="order">
+				<div id="handling" class="list-box" v-show="currentIndex === 4">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="no">款号</dt>
@@ -217,13 +194,13 @@
 								<dd class="problem">问题</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
-								<dt class="no">{{el.no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dt class="no">{{ item.no}}</dt>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="provider">
 									<input type="text">
 								</dd>
@@ -232,10 +209,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="replenishment" class="list-box" ms-visible="currentIndex === 5">
-					<div class="status-box" ms-controller="order">
+				<div id="replenishment" class="list-box" v-show="currentIndex === 5">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -249,25 +226,25 @@
 								<dd class="details">预采任务单</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="no">{{el.no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="no">{{ item.no}}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="replenishment-in" class="list-box" ms-visible="currentIndex === 6">
-					<div class="status-box" ms-controller="replenishmentin1">
+				<div id="replenishment-in" class="list-box" v-show="currentIndex === 6">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -282,16 +259,16 @@
 								<dd class="remark">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="update-info">
 									<input type="text">
 								</dd>
@@ -302,7 +279,7 @@
 						</div>
 					</div>
 
-					<div class="status-box" ms-controller="replenishmentin2">
+					<div class="status-box">
 						<div class="status-title">需处理</div>
 						<div class="list-title">
 							<dl>
@@ -318,24 +295,24 @@
 								<dd class="problem">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="providers">供应商</dd>
 								<dd class="problem">备注</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="cost-accounting" class="list-box" ms-visible="currentIndex === 7">
-					<div class="status-box" ms-controller="costs1" id="cost-accounting1">
+				<div id="cost-accounting" class="list-box" v-show="currentIndex === 7">
+					<!--<div class="status-box" id="cost-accounting1">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -350,16 +327,16 @@
 								<dd class="operator">核算完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -369,7 +346,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="costs2" id="cost-accounting2">
+					<div class="status-box" id="cost-accounting2">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -384,16 +361,16 @@
 								<dd class="operator">确认移交</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress" id="costs2">
+						<div class="list-detail table table-hover" id="costs2">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.typein_materialsheet_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.typein_materialsheet_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -402,14 +379,14 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<!-- Modal -->
-					<div class="modal fade" id="costsModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal fade" id="costsModal2" tabindex="-1" role="dialog" aria-lab itemledby="myModalLab item">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">成本核算</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-lab item="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLab item">成本核算</h4>
 								</div>
 								<div class="modal-body">
 								确定移交吗?
@@ -425,8 +402,7 @@
 			</div>
 		</div>
 	</div>
-<script src="js/avalon.js"></script>
- <script src="js/global.js"></script>
-<script src="purchase/js/purchase.js"></script>
+ <script src="./js/global.js"></script>
+<script src="./purchase/purchasedle.js"></script>
 </body>
 </html>

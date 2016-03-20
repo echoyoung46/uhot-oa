@@ -23,6 +23,32 @@
     width: 15%;
 }
 
+/*下单表*/
+#order-table .list-checkbox{
+    width: 5%;
+}
+#order-table .design-no{
+    width: 15%;
+}
+#order-table .operator-time{
+    width: 15%;
+}
+#order-table .gender{
+    width: 10%;
+}
+#order-table .series{
+    width: 10%;
+}
+#order-table .source{
+    width: 10%;
+}
+#order-table .updateinfo{
+    width: 20%;
+}
+#order-table .operator{
+    width: 15%;
+}
+
 /*下单表1*/
 #order-table1 .list-checkbox{
     width: 5%;

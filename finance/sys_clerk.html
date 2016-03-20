@@ -4,23 +4,23 @@
 	<meta charset="UTF-8">
 	<title>财务部</title>
 	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="finance/css/sys_clerk.css">
+	<link rel="stylesheet" type="text/css" href="finance/sys_clerk.css">
 </head>
 <body>
-	<div id="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div id="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#goods-info" id="goods-info-enter"  ms-click="toggle(0)">商品信息</a></li>
-					<li role="presentation"><a href="#price-list" id="price-list-enter"  ms-click="toggle(1)">定价单</a></li>
-					<li role="presentation"><a href="#ingredient-entering" id="ingredient-entering-enter"  ms-click="toggle(2)">成分录入</a></li>
-					<li role="presentation"><a href="#outbuy-goods" id="outbuy-goods-enter"  ms-click="toggle(3)">外采商品信息</a></li>
-					<li role="presentation"><a href="#outbuy-price" id="outbuy-price-enter"  ms-click="toggle(4)">外采价格录入</a></li>
+					<li role="presentation" class="active"><a href="#goods-info" id="goods-info-enter"  v-on:click="toggle(0, [20], ['goodsInfo'])">商品信息</a></li>
+					<li role="presentation"><a href="#price-list" id="price-list-enter"  v-on:click="toggle(1, [27], ['price'])">定价单</a></li>
+					<li role="presentation"><a href="#ingredient-entering" id="ingredient-entering-enter"  v-on:click="toggle(2)">成分录入</a></li>
+					<li role="presentation"><a href="#outbuy-goods" id="outbuy-goods-enter"  v-on:click="toggle(3)">外采商品信息</a></li>
+					<li role="presentation"><a href="#outbuy-price" id="outbuy-price-enter"  v-on:click="toggle(4)">外采价格录入</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div id="goods-info" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="goods">
+				<div id="goods-info" class="list-box" v-show="currentIndex === 0">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -35,21 +35,21 @@
 								<dd class="operator">录入完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress" id="info">
-							<dl>
+						<div class="list-detail table table-hover" id="info">
+							<dl v-for="item in goodsInfo">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.finish_styleno_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-								<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#goodsModal">完成</button>
+								<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#goodsModal" v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl>
 						</div>
@@ -67,14 +67,14 @@
 								</div>
 								<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary" id="info-input-button">确定</button>
+								<button type="button" class="btn btn-primary" id="info-input-button" v-on:click="updateStatus(21, 'typein_product_time')">确定</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div id="price-list" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="price">
+				<div id="price-list" class="list-box" v-show="currentIndex === 1">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -89,28 +89,45 @@
 								<dd class="operator">录入完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in price">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.price_confirm_time  }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#priceModal" v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl>
 						</div>
+                        <div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">完成价格录入</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成录入吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(28, 'price_finishtypein_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
-				<div id="ingredient-entering" class="list-box" ms-visible="currentIndex === 2">	
-					<div class="status-box" ms-controller="ingredient">
+				<div id="ingredient-entering" class="list-box" v-show="currentIndex === 2">	
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -126,7 +143,7 @@
 								<dd class="operator">录入完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -147,8 +164,8 @@
 						</div>
 					</div>
 				</div>
-				<div id="outbuy-goods-info" class="list-box" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="ingredient">
+				<div id="outbuy-goods-info" class="list-box" v-show="currentIndex === 3">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -162,7 +179,7 @@
 								<dd class="operator">录入完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -181,8 +198,8 @@
 						</div>
 					</div>
 				</div>
-				<div id="outbuy-price-entering" class="list-box" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="ingredient">
+				<div id="outbuy-price-entering" class="list-box" v-show="currentIndex === 4">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -197,7 +214,7 @@
 								<dd class="operator">申请调料</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -221,8 +238,7 @@
 		</div>
 	</div>
 
-<script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
-<script src="finance/js/sys_clerk.js"></script> 	
+<script src="finance/sysdle.js"></script> 	
 </body>
 </html>

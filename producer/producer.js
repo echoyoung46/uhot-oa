@@ -8,10 +8,10 @@ $(function() {
 	producerModel = new Vue({
         el: "#menu",
         data: {
-            currentIndex: 4,
+            currentIndex: 0,
             
             //下单表 
-            order1: [],
+            order: [],
             
         },
         methods: {
@@ -50,7 +50,7 @@ $(function() {
 	// initAction();
     
     //初始时获取第一项数据
-    producerModel.toggle(4, [27], ['order1']);
+    // producerModel.toggle(4, [27], ['order1']);
     
 	// initSave();
 	bindEvent();

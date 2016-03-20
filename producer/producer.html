@@ -15,7 +15,7 @@
 					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" v-on:click="toggle(1)">预采任务单</a></li>
 					<li role="presentation"><a href="#craftmaterial-list" id="craftmaterial-list-enter" v-on:click="toggle(2)">工艺配料单</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3)">工艺单</a></li>
-					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(4, [27], ['order1'])">下单表</a></li>
+					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(4, [30], ['order'])">下单表</a></li>
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(5)">产前版发料</a></li>
 					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6)">大货发料</a></li>
 					<li role="presentation"><a href="#producing" id="producing-enter" v-on:click="toggle(7)">生产中</a></li>
@@ -26,678 +26,694 @@
 					<li role="presentation"><a href="#outbuy-send" id="outbuy-send-enter" v-on:click="toggle(12)">外采/FOB发料</a></li>
 				</ul>
 			</div>
-		</div>
-	
-		<div class="page-list">
-			<div id="apply-no" class="list-box" v-show="currentIndex === 0">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">申请时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="details">预采任务单</dd>
-							<dd class="operator">大货款号</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover" id="apply">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.adopt_transfer_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="operator">
-								<div class="input-group">
-									<input type="text" class="form-control cargo-no" placeholder="请输入大货款号">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#cargoModal">提交</button>
-										</span>
-								</div>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-				<div class="modal fade" id="cargoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">申请款号</h4>
-							</div>
-							<div class="modal-body">
-								确定提交款号吗?
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary" id="cargono-save-button">确定</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="page-list">
+                <div id="apply-no" class="list-box" v-show="currentIndex === 0">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">申请时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="details">预采任务单</dd>
+                                <dd class="operator">大货款号</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover" id="apply">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.adopt_transfer_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="operator">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control cargo-no" placeholder="请输入大货款号">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#cargoModal">提交</button>
+                                            </span>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                    <!--<div class="modal fade" id="cargoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">申请款号</h4>
+                                </div>
+                                <div class="modal-body">
+                                    确定提交款号吗?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="cargono-save-button">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="repurchase-list" class="list-box" v-show="currentIndex === 1">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">移交时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="details">预采任务单</dd>
-							<dd class="update-info">变更信息</dd>
-							<dd class="operator">系统录入</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover" id="repurchase">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.typein_product_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="update-info">
-								<input type="text">
-							</dd>
-							<dd class="operator">
-								<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#repurchaseModal">提交</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-				<!-- Modal -->
-					<div class="modal fade" id="repurchaseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">预采任务单</h4>
-								</div>
-								<div class="modal-body">
-								确定录入工艺配料单吗?
-								</div>
-								<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary" id="repurchase-save-button">确定</button>
-								</div>
-							</div>
-						</div>
-					</div>
-			</div>
-            
-			<div id="craftmaterial-list" class="list-box" v-show="currentIndex === 2">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">移交时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="details">预采任务单</dd>
-							<dd class="update-info">变更信息</dd>
-							<dd class="operator">系统录入</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<div class="update-info">
-								<input type="text">
-							</div>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">录入</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
-            
-			<div id="process-sheet" class="list-box" v-show="currentIndex === 3">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">移交时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="details">工艺单</dd>
-							<dd class="update-info">变更信息</dd>
-							<dd class="apply-maker">申请唛架</dd>
-							<dd class="update-craft">申请修改工艺单</dd>
-							<dd class="apply-sample">申请纸样</dd>
-							<dd class="apply-update-maker">申请修改唛架</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">{{el.no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="update-info">
-								<input type="text">
-							</dd>
-							<dd class="apply-maker">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请唛架</button>
-							</dd>
-							<dd class="update-craft">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改工艺单</button>
-							</dd>
-							<dd class="apply-sample">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请纸样</button>
-							</dd>
-							<dd class="apply-update-maker">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改唛架</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="repurchase-list" class="list-box" v-show="currentIndex === 1">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">移交时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="details">预采任务单</dd>
+                                <dd class="update-info">变更信息</dd>
+                                <dd class="operator">系统录入</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover" id="repurchase">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.typein_product_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="update-info">
+                                    <input type="text">
+                                </dd>
+                                <dd class="operator">
+                                    <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#repurchaseModal">提交</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                    <!-- Modal -->
+                    <!--<div class="modal fade" id="repurchaseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">预采任务单</h4>
+                                </div>
+                                <div class="modal-body">
+                                确定录入工艺配料单吗?
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="repurchase-save-button">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                
+                <div id="craftmaterial-list" class="list-box" v-show="currentIndex === 2">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">移交时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="details">预采任务单</dd>
+                                <dd class="update-info">变更信息</dd>
+                                <dd class="operator">系统录入</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <div class="update-info">
+                                    <input type="text">
+                                </div>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">录入</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
+                
+                <div id="process-sheet" class="list-box" v-show="currentIndex === 3">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">移交时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="details">工艺单</dd>
+                                <dd class="update-info">变更信息</dd>
+                                <dd class="apply-maker">申请唛架</dd>
+                                <dd class="update-craft">申请修改工艺单</dd>
+                                <dd class="apply-sample">申请纸样</dd>
+                                <dd class="apply-update-maker">申请修改唛架</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">{{el.no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="update-info">
+                                    <input type="text">
+                                </dd>
+                                <dd class="apply-maker">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请唛架</button>
+                                </dd>
+                                <dd class="update-craft">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改工艺单</button>
+                                </dd>
+                                <dd class="apply-sample">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请纸样</button>
+                                </dd>
+                                <dd class="apply-update-maker">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改唛架</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="order-table" class="list-box" v-show="currentIndex === 4">
-				<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="receipt-no">单据号</dd>
-							<dd class="operator-time">下单时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="update-info">变更信息</dd>
-							<dd class="operator">系统录入</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl v-for="item in order1">
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="receipt-no">{{ item.design_no }}</dd>
-							<dd class="operator-time">{{ item.order_confirm_time }}</dd>
-							<dd class="gender">{{ item.d_gender }}</dd>
-							<dd class="series">{{ item.series_id }}</dd>
-							<dd class="source">{{ item.source }}</dd>
-							<dd class="update-info">
-								<input type="text">
-							</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">录入</button>
-							</dd>
-						</dl>
-					</div>
-				</div>
-			</div>
+                <div id="order-table" class="list-box" v-show="currentIndex === 4">
+                    <div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="receipt-no">单据号</dd>
+                                <dd class="operator-time">下单时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="update-info">变更信息</dd>
+                                <dd class="operator">系统录入</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl v-for="item in order">
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="receipt-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.price_finishtypein_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
+                                <dd class="update-info">
+                                    <input type="text">
+                                </dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#orderModal" v-on:click="getChosenId( item.design_no )">录入</button>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">下单表录入完成</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成录入吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary" id="morder3-save-button" v-on:click="updateStatus(31, 'order_typein_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-			<div id="prenatal-issue" class="list-box" v-show="currentIndex === 5">
-				<!--<div class="status-box" id="prenatal-issue1">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">到料时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="operator">通知发料</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
-							</dd>
-						</dl>
-					</div>
-				</div>
-				<div class="status-box" id="prenatal-issue2">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">到料时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="fabric-status">面料状态</dd>
-							<dd class="accessory-status">辅料状态</dd>
-							<dd class="operator">纸样</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="fabric-status">面料状态</dd>
-							<dd class="accessory-status">辅料状态</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="prenatal-issue" class="list-box" v-show="currentIndex === 5">
+                    <!--<div class="status-box" id="prenatal-issue1">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">到料时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="operator">通知发料</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="status-box" id="prenatal-issue2">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">到料时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="fabric-status">面料状态</dd>
+                                <dd class="accessory-status">辅料状态</dd>
+                                <dd class="operator">纸样</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="fabric-status">面料状态</dd>
+                                <dd class="accessory-status">辅料状态</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="cargo-issue" class="list-box" v-show="currentIndex === 6">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">到料时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="notice">注意信息</dd>
-							<dd class="operator">通知发料</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">{{el.no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
-							</dd>
-						</dl>
-					</div>
-				</div>
-				<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">到料时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="fabric-status">面料状态</dd>
-							<dd class="accessory-status">辅料状态</dd>
-							<dd class="operator">纸样、唛架、吊牌等</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">{{el.no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="fabric-status">面料状态</dd>
-							<dd class="accessory-status">辅料状态</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="cargo-issue" class="list-box" v-show="currentIndex === 6">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">到料时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="notice">注意信息</dd>
+                                <dd class="operator">通知发料</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">{{el.no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">到料时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="fabric-status">面料状态</dd>
+                                <dd class="accessory-status">辅料状态</dd>
+                                <dd class="operator">纸样、唛架、吊牌等</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">{{el.no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="fabric-status">面料状态</dd>
+                                <dd class="accessory-status">辅料状态</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="producing" class="list-box" v-show="currentIndex === 7">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">投产时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="operator">入仓检验</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">检验</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="producing" class="list-box" v-show="currentIndex === 7">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">投产时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="operator">入仓检验</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">检验</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="replenishment" class="list-box" v-show="currentIndex === 8">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">补货时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="notice">注意信息</dd>
-							<dd class="operator">发料</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="notice">注意信息</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发料</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="replenishment" class="list-box" v-show="currentIndex === 8">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">补货时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="notice">注意信息</dd>
+                                <dd class="operator">发料</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="notice">注意信息</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发料</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="marker" class="list-box" v-show="currentIndex === 9">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">移交时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="craft">工艺单</dd>
-							<dd class="status">状态</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">{{el.no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="craft">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="status">唛架已完</dd>
-						</dl>
-					</div>
-				</div>
-				<div class="status-box">
-					<div class="status-title">唛架修改</div>
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">移交时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="craft">工艺单</dd>
-							<dd class="status">状态</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">{{el.no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="craft">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="status">唛架修改完</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="marker" class="list-box" v-show="currentIndex === 9">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">移交时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="craft">工艺单</dd>
+                                <dd class="status">状态</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">{{el.no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="craft">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="status">唛架已完</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="status-box">
+                        <div class="status-title">唛架修改</div>
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">移交时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="craft">工艺单</dd>
+                                <dd class="status">状态</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">{{el.no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="craft">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="status">唛架修改完</dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="amount-adjust" class="list-box" v-show="currentIndex === 10">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">设计款号</dd>
-							<dd class="operator-time">变更时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="update-reason">变更原因</dd>
-							<dd class="details">预采任务单</dd>
-							<dd class="last-width">原幅宽</dd>
-							<dd class="new-width">新幅宽</dd>
-							<dd class="status">移交</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="update-reason">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="last-width">{{el.source}}</dd>
-							<dd class="new-width">{{el.source}}</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="amount-adjust" class="list-box" v-show="currentIndex === 10">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">设计款号</dd>
+                                <dd class="operator-time">变更时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="update-reason">变更原因</dd>
+                                <dd class="details">预采任务单</dd>
+                                <dd class="last-width">原幅宽</dd>
+                                <dd class="new-width">新幅宽</dd>
+                                <dd class="status">移交</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="update-reason">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="last-width">{{el.source}}</dd>
+                                <dd class="new-width">{{el.source}}</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="cost-check" class="list-box" v-show="currentIndex === 11">
-				<!--<div class="status-box" id="cost-check1">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">完成时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="details">预采任务单</dd>
-							<dd class="operator">核算完成</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">完成</button>
-							</dd>
-						</dl>
-					</div>
-				</div>
-				<div class="status-box" id="cost-check2">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">完成时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="operator">确认移交</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="design-no">{{el.design_no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="cost-check" class="list-box" v-show="currentIndex === 11">
+                    <!--<div class="status-box" id="cost-check1">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">完成时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="details">预采任务单</dd>
+                                <dd class="operator">核算完成</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">完成</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="status-box" id="cost-check2">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">完成时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="operator">确认移交</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{el.design_no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
 
-			<div id="outbuy-send" class="list-box" v-show="currentIndex === 12">
-				<!--<div class="status-box">
-					<div class="list-title">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">款号</dd>
-							<dd class="operator-time">申请时间</dd>
-							<dd class="gender">女/男装</dd>
-							<dd class="series">系列</dd>
-							<dd class="source">生产类型</dd>
-							<dd class="details">预采单</dd>
-							<dd class="operator">移交</dd>
-						</dl>
-					</div>
-					<div class="list-detail table table-hover">
-						<dl>
-							<dt class="list-checkbox">
-								<input type="checkbox" name="" value="">
-							</dt>
-							<dd class="no">{{el.no}}</dd>
-							<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-							<dd class="gender">{{el.d_gender}}</dd>
-							<dd class="series">{{el.series_id}}</dd>
-							<dd class="source">{{el.source}}</dd>
-							<dd class="details">
-								<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							</dd>
-							<dd class="operator">
-								<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
-							</dd>
-						</dl>
-					</div>
-				</div>-->
-			</div>
+                <div id="outbuy-send" class="list-box" v-show="currentIndex === 12">
+                    <!--<div class="status-box">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">款号</dd>
+                                <dd class="operator-time">申请时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="details">预采单</dd>
+                                <dd class="operator">移交</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="no">{{el.no}}</dd>
+                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+                                <dd class="gender">{{el.d_gender}}</dd>
+                                <dd class="series">{{el.series_id}}</dd>
+                                <dd class="source">{{el.source}}</dd>
+                                <dd class="details">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                </dd>
+                                <dd class="operator">
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">移交</button>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
 		</div>
 	</div>
     

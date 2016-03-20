@@ -22,3 +22,29 @@
 #goods-info .operator{
 	width: 25%;
 }
+
+/*定价单*/
+#price-list .list-checkbox{
+	width: 5%;
+}
+#price-list .design-no{
+	width: 15%;
+}
+#price-list .operator-time{
+	width: 15%;
+}
+#price-list .gender{
+	width: 10%;
+}
+#price-list .series{
+	width: 10%;
+}
+#price-list .source{
+	width: 10%;
+}
+#price-list .details{
+	width: 10%;
+}
+#price-list .operator{
+	width: 25%;
+}

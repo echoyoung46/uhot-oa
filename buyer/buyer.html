@@ -12,8 +12,8 @@
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
 					<li role="presentation"  class="active"><a href="#price-order" id="price-table-enter" v-on:click="toggle(0, [25,26], ['price1','price2'])">定价表</a></li>
-					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(1)">下单表</a></li>
-					<li role="presentation"><a href="#order-table1" id="order-table-enter1" v-on:click="toggle(2,[26,26,26],['morder1','morder2','morder3'])">下单表</a></li>
+					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(1, [28], ['order1'])">下单表</a></li>
+					<li role="presentation"><a href="#order-table1" id="order-table-enter1" v-on:click="toggle(2,[26,26,29],['morder1','morder2','morder3'])">下单表</a></li>
 					<li role="presentation"><a href="#wear-in" id="wear-in-enter" v-on:click="toggle(3)">成衣入库</a></li>
 					<li role="presentation"><a href="#wear-send" id="wear-send-enter" v-on:click="toggle(4)">成衣发出</a></li>
 					<li role="presentation"><a href="#outbuy" id="outbuy-enter" v-on:click="toggle(5)">外采</a></li>
@@ -47,7 +47,7 @@
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{ item.design_no }}</dd>
-								<dd class="operator-time">{{ item.cost_trans_time | date("yyyy/MM/dd HH:mm:ss") }}</dd>
+								<dd class="operator-time">{{ item.cost_trans_time }}</dd>
 								<dd class="gender">{{ item.d_gender }}</dd>
 								<dd class="series">{{ item.series_id }}</dd>
 								<dd class="source">{{ item.source }}</dd>
@@ -91,7 +91,7 @@
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
 								<dd class="update-info">变更信息</dd>
-								<dd class="operator">申请审批</dd>
+								<dd class="operator">完成定价</dd>
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" id="price2">
@@ -100,7 +100,7 @@
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{ item.design_no }}</dd>
-								<dd class="operator-time">{{ item.cost_trans_time | date("yyyy/MM/dd HH:mm:ss") }}</dd>
+								<dd class="operator-time">{{ item.cost_trans_time }}</dd>
 								<dd class="gender">{{ item.d_gender }}</dd>
 								<dd class="series">{{ item.series_id }}</dd>
 								<dd class="source">{{ item.source }}</dd>
@@ -108,15 +108,32 @@
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#priceModal2" v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl> 
 						</div>
+                        <div class="modal fade" id="priceModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">完成定价</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成定价吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(27, 'price_confirm_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 
 				<div class="list-box" id="order-table" v-show="currentIndex === 1">
-					<!--<div class="status-box" ms-controller="order">
+					<div class="status-box" ms-controller="order">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -132,25 +149,41 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+							<dl v-for="item in order1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="details">
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.price_finishtypein_time }}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
+								<dd class="updateinfo">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#orderModal" v-on:click="getChosenId( item.design_no )">申请</button>
 								</dd>
 							</dl>
 						</div>
-						</div>
-					</div>-->
+						<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">申请下单</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请下单吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(29, 'order_applycheck_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
 				</div>
 
 				<div class="list-box" id="order-table1" v-show="currentIndex === 2">
@@ -269,7 +302,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary" id="morder3-save-button" v-on:click="updateStatus(27, 'order_confirm_time')">提交</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(30, 'order_confirm_time')">提交</button>
                                     </div>
                                 </div>
                             </div>
