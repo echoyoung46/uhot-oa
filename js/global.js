@@ -47,8 +47,8 @@ function getDressByStatus(_status, _source) {
     }
     
 	$.ajax({
-		// url: './js/dress.json',
-		url: 'include/schedule/get_dress_by_status.php',
+		url: './js/dress.json',
+		// url: 'include/schedule/get_dress_by_status.php',
 		type: 'GET',
 		dataType: 'JSON',
 		async: false,

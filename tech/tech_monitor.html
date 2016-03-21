@@ -3,26 +3,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>技术部</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="tech/css/tech.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./tech/tech.css">
 </head>
 <body>
-	<div id="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div id="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  ms-click="toggle(0)">头版样衣制作</a></li>
-					<li role="presentation"><a href="#viewer" id="viewer-enter"  ms-click="toggle(1)">审版</a></li>
-					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  ms-click="toggle(2)">复版</a></li>
-					<li role="presentation"><a href="#process-sheet" id="process-enter"  ms-click="toggle(3)">工艺单</a></li>
-					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  ms-click="toggle(4)">纸样</a></li>
-					<li role="presentation"><a href="#marker" id="marker-enter"  ms-click="toggle(5)">唛架</a></li>
-					<li role="presentation"><a href="#sample-grade" id="grade-enter"  ms-click="toggle(6)">样衣分数</a></li>
+					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  v-on:click="toggle(0)">头版样衣制作</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter"  v-on:click="toggle(1)">审版</a></li>
+					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2)">复版</a></li>
+					<li role="presentation"><a href="#process-sheet" id="process-enter"  v-on:click="toggle(3)">工艺单</a></li>
+					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  v-on:click="toggle(4, [34], ['sample'])">纸样</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter"  v-on:click="toggle(5)">唛架</a></li>
+					<li role="presentation"><a href="#sample-grade" id="grade-enter"  v-on:click="toggle(6)">样衣分数</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div id="sample" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="sample1" id="sample1">
+				<div id="sample" class="list-box" v-show="currentIndex === 0">
+					<!--<div class="status-box" ms-controller="sample1" id="sample1">
 						<div class="status-title">申请制作</div>
 						<div class="list-title">
 							<dl>
@@ -58,7 +58,7 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<!-- Modal -->
 					<div class="modal fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -77,7 +77,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="sample2" id="sample2">
+					<!--<div class="status-box" ms-controller="sample2" id="sample2">
 						<div class="status-title">完成纸样</div>
 						<div class="list-title">
 							<dl>
@@ -114,7 +114,7 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<!-- Modal -->
 					<div class="modal fade" id="sampleModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -134,7 +134,7 @@
 						</div>
 					</div>
 
-					<div class="status-box" ms-controller="sample3" id="sample3">
+					<!--<div class="status-box" ms-controller="sample3" id="sample3">
 						<div class="status-title">制作完成</div>
 						<div class="list-title">
 							<dl>
@@ -171,7 +171,7 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<!--Modal-->
 					<div class="modal fade" id="sampleModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
@@ -191,8 +191,8 @@
 					  </div>
 					</div>
 				</div>
-				<div id="viewer" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="viewer1" id="viewer1">
+				<div id="viewer" class="list-box" v-show="currentIndex === 1">
+					<!--<div class="status-box" ms-controller="viewer1" id="viewer1">
 						<div class="status-title">审版通过</div>
 						<div class="list-title">
 							<dt class="design-no">设计款号</dt>
@@ -239,7 +239,7 @@
 								<dd class="dub-time">{{el.source}}</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<div class="modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -259,8 +259,8 @@
 					</div>
 				</div>
 
-				<div id="dubviewer" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="dubviewer1" id="dubviewer1">
+				<div id="dubviewer" class="list-box" v-show="currentIndex === 2">
+					<!--<div class="status-box" ms-controller="dubviewer1" id="dubviewer1">
 						<div class="status-title">复版制作</div>
 						<div class="list-title">
 							<dl>
@@ -305,7 +305,7 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<!--Modal-->
 					<div class="modal fade" id="dubviewerModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -342,7 +342,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="dubviewer2" id="dubviewer2">
+					<!--<div class="status-box" ms-controller="dubviewer2" id="dubviewer2">
 						<div class="status-title">完成纸样</div>
 						<div class="list-title">
 							<dl>
@@ -379,7 +379,7 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 					<!--Modal-->
 					<div class="modal fade" id="dubviewerModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -398,7 +398,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="dubviewer3" id="dubviewer3">
+					<!--<div class="status-box" ms-controller="dubviewer3" id="dubviewer3">
 						<div class="status-title">复版完成</div>
 						<div class="list-title">
 							<dl>
@@ -431,10 +431,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="process-sheet" class="list-box" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="dubviewer">
+				<div id="process-sheet" class="list-box" v-show="currentIndex === 3">
+					<!--<div class="status-box" ms-controller="dubviewer">
 						<div class="status-title">工艺单</div>
 						<div class="list-title">
 							<dl>
@@ -507,10 +507,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="paper-sample" class="list-box" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="sample1">
+				<div id="paper-sample" class="list-box" v-show="currentIndex === 4">
+					<div class="status-box">
 						<div class="status-title">纸样</div>
 						<div class="list-title">
 							<dl>
@@ -526,26 +526,44 @@
 								<dd class="operator">完成移交</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.pattern_apply_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">移交</button>
+                                    <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal"  v-on:click="getChosenId( item.design_no )">移交</button>
 								</dd>
 							</dl>
 						</div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">移交纸样</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成移交吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(35, 'pattern_trans_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
-					<div class="status-box" ms-controller="sample2">
+					<!--<div class="status-box" ms-controller="sample2">
 						<div class="status-title">修改唛架</div>
 						<div class="list-title">
 							<dl>
@@ -583,10 +601,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="marker" class="list-box" ms-visible="currentIndex === 5">
-					<div class="status-box" ms-controller="dubviewer">
+				<div id="marker" class="list-box" v-show="currentIndex === 5">
+					<!--<div class="status-box" ms-controller="dubviewer">
 						<div class="status-title">唛架</div>
 						<div class="list-title">
 							<dl>
@@ -659,25 +677,24 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="sample-grade" class="list-box" ms-visible="currentIndex === 6">
-					<div class="status-box" ms-controller="dubviewer">
+				<div id="sample-grade" class="list-box" v-show="currentIndex === 6">
+					<!--<div class="status-box" ms-controller="dubviewer">
 						<div class="list-title">
 							
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
 							
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	
-<script src="js/avalon.js"></script>
-<script src="js/global.js"></script>
-<script src="tech/js/tech.js"></script> 
+<script src="./js/global.js"></script>
+<script src="./tech/techdle.js"></script> 
 </body>
 </html>

@@ -1,6 +1,6 @@
 $(function(){
 	$('#view-process').on('click', function(){
-		$ajaxUrl("purchase/purchase.html")
+		$ajaxUrl("producer/producer.html")
 	}).click();
 　　
 	

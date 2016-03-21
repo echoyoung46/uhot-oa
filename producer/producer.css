@@ -51,6 +51,44 @@
 	width: 10%;
 }
 
+/*工艺单*/
+#process-sheet .list-checkbox{
+    width: 5%;
+}
+#process-sheet .design-no{
+    width: 10%;
+}
+#process-sheet .operator-time{
+    width: 10%;
+}
+#process-sheet .gender{
+    width: 5%;
+}
+#process-sheet .series{
+    width: 5%;
+}
+#process-sheet .source{
+    width: 5%;
+}
+#process-sheet .details{
+    width: 10%;
+}
+#process-sheet .update-info{
+    width: 10%;
+}
+#process-sheet .apply-maker{
+    width: 10%;
+}
+#process-sheet .update-craft{
+    width: 10%;
+}
+#process-sheet .apply-sample{
+    width: 10%;
+}
+#process-sheet .apply-update-maker{
+    width: 10%;
+}
+
 /*下单表*/
 #order-table .list-checkbox{
 	width: 5%;
@@ -75,4 +113,55 @@
 }
 #order-table .operator{
 	width: 20%;
+}
+
+/*产前版发料*/
+#prenatal-issue1 .list-checkbox{
+    width: 5%;
+}
+#prenatal-issue1 .design-no{
+    width: 15%;
+}
+#prenatal-issue1 .operator-time{
+    width: 15%;
+}
+#prenatal-issue1 .gender{
+    width: 10%;
+}
+#prenatal-issue1 .series{
+    width: 10%;
+}
+#prenatal-issue1 .source{
+    width: 10%;
+}
+#prenatal-issue1 .operator{
+    width: 35%;
+}
+
+#prenatal-issue2 .list-checkbox{
+    width: 5%;
+}
+#prenatal-issue2 .design-no{
+    width: 10%;
+}
+#prenatal-issue2 .operator-time{
+    width: 15%;
+}
+#prenatal-issue2 .gender{
+    width: 10%;
+}
+#prenatal-issue2 .series{
+    width: 10%;
+}
+#prenatal-issue2 .source{
+    width: 10%;
+}
+#prenatal-issue2 .fabric-status{
+    width: 15%;
+}
+#prenatal-issue2 .accessory-status{
+    width: 15%;
+}
+#prenatal-issue2 .operator{
+    width: 10%;
 }

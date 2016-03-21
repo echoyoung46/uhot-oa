@@ -1,0 +1,25 @@
+/*纸样*/
+#paper-sample .list-checkbox{
+    width: 5%;
+}
+#paper-sample .design-no{
+    width: 10%;
+}
+#paper-sample .operator-time{
+    width: 15%;
+}
+#paper-sample .gender{
+    width: 10%;
+}
+#paper-sample .series{
+    width: 10%;
+}
+#paper-sample .source{
+    width: 10%;
+}
+#paper-sample .details{
+    width: 15%;
+}
+#paper-sample .operator{
+    width: 15%;
+}

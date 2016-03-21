@@ -48,23 +48,16 @@
 
 	var chosenId = null,
 		selectNoArr = [],
-	    producerModel = null;
+	    techModel = null;
 
 	$(function() {
-		producerModel = new Vue({
+		techModel = new Vue({
 	        el: "#menu",
 	        data: {
 	            currentIndex: 0,
 	            
-	            //下单表 
-	            order: [],
-	            
-	            //工艺单 
-	            craft: [],
-	            
-	            //产前版发料 
-	            prenatal1: [],
-	            prenatal2: [],
+	            //纸样 
+	            sample: [],
 	            
 	        },
 	        methods: {
@@ -94,7 +87,7 @@
 	            		var data = getDressByStatus(_statusArr[i]);
 	                    console.log(val);
 	                    console.log(data);
-	                    producerModel[val] = data;
+	                    techModel[val] = data;
 	            	})
 	            }
 	        }
@@ -140,428 +133,247 @@
 		});
 	}
 
+	function initAction(){
+		/**************头版样衣制作*************/
+		$('#sample-enter').on('click', function(event) {
+			var reqData1 = getDressByStatus(4);
+			var sample1 = avalon.define({
+				$id: "sample1",
+				dress: reqData1
+			});
+
+			var reqData2 = getDressByStatus(6);
+			var sample2 = avalon.define({
+				$id: "sample2",
+				dress: reqData2
+			});
+
+			var reqData3 = getDressByStatus(8);
+			var sample3 = avalon.define({
+				$id: "sample3",
+				dress: reqData3
+			});
+		}).click();
+
+		/*****************审版*****************/
+		$('#viewer-enter').on('click', function(){
+			//审版通过
+			var reqData1 = getDressByStatus(10);
+			var viewer1 = avalon.define({
+				$id: "viewer1",
+				dress: reqData1
+			});
+
+			//申请复版
+			var reqData2 = getDressByStatus(14);
+			var viewer2 = avalon.define({
+				$id: "viewer2",
+				dress: reqData2
+			});
+		}).click();
+
+		/*************复版**************/
+		$('#dubviewer-enter').on('click', function(){
+			//复版制作
+			var reqData1 = getDressByStatus(15);
+			var dubviewer1 = avalon.define({
+				$id: "dubviewer1",
+				dress: reqData1
+			});
+
+			//完成纸样
+			var reqData2 = getDressByStatus(17);
+			var dubviewer2 = avalon.define({
+				$id: "dubviewer2",
+				dress: reqData2
+			});
+
+			//复版完成
+			var reqData3 = getDressByStatus(18);
+			var dubviewer3 = avalon.define({
+				$id: "dubviewer3",
+				dress: reqData3
+			});
+		})
+	}
+
 	function initSave() {
-		$('#cargono-save-button').on('click', function () {
-			var selectArr = getSelectArr("apply");
-			var cargoNo = $('.cargo-no').val();
-			submitStyleNo(selectArr, cargoNo);
-			updateDressStatus(20, selectArr, "finish_styleno_time");
+		//头版样衣制作
+		$('#sample1-save-button').on('click', function(){
+			selectNoArr = [];
+			var carversionName = $('.sampler-select').val();
+			$('#sample1 .list-checkbox input:checked').each(function(i, el){
+				var $el = $(el);
+				var dressId = $el.closest('dl').find('.design-no').html();
+				selectNoArr.push(parseInt(dressId));
+			});
+			if(selectNoArr.length == 0) {
+				selectNoArr.push(parseInt(chosenId));
+			}
+			adoptSampler(selectNoArr, samplerName);
+			updateDressStatus(5, selectNoArr, "allotpattern_time");
+		});
+		$('#carversion-save-button').on('click', function(){
+			selectNoArr = [];
+			var carversionName = $('.carversion-select').val();
+			$('#sample2 .list-checkbox input:checked').each(function(i, el){
+				var $el = $(el);
+				var dressId = $el.closest('dl').find('.design-no').html();
+				selectNoArr.push(parseInt(dressId));
+			});
+			if(selectNoArr.length == 0) {
+				selectNoArr.push(parseInt(chosenId));
+			}
+			adoptCarversion(selectNoArr, carversionName);
+			updateDressStatus(8, selectNoArr, "allotcarversion_time");
+		});
+		$('#score-save-button').on('click', function(){
+			selectNoArr = [];
+			var carversionScore = $('.carversion-score').val();
+			$('#sample3 .list-checkbox input:checked').each(function(i, el){
+				var $el = $(el);
+				var dressId = $el.closest('dl').find('.design-no').html();
+				selectNoArr.push(parseInt(dressId));
+			});
+			if(selectNoArr.length == 0) {
+				selectNoArr.push(parseInt(chosenId));
+			}
+			setCarversionScore(selectNoArr, carversionScore);
+			updateDressStatus(9, selectNoArr, "scoring_time");
 		});
 
-		$('#repurchase-save-button').on('click', function () {
-			var selectArr = getSelectArr("repurchase");
-			updateDressStatus(22, selectArr, "typein_materialsheet_time");
+		//审版-同意复版
+		$('#dubviewer-pass-button').on('click', function(){
+			var selectArr = getSelectArr("sample3");
+			var carversionScore = $('.carversion-score').val();
+			setCarversionScore(selectArr, carversionScore);
+			updateDressStatus(15, selectArr, "dub_agreeversion_time");
+		});
+
+		//复版-复版制作-分配纸样师
+		$('#dubsampler-button').on('click', function(){
+			var selectArr = getSelectArr("sample3");
+			var carversionScore = $('.dub-sampler-select').val();
+			setCarversionScore(selectArr, carversionScore);
+			updateDressStatus(16, selectArr, "dub_allotpattern_time");
+		});
+		//复版-复版制作-分配车版师
+		$('#dubcarversion-button1').on('click', function(){
+			var selectArr = getSelectArr("sample3");
+			var carversionScore = $('.dub-carversion-select').val();
+			setCarversionScore(selectArr, carversionScore);
+			updateDressStatus(18, selectArr, "dub_allotcarversion_time");
+		});
+		//复版-完成纸样-分配车版师
+		$('#dubcarversion-button2').on('click', function(){
+			var selectArr = getSelectArr("sample3");
+			var carversionScore = $('.dub-carversion-select').val();
+			setCarversionScore(selectArr, carversionScore);
+			updateDressStatus(18, selectArr, "dub_allotcarversion_time");
+		});
+		//复版-复版完成-车版计分
+		$('#dubcarversion-button2').on('click', function(){
+			var selectArr = getSelectArr("sample3");
+			var carversionScore = $('.dub-carversion-select').val();
+			setCarversionScore(selectArr, carversionScore);
+			updateDressStatus(19, selectArr, "dub_scoring_time");
 		});
 	}
 
+		//审版
+		//复版
+		//工艺单
+		//纸样
+		//唛架
+		//样衣分数
+
+
+	/*$(function() {
+		initList();
+		initAction();
+	});
+
 	function initAction() {
-		/*******************申请款号入口*******************/
-		$("#apply-no-enter").on('click', function(){
-			var reqData = getDressByStatus(13);
-			var apply = avalon.define({
-				$id: "apply",
-				dress: reqData
-			})
-		}).click();
-
-		/********************预采任务单入口**********************/
-		$("#repurchase-list-enter").bind('click', function(){
-			var reqData = getDressByStatus(21);
-			var apply = avalon.define({
-				$id: "repurchase",
-				dress: reqData
-			})
-
-		}).click();
-		//录入完成
-		$("#repurchase-list .table-list").on('click', '.list-button', function() {
+		//头版样衣制作-申请制作-分配
+		$("#applyManu .table-list").on('click', '.list-button', function() {
 			var $this = $(this);
 			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
 			if($.inArray(dress_id, selectNoArr) == -1) {
 				selectNoArr.push(dress_id);
 			}
+			var sampler_name = $this.siblings('input').val();
 			$.confirm({
-				"words": "确定系统录入完成吗？",
+				"words": "确定分配纸样师吗？",
 				"yesCallback": function(){
-					top.submitStyleNo(selectNoArr, styleNo);
-					top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
+					top.adoptSampler(selectNoArr, sampler_name);
+					top.updateDressStatus(7, selectNoArr, "finishallot_time");
 				}
-			});
+			});	
 		});
-		/********************外采预采任务单入口**********************/
-		$("#craftmaterial-list-enter").bind('click', function(){
+
+		//完成纸样-分配车版师
+		$("#sampleDone .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			var carversion_name = $this.siblings('input').val();
+			$.confirm({
+				"words": "确定分配车版师吗？",
+				"yesCallback": function(){
+					top.adoptCarversion(selectNoArr, carversion_name);
+					top.updateDressStatus(8, selectNoArr, "allotcarversion_time");
+				}
+			});	
+		});
+
+		//制作完成-车版计分 
+		$("#ManuDone .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			var carversion_score = $this.siblings('input').val();
+			$.confirm({
+				"words": "确定上传分数吗？",
+				"yesCallback": function(){
+					top.setCarversionScore(selectNoArr, carversion_score);
+					top.updateDressStatus(9, selectNoArr, "scoring_time");
+				}
+			});	
+		});*/
+
+		/*****************审版入口*****************/
+		/*$("#viewer-enter").bind('click', function(event) {
+			//审版通过
 			$.ajax({
 				url: '../include/schedule/get_dress_by_status.php',
 				type: 'GET',
 				dataType: 'JSON',
-				data: {status: 21,source: 2}
+				data: {status: 10}
 			})
 			.done(function(data) {
 				if(data.ret==0){
 					var dressList = data.list;
+					console.log(dressList);
 					var domStr = "";
 					listNoArr = [];
 					$.each(dressList, function(i, val) {
 						listNoArr.push(val.design_no);
 						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
 								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.typein_product_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="15%">'
-								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-								+	'</td>'
-								+	'<td width="15%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="15%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
+								+	'<td width="20%">' + getFormatTime(val.apply_transmaterial_time) + '</td>'
+								+	'<td width="15%">' + getGender(val.gender) + '</td>'
+								+	'<td width="15%">' + getSeries(val.series_id) + '</td>'
+								+   '<td width="35%">审版通过</td>'
 								+'</tr>';
 					});
-					$("#craftmaterial-list .table-list").html(domStr);
+					$("#viewer #passVersion .table-list").html(domStr);
 				}else{
 					console.log("没有款式申请调料");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-
-		});
-		//录入完成
-		$("#craftmaterial-list .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定系统录入完成吗？",
-				"yesCallback": function(){
-					top.updateDressStatus(22, selectNoArr, "typein_materialsheet_time");
-				}
-			});
-		});
-		/********************工艺单入口****************/
-		$("#process-sheet-enter").bind('click', function(){
-			var processStr = "";
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 33}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						processStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="10%">' + val.design_no + '</td>'
-								+	'<td width="10%">' + getFormatTime(val.inrecord_finish_time) + '</td>'
-								+	'<td width="5%">' + getGender(val.gender) + '</td>'
-								+	'<td width="5%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="10%">'
-								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-								+	'</td>'
-								+	'<td width="15%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="10%"><span class="maker-button" id="makerbutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="process-button" id="processbutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="list-button sample-button" id="samplebutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="editmaker-button" id="editmakerbutton_' + val.design_no + '">申请</span></td>'
-								+'</tr>';
-					});
-					$("#process-sheet .table-list").html(processStr);
-				}else{
-					console.log("没有款式申请调料");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-			//申请唛架
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 38}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					listNoArr = [];
-					// var domStr = "";
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						processStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="10%">' + val.design_no + '</td>'
-								+	'<td width="10%">' + getFormatTime(val.preedition_allsend_time) + '</td>'
-								+	'<td width="5%">' + getGender(val.gender) + '</td>'
-								+	'<td width="5%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="10%">'
-								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-								+	'</td>'
-								+	'<td width="15%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="10%"><span class="list-button maker-button" id="makerbutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="process-button" id="processbutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="sample-button" id="samplebutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="editmaker-button" id="editmakerbutton_' + val.design_no + '">申请</span></td>'
-								+'</tr>';
-					});
-					$("#process-sheet .table-list").html(processStr);
-				}else{
-					console.log("没有款式申请调料");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-			//申请修改唛架
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 41}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					listNoArr = [];
-					// var domStr = "";
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						processStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="10%">' + val.design_no + '</td>'
-								+	'<td width="10%">' + getFormatTime(val.preedition_allsend_time) + '</td>'
-								+	'<td width="5%">' + getGender(val.gender) + '</td>'
-								+	'<td width="5%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="10%">'
-								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-								+	'</td>'
-								+	'<td width="15%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="10%"><span class="maker-button" id="makerbutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="process-button" id="processbutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="sample-button" id="samplebutton_' + val.design_no + '">申请</span></td>'
-								+	'<td width="10%"><span class="list-button editmaker-button" id="editmakerbutton_' + val.design_no + '">申请</span></td>'
-								+'</tr>';
-					});
-					$("#process-sheet .table-list").html(processStr);
-				}else{
-					console.log("没有款式申请调料");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-		});
-		//申请纸样
-		$("#process-sheet .table-list").on('click', '.list-button.sample-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定申请纸样吗？",
-				"yesCallback": function(){
-					top.submitStyleNo(selectNoArr, styleNo);
-					top.updateDressStatus(34, selectNoArr, "pattern_apply_time");
-				}
-			});
-		});
-		//申请唛架
-		$("#process-sheet .table-list").on('click', '.list-button.maker-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定申请唛架吗？",
-				"yesCallback": function(){
-					top.updateDressStatus(39, selectNoArr, "marker_apply_time");
-				}
-			});
-		});
-		//申请修改唛架
-		$("#process-sheet .table-list").on('click', '.list-button.editmaker-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定申请修改唛架吗？",
-				"yesCallback": function(){
-					top.updateDressStatus(50, selectNoArr, "marker_applyadjust_time");
-				}
-			});
-		});
-		/******************下单表入口******************/
-		$("#order-table-enter").bind('click',function(){
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 30}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					var domStr = "";
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.typein_product_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%" class="source-id" id="source_' + val.source + '">' + getSource(val.source) + '</td>'
-								+	'<td width="10%">下单完成</td>'
-								+	'<td width="25%"><input type="text" class="styleno-input" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="10%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
-								+'</tr>';
-					});
-					$("#order-table .table-list").html(domStr);
-				}else{
-					console.log("没有款式申请调料");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-		});
-		//录入完成
-		$("#order-table .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定录入完成吗？",
-				"yesCallback": function(){
-					top.submitStyleNo(selectNoArr, styleNo);
-					top.updateDressStatus(31, selectNoArr, "order_typein_time");
-				}
-			});
-		});
-		/*********************产前版发料入口***********************/
-		$("#prenatal-issue-enter").bind('click',function(){
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 35}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					var domStr = "";
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.pattern_trans_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="15%">移交完成</td>'
-								+	'<td width="40%"><input list="send-type" class="send-type" value="聚一佳"><span class="list-button" id="button_' + val.design_no + '">发出</span></td>'
-								+'</tr>';
-					});
-					$("#prenatal-issue #send-material .table-list").html(domStr);
-				}else{
-					console.log("暂无数据");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-		});
-		//产前版通知发料
-		$("#prenatal-issue .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var sendType = $this.closest('tr').find('.send-type').val();
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定通知发料吗？",
-				"yesCallback": function(){
-					top.submitSendType(selectNoArr, sendType);
-					top.updateDressStatus(36, selectNoArr, "noticeexstore_time");
-				}
-			});
-		});
-		/*************************大货发料入口**************************/
-		$("#cargo-issue-enter").bind('click',function(){
-			var cargoDom = "";
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 41}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						cargoDom += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.pattern_trans_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%">唛架完成</td>'
-								+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="25%"><input list="send-type" class="send-type" value="聚一佳"><span class="list-button" id="button_' + val.design_no + '">发出</span></td>'
-								+'</tr>';
-					});
-					$("#cargo-issue  #notice-issue .table-list").html(cargoDom);
-				}else{
-					console.log("暂无数据");
-				}
+				}	
 			})
 			.fail(function() {
 				console.log("error");
@@ -570,230 +382,17 @@
 				console.log("complete");
 			});
 
+			//申请复版
 			$.ajax({
 				url: '../include/schedule/get_dress_by_status.php',
 				type: 'GET',
 				dataType: 'JSON',
-				data: {status: 52}
+				data: {status: 14}
 			})
 			.done(function(data) {
 				if(data.ret==0){
 					var dressList = data.list;
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						cargoDom += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.pattern_trans_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%">唛架完成</td>'
-								+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
-								+	'<td width="25%"><input list="send-type" class="send-type" value="聚一佳"><span class="list-button" id="button_' + val.design_no + '">发出</span></td>'
-								+'</tr>';
-					});
-					$("#cargo-issue  #notice-issue .table-list").html(cargoDom);
-				}else{
-					console.log("暂无数据");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-		});
-		//大货通知发料
-		$("#cargo-issue #notice-issue .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var sendType = $this.closest('tr').find('.send-type').val();
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定通知发料吗？",
-				"yesCallback": function(){
-					top.submitSendType(selectNoArr, sendType);
-					top.updateDressStatus(42, selectNoArr, "product_noticesend_time");
-				}
-			});
-		});
-		/********************生产中入口**********************/
-		$("#producing-enter").bind('click',function(){
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 44}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					var domStr = "";
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.production_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%">大货整款发出</td>'
-								+	'<td width="45%"><span class="list-button" id="button_' + val.design_no + '">入仓</span></td>'
-								+'</tr>';
-					});
-					$("#producing .table-list").html(domStr);
-				}else{
-					console.log("暂无数据");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-		});
-		//大货通知发料
-		$("#producing .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var sendType = $this.closest('tr').find('.send-type').val();
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定入仓检验吗？",
-				"yesCallback": function(){
-					top.submitSendType(selectNoArr, sendType);
-					top.updateDressStatus(45, selectNoArr, "instorecheck_time");
-				}
-			});
-		});
-		/******************成本核算入口*********************/
-		$("#cost-check-enter").bind('click', function(){
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 22, source: 2}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					var domStr = "";
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.typein_materialsheet_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="10%">' + getSource(val.source) + '</td>'
-								+	'<td width="15%">'
-								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-								+	'</td>'
-								+	'<td width="20%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
-								+'</tr>';
-					});
-					$("#cost-check #cost-checking .table-list").html(domStr);
-				}else{
-					console.log("暂无数据");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 53, source: 2}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					var domStr = "";
-					listNoArr = [];
-					$.each(dressList, function(i, val) {
-						listNoArr.push(val.design_no);
-						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box" id="' + val.design_no + '"></span>'
-								+	'</td>'
-								+	'<td width="15%">' + val.design_no + '</td>'
-								+	'<td width="15%">' + getFormatTime(val.typein_materialsheet_time) + '</td>'
-								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="10%">' + getSource(val.source) + '</td>'
-								+	'<td width="35%"><span class="list-button" id="button_' + val.design_no + '">移交</span></td>'
-								+'</tr>';
-					});
-					$("#cost-check #cost-transfer .table-list").html(domStr);
-				}else{
-					console.log("暂无数据");
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});
-		});
-		//成本核算完成
-		$("#cost-check #cost-checking .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定审核完成吗？",
-				"yesCallback": function(){
-					top.updateDressStatus(53, selectNoArr, "outcost_check_time");
-				}
-			});
-		});
-		//成本移交
-		$("#cost-check #cost-transfer .table-list").on('click', '.list-button', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			if($.inArray(dress_id, selectNoArr) == -1) {
-				selectNoArr.push(dress_id);
-			}
-			$.confirm({
-				"words": "确定移交吗？",
-				"yesCallback": function(){
-					top.updateDressStatus(54, selectNoArr, "cost_check_time");
-				}
-			});
-		});
-		/********************外采发料入口**********************/
-		$("#outbuy-send-enter").bind('click',function(){
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 31,source: 2}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
+					console.log(dressList);
 					var domStr = "";
 					listNoArr = [];
 					$.each(dressList, function(i, val) {
@@ -805,15 +404,19 @@
 								+	'<td width="15%">' + val.design_no + '</td>'
 								+	'<td width="15%">' + getFormatTime(val.apply_transmaterial_time) + '</td>'
 								+	'<td width="10%">' + getGender(val.gender) + '</td>'
-								+	'<td width="15%">' + getSource(val.source) + '</td>'
-								+	'<td width="20%">生产计划单录入完成</td>'
-								+	'<td width="20%"><span class="list-button" id="button_' + val.design_no + '">发料</span></td>'
+								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+								+   '<td width="20%" class="dubversion_advice">' + val.dubversion_advice + '</td>'
+								+	'<td width="15%">'
+								+	'<span class="dubsample-button list-button" id="samplebutton_' + val.design_no + '">纸样复版</span>'
+								+	'<span class="dubcarversion-button list-button" id="carversionbutton_' + val.design_no + '">车版复版</span>'
+								+	'</td>'
+								+   '<td width="10%">' + val.dubversion_count + '</td>'
 								+'</tr>';
 					});
-					$("#outbuy-send .table-list").html(domStr);
+					$("#viewer #applyDubVersion .table-list").html(domStr);
 				}else{
-					console.log("暂无数据");
-				}
+					console.log("没有款式申请调料");
+				}	
 			})
 			.fail(function() {
 				console.log("error");
@@ -822,23 +425,510 @@
 				console.log("complete");
 			});
 		});
-		//大货通知发料
-		$("#outbuy-send .table-list").on('click', '.list-button', function() {
+		$("#viewer #applyDubVersion .table-list").on('click', '.dubsample-button', function() {
 			var $this = $(this);
 			var dress_id = parseInt($this.attr('id').split('_')[1]);
-			var sendType = $this.closest('tr').find('.send-type').val();
 			if($.inArray(dress_id, selectNoArr) == -1) {
 				selectNoArr.push(dress_id);
 			}
 			$.confirm({
-				"words": "确定发料吗？",
+				"words": "确定同意申请复版纸样吗？",
 				"yesCallback": function(){
-					top.submitSendType(selectNoArr, sendType);
-					top.updateDressStatus(44, selectNoArr, "production_time");
+					top.updateDressStatus(15, selectNoArr, "dub_agreeversion_time");
 				}
+			});	
+		}).on('click', '.dubcarversion-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			$.confirm({
+				"words": "确定同意申请复版车版吗？",
+				"yesCallback": function(){
+					top.updateDressStatus(17, selectNoArr, "dub_agreeversion_time");
+				}
+			});	
+		});*/
+		/*****************复版入口*****************/
+		/*$("#dubviewer-enter").bind('click', function(event) {
+			//复版制作
+			$.ajax({
+				url: '../include/schedule/get_dress_by_status.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data: {status: 15}
+			})
+			.done(function(data) {
+				if(data.ret==0){
+					var dressList = data.list;
+					console.log(dressList);
+					var domStr = "";
+					listNoArr = [];
+					$.each(dressList, function(i, val) {
+						listNoArr.push(val.design_no);
+						domStr += '<tr>'
+								+	'<td width="5%">'
+								+		'<span class="check-box" id="' + val.design_no + '"></span>'
+								+	'</td>'
+								+	'<td width="15%">' + val.design_no + '</td>'
+								+	'<td width="15%">' + getFormatTime(val.dub_agreeversion_time) + '</td>'
+								+	'<td width="15%">' + getGender(val.gender) + '</td>'
+								+	'<td width="15%">' + getSeries(val.series_id) + '</td>'
+								+   '<td width="35%">'
+								+		'<input list="sampler" value="纸样师——汤胜辉">'
+								+		'<span class="list-button" id="button_' + val.design_no + '">分配</spam>'
+								+	'</td>'
+								/*+   '<td width="25%">'
+								+		'<input list="car-version" value="车版师——汤胜辉">'
+								+		'<span class="list-button" id="button_' + val.design_no + '">分配</spam>'
+								+	'</td>'
+								+'</tr>';
+					});
+					$("#dubviewer #dubversioning .table-list").html(domStr);
+				}else{
+					console.log("没有款式申请调料");
+				}	
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			//纸样完成
+			$.ajax({
+				url: '../include/schedule/get_dress_by_status.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data: {status: 17}
+			})
+			.done(function(data) {
+				if(data.ret==0){
+					var dressList = data.list;
+					console.log(dressList);
+					var domStr = "";
+					listNoArr = [];
+					$.each(dressList, function(i, val) {
+						listNoArr.push(val.design_no);
+						domStr += '<tr>'
+								+	'<td width="5%">'
+								+		'<span class="check-box" id="' + val.design_no + '"></span>'
+								+	'</td>'
+								+	'<td width="15%">' + val.design_no + '</td>'
+								+	'<td width="15%">' + getFormatTime(val.dub_agreeversion_time) + '</td>'
+								+	'<td width="15%">' + getGender(val.gender) + '</td>'
+								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+								+   '<td width="20%">' + val.sampler_name + '</td>'
+								+   '<td width="20%">'
+								+		'<input list="car-version" value="车版师——汤胜辉">'
+								+		'<span class="list-button" id="button_' + val.design_no + '">分配</spam>'
+								+	'</td>'
+								+'</tr>';
+					});
+					$("#dubviewer #dubfinishsample .table-list").html(domStr);
+				}else{
+					console.log("没有款式申请调料");
+				}	
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			//复版完成
+			$.ajax({
+				url: '../include/schedule/get_dress_by_status.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data: {status: 18}
+			})
+			.done(function(data) {
+				if(data.ret==0){
+					var dressList = data.list;
+					console.log(dressList);
+					var domStr = "";
+					listNoArr = [];
+					$.each(dressList, function(i, val) {
+						listNoArr.push(val.design_no);
+						domStr += '<tr>'
+								+	'<td width="5%">'
+								+		'<span class="check-box" id="' + val.design_no + '"></span>'
+								+	'</td>'
+								+	'<td width="15%">' + val.design_no + '</td>'
+								+	'<td width="15%">' + getFormatTime(val.dub_agreeversion_time) + '</td>'
+								+	'<td width="15%">' + getGender(val.gender) + '</td>'
+								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+								+   '<td width="20%">' + val.carversion_name + '</td>'
+								+	'<td width="25%">'
+								+		'<input id="dub_carversion_score" value="" placeholder="请输入分数" >'
+								+		'<span class="list-button" id="button_' + val.design_no + '">计分</spam>'
+								+	'</td>'
+								+'</tr>';
+					});
+					$("#dubviewer #dubfinish .table-list").html(domStr);
+				}else{
+					console.log("没有款式申请调料");
+				}	
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
 			});
 		});
+
+		$("#dubviewer #dubversioning .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			$.confirm({
+				"words": "确定分配纸样师吗？",
+				"yesCallback": function(){
+					top.updateDressStatus(16, selectNoArr, "dub_allotpattern_time");
+				}
+			});	
+		});
+
+		$("#dubviewer #dubfinishsample .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			$.confirm({
+				"words": "确定分配车版师吗？",
+				"yesCallback": function(){
+					top.updateDressStatus(18, selectNoArr, "dub_allotcarversion_time");
+				}
+			});	
+		})
+
+		//制作完成-车版计分 
+		$("#dubviewer #dubfinish .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			var carversion_score = $this.siblings('input').val();
+			$.confirm({
+				"words": "确定上传分数吗？",
+				"yesCallback": function(){
+					top.setCarversionScore(selectNoArr, carversion_score);
+					top.updateDressStatus(19, selectNoArr, "dub_scoring_time");
+				}
+			});	
+		});*/
+		/*********************纸样入口*********************/
+		/*$("#paper-sample-enter").bind('click', function(event) {
+			$.ajax({
+				url: '../include/schedule/get_dress_by_status.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data: {status: 34}
+			})
+			.done(function(data) {
+				if(data.ret==0){
+					var dressList = data.list;
+					console.log(dressList);
+					var domStr = "";
+					listNoArr = [];
+					$.each(dressList, function(i, val) {
+						listNoArr.push(val.design_no);
+						domStr += '<tr>'
+								+	'<td width="5%">'
+								+		'<span class="check-box" id="' + val.design_no + '"></span>'
+								+	'</td>'
+								+	'<td width="15%">' + val.design_no + '</td>'
+								+	'<td width="15%">' + getFormatTime(val.pattern_apply_time) + '</td>'
+								+	'<td width="10%">' + getGender(val.gender) + '</td>'
+								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+								+	'<td width="10%">'
+								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
+								+	'</td>'
+								+	'<td width="15%">'
+								+		'<span class="list-button" id="button_' + val.design_no + '">移交</spam>'
+								+	'</td>'
+								+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
+								+'</tr>';
+					});
+					$("#paper-sample .table-list").html(domStr);
+				}else{
+					console.log("没有款式申请调料");
+				}	
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+		//完成移交 
+		$("#paper-sample .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			var carversion_score = $this.siblings('input').val();
+			$.confirm({
+				"words": "确定完成移交吗？",
+				"yesCallback": function(){
+					top.setCarversionScore(selectNoArr, carversion_score);
+					top.updateDressStatus(35, selectNoArr, "pattern_trans_time");
+				}
+			});	
+		});*/
+
+		/******************唛架入口********************/
+		/*$("#marker-enter").bind('click', function(event) {
+			$.ajax({
+				url: '../include/schedule/get_dress_by_status.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data: {status: 40}
+			})
+			.done(function(data) {
+				if(data.ret==0){
+					var dressList = data.list;
+					console.log(dressList);
+					var domStr = "";
+					listNoArr = [];
+					$.each(dressList, function(i, val) {
+						listNoArr.push(val.design_no);
+						domStr += '<tr>'
+								+	'<td width="5%">'
+								+		'<span class="check-box" id="' + val.design_no + '"></span>'
+								+	'</td>'
+								+	'<td width="15%">' + val.design_no + '</td>'
+								+	'<td width="15%">' + getFormatTime(val.marker_applycheck_time) + '</td>'
+								+	'<td width="10%">' + getGender(val.gender) + '</td>'
+								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+								+	'<td width="15%">'
+								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
+								+	'</td>'
+								+	'<td width="15%">'
+								+		'<span class="list-button" id="button_' + val.design_no + '">完成</spam>'
+								+	'</td>'
+								+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
+								+'</tr>';
+					});
+					$("#marker #sheet .table-list").html(domStr);
+				}else{
+					console.log("没有款式申请调料");
+				}	
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			//修改唛架
+			$.ajax({
+				url: '../include/schedule/get_dress_by_status.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data: {status: 51}
+			})
+			.done(function(data) {
+				if(data.ret==0){
+					var dressList = data.list;
+					console.log(dressList);
+					var domStr = "";
+					listNoArr = [];
+					$.each(dressList, function(i, val) {
+						listNoArr.push(val.design_no);
+						domStr += '<tr>'
+								+	'<td width="5%">'
+								+		'<span class="check-box" id="' + val.design_no + '"></span>'
+								+	'</td>'
+								+	'<td width="15%">' + val.design_no + '</td>'
+								+	'<td width="15%">' + getFormatTime(val.marker_applycheckadjust_time) + '</td>'
+								+	'<td width="10%">' + getGender(val.gender) + '</td>'
+								+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+								+	'<td width="15%">' + val.adjustmaker_reason + '</td>'
+								+	'<td width="15%">'
+								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
+								+	'</td>'
+								+	'<td width="20%">'
+								+		'<span class="list-button" id="button_' + val.design_no + '">完成</spam>'
+								+	'</td>'
+								+'</tr>';
+					});
+					$("#marker #editSheet .table-list").html(domStr);
+				}else{
+					console.log("没有款式申请调料");
+				}	
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+		//完成唛架
+		$("#marker #sheet .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			var carversion_score = $this.siblings('input').val();
+			$.confirm({
+				"words": "确定完成唛架吗？",
+				"yesCallback": function(){
+					top.updateDressStatus(41, selectNoArr, "marker_confirm_time");
+				}
+			});	
+		});
+		//完成修改唛架
+		$("#marker #editSheet .table-list").on('click', '.list-button', function() {
+			var $this = $(this);
+			var dress_id = parseInt($this.attr('id').split('_')[1]);
+			if($.inArray(dress_id, selectNoArr) == -1) {
+				selectNoArr.push(dress_id);
+			}
+			var carversion_score = $this.siblings('input').val();
+			$.confirm({
+				"words": "确定完成修改唛架吗？",
+				"yesCallback": function(){
+					top.updateDressStatus(52, selectNoArr, "marker_finishadjust_time");
+				}
+			});	
+		});
 	}
+
+	function initList() {
+		$.ajax({
+			url: '../include/schedule/get_dress_by_status.php',
+			type: 'GET',
+			dataType: 'JSON',
+			data: {status: 4}
+		})
+		.done(function(data) {
+			if(data.ret==0){
+				var dressList = data.list;
+				console.log(dressList);
+				var domStr = "";
+				listNoArr = [];
+				$.each(dressList, function(i, val) {
+					listNoArr.push(val.design_no);
+					domStr += '<tr>'
+							+	'<td width="5%">'
+							+		'<span class="check-box" id="' + val.design_no + '"></span>'
+							+	'</td>'
+							+	'<td width="15%">' + val.design_no + '</td>'
+							+	'<td width="20%">' + getFormatTime(val.filing_time) + '</td>'
+							+	'<td width="15%">' + getGender(val.gender) + '</td>'
+							+	'<td width="15%">' + getSeries(val.series_id) + '</td>'
+							+	'<td width="30%">'
+							+		'<input list="sampler" value="纸样师——汤胜辉">'
+							+		'<span class="list-button" id="button_' + val.design_no + '">分配</spam>'
+							+	'</td>'
+							+'</tr>';
+				});
+				$("#applyManu .table-list").html(domStr);
+			}else{
+				console.log("没有款式建档完成");
+			}	
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+		$.ajax({
+			url: '../include/schedule/get_dress_by_status.php',
+			type: 'GET',
+			dataType: 'JSON',
+			data: {status: 6}
+		})
+		.done(function(data) {
+			if(data.ret==0){
+				var dressList = data.list;
+				console.log(dressList);
+				var domStr = "";
+				listNoArr = [];
+				$.each(dressList, function(i, val) {
+					listNoArr.push(val.design_no);
+					domStr += '<tr>'
+							+	'<td width="5%">'
+							+		'<span class="check-box" id="' + val.design_no + '"></span>'
+							+	'</td>'
+							+	'<td width="15%">' + val.design_no + '</td>'
+							+	'<td width="15%">' + getFormatTime(val.filing_time) + '</td>'
+							+	'<td width="15%">' + getGender(val.gender) + '</td>'
+							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+							+	'<td width="15%">' + val.sampler_name + '</td>'
+							+	'<td width="25%">'
+							+		'<input list="car-version" value="车版师——汤胜辉">'
+							+		'<span class="list-button" id="button_' + val.design_no + '">分配</spam>'
+							+	'</td>'
+							+'</tr>';
+				});
+				$("#sampleDone .table-list").html(domStr);
+			}else{
+				console.log("没有纸样制作完成");
+			}	
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+		$.ajax({
+			url: '../include/schedule/get_dress_by_status.php',
+			type: 'GET',
+			dataType: 'JSON',
+			data: {status: 8}
+		})
+		.done(function(data) {
+			if(data.ret==0){
+				var dressList = data.list;
+				console.log(dressList);
+				var domStr = "";
+				listNoArr = [];
+				$.each(dressList, function(i, val) {
+					listNoArr.push(val.design_no);
+					domStr += '<tr>'
+							+	'<td width="5%">'
+							+		'<span class="check-box" id="' + val.design_no + '"></span>'
+							+	'</td>'
+							+	'<td width="15%">' + val.design_no + '</td>'
+							+	'<td width="15%">' + getFormatTime(val.filing_time) + '</td>'
+							+	'<td width="15%">' + getGender(val.gender) + '</td>'
+							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
+							+	'<td width="15%">' + val.carversion_name + '</td>'
+							+	'<td width="25%">'
+							+		'<input id="carversion_score" value="" placeholder="请输入分数" >'
+							+		'<span class="list-button" id="button_' + val.design_no + '">计分</spam>'
+							+	'</td>'
+							+'</tr>';
+				});
+				$("#ManuDone .table-list").html(domStr);
+			}else{
+				console.log("没有纸样制作完成");
+			}	
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+	}*/
 
 /***/ },
 /* 1 */

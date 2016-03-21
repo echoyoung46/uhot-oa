@@ -13,6 +13,13 @@ $(function() {
             //下单表 
             order: [],
             
+            //工艺单 
+            craft: [],
+            
+            //产前版发料 
+            prenatal1: [],
+            prenatal2: [],
+            
         },
         methods: {
             

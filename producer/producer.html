@@ -14,9 +14,9 @@
 					<li role="presentation" class="active"><a href="#apply-no" id="apply-no-enter" v-on:click="toggle(0)">申请款号</a></li>
 					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" v-on:click="toggle(1)">预采任务单</a></li>
 					<li role="presentation"><a href="#craftmaterial-list" id="craftmaterial-list-enter" v-on:click="toggle(2)">工艺配料单</a></li>
-					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3)">工艺单</a></li>
+					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3, [33], ['craft'])">工艺单</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(4, [30], ['order'])">下单表</a></li>
-					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(5)">产前版发料</a></li>
+					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(5, [35, 35], ['prenatal1', 'prenatal2'])">产前版发料</a></li>
 					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6)">大货发料</a></li>
 					<li role="presentation"><a href="#producing" id="producing-enter" v-on:click="toggle(7)">生产中</a></li>
 					<li role="presentation"><a href="#replenishment" id="replenishment-enter" v-on:click="toggle(8)">补货</a></li>
@@ -187,13 +187,13 @@
                 </div>
                 
                 <div id="process-sheet" class="list-box" v-show="currentIndex === 3">
-                    <!--<div class="status-box">
+                    <div class="status-box">
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="no">款号</dd>
+                                <dd class="design-no">款号</dd>
                                 <dd class="operator-time">移交时间</dd>
                                 <dd class="gender">女/男装</dd>
                                 <dd class="series">系列</dd>
@@ -207,15 +207,15 @@
                             </dl>
                         </div>
                         <div class="list-detail table table-hover">
-                            <dl>
+                            <dl v-for="item in craft">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="no">{{el.no}}</dd>
-                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.inrecord_finish_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
                                 <dd class="details">
                                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                                 </dd>
@@ -223,20 +223,38 @@
                                     <input type="text">
                                 </dd>
                                 <dd class="apply-maker">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请唛架</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal" v-on:click="getChosenId( item.design_no )">申请唛架</button>
                                 </dd>
                                 <dd class="update-craft">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改工艺单</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal" v-on:click="getChosenId( item.design_no )">申请修改工艺单</button>
                                 </dd>
                                 <dd class="apply-sample">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请纸样</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#sampleModal"  v-on:click="getChosenId( item.design_no )">申请纸样</button>
                                 </dd>
                                 <dd class="apply-update-maker">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">申请修改唛架</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal"  v-on:click="getChosenId( item.design_no )">申请修改唛架</button>
                                 </dd>
                             </dl>
                         </div>
-                    </div>-->
+                        <!-- 申请纸样Modal -->
+                        <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">申请纸样</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请纸样吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(34, 'pattern_apply_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="order-table" class="list-box" v-show="currentIndex === 4">
@@ -294,7 +312,7 @@
                 </div>
 
                 <div id="prenatal-issue" class="list-box" v-show="currentIndex === 5">
-                    <!--<div class="status-box" id="prenatal-issue1">
+                    <div class="status-box" id="prenatal-issue1">
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
@@ -309,22 +327,41 @@
                             </dl>
                         </div>
                         <div class="list-detail table table-hover">
-                            <dl>
+                            <dl v-for="item in prenatal1">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="design-no">{{el.design_no}}</dd>
-                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.pattern_trans_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
                                 <dd class="operator">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">提交</button>
+                                    <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#prenatalModal1"  v-on:click="getChosenId( item.design_no )">提交</button>
                                 </dd>
                             </dl>
                         </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="prenatalModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">产前版发料</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定通知发料吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(36, 'noticeexstore_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="status-box" id="prenatal-issue2">
+                        <div class="status-title">纸样</div>
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
@@ -341,23 +378,41 @@
                             </dl>
                         </div>
                         <div class="list-detail table table-hover">
-                            <dl>
+                            <dl v-for="item in prenatal2">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="design-no">{{el.design_no}}</dd>
-                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.pattern_trans_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
                                 <dd class="fabric-status">面料状态</dd>
                                 <dd class="accessory-status">辅料状态</dd>
                                 <dd class="operator">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+                                    <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#prenatalModal2"  v-on:click="getChosenId( item.design_no )">发出</button>
                                 </dd>
                             </dl>
                         </div>
-                    </div>-->
+                        <!-- Modal -->
+                        <div class="modal fade" id="prenatalModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">移交纸样</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成移交吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(35, 'pattern_trans_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="cargo-issue" class="list-box" v-show="currentIndex === 6">

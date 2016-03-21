@@ -1,62 +1,87 @@
-var chosenId = null;
-$(function(){
-	var bodymodel = avalon.define({
-        $id: "menu",
-        currentIndex: 0,
-        toggle: function(index) {
-            bodymodel.currentIndex = index;
+var Vue = require('vue');
+
+var chosenId = null,
+	selectNoArr = [],
+    techModel = null;
+
+$(function() {
+	techModel = new Vue({
+        el: "#menu",
+        data: {
+            currentIndex: 0,
+            
+            //纸样 
+            sample: [],
+            
+        },
+        methods: {
+            
+            //显示或隐藏面板
+            toggle: function(index, _statusArr, _dataArr) {
+                this.currentIndex = index;
+                this.getDress(_statusArr, _dataArr);
+            },
+            
+            //提交dress新的状态值
+            updateStatus: function(_status, _time){
+            	updateDressStatus(_status, selectNoArr, _time);
+            },
+            
+            //点击操作按钮获取衣服的id
+            getChosenId: function(_id){
+            	if($.inArray(_id, selectNoArr) < 0){
+					selectNoArr.push(_id);
+				}
+            },
+            
+            //根据status获取dress列表，填充对应的model
+            getDress: function(_statusArr, _dataArr){
+                
+            	$.each(_dataArr, function(i, val){
+            		var data = getDressByStatus(_statusArr[i]);
+                    console.log(val);
+                    console.log(data);
+                    techModel[val] = data;
+            	})
+            }
         }
     })
-	
-	initAction();
-	initSave();
+
+	// initAction();
+    
+    //初始时获取第一项数据
+    // producerModel.toggle(4, [27], ['order1']);
+    
+	// initSave();
 	bindEvent();
 });
 
-function bindEvent(){
-	$('.page-menu').on('click','li',function(){
+function bindEvent() {
+	$('.page-menu').on('click', 'li', function () {
 		var $this = $(this);
 		$this.addClass('active').siblings().removeClass('active');
 	});
-	
-	$('.list-title .checkAll').on('click', function(){
+
+	$('.list-title .checkAll').on('click', function () {
 		var $this = $(this);
 		var $list = $this.closest('.status-box').find('.list-detail input');
-		if($this.is(':checked')){
-			$list.each(function(i, el){
-				$(el).attr('checked','true');
+		if ($this.is(':checked')) {
+			$list.each(function (i, el) {
+				$(el).attr('checked', 'true');
 			});
-		}else{
-			$list.each(function(i, el){
+		} else {
+			$list.each(function (i, el) {
 				$(el).removeAttr('checked');
 			});
 		}
 	});
-	$('#sampleModal1').on('show.bs.modal', function (event) {
+	
+	$('#cargoModal').on('show.bs.modal', function (event) {
 		var $button = $(event.relatedTarget);
 		chosenId = $button.closest('dl').find('.design-no').html();
 	});
-	$('#sampleModal2').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
-	$('#sampleModal3').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
-	$('#viewer1').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
-	$('#viewer2').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
-	$('#dubviewer1').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
-	$('#dubviewer2').on('show.bs.modal', function (event) {
+
+	$('#repurchaseModal').on('show.bs.modal', function (event) {
 		var $button = $(event.relatedTarget);
 		chosenId = $button.closest('dl').find('.design-no').html();
 	});
