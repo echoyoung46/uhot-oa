@@ -3,24 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>仓储部</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="storage/css/material_manager.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./storage/material.css">
 </head>
 <body>
-	<div id="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div id="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#storage-check" id="storage-check-enter" ms-click="toggle(0)">入仓检验</a></li>
-					<li role="presentation"><a href="#accessory-in" id="accessory-in-enter" ms-click="toggle(1)">辅料入库</a></li>
-					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" ms-click="toggle(2)">产前版发料</a></li>
-					<li role="presentation"><a href="#material-cargo-issue" id="material-cargo-issue-enter" ms-click="toggle(3)">大货发料</a></li>
-					<li role="presentation"><a href="#accessory-cargo-issue" id="accessory-cargo-issue-enter" ms-click="toggle(4)">大货发料</a></li>
+					<li role="presentation" class="active"><a href="#storage-check" id="storage-check-enter" v-on:click="toggle(0)">入仓检验</a></li>
+					<li role="presentation"><a href="#accessory-in" id="accessory-in-enter" v-on:click="toggle(1)">辅料入库</a></li>
+					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(2, [36], ['prenatal'])">产前版发料</a></li>
+					<li role="presentation"><a href="#material-cargo-issue" id="material-cargo-issue-enter" v-on:click="toggle(3)">大货发料</a></li>
+					<li role="presentation"><a href="#accessory-cargo-issue" id="accessory-cargo-issue-enter" v-on:click="toggle(4)">大货发料</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div id="storage-check" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="storage">
+				<div id="storage-check" class="list-box" v-show="currentIndex === 0">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -37,7 +37,7 @@
 								<dd class="operator">申请调料</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -57,10 +57,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="accessory-in" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="storage">
+				<div id="accessory-in" class="list-box" v-show="currentIndex === 1">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -75,7 +75,7 @@
 								<dd class="operator">移交</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -93,16 +93,16 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="prenatal-issue" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="storage">
+				<div id="prenatal-issue" class="list-box" v-show="currentIndex === 2">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="no">款号</dd>
+								<dd class="design-no">款号</dd>
 								<dd class="operator-time">申请时间</dd>
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
@@ -111,26 +111,43 @@
 								<dd class="operator">辅料发出</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in prenatal">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.noticeexstore_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="notice">已发出</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">发出</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#prenatalModal" v-on:click="getChosenId( item.design_no )">发出</button>
 								</dd>
 							</dl>
 						</div>
+                        <div class="modal fade" id="prenatalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">产前版发料</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定发出面料吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(37, 'exstore_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
-				<div id="material-cargo-issue" class="list-box" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="storage">
+				<div id="material-cargo-issue" class="list-box" v-show="currentIndex === 3">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -145,7 +162,7 @@
 								<dd class="operator">面料发出</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -161,10 +178,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="accessory-cargo-issue" class="list-box" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="storage">
+				<div id="accessory-cargo-issue" class="list-box" v-show="currentIndex === 4">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -179,7 +196,7 @@
 								<dd class="operator">辅料发出</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -195,13 +212,12 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
-<script src="js/avalon.js"></script>
-<script src="js/global.js"></script>
-<script src="storage/js/material_manager.js"></script> 
+<script src="./js/global.js"></script>
+<script src="./storage/materialdle.js"></script> 
 </body>
 </html>
