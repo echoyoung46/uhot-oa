@@ -1,0 +1,25 @@
+/*唛架*/
+#marker .list-checkbox{
+    width: 5%;
+}
+#marker .design-no{
+    width: 10%;
+}
+#marker .operator-time{
+    width: 15%;
+}
+#marker .gender{
+    width: 10%;
+}
+#marker .series{
+    width: 10%;
+}
+#marker .source{
+    width: 10%;
+}
+#marker .reason{
+    width: 20%;
+}
+#marker .operator{
+    width: 20%;
+}

@@ -1,3 +1,4 @@
+/*入仓检验*/
 #storage-check-monitor .list-checkbox{
     width: 5%;
 }
@@ -26,5 +27,34 @@
     width: 10%;
 }
 #storage-check-monitor .operator{
+    width: 10%;
+}
+
+/*产前版发料*/
+#prenatal-issue .list-checkbox{
+    width: 5%;
+}
+#prenatal-issue .design-no{
+    width: 10%;
+}
+#prenatal-issue .operator-time{
+    width: 15%;
+}
+#prenatal-issue .gender{
+    width: 10%;
+}
+#prenatal-issue .series{
+    width: 10%;
+}
+#prenatal-issue .source{
+    width: 10%;
+}
+#prenatal-issue .fabric{
+    width: 15%;
+}
+#prenatal-issue .accessory{
+    width: 15%;
+}
+#prenatal-issue .operator{
     width: 10%;
 }

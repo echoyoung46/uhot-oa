@@ -82,16 +82,6 @@ function bindEvent() {
 			});
 		}
 	});
-	
-	$('#cargoModal').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
-
-	$('#repurchaseModal').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
 }
 
 function initSave() {

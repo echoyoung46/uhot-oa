@@ -13,6 +13,10 @@ $(function() {
             //纸样 
             sample: [],
             
+            //唛架 
+            marker1: [],
+            marker2: [],
+            
         },
         methods: {
             

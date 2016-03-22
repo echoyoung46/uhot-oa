@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="tech/css/paper_sample.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./tech/paper_sample.css">
 </head>
 <body>
-	<div id="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div id="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#sample" id="sample-enter" ms-click="toggle(0)">纸样制作</a></li>
-					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" ms-click="toggle(1)">工艺单</a></li>
-					<li role="presentation"><a href="#marker" id="marker-enter" ms-click="toggle(2)">唛架</a></li>
+					<li role="presentation" class="active"><a href="#sample" id="sample-enter" v-on:click="toggle(0)">纸样制作</a></li>
+					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(1)">工艺单</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter" v-on:click="toggle(2, [39,39], ['maker','modifyMaker'])">唛架</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div id="sample" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="sample1" id="sample1">
+				<div id="sample" class="list-box" v-show="currentIndex === 0">
+					<!--<div class="status-box" id="sample1">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -47,7 +47,7 @@
 							</dl>
 						</div>
 
-						<!--弹出框-->
+						
 						<div class="modal fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -96,10 +96,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="process-sheet" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="sample">
+				<div id="process-sheet" class="list-box" v-show="currentIndex === 1">
+					<!--<div class="status-box" ms-controller="sample">
 						<div class="status-title">工艺单</div>
 						<div class="list-title">
 							<dl>
@@ -168,10 +168,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
-				<div id="marker" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="marker">
+				<div id="marker" class="list-box" v-show="currentIndex === 2">
+					<div class="status-box">
 						<div class="status-title">唛架</div>
 						<div class="list-title">
 							<dl>
@@ -183,31 +183,67 @@
 								<dd class="gender">女/男装</dd>
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
-								<dd class="operator">申请审批</dd>
-								<dd class="remark">备注</dd>
+								<dd class="reason">申请审批</dd>
+								<dd class="operator">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in maker">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">提交</button>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.preedition_allsend_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
+								<dd class="reason">
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#markerModal"  v-on:click="getChosenId( item.design_no )">申请</button>
 								</dd>
-								<dd class="备注">
+								<dd class="operator">
 									<input type="text">
 								</dd>
 							</dl>
 						</div>
+                        <!-- 申请审批Modal -->
+                        <div class="modal fade" id="markerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">申请唛架审批</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请审批吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(40, 'marker_applycheck_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 申请纸样Modal -->
+                        <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">申请纸样</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请纸样吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(34, 'pattern_apply_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 
-					<div class="status-box" ms-controller="sample">
+					<div class="status-box">
 						<div class="status-title">修改唛架</div>
 						<div class="list-title">
 							<dl>
@@ -223,16 +259,16 @@
 								<dd class="operator">申请调料</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in modifyMaker">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="reason">
 									<input type="text">
 								</dd>
@@ -246,8 +282,8 @@
 			</div>
 		</div>
 	</div>
-<script src="js/avalon.js"></script>
-<script src="js/global.js"></script>
-<script src="tech/js/paper_sample.js"></script> 
+    
+<script src="./js/global.js"></script>
+<script src="./tech/paperdle.js"></script> 
 </body>
 </html>

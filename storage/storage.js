@@ -13,6 +13,9 @@ $(function(){
             //入仓检验
             mInCheck: [],
             
+            //产前版发料 
+            prenatal: [],
+            
         },
         methods: {
             

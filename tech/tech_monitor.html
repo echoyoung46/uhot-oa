@@ -16,7 +16,7 @@
 					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2)">复版</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-enter"  v-on:click="toggle(3)">工艺单</a></li>
 					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  v-on:click="toggle(4, [34], ['sample'])">纸样</a></li>
-					<li role="presentation"><a href="#marker" id="marker-enter"  v-on:click="toggle(5)">唛架</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter"  v-on:click="toggle(5, [40, 40], ['marker1','marker2'])">唛架</a></li>
 					<li role="presentation"><a href="#sample-grade" id="grade-enter"  v-on:click="toggle(6)">样衣分数</a></li>
 				</ul>
 			</div>
@@ -604,7 +604,7 @@
 					</div>-->
 				</div>
 				<div id="marker" class="list-box" v-show="currentIndex === 5">
-					<!--<div class="status-box" ms-controller="dubviewer">
+					<div class="status-box" id="marker1">
 						<div class="status-title">唛架</div>
 						<div class="list-title">
 							<dl>
@@ -620,26 +620,44 @@
 								<dd class="operator">完成唛架</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in marker1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.marker_applycheck_time  }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#markerModal1"  v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl>
 						</div>
+                        <!-- 完成唛架Modal -->
+                        <div class="modal fade" id="markerModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">完成唛架</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成唛架吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(41, 'marker_confirm_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
-					<div class="status-box" ms-controller="dubviewer">
+					<div class="status-box" id="marker2">
 						<div class="status-title">修改唛架</div>
 						<div class="list-title">
 							<dl>
@@ -656,16 +674,16 @@
 								<dd class="operator">完成唛架</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in marker2">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.marker_applycheck_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="reason">
 									<input type="text">
 								</dd>
@@ -673,11 +691,12 @@
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#markerModal2"  v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+                        
+					</div>
 				</div>
 				<div id="sample-grade" class="list-box" v-show="currentIndex === 6">
 					<!--<div class="status-box" ms-controller="dubviewer">

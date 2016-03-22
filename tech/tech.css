@@ -23,3 +23,57 @@
 #paper-sample .operator{
     width: 15%;
 }
+
+/*唛架*/
+#marker1 .list-checkbox{
+    width: 5%;
+}
+#marker1 .design-no{
+    width: 15%;
+}
+#marker1 .operator-time{
+    width: 15%;
+}
+#marker1 .gender{
+    width: 10%;
+}
+#marker1 .series{
+    width: 10%;
+}
+#marker1 .source{
+    width: 10%;
+}
+#marker1 .details{
+    width: 15%;
+}
+#marker1 .operator{
+    width: 20%;
+}
+
+#marker2 .list-checkbox{
+    width: 5%;
+}
+#marker2 .design-no{
+    width: 10%;
+}
+#marker2 .operator-time{
+    width: 15%;
+}
+#marker2 .gender{
+    width: 10%;
+}
+#marker2 .series{
+    width: 10%;
+}
+#marker2 .source{
+    width: 10%;
+}
+#marker2 .reason{
+    width: 20%;
+}
+#marker2 .details{
+    width: 10%;
+}
+#marker2 .operator{
+    width: 10%;
+}
