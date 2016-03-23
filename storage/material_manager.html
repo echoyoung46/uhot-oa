@@ -14,7 +14,7 @@
 					<li role="presentation" class="active"><a href="#storage-check" id="storage-check-enter" v-on:click="toggle(0)">入仓检验</a></li>
 					<li role="presentation"><a href="#accessory-in" id="accessory-in-enter" v-on:click="toggle(1)">辅料入库</a></li>
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(2, [36], ['prenatal'])">产前版发料</a></li>
-					<li role="presentation"><a href="#material-cargo-issue" id="material-cargo-issue-enter" v-on:click="toggle(3)">大货发料</a></li>
+					<li role="presentation"><a href="#material-cargo-issue" id="material-cargo-issue-enter" v-on:click="toggle(3, [42], ['cargo'])">大货发料</a></li>
 					<li role="presentation"><a href="#accessory-cargo-issue" id="accessory-cargo-issue-enter" v-on:click="toggle(4)">大货发料</a></li>
 				</ul>
 			</div>
@@ -147,7 +147,7 @@
 					</div>
 				</div>
 				<div id="material-cargo-issue" class="list-box" v-show="currentIndex === 3">
-					<!--<div class="status-box">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -163,22 +163,22 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
+							<dl v-for="item in cargo">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.product_noticesend_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="notice">已发出</dd>
 								<dd class="operator">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">发出</button>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
 				</div>
 				<div id="accessory-cargo-issue" class="list-box" v-show="currentIndex === 4">
 					<!--<div class="status-box">

@@ -20,6 +20,11 @@ $(function() {
             prenatal1: [],
             prenatal2: [],
             
+            //大货发料 
+            cargo1: [],
+            cargo2: [],
+            
+            
         },
         methods: {
             

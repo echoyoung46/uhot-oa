@@ -165,3 +165,57 @@
 #prenatal-issue2 .operator{
     width: 10%;
 }
+
+/*大货发料*/
+#cargo1 .list-checkbox{
+    width: 5%;
+}
+#cargo1 .design-no{
+    width: 10%;
+}
+#cargo1 .operator-time{
+    width: 15%;
+}
+#cargo1 .gender{
+    width: 10%;
+}
+#cargo1 .series{
+    width: 10%;
+}
+#cargo1 .source{
+    width: 10%;
+}
+#cargo1 .details{
+    width: 15%;
+}
+#cargo1 .operator{
+    width: 10%;
+}
+
+#cargo2 .list-checkbox{
+    width: 5%;
+}
+#cargo2 .design-no{
+    width: 10%;
+}
+#cargo2 .operator-time{
+    width: 15%;
+}
+#cargo2 .gender{
+    width: 10%;
+}
+#cargo2 .series{
+    width: 10%;
+}
+#cargo2 .source{
+    width: 10%;
+}
+#cargo2 .fabric-status{
+    width: 15%;
+}
+#cargo2 .accessory-status{
+    width: 15%;
+}
+#cargo2 .operator{
+    width: 10%;
+}

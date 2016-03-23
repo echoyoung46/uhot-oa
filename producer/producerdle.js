@@ -66,6 +66,11 @@
 	            prenatal1: [],
 	            prenatal2: [],
 	            
+	            //大货发料 
+	            cargo1: [],
+	            cargo2: [],
+	            
+	            
 	        },
 	        methods: {
 	            
@@ -127,16 +132,6 @@
 					$(el).removeAttr('checked');
 				});
 			}
-		});
-		
-		$('#cargoModal').on('show.bs.modal', function (event) {
-			var $button = $(event.relatedTarget);
-			chosenId = $button.closest('dl').find('.design-no').html();
-		});
-
-		$('#repurchaseModal').on('show.bs.modal', function (event) {
-			var $button = $(event.relatedTarget);
-			chosenId = $button.closest('dl').find('.design-no').html();
 		});
 	}
 

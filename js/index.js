@@ -1,6 +1,6 @@
 $(function(){
 	$('#view-process').on('click', function(){
-		$ajaxUrl("tech/tech_monitor.html")
+		$ajaxUrl("storage/material_manager.html")
 	}).click();
 　　
 	

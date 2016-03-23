@@ -17,7 +17,7 @@
 					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3, [[33, 38]], ['craft'])">工艺单</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(4, [30], ['order'])">下单表</a></li>
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(5, [35, 35], ['prenatal1', 'prenatal2'])">产前版发料</a></li>
-					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6)">大货发料</a></li>
+					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6, [41,41], ['cargo1','cargo2'])">大货发料</a></li>
 					<li role="presentation"><a href="#producing" id="producing-enter" v-on:click="toggle(7)">生产中</a></li>
 					<li role="presentation"><a href="#replenishment" id="replenishment-enter" v-on:click="toggle(8)">补货</a></li>
 					<li role="presentation"><a href="#marker" id="marker-enter" v-on:click="toggle(9)">唛架</a></li>
@@ -434,47 +434,65 @@
                 </div>
 
                 <div id="cargo-issue" class="list-box" v-show="currentIndex === 6">
-                    <!--<div class="status-box">
+                    <div class="status-box" id="cargo1">
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="no">款号</dd>
+                                <dd class="design-no">款号</dd>
                                 <dd class="operator-time">到料时间</dd>
                                 <dd class="gender">女/男装</dd>
                                 <dd class="series">系列</dd>
                                 <dd class="source">生产类型</dd>
-                                <dd class="notice">注意信息</dd>
+                                <dd class="details">注意信息</dd>
                                 <dd class="operator">通知发料</dd>
                             </dl>
                         </div>
                         <div class="list-detail table table-hover">
-                            <dl>
+                            <dl v-for="item in cargo1">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="no">{{el.no}}</dd>
-                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.marker_confirm_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
                                 <dd class="details">
                                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                                 </dd>
                                 <dd class="operator">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#cargoModal1" v-on:click="getChosenId( item.design_no )">发出</button>
                                 </dd>
                             </dl>
                         </div>
+                         <!-- 大货通知发料Modal -->
+                        <div class="modal fade" id="cargoModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">大货发料</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定通知发料吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(42, 'product_noticesend_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="status-box">
+                    <div class="status-box" id="cargo2">
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="no">款号</dd>
+                                <dd class="design-no">款号</dd>
                                 <dd class="operator-time">到料时间</dd>
                                 <dd class="gender">女/男装</dd>
                                 <dd class="series">系列</dd>
@@ -485,23 +503,23 @@
                             </dl>
                         </div>
                         <div class="list-detail table table-hover">
-                            <dl>
+                            <dl v-for="item in cargo1">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="no">{{el.no}}</dd>
-                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
-                                <dd class="fabric-status">面料状态</dd>
-                                <dd class="accessory-status">辅料状态</dd>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.marker_confirm_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
+                                <dd class="fabric-status"></dd>
+                                <dd class="accessory-status"></dd>
                                 <dd class="operator">
                                     <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">发出</button>
                                 </dd>
                             </dl>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
 
                 <div id="producing" class="list-box" v-show="currentIndex === 7">
