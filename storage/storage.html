@@ -206,7 +206,7 @@
 					</div>
 				</div>
 				<div id="cargo-issue"class="list-box" v-show="currentIndex === 2">
-					<!--<div class="status-box" ms-controller="storage">
+					<div class="status-box" ms-controller="storage">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -223,23 +223,40 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+							<dl v-for="cargo">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.product_send_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="fabric">面料</dd>
 								<dd class="accessory">辅料</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">发出</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#priceModal2" v-on:click="getChosenId( item.design_no )">发出</button>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+						<div class="modal fade" id="priceModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">大货发料</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定发出面料吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(43, 'product_send_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
 				</div>
 				<div id="order-table"class="list-box" v-show="currentIndex === 3">
 					<!--<div class="status-box" ms-controller="storage">
