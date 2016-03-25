@@ -23,7 +23,10 @@ $(function() {
             //大货发料 
             cargo1: [],
             cargo2: [],
+            cargo3: [],
             
+            //生产中 
+            producing: [],
             
         },
         methods: {

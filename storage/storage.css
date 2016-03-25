@@ -58,3 +58,11 @@
 #prenatal-issue .operator{
     width: 10%;
 }
+
+/*大货发料*/
+#cargo-issue .fabric{
+    width: 10%;
+}
+#cargo-issue .accessory{
+    width: 10%;
+}

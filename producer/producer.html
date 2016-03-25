@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>生产部</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
 	<link rel="stylesheet" type="text/css" href="./producer/producer.css">
 </head>
 <body>
@@ -17,8 +17,8 @@
 					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3, [[33, 38]], ['craft'])">工艺单</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(4, [30], ['order'])">下单表</a></li>
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(5, [35, 35], ['prenatal1', 'prenatal2'])">产前版发料</a></li>
-					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6, [41,41], ['cargo1','cargo2'])">大货发料</a></li>
-					<li role="presentation"><a href="#producing" id="producing-enter" v-on:click="toggle(7)">生产中</a></li>
+					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6, [41,41,45], ['cargo1','cargo2','cargo3'])">大货发料</a></li>
+					<li role="presentation"><a href="#producing" id="producing-enter" v-on:click="toggle(7, [44], ['producing'])">生产中</a></li>
 					<li role="presentation"><a href="#replenishment" id="replenishment-enter" v-on:click="toggle(8)">补货</a></li>
 					<li role="presentation"><a href="#marker" id="marker-enter" v-on:click="toggle(9)">唛架</a></li>
 					<li role="presentation"><a href="#amount-adjust" id="amount-adjust-enter" v-on:click="toggle(10)">幅宽及用量变更</a></li>
@@ -520,10 +520,38 @@
                             </dl>
                         </div>
                     </div>
+                    <div class="status-box" id="cargo3">
+                        <div class="list-title">
+                            <dl>
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">款号</dd>
+                                <dd class="operator-time">发料时间</dd>
+                                <dd class="gender">女/男装</dd>
+                                <dd class="series">系列</dd>
+                                <dd class="source">生产类型</dd>
+                                <dd class="operator">状态</dd>
+                            </dl>
+                        </div>
+                        <div class="list-detail table table-hover">
+                            <dl v-for="item in cargo3">
+                                <dt class="list-checkbox">
+                                    <input type="checkbox" name="" value="">
+                                </dt>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.marker_confirm_time }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
+                                <dd class="operator">已发出</dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="producing" class="list-box" v-show="currentIndex === 7">
-                    <!--<div class="status-box">
+                    <div class="status-box">
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
@@ -538,21 +566,38 @@
                             </dl>
                         </div>
                         <div class="list-detail table table-hover">
-                            <dl>
+                            <dl v-for="item in producing">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="design-no">{{el.design_no}}</dd>
-                                <dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
+                                <dd class="design-no">{{ item.design_no }}</dd>
+                                <dd class="operator-time">{{ item.production_time  }}</dd>
+                                <dd class="gender">{{ item.d_gender }}</dd>
+                                <dd class="series">{{ item.series_id }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
                                 <dd class="operator">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">检验</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#producingModal" v-on:click="getChosenId( item.design_no )">检验</button>
                                 </dd>
                             </dl>
                         </div>
-                    </div>-->
+                        <div class="modal fade" id="producingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">生产中</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定入仓检验吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(45, 'instorecheck_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="replenishment" class="list-box" v-show="currentIndex === 8">

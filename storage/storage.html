@@ -13,7 +13,7 @@
                 <ul class="list-inline nav nav-tabs">
 					<li role="presentation" class="active"><a href="#storage-check-monitor" id="storage-check-monitor-enter" v-on:click="toggle(0, [32], ['mInCheck'])">入仓检验</a></li>
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(1, [37], ['prenatal'])">产前版发料</a></li>
-					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(2)">大货发料</a></li>
+					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(2, [43], ['cargo'])">大货发料</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(3)">下单表</a></li>
 					<li role="presentation"><a href="#readymade-check" id="readymade-check-enter" v-on:click="toggle(4)">成衣检验</a></li>
 				</ul>
@@ -206,7 +206,7 @@
 					</div>
 				</div>
 				<div id="cargo-issue"class="list-box" v-show="currentIndex === 2">
-					<div class="status-box" ms-controller="storage">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -222,8 +222,8 @@
 								<dd class="operator">整款发出</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl v-for="cargo">
+						<div class="list-detail table table-hover">
+							<dl v-for="item in cargo">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -235,11 +235,11 @@
 								<dd class="fabric">面料</dd>
 								<dd class="accessory">辅料</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#priceModal2" v-on:click="getChosenId( item.design_no )">发出</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#cargoModal" v-on:click="getChosenId( item.design_no )">发出</button>
 								</dd>
 							</dl>
 						</div>
-						<div class="modal fade" id="priceModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal fade" id="cargoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -247,11 +247,11 @@
                                         <h4 class="modal-title" id="myModalLabel">大货发料</h4>
                                     </div>
                                     <div class="modal-body">
-                                    确定发出面料吗?
+                                    确定整款发出吗?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(43, 'product_send_time')">提交</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(44, 'production_time')">提交</button>
                                     </div>
                                 </div>
                             </div>

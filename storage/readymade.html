@@ -3,27 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>仓储部</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="storage/css/readymade.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./storage/readymade.css">
 </head>
 <body>
-	<div id="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div id="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#storage-check" id="storage-check-enter" ms-click="toggle(0)">入仓检验</a></li>
-					<li role="presentation"><a href="#readymade-send" id="readymade-send-enter" ms-click="toggle(1)">成衣发货</a></li>
-					<li role="presentation"><a href="#readymade-handling" id="readymade-handling-enter"> ms-click="toggle(2)"成衣待处理</a></li>
-					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" ms-click="toggle(3)">大货发料</a></li>
-					<li role="presentation"><a href="#handling" id="handling-enter" ms-click="toggle(4)">需处理</a></li>
-					<li role="presentation"><a href="#material-in" id="material-in-enter" ms-click="toggle(5)">补货</a></li>
-					<li role="presentation"><a href="#lining-in" id="lining-in-enter" ms-click="toggle(6)">补货入库</a></li>
-					<li role="presentation"><a href="#cost-check" id="cost-check-enter" ms-click="toggle(7)">成本核算</a></li>
+					<li role="presentation" class="active"><a href="#storage-check" id="storage-check-enter" v-on:click="toggle(0,[45],['checkin'])">入仓检验</a></li>
+					<li role="presentation"><a href="#readymade-send" id="readymade-send-enter" v-on:click="toggle(1)">成衣发货</a></li>
+					<li role="presentation"><a href="#readymade-handling" id="readymade-handling-enter" v-on:click="toggle(2)">成衣待处理</a></li>
+					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(3)">大货发料</a></li>
+					<li role="presentation"><a href="#handling" id="handling-enter" v-on:click="toggle(4)">需处理</a></li>
+					<li role="presentation"><a href="#material-in" id="material-in-enter" v-on:click="toggle(5)">补货</a></li>
+					<li role="presentation"><a href="#lining-in" id="lining-in-enter" v-on:click="toggle(6)">补货入库</a></li>
+					<li role="presentation"><a href="#cost-check" id="cost-check-enter" v-on:click="toggle(7)">成本核算</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
 				<div id="storage-check" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="storage">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -39,16 +39,16 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in checkin">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.instorecheck_time }}</dd>
+								<dd class="gender">{{ item.d_gender}}</dd>
+								<dd class="series">{{ item.series_id}}</dd>
+								<dd class="source">{{ item.source}}</dd>
 								<dd class="check-result">
 									<input type="text">
 								</dd>
@@ -63,7 +63,7 @@
 					</div>
 				</div>
 				<div id="readymade-send" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -100,10 +100,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="readymade-handling" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -136,10 +136,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="cargo-issue" class="list-box" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -172,10 +172,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="handling" class="list-box" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -208,10 +208,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="material-in" class="list-box" ms-visible="currentIndex === 5">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -248,10 +248,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="lining-in" class="list-box" ms-visible="currentIndex === 6">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -284,10 +284,10 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div id="cost-check" class="list-box" ms-visible="currentIndex === 7">
-					<div class="status-box" ms-controller="storage">
+					<!--<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -322,13 +322,12 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
-<script src="js/avalon.js"></script>
 <script src="js/global.js"></script>
-<script src="storage/js/readymade.js"></script> 
+<script src="./storage/readymadel.js"></script> 
 </body>
 </html>

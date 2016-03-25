@@ -62,6 +62,9 @@
 	            //产前版发料 
 	            prenatal: [],
 	            
+	            //大货发料   
+	            cargo: [],
+	            
 	        },
 	        methods: {
 	            
