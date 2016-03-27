@@ -15,7 +15,7 @@
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(1, [37], ['prenatal'])">产前版发料</a></li>
 					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(2, [43], ['cargo'])">大货发料</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(3)">下单表</a></li>
-					<li role="presentation"><a href="#readymade-check" id="readymade-check-enter" v-on:click="toggle(4)">成衣检验</a></li>
+					<li role="presentation"><a href="#readymade-check" id="readymade-check-enter" v-on:click="toggle(4, [46], ['madeCheck'])">成衣检验</a></li>
 				</ul>
             </div>
 			<div class="page-list">
@@ -295,7 +295,7 @@
 					</div>-->
 				</div>
 				<div id="readymade-check"class="list-box" v-show="currentIndex === 4">
-					<!--<div class="status-box" ms-controller="storage">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -313,15 +313,15 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+							<dl v-for="item in madeCheck">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.product_inrecord_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="check-result">
 									<input type="text">
 								</dd>
@@ -332,11 +332,28 @@
 									<input type="text">
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">入库</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#priceModal2" v-on:click="getChosenId( item.design_no )">入库</button>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+                        <div class="modal fade" id="priceModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">成衣检验</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成入库吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(47, 'product_inrecord_time')">确认</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
 				</div>
 			</div>
 		</div>

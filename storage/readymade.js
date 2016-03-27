@@ -13,6 +13,8 @@ $(function() {
             //入仓检验  
             checkin: [],
             
+            //成衣发货
+            readySend: [],
             
             
         },

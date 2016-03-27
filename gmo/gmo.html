@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>总经办</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="gmo/gmo.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./gmo/gmo.css">
 </head>
 <body>
 	<div class="page-container">
@@ -12,7 +12,7 @@
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
 					<li role="presentation" class="active"><a href="#filing" id="filing-enter" v-on:click="toggle(0, [0], ['filing'])">建档</a></li>
-					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" v-on:click="toggle(1, [], [''])">入图</a></li>
+					<li role="presentation"><a href="#drawing-in" id="drawingin-enter" v-on:click="toggle(1, [1], ['drawing'])">入图</a></li>
 					<li role="presentation"><a href="#front-sample" id="frontsample-enter" v-on:click="toggle(2, [], [''])">头版样衣</a></li>
 					<li role="presentation"><a href="#trial-version" id="trialversion-enter" v-on:click="toggle(3, [], [''])">审版</a></li>
 					<li role="presentation"><a href="#color-sample-done" id="colorsampledone-enter" v-on:click="toggle(4, [], [''])">齐色样完成</a></li>
@@ -90,12 +90,12 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+							<dl v-for="item in drawing">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">&nbsp;</dd>
 							</dl>
 						</div>
@@ -113,12 +113,12 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+							<dl v-for="item in frontSample">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 							</dl>
 						</div>
 					</div>
@@ -135,12 +135,13 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+            
+							<dl v-for="item in trialVersion">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 							</dl>
 						</div>
 					</div>
@@ -157,12 +158,12 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+							<dl v-for="item in colorDone">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 							</dl>
 						</div>
 					</div>
@@ -179,12 +180,12 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+							<dl v-for="item in materialsInStore">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 							</dl>
 						</div>
 					</div>
@@ -201,12 +202,12 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+							<dl v-for="item in materialsIn">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 							</dl>
 						</div>
 					</div>
@@ -223,12 +224,12 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+							<dl v-for="item in wearIn">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time  }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 							</dl>
 						</div>
 					</div>
@@ -239,7 +240,7 @@
 
 
 
-<script src="js/common.js"></script>
+<script src="./js/global.js"></script>
 <script src="./gmo/gmodle.js"></script> 
 </body>
 </html>

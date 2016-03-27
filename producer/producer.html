@@ -14,7 +14,7 @@
 					<li role="presentation" class="active"><a href="#apply-no" id="apply-no-enter" v-on:click="toggle(0)">申请款号</a></li>
 					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" v-on:click="toggle(1)">预采任务单</a></li>
 					<li role="presentation"><a href="#craftmaterial-list" id="craftmaterial-list-enter" v-on:click="toggle(2)">工艺配料单</a></li>
-					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3, [[33, 38]], ['craft'])">工艺单</a></li>
+					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3, [[33, 38, 41]], ['craft'])">工艺单</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(4, [30], ['order'])">下单表</a></li>
 					<li role="presentation"><a href="#prenatal-issue" id="prenatal-issue-enter" v-on:click="toggle(5, [35, 35], ['prenatal1', 'prenatal2'])">产前版发料</a></li>
 					<li role="presentation"><a href="#cargo-issue" id="cargo-issue-enter" v-on:click="toggle(6, [41,41,45], ['cargo1','cargo2','cargo3'])">大货发料</a></li>
@@ -232,7 +232,7 @@
                                     <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#sampleModal"  v-on:click="getChosenId( item.design_no )">申请纸样</button>
                                 </dd>
                                 <dd class="apply-update-maker">
-                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal"  v-on:click="getChosenId( item.design_no )">申请修改唛架</button>
+                                    <button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#adjustmakerModal"  v-on:click="getChosenId( item.design_no )">申请修改唛架</button>
                                 </dd>
                             </dl>
                         </div>
@@ -268,6 +268,24 @@
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                     <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(34, 'pattern_apply_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 申请唛架Modal -->
+                        <div class="modal fade" id="adjustmakerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">申请修改唛架</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请修改唛架吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(50, 'marker_applyadjust_time')">确定</button>
                                     </div>
                                 </div>
                             </div>

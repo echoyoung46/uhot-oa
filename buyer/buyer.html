@@ -14,8 +14,8 @@
 					<li role="presentation"  class="active"><a href="#price-order" id="price-table-enter" v-on:click="toggle(0, [25,26], ['price1','price2'])">定价表</a></li>
 					<li role="presentation"><a href="#order-table" id="order-table-enter" v-on:click="toggle(1, [28], ['order1'])">下单表</a></li>
 					<li role="presentation"><a href="#order-table1" id="order-table-enter1" v-on:click="toggle(2,[26,26,29],['morder1','morder2','morder3'])">下单表</a></li>
-					<li role="presentation"><a href="#wear-in" id="wear-in-enter" v-on:click="toggle(3)">成衣入库</a></li>
-					<li role="presentation"><a href="#wear-send" id="wear-send-enter" v-on:click="toggle(4)">成衣发出</a></li>
+					<li role="presentation"><a href="#wear-in" id="wear-in-enter" v-on:click="toggle(3,[47],['wearIn'])">成衣入库</a></li>
+					<li role="presentation"><a href="#wear-send" id="wear-send-enter" v-on:click="toggle(4,[49],['wearSend'])">成衣发出</a></li>
 					<li role="presentation"><a href="#outbuy" id="outbuy-enter" v-on:click="toggle(5)">外采</a></li>
 					<li role="presentation"><a href="#outbuy-in" id="outbuy-in-enter" v-on:click="toggle(6)">外采入库</a></li>
 					<li role="presentation"><a href="#outbuy-send" id="outbuy-send-enter" v-on:click="toggle(7)">外采发出</a></li>
@@ -148,7 +148,7 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl v-for="item in order1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -311,32 +311,7 @@
 				</div>
 
 				<div class="list-box" id="wear-in" v-show="currentIndex === 3">
-					<!--<div class="status-box" ms-controller="wearin">
-						<div class="list-title">
-							<dl>
-								<dt class="design-no">设计款号</dt>
-								<dd class="operator-time">入图时间</dd>
-								<dd class="gender">女/男装</dd>
-								<dd class="series">系列</dd>
-								<dd class="source">生产类型</dd>
-								<dd class="details">详细内容</dd>
-							</dl>
-						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="details">&nbsp;</dd>
-							</dl>
-						</div>
-					</div>-->
-				</div>
-
-				<div class="list-box" id="wear-send" v-show="currentIndex === 4">
-					<!--<div class="status-box" ms-controller="wearsend">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="design-no">设计款号</dt>
@@ -347,17 +322,42 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in wearIn">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.product_inrecord_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">&nbsp;</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
+				</div>
+
+				<div class="list-box" id="wear-send" v-show="currentIndex === 4">
+					<div class="status-box">
+						<div class="list-title">
+							<dl>
+								<dt class="design-no">设计款号</dt>
+								<dd class="operator-time">入库时间</dd>
+								<dd class="gender">女/男装</dd>
+								<dd class="series">系列</dd>
+								<dd class="source">生产类型</dd>
+								<dd class="details">详细内容</dd>
+							</dl>
+						</div>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in wearSend">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.product_exstore_time }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
+								<dd class="details">&nbsp;</dd>
+							</dl>
+						</div>
+					</div>
 				</div>
 
 				<div class="list-box" id="outbuy" v-show="currentIndex === 5">
@@ -374,7 +374,7 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -408,7 +408,7 @@
 								<dd class="operator">处理结果</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -438,7 +438,7 @@
 								<dd class="remark">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -467,7 +467,7 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -496,7 +496,7 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
@@ -526,7 +526,7 @@
 								<dd class="operator">审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="design-no">{{el.design_no}}</dt>
 								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>

@@ -70,6 +70,12 @@
 	            morder3: [],
 	            
 	            //成衣入库
+	            wearIn: [],
+
+	            //成衣出库
+	            wearSend: [],
+	            
+	            
 	        },
 	        methods: {
 	            

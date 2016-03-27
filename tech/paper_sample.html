@@ -12,7 +12,7 @@
 				<ul class="list-inline nav nav-tabs">
 					<li role="presentation" class="active"><a href="#sample" id="sample-enter" v-on:click="toggle(0)">纸样制作</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(1)">工艺单</a></li>
-					<li role="presentation"><a href="#marker" id="marker-enter" v-on:click="toggle(2, [39,39], ['maker','modifyMaker'])">唛架</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter" v-on:click="toggle(2, [39,50], ['maker','modifyMaker'])">唛架</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
@@ -256,7 +256,7 @@
 								<dd class="series">系列</dd>
 								<dd class="source">生产类型</dd>
 								<dd class="reason">修改原因</dd>
-								<dd class="operator">申请调料</dd>
+								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
@@ -273,10 +273,28 @@
 									<input type="text">
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">申请</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#modifyMarkerModal"  v-on:click="getChosenId( item.design_no )">申请</button>
 								</dd>
 							</dl>
 						</div>
+						<!-- 申请修改唛架Modal -->
+                        <div class="modal fade" id="modifyMarkerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">申请修改唛架审批</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请审批吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(51, 'marker_applycheckadjust_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>

@@ -48,37 +48,18 @@
 
 	var chosenId = null,
 		selectNoArr = [],
-		gmoModel = null;
-
-	$(function() {
-		gmoModel = new Vue({
+	    buyerModel = null;
+	    
+	$(function(){
+		buyerModel = new Vue({
 	        el: "#menu",
 	        data: {
 	            currentIndex: 0,
 	            
-	            //建档
-	            filing: [],
-
-	            //入图
-	            drawing: [],
-
-	            //头版样衣
-	            frontSample: [],
-
-	            //审版
-	            trialVersion: [],
-
-	            //齐色样完成
-	            colorDone: [],
-
-	            //面辅料入仓
-	            materialsInStore: [],
-
-	            //面辅料入库
-	            materialsIn: [],
-
 	            //成衣入库
-	            wearIn: []
+	            madeIn: [],
+	            
+	            
 	        },
 	        methods: {
 	            
@@ -102,147 +83,204 @@
 	            
 	            //根据status获取dress列表，填充对应的model
 	            getDress: function(_statusArr, _dataArr){
+	                
 	            	$.each(_dataArr, function(i, val){
 	            		var data = getDressByStatus(_statusArr[i]);
+	                    console.log(val);
 	                    console.log(data);
-	                    gmoModel[val] = data;
+	                    buyerModel[val] = data;
 	            	})
 	            }
 	        }
 	    })
-
-	    //初始时获取第一项数据
-	    gmoModel.toggle(0, [0], ['filing']);
+		
+		// initAction();
+		// initSave();
+		bindEvent();
 	    
-		$('#filing-save-button').on('click', function(){
-			updateDressStatus(1, selectNoArr, "filing_time");
-		})
+	    //初始时获取第一项数据
+	    // buyerModel.toggle(0, [25,26], ['price1','price2']);
 	});
 
-	function initAction() {
-		$('#filing-enter').on('click', function(event) {
-			event.preventDefault();
-			var reqData = getDressByStatus(0);
-			var filing = avalon.define({
-				$id: "filing",
-				dress: reqData
-			})
-		}).click();
-
-		//建档-建档完成
-		$("#filing .list-detail").on('click', '.operator-button', function() {
+	function bindEvent(){
+		$('.page-menu').on('click','li',function(){
 			var $this = $(this);
-			var dress_id = parseInt($this.closest('dl').find('.design-no').html());
-			if($.inArray(dress_id, selectNoArr) == -1){
-				selectNoArr.push(dress_id);
+			$this.addClass('active').siblings().removeClass('active');
+		});
+		
+		$('.list-title .checkAll').on('click', function(){
+			var $this = $(this);
+			var $list = $this.closest('.status-box').find('.list-detail input');
+			if($this.is(':checked')){
+				$list.each(function(i, el){
+					$(el).attr('checked','true');
+				});
+			}else{
+				$list.each(function(i, el){
+					$(el).removeAttr('checked');
+				});
 			}
 		});
 
-		$('#drawingin-enter').on('click', function(event) {
-			event.preventDefault();
-			var reqData = getDressByStatus(1);
-			var drawingin = avalon.define({
-				$id: "drawingin",
-				dress: reqData
-			})
-		}).click();
-		
-		/*//建档-建档按钮
-		$("#new-file").bind('click', function() {
-			$("#fullscreenFrame",top.document).get(0).src = "/uhot/layout/purchase_sheet.html";
-			$("#fullscreenFrame",top.document).fadeIn("normal");
+		$('#priceModal').on('show.bs.modal', function (event) {
+			var $button = $(event.relatedTarget);
+			chosenId = $button.closest('dl').find('.design-no').html();
 		});
-		//建档-打开预采任务单
-		$("#filing .table-list").on('click', 'img', function() {
-			var $this = $(this);
-			var dress_id = parseInt($this.parent('a').attr('id').split("_")[1]);
-			$("#fullscreenFrame",top.document).get(0).src = "/uhot/layout/purchase_sheet.html?" + dress_id;
-			$("#fullscreenFrame",top.document).fadeIn("normal");
-		});
-		
-		
-
-		//入图入口
-		$("#drawingin-enter").bind('click', function() {
-			$.ajax({
-				url: '../include/schedule/get_dress_by_status.php',
-				type: 'GET',
-				dataType: 'JSON',
-				data: {status: 1}
-			})
-			.done(function(data) {
-				if(data.ret==0){
-					var dressList = data.list;
-					console.log(dressList);
-					var domStr = "";
-					$.each(dressList, function(i, val) {
-						domStr += '<tr>'
-								+	'<td width="5%">'
-								+		'<span class="check-box"></span>'
-								+	'</td>'
-								+	'<td width="20%">' + val.design_no + '</td>'
-								+	'<td width="20%">' + getFormatTime(val.filing_time) + '</td>'
-								+	'<td width="20%">' + getGender(val.gender) + '</td>'
-								+	'<td width="15%">' + getSeries(val.series_id) + '</td>'
-								+	'<td width="20%">'
-								+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-								+	'</td>'
-								+'</tr>';
-					});
-					$("#drawing-in .table-list").html(domStr);
-				}else{
-					console.log("没有款式建档完成");
-				}	
-			})
-			.fail(function() {
-				console.log("error");
-			})
-			.always(function() {
-				console.log("complete");
-			});	
-		});
-
 	}
-	function initList() {
-		$.ajax({
-			url: '../include/schedule/get_dress_by_status.php',
-			type: 'GET',
-			dataType: 'JSON',
-			data: {status: 0}
-		})
-		.done(function(data) {
-			if(data.ret==0){
-				var dressList = data.list;
-				console.log(dressList);
-				var domStr = "";
-				$.each(dressList, function(i, val) {
-					domStr += '<tr>'
-							+	'<td width="5%">'
-							+		'<span class="check-box"></span>'
-							+	'</td>'
-							+	'<td width="15%">' + val.design_no + '</td>'
-							+	'<td width="15%">' + getFormatTime(val.filing_time) + '</td>'
-							+	'<td width="15%">' + getGender(val.gender) + '</td>'
-							+	'<td width="10%">' + getSeries(val.series_id) + '</td>'
-							+	'<td width="10%">' + getSource(val.source) + '</td>'
-							+	'<td width="20%">'
-							+		'<a class="sheetLink" id="sheet_' + val.design_no + '"><img src="../image/sheet.png"></a>'
-							+	'</td>'
-							+	'<td width="10%"><span class="list-button" id="button_' + val.design_no + '">提交</sapn></td>'
-							+'</tr>';
-				});
-				$("#filing .table-list").html(domStr);
-			}else{
-				console.log("没有款式建档完成");
-			}	
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});*/
-	}
+
+	// function initAction(){
+	// 	/*****************定价表入口****************/
+	// 	$("#price-list-enter").bind('click',function(){
+	// 		//待审批
+	// 		$.ajax({
+	// 			url: '../include/schedule/get_dress_by_status.php',
+	// 			type: 'GET',
+	// 			dataType: 'JSON',
+	// 			data: {status: 27}
+	// 		})
+	// 		.done(function(data) {
+	// 			if(data.ret==0){
+	// 				var dressList = data.list;
+	// 				var domStr = "";
+	// 				listNoArr = [];
+	// 				$.each(dressList, function(i, val) {
+	// 					listNoArr.push(val.design_no);
+	// 					domStr += '<tr>'
+	// 							+	'<td width="5%">'
+	// 							+		'<span class="check-box" id="' + val.design_no + '"></span>'
+	// 							+	'</td>'
+	// 							+	'<td width="15%">' + val.design_no + '</td>'
+	// 							+	'<td width="15%">' + getFormatTime(val.price_confirm_time) + '</td>'
+	// 							+	'<td width="10%">' + getGender(val.gender) + '</td>'
+	// 							+	'<td width="10%">完成定价</td>'
+	// 							+	'<td width="20%"><input type="text" id="input_' + val.design_no + '" /></td>'
+	// 							+	'<td width="25%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
+	// 							+'</tr>';
+	// 				});
+	// 				$("#price-list .table-list").html(domStr);
+	// 			}else{
+	// 				console.log("没有款式申请调料");
+	// 			}
+	// 		})
+	// 	})
+	// 	//价格录入完成
+	// 	$("#price-list .table-list").on('click', '.list-button', function() {
+	// 		var $this = $(this);
+	// 		var dress_id = parseInt($this.attr('id').split('_')[1]);
+	// 		var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
+	// 		if($.inArray(dress_id, selectNoArr) == -1) {
+	// 			selectNoArr.push(dress_id);
+	// 		}
+	// 		$.confirm({
+	// 			"words": "确定录入完成吗？",
+	// 			"yesCallback": function(){
+	// 				top.submitStyleNo(selectNoArr, styleNo);
+	// 				top.updateDressStatus(28, selectNoArr, "price_finishtypein_time");
+	// 			}
+	// 		});	
+	// 	});
+	// 	/*****************成衣入库入口******************/
+	// 	$("#readymade-in-enter").bind('click',function(){
+	// 		//待审批
+	// 		$.ajax({
+	// 			url: '../include/schedule/get_dress_by_status.php',
+	// 			type: 'GET',
+	// 			dataType: 'JSON',
+	// 			data: {status: 47, source: 1}
+	// 		})
+	// 		.done(function(data) {
+	// 			if(data.ret==0){
+	// 				var dressList = data.list;
+	// 				var domStr = "";
+	// 				listNoArr = [];
+	// 				$.each(dressList, function(i, val) {
+	// 					listNoArr.push(val.design_no);
+	// 					domStr += '<tr>'
+	// 							+	'<td width="5%">'
+	// 							+		'<span class="check-box" id="' + val.design_no + '"></span>'
+	// 							+	'</td>'
+	// 							+	'<td width="15%">' + val.design_no + '</td>'
+	// 							+	'<td width="15%">' + getFormatTime(val.price_confirm_time) + '</td>'
+	// 							+	'<td width="10%">' + getGender(val.gender) + '</td>'
+	// 							+	'<td width="15%">成衣入库</td>'
+	// 							+	'<td width="15%"><input type="text" id="input_' + val.design_no + '" /></td>'
+	// 							+	'<td width="25%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
+	// 							+'</tr>';
+	// 				});
+	// 				$("#readymade-in .table-list").html(domStr);
+	// 			}else{
+	// 				console.log("没有款式申请调料");
+	// 			}
+	// 		})
+	// 	})
+	// 	//调拨完成
+	// 	$("#readymade-in .table-list").on('click', '.list-button', function() {
+	// 		var $this = $(this);
+	// 		var dress_id = parseInt($this.attr('id').split('_')[1]);
+	// 		var styleNo = parseInt($this.closest('tr').find('.styleno-input').val());
+	// 		if($.inArray(dress_id, selectNoArr) == -1) {
+	// 			selectNoArr.push(dress_id);
+	// 		}
+	// 		$.confirm({
+	// 			"words": "确定调拨完成吗？",
+	// 			"yesCallback": function(){
+	// 				top.submitStyleNo(selectNoArr, styleNo);
+	// 				top.updateDressStatus(48, selectNoArr, "product_allotconfirm_time");
+	// 			}
+	// 		});	
+	// 	});
+	// 	/****************外采入库入口******************/
+	// 	$("#outbuy-in-enter").bind('click',function(){
+	// 		$.ajax({
+	// 			url: '../include/schedule/get_dress_by_status.php',
+	// 			type: 'GET',
+	// 			dataType: 'JSON',
+	// 			data: {status: 47, source: 2}
+	// 		})
+	// 		.done(function(data) {
+	// 			if(data.ret==0){
+	// 				var dressList = data.list;
+	// 				var domStr = "";
+	// 				listNoArr = [];
+	// 				$.each(dressList, function(i, val) {
+	// 					listNoArr.push(val.design_no);
+	// 					domStr += '<tr>'
+	// 							+	'<td width="5%">'
+	// 							+		'<span class="check-box" id="' + val.design_no + '"></span>'
+	// 							+	'</td>'
+	// 							+	'<td width="15%">' + val.design_no + '</td>'
+	// 							+	'<td width="15%">' + getFormatTime(val.price_confirm_time) + '</td>'
+	// 							+	'<td width="10%">' + getGender(val.gender) + '</td>'
+	// 							+	'<td width="10%">外采入库</td>'
+	// 							+	'<td width="15%">供应商</td>'
+	// 							+	'<td width="10%">订单数</td>'
+	// 							+	'<td width="10%"><input type="text" id="input_' + val.design_no + '" /></td>'
+	// 							+	'<td width="10%"><span class="list-button" id="button_' + val.design_no + '">完成</span></td>'
+	// 							+'</tr>';
+	// 				});
+	// 				$("#outbuy-in .table-list").html(domStr);
+	// 			}else{
+	// 				console.log("没有款式申请调料");
+	// 			}
+	// 		})
+	// 	})
+	// 	//调拨完成
+	// 	$("#outbuy-in .table-list").on('click', '.list-button', function() {
+	// 		var $this = $(this);
+	// 		var dress_id = parseInt($this.attr('id').split('_')[1]);
+	// 		var orderCount = parseInt($this.closest('tr').find('input').val());
+	// 		if($.inArray(dress_id, selectNoArr) == -1) {
+	// 			selectNoArr.push(dress_id);
+	// 		}
+	// 		$.confirm({
+	// 			"words": "确定调拨完成吗？",
+	// 			"yesCallback": function(){
+	// 				top.submitOuybuyIn Count(selectNoArr, orderCount);
+	// 				top.updateDressStatus(48, selectNoArr, "product_allotconfirm_time");
+	// 			}
+	// 		});	
+	// 	});
+	// }
 
 /***/ },
 /* 1 */

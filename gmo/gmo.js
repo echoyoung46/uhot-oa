@@ -11,9 +11,28 @@ $(function() {
             currentIndex: 0,
             
             //建档
-            fling: [],
-            
-            
+            filing: [],
+
+            //入图
+            drawing: [],
+
+            //头版样衣
+            frontSample: [],
+
+            //审版
+            trialVersion: [],
+
+            //齐色样完成
+            colorDone: [],
+
+            //面辅料入仓
+            materialsInStore: [],
+
+            //面辅料入库
+            materialsIn: [],
+
+            //成衣入库
+            wearIn: []
         },
         methods: {
             

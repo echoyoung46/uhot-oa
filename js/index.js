@@ -1,6 +1,6 @@
 $(function(){
 	$('#view-process').on('click', function(){
-		$ajaxUrl("storage/readymade.html")
+		$ajaxUrl("gmo/gmo.html")
 	}).click();
 　　
 	

@@ -66,3 +66,14 @@
 #cargo-issue .accessory{
     width: 10%;
 }
+
+/*成衣检验*/
+#readymade-check .gender,#readymade-check .series,#readymade-check .source{
+    width: 5%;
+}
+#readymade-check .check-result,#readymade-check .storage-num{
+    width: 15%;
+}
+#readymade-check .operator{
+    width: 10%;
+}

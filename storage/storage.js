@@ -18,6 +18,9 @@ $(function(){
             
             //大货发料   
             cargo: [],
+
+            //成衣检验
+            madeCheck: [],
             
         },
         methods: {

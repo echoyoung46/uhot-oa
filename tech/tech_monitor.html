@@ -16,7 +16,7 @@
 					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2)">复版</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-enter"  v-on:click="toggle(3)">工艺单</a></li>
 					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  v-on:click="toggle(4, [34], ['sample'])">纸样</a></li>
-					<li role="presentation"><a href="#marker" id="marker-enter"  v-on:click="toggle(5, [40, 40], ['marker1','marker2'])">唛架</a></li>
+					<li role="presentation"><a href="#marker" id="marker-enter"  v-on:click="toggle(5, [40, 51], ['marker1','marker2'])">唛架</a></li>
 					<li role="presentation"><a href="#sample-grade" id="grade-enter"  v-on:click="toggle(6)">样衣分数</a></li>
 				</ul>
 			</div>
@@ -680,7 +680,7 @@
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{ item.design_no }}</dd>
-								<dd class="operator-time">{{ item.marker_applycheck_time }}</dd>
+								<dd class="operator-time">{{ item.marker_applycheckadjust_time }}</dd>
 								<dd class="gender">{{ item.d_gender }}</dd>
 								<dd class="series">{{ item.series_id }}</dd>
 								<dd class="source">{{ item.source }}</dd>
@@ -695,7 +695,24 @@
 								</dd>
 							</dl>
 						</div>
-                        
+                        <!-- 完成修改唛架Modal -->
+                        <div class="modal fade" id="markerModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">完成修改唛架</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定完成修改唛架吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" id="price-save-button" v-on:click="updateStatus(52, 'marker_finishadjust_time')">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 				<div id="sample-grade" class="list-box" v-show="currentIndex === 6">
