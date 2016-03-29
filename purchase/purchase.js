@@ -91,11 +91,6 @@ function bindEvent(){
 			});
 		}
 	});
-
-	$('#costsModal2').on('show.bs.modal', function (event) {
-		var $button = $(event.relatedTarget);
-		chosenId = $button.closest('dl').find('.design-no').html();
-	});
 }
 
 /**

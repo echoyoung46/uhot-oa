@@ -93,7 +93,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in season1">
+							<dl v-for="item in season1" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -124,7 +124,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in season2">
+							<dl v-for="item in season2" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -143,14 +143,14 @@
 						    <div class="modal-content">
 						      	<div class="modal-header">
 						        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        	<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+						        	<h4 class="modal-title" id="myModalLabel">调料</h4>
 						      	</div>
 						     	<div class="modal-body">
-						       	 确定提交建档（自产）吗?
+						       	 确定申请头版样衣制作吗?
 						      	</div>
 						      	<div class="modal-footer">
 						        	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        	<button type="button" class="btn btn-primary"  v-on:click="updateStatus(1, 'filing_time')">确定</button>
+						        	<button type="button" class="btn btn-primary"  v-on:click="updateStatus(4, 'filiapply_makefront_timeng_time')">确定</button>
 						      	</div>
 						    </div>
 						</div>
@@ -192,15 +192,15 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in sample1">
+							<dl v-for="item in sample1" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | transTime}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.apply_makefront_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource}}</dd>
 								<dd class="details">&nbsp;</dd>
 							</dl>
 						</div>

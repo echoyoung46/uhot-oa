@@ -11,7 +11,7 @@
 		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  v-on:click="toggle(0)">头版样衣制作</a></li>
+					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  v-on:click="toggle(0,[4],['sample'])">头版样衣制作</a></li>
 					<li role="presentation"><a href="#viewer" id="viewer-enter"  v-on:click="toggle(1)">审版</a></li>
 					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2)">复版</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-enter"  v-on:click="toggle(3)">工艺单</a></li>
@@ -22,7 +22,7 @@
 			</div>
 			<div class="page-list">
 				<div id="sample" class="list-box" v-show="currentIndex === 0">
-					<!--<div class="status-box" ms-controller="sample1" id="sample1">
+					<div class="status-box" ms-controller="sample1" id="sample1">
 						<div class="status-title">申请制作</div>
 						<div class="list-title">
 							<dl>
@@ -37,16 +37,16 @@
 								<dd class="operator">纸样分配</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.apply_makefront_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.apply_makefront_time | transTime  }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSerie}}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="operator">
 									<select class="sampler-select">
 										<option value="汤胜辉1">纸样师——汤胜辉1</option>
@@ -58,7 +58,7 @@
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
 					<!-- Modal -->
 					<div class="modal fade" id="sampleModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">

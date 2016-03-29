@@ -58,6 +58,9 @@ $(function() {
     
 	// initSave();
 	bindEvent();
+    
+    //初始时获取第一项数据
+    techModel.toggle(0, [0], ['filing']);
 });
 
 function bindEvent() {

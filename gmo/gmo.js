@@ -196,22 +196,6 @@ function initList() {
 }
 
 /**
- * Vue 时间格式转换
- */
-Vue.filter('transTime', function (_time) {
-    //时间格式转换
-    var t = _time,
-        _year = t.getFullYear(),
-        _month = t.getMonth() + 1,
-        _day = t.getDate(),
-        _hour = t.getHours(),
-        _min = t.getMinutes(),
-        _sec = t.getSeconds(),
-        timeResult = _year + '-' + _month + '-' + _day + ' ' + _hour + ':' + _min + ':' + _sec; 
-    return timeResult;
-})
-
-/**
  * 时间格式转换过滤器
  */
 Vue.filter('transTime', function (_time) {

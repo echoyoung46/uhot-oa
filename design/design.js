@@ -76,7 +76,30 @@ $(function() {
 
     //初始时获取第一项数据
     designModel.toggle(0, [1], ['basicFile']);
+    
+    bindEvent();
 });
+
+function bindEvent(){
+	$('.page-menu').on('click','li',function(){
+		var $this = $(this);
+		$this.addClass('active').siblings().removeClass('active');
+	});
+	
+	$('.list-title .checkAll').on('click', function(){
+		var $this = $(this);
+		var $list = $this.closest('.status-box').find('.list-detail input');
+		if($this.is(':checked')){
+			$list.each(function(i, el){
+				$(el).attr('checked','true');
+			});
+		}else{
+			$list.each(function(i, el){
+				$(el).removeAttr('checked');
+			});
+		}
+	});
+}
 
 /**
  * Vue 时间格式转换

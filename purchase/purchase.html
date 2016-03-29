@@ -39,7 +39,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in spicesApply">
+							<dl v-for="item in spicesApply" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -52,10 +52,27 @@
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#myModal">完成</button>
+									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#spiceModal" v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl>
 						</div>
+                        <div class="modal fade" id="spiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">调料申请</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    确定申请调料吗?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary"  v-on:click="updateStatus(3, 'finish_transmaterial_time')">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 				<div id="repurchase-list" class="list-box" v-show="currentIndex === 1">
