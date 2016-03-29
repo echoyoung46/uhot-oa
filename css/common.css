@@ -26,6 +26,47 @@
 	margin-bottom: 0;
 	height: 40px;
 }
+/* RESET*/
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,abbr,article,aside,command,details,figcaption,figure,footer,header,hgroup,mark,meter,nav,output,progress,section,summary,time {margin: 0; padding: 0; }
+/*h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,strong,th,figcaption {font-weight: normal; font-style: normal; }*/
+fieldset,iframe {border: none; }
+caption,th {text-align: left; }
+table {border-collapse: collapse; border-spacing: 0; }
+article,aside,footer,header,hgroup,nav,section,figure,figcaption {display: block; }
+a{text-decoration: none;}
+input{background: none;border: none;outline: none;color:#fff;}
+ul{list-style: none;}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff;
+    opacity:  0.8;
+    font-size: 16px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 16 */
+   color:    #fff;
+   opacity:  0.8;
+   font-size: 16px;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #fff;
+   opacity:  0.8;
+   font-size: 16px;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #fff;
+   opacity:  0.8;
+   filter:alpha(opacity=80);
+   font-size: 16px;
+}
+:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+  color:    #fff;
+  opacity:  0.8;
+  font-size: 16px;
+}
+
+body{
+    font-family: Helvetica, Tahoma, Arial, 'Hiragino Sans GB', "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+}
+
 .status-box dt, .status-box dd{
 	float: left;
 	height: 100%;

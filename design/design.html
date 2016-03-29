@@ -3,27 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>设计部</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="design/css/design.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./design/design.css">
 </head>
 <body>
-	<div id="page-container" ms-controller="menu">
-		<div class="page-content">
+	<div id="page-container">
+		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#basic-file" id="basic-file-enter" ms-click="toggle(0)">基础档案</a></li>
-					<li role="presentation"><a href="#season" id="season-enter" ms-click="toggle(1)">调料</a></li>
-					<li role="presentation"><a href="#sample" id="sample-enter" ms-click="toggle(2)">头版样衣制作</a></li>
-					<li role="presentation"><a href="#viewer" id="viewer-enter" ms-click="toggle(3)">审版</a></li>
-					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter" ms-click="toggle(4)">复版</a></li>
-					<li role="presentation"><a href="#repurchase-list" id="repurchase-enter" ms-click="toggle(5)">设计助理-预采任务单</a></li>
-					<li role="presentation"><a href="#repurchase-list1" id="repurchase1-enter" ms-click="toggle(6)">设计师-预采任务单</a></li>
-					<li role="presentation"><a href="#repurchase-list2" id="repurchase2-enter" ms-click="toggle(7)">设计主管-预采任务单</a></li>
+					<li role="presentation" class="active"><a href="#basic-file" id="basic-file-enter" v-on:click="toggle(0,[1],['basicFile'])">基础档案</a></li>
+					<li role="presentation"><a href="#season" id="season-enter" v-on:click="toggle(1,[2,3],['season1','season2'])">调料</a></li>
+					<li role="presentation"><a href="#sample" id="sample-enter" v-on:click="toggle(2,[4,9],['sample1','sample2'])">头版样衣制作</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter" v-on:click="toggle(3,[10],['viewer'])">审版</a></li>
+					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter" v-on:click="toggle(4,[1,1],['dubviewer1','dubviewer2'])">复版</a></li>
+					<li role="presentation"><a href="#repurchase-list" id="repurchase-enter" v-on:click="toggle(5,[1,1],['repurchase1','repurchase2'])">设计助理-预采任务单</a></li>
+					<li role="presentation"><a href="#repurchase-list1" id="repurchase1-enter" v-on:click="toggle(6,[11,11,11],['repurchaseD1','repurchaseD2','repurchaseD3'])">设计师-预采任务单</a></li>
+					<li role="presentation"><a href="#repurchase-list2" id="repurchase2-enter" v-on:click="toggle(7,[11,12,13],['repurchaseM1','repurchaseM2','repurchaseM3'])">设计主管-预采任务单</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
-				<div id="basic-file" class="list-box" ms-visible="currentIndex === 0">
-					<div class="status-box" ms-controller="basic">
+				<div id="basic-file" class="list-box" v-show="currentIndex === 0">
+					<div class="status-box">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -38,21 +38,21 @@
 								<dd class="operator">申请调料</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in basicFile" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#filingModal">提交</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#filingModal" v-on:click="getChosenId( item.design_no )">提交</button>                                
 								</dd>
 							</dl>
 						</div>
@@ -69,15 +69,15 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="filing-save-button">确定</button>
+									<button type="button" class="btn btn-primary"  v-on:click="updateStatus(2, 'apply_transmaterial_time')">确定</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 						
-				<div id="season" class="list-box" ms-visible="currentIndex === 1">
-					<div class="status-box" ms-controller="season1" id="season1">
+				<div id="season" class="list-box" v-show="currentIndex === 1">
+					<div class="status-box" id="season1">
 						<div class="status-title">调料中</div>
 						<div class="list-title">
 							<dl>
@@ -92,23 +92,23 @@
 								<dd class="details">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in season1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.apply_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.apply_transmaterial_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource}}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="season2" id="season2">
+					<div class="status-box" id="season2">
 						<div class="status-title">调料完成</div>
 						<div class="list-title">
 							<dl>
@@ -123,21 +123,38 @@
 								<dd class="operator">申请头版样衣制作</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in season2">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.finish_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.finish_transmaterial_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#seasonModal">申请</button>
+									<button v-if="item.source == 1" type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal" v-on:click="getChosenId( item.design_no )">提交</button>
 								</dd>
 							</dl>
 						</div>
+                        <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  	<div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      	<div class="modal-header">
+						        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        	<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+						      	</div>
+						     	<div class="modal-body">
+						       	 确定提交建档（自产）吗?
+						      	</div>
+						      	<div class="modal-footer">
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        	<button type="button" class="btn btn-primary"  v-on:click="updateStatus(1, 'filing_time')">确定</button>
+						      	</div>
+						    </div>
+						</div>
+					</div>
 					</div>
 					<div class="modal fade" id="seasonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -158,8 +175,8 @@
 					</div>
 				</div>
 
-				<div id="sample" class="list-box" ms-visible="currentIndex === 2">
-					<div class="status-box" ms-controller="sample1" id="sample1">
+				<div id="sample" class="list-box" v-show="currentIndex === 2">
+					<div class="status-box" id="sample1">
 						<div class="status-title">制作中</div>
 						<div class="list-title">
 							<dl>
@@ -174,13 +191,13 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
+								<dd class="operator-time">{{el.filing_time | transTime}}</dd>
 								<dd class="gender">{{el.d_gender}}</dd>
 								<dd class="series">{{el.series_id}}</dd>
 								<dd class="source">{{el.source}}</dd>
@@ -188,7 +205,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="sample2" id="sample2">
+					<div class="status-box" id="sample2">
 						<div class="status-title">制作完成</div>
 						<div class="list-title">
 							<dl>
@@ -204,16 +221,16 @@
 								<dd class="operator">审版意见</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample2">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.scoring_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.scoring_time | transTime}}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
 									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#passModal">审版通过</button>
 								</dd>
@@ -264,8 +281,8 @@
 					</div>
 				</div>
 
-				<div id="viewer" class="list-box" ms-visible="currentIndex === 3">
-					<div class="status-box" ms-controller="viewer">
+				<div id="viewer" class="list-box" v-show="currentIndex === 3">
+					<div class="status-box">
 						<div class="status-title">制作中</div>
 						<div class="list-title">
 							<dl>
@@ -281,21 +298,21 @@
 								<dd class="operator">完成预采单</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in viewer">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.passversion_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.passversion_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#viewerModal">提交审批</button>
+									<button v-else type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#viewerModal" v-on:click="getChosenId( item.design_no )">提交审批</button>
 								</dd>
 							</dl>
 						</div>
@@ -319,8 +336,8 @@
 					</div>	
 				</div>
 
-				<div id="dubviewer" class="list-box" ms-visible="currentIndex === 4">
-					<div class="status-box" ms-controller="dubviewer1">
+				<div id="dubviewer" class="list-box" v-show="currentIndex === 4">
+					<div class="status-box">
 						<div class="status-title">制作中</div>
 						<div class="list-title">
 							<dl>
@@ -335,16 +352,16 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in dubviewer1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -352,7 +369,7 @@
 						</div>
 					</div>
 					
-					<div class="status-box" ms-controller="dubviewer2">
+					<div class="status-box">
 						<div class="status-title">制作完成</div>
 						<div class="list-title">
 							<dl>
@@ -368,30 +385,30 @@
 								<dd class="operator">审版意见</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in dubviewer2">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.design_no}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
-									<button class="btn btn-default btn-primary sample-pass-button" type="submit" data-toggle="pass-modal" data-target="#passModal">审版通过</button>
+									<button class="btn btn-default btn-primary sample-pass-button" type="submit" data-toggle="pass-modal" data-target="#passModal" v-on:click="getChosenId( item.design_no )">审版通过</button>
 								</dd>
 								<dd class="operator">
 									<input type="text" id="dubview-option-input">
-									<button class="btn btn-default btn-primary sample-dubview-button" type="submit" data-toggle="dubview-modal" data-target="#dubviewModal">申请复版</button>
+									<button class="btn btn-default btn-primary sample-dubview-button" type="submit" data-toggle="dubview-modal" data-target="#dubviewModal" v-on:click="getChosenId( item.design_no )">申请复版</button>
 								</dd>
 							</dl>
 						</div>
 					</div>
 				</div>
 
-				<div id="repurchase-list" class="list-box" ms-visible="currentIndex === 5">
-					<div class="status-box" ms-controller="repurchase1">
+				<div id="repurchase-list" class="list-box" v-show="currentIndex === 5">
+					<div class="status-box">
 						<div class="status-title">审批中</div>
 						<div class="list-title">
 							<dl>
@@ -403,13 +420,13 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchase1">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender }}</dd>
+								<dd class="series">{{ item.series_id }}</dd>
+								<dd class="source">{{ item.source }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -417,7 +434,7 @@
 						</div>
 					</div>
 					
-					<div class="status-box" ms-controller="repurchase2">
+					<div class="status-box">
 						<div class="status-title">已移交</div>
 						<div class="list-title">
 							<dl>
@@ -429,13 +446,13 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchase2">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -443,8 +460,8 @@
 						</div>
 					</div>
 				</div>
-				<div id="repurchase-list1" class="list-box" ms-visible="currentIndex === 6">
-					<div class="status-box" ms-controller="designer-repurchase1" id="designer-check1">
+				<div id="repurchase-list1" class="list-box" v-show="currentIndex === 6">
+					<div class="status-box" id="designer-check1">
 						<div class="status-title">待审批</div>
 						<div class="list-title">
 							<dl>
@@ -460,21 +477,21 @@
 								<dd class="operator">审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchaseD1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.adopt_admitcheck_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.adopt_admitcheck_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#designerModal">审批</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#designerModal" v-on:click="getChosenId( item.design_no )">审批</button>
 								</dd>
 							</dl>
 						</div>
@@ -497,8 +514,8 @@
 						</div>
 						</div>
 					</div>
-					
-					<div class="status-box" ms-controller="repurchase2">
+                    
+					<div class="status-box">
 						<div class="status-title">审批中</div>
 						<div class="list-title">
 							<dl>
@@ -510,20 +527,21 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchaseD2">
+								<dt class="design-no">{{item.design_no }}</dt>
+								<dd class="operator-time">{{item.filing_time | transTime }}</dd>
+								<dd class="gender">{{item.d_gender | getGender }}</dd>
+								<dd class="series">{{item.series_id | getSeries }}</dd>
+								<dd class="source">{{item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="repurchase3">
+                    
+					<div class="status-box">
 						<div class="status-title">已移交</div>
 						<div class="list-title">
 							<dl>
@@ -535,13 +553,13 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchaseD3">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -549,8 +567,8 @@
 						</div>
 					</div>
 				</div>
-				<div id="repurchase-list2" class="list-box" ms-visible="currentIndex === 7">
-					<div class="status-box" ms-controller="designmonitor-repurchase1">
+				<div id="repurchase-list2" class="list-box" v-show="currentIndex === 7">
+					<div class="status-box">
 						<div class="status-title">审批中</div>
 						<div class="list-title">
 							<dl>
@@ -562,20 +580,20 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchaseM1">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="designmonitor-repurchase2" id="designmonitor-repurchase2">
+					<div class="status-box" id="designmonitor-repurchase2">
 						<div class="status-title">待审批</div>
 						<div class="list-title">
 							<dl>
@@ -591,21 +609,21 @@
 								<dd class="operator">移交</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchaseM2">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.adopt_checked_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.adopt_checked_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#designer-transmit-Modal">移交</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#designer-transmit-Modal" v-on:click="getChosenId( item.design_no )">移交</button>
 								</dd>
 							</dl>
 						</div>
@@ -628,7 +646,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="designmonitor-repurchase3">
+					<div class="status-box">
 						<div class="status-title">已移交</div>
 						<div class="list-title">
 							<dl>
@@ -640,13 +658,13 @@
 								<dd class="details">详细内容</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.adopt_transfer_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in repurchaseM3">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.adopt_transfer_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="details">
 									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 								</dd>
@@ -659,8 +677,8 @@
 		
 	
 	</div>
-<script src="js/avalon.js"></script>
-<script src="js/global.js"></script>
-<script src="design/js/design.js"></script> 
+    
+<script src="./js/global.js"></script>
+<script src="./design/designdle.js"></script> 
 </body>
 </html>
