@@ -57,7 +57,9 @@
 	            currentIndex: 0,
 	            
 	            //纸样 
-	            sample: [],
+	            sample1: [],
+	            sample2: [],
+	            sample3: [],
 	            
 	            //唛架 
 	            marker1: [],
@@ -96,17 +98,14 @@
 	            }
 	        }
 	    })
-
-		// initAction();
 	    
-	    //初始时获取第一项数据
-	    // producerModel.toggle(4, [27], ['order1']);
+		// initAction();
 	    
 		// initSave();
 		bindEvent();
 	    
 	    //初始时获取第一项数据
-	    techModel.toggle(0, [0], ['filing']);
+	    techModel.toggle(0,[4,6,8],['sample1','sample2','sample3']);
 	});
 
 	function bindEvent() {
@@ -140,114 +139,68 @@
 		});
 	}
 
-	function initAction(){
-		/**************头版样衣制作*************/
-		$('#sample-enter').on('click', function(event) {
-			var reqData1 = getDressByStatus(4);
-			var sample1 = avalon.define({
-				$id: "sample1",
-				dress: reqData1
-			});
+	/**
+	 * 时间格式转换过滤器
+	 */
+	Vue.filter('transTime', function (_time) {
+	    var t = new Date(parseInt(_time)),
+	        _year = t.getFullYear(),
+	        _month = t.getMonth() + 1,
+	        _day = t.getDate(),
+	        _hour = t.getHours(),
+	        _min = t.getMinutes(),
+	        _sec = t.getSeconds(),
+	        timeResult = _year + '-' + _month + '-' + _day + ' ' + _hour + ':' + _min + ':' + _sec; 
+	    return timeResult;
+	})
 
-			var reqData2 = getDressByStatus(6);
-			var sample2 = avalon.define({
-				$id: "sample2",
-				dress: reqData2
-			});
+	/**
+	 * 男女装过滤器
+	 */
+	Vue.filter('getGender', function (value) {
+	    if(value == '1'){
+	        return '男装'
+	    }else if(value == '2'){
+	        return '女装'
+	    }else {
+	        return '其他'
+	    }
+	})
 
-			var reqData3 = getDressByStatus(8);
-			var sample3 = avalon.define({
-				$id: "sample3",
-				dress: reqData3
-			});
-		}).click();
+	/**
+	 * 系列过滤器
+	 */
+	Vue.filter('getSeries', function (value) {
+	    if(value == '1'){
+	        return '贵尚'
+	    }else if(value == '2'){
+	        return '雅尚'
+	    }else if(value == '3'){
+	        return '器尚'
+	    }else if(value == '4'){
+	        return '风尚'
+	    }else if(value == '5'){
+	        return '外采'
+	    }else {
+	        return '其他'
+	    }
+	})
 
-		/*****************审版*****************/
-		$('#viewer-enter').on('click', function(){
-			//审版通过
-			var reqData1 = getDressByStatus(10);
-			var viewer1 = avalon.define({
-				$id: "viewer1",
-				dress: reqData1
-			});
-
-			//申请复版
-			var reqData2 = getDressByStatus(14);
-			var viewer2 = avalon.define({
-				$id: "viewer2",
-				dress: reqData2
-			});
-		}).click();
-
-		/*************复版**************/
-		$('#dubviewer-enter').on('click', function(){
-			//复版制作
-			var reqData1 = getDressByStatus(15);
-			var dubviewer1 = avalon.define({
-				$id: "dubviewer1",
-				dress: reqData1
-			});
-
-			//完成纸样
-			var reqData2 = getDressByStatus(17);
-			var dubviewer2 = avalon.define({
-				$id: "dubviewer2",
-				dress: reqData2
-			});
-
-			//复版完成
-			var reqData3 = getDressByStatus(18);
-			var dubviewer3 = avalon.define({
-				$id: "dubviewer3",
-				dress: reqData3
-			});
-		})
-	}
+	/**
+	 * 生产方式过滤器
+	 */
+	Vue.filter('getSource', function (value) {
+	    if(value == '1'){
+	        return '自产'
+	    }else if(value == '2'){
+	        return '外采'
+	    }else {
+	        return '其他'
+	    }
+	})
 
 	function initSave() {
-		//头版样衣制作
-		$('#sample1-save-button').on('click', function(){
-			selectNoArr = [];
-			var carversionName = $('.sampler-select').val();
-			$('#sample1 .list-checkbox input:checked').each(function(i, el){
-				var $el = $(el);
-				var dressId = $el.closest('dl').find('.design-no').html();
-				selectNoArr.push(parseInt(dressId));
-			});
-			if(selectNoArr.length == 0) {
-				selectNoArr.push(parseInt(chosenId));
-			}
-			adoptSampler(selectNoArr, samplerName);
-			updateDressStatus(5, selectNoArr, "allotpattern_time");
-		});
-		$('#carversion-save-button').on('click', function(){
-			selectNoArr = [];
-			var carversionName = $('.carversion-select').val();
-			$('#sample2 .list-checkbox input:checked').each(function(i, el){
-				var $el = $(el);
-				var dressId = $el.closest('dl').find('.design-no').html();
-				selectNoArr.push(parseInt(dressId));
-			});
-			if(selectNoArr.length == 0) {
-				selectNoArr.push(parseInt(chosenId));
-			}
-			adoptCarversion(selectNoArr, carversionName);
-			updateDressStatus(8, selectNoArr, "allotcarversion_time");
-		});
-		$('#score-save-button').on('click', function(){
-			selectNoArr = [];
-			var carversionScore = $('.carversion-score').val();
-			$('#sample3 .list-checkbox input:checked').each(function(i, el){
-				var $el = $(el);
-				var dressId = $el.closest('dl').find('.design-no').html();
-				selectNoArr.push(parseInt(dressId));
-			});
-			if(selectNoArr.length == 0) {
-				selectNoArr.push(parseInt(chosenId));
-			}
-			setCarversionScore(selectNoArr, carversionScore);
-			updateDressStatus(9, selectNoArr, "scoring_time");
-		});
+		
 
 		//审版-同意复版
 		$('#dubviewer-pass-button').on('click', function(){
@@ -1228,7 +1181,7 @@
 	var isArray = Array.isArray;
 
 	/**
-	 * Define a non-enumerable property
+	 * Define a property.
 	 *
 	 * @param {Object} obj
 	 * @param {String} key
@@ -1331,6 +1284,12 @@
 
 	// Browser environment sniffing
 	var inBrowser = typeof window !== 'undefined' && Object.prototype.toString.call(window) !== '[object Object]';
+
+	// Check if the browser supports native <template>.
+	var hasNativeTemplate = (function () {
+	  var t = document.createElement('template');
+	  return t.content && t.content.nodeType === 11;
+	})();
 
 	// detect devtools
 	var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
@@ -1847,6 +1806,13 @@
 	   */
 
 	  warnExpressionErrors: true,
+
+	  /**
+	   * Whether to allow devtools inspection.
+	   * Disabled by default in production builds.
+	   */
+
+	  devtools: process.env.NODE_ENV !== 'production',
 
 	  /**
 	   * Internal flag to indicate the delimiters have been
@@ -2515,7 +2481,33 @@
 	function initProp(vm, prop, value) {
 	  var key = prop.path;
 	  value = coerceProp(prop, value);
+	  if (value === undefined) {
+	    value = getPropDefaultValue(vm, prop.options);
+	  }
 	  vm[key] = vm._data[key] = assertProp(prop, value) ? value : undefined;
+	}
+
+	/**
+	 * Get the default value of a prop.
+	 *
+	 * @param {Vue} vm
+	 * @param {Object} options
+	 * @return {*}
+	 */
+
+	function getPropDefaultValue(vm, options) {
+	  // no default, return undefined
+	  if (!hasOwn(options, 'default')) {
+	    // absent boolean value defaults to false
+	    return options.type === Boolean ? false : undefined;
+	  }
+	  var def = options['default'];
+	  // warn against non-factory defaults for Object & Array
+	  if (isObject(def)) {
+	    process.env.NODE_ENV !== 'production' && warn('Object/Array as default prop values will be shared ' + 'across multiple instances. Use a factory function ' + 'to return the default value instead.');
+	  }
+	  // call factory function for non-Function types
+	  return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
 	}
 
 	/**
@@ -3208,9 +3200,10 @@
 	 * @param {Object} obj
 	 * @param {String} key
 	 * @param {*} val
+	 * @param {Boolean} doNotObserve
 	 */
 
-	function defineReactive(obj, key, val) {
+	function defineReactive(obj, key, val, doNotObserve) {
 	  var dep = new Dep();
 
 	  var property = Object.getOwnPropertyDescriptor(obj, key);
@@ -3222,7 +3215,11 @@
 	  var getter = property && property.get;
 	  var setter = property && property.set;
 
-	  var childOb = observe(val);
+	  // if doNotObserve is true, only use the child value observer
+	  // if it already exists, and do not attempt to create it.
+	  // this allows freezing a large object from the root and
+	  // avoid unnecessary observation inside v-for fragments.
+	  var childOb = doNotObserve ? typeof val === 'object' && val.__ob__ : observe(val);
 	  Object.defineProperty(obj, key, {
 	    enumerable: true,
 	    configurable: true,
@@ -3252,7 +3249,7 @@
 	      } else {
 	        val = newVal;
 	      }
-	      childOb = observe(newVal);
+	      childOb = doNotObserve ? typeof newVal === 'object' && newVal.__ob__ : observe(newVal);
 	      dep.notify();
 	    }
 	  });
@@ -3287,6 +3284,7 @@
 		isArray: isArray,
 		hasProto: hasProto,
 		inBrowser: inBrowser,
+		hasNativeTemplate: hasNativeTemplate,
 		devtools: devtools,
 		isIE9: isIE9,
 		isAndroid: isAndroid,
@@ -3969,6 +3967,8 @@
 	// before user watchers so that when user watchers are
 	// triggered, the DOM would have already been in updated
 	// state.
+
+	var queueIndex;
 	var queue = [];
 	var userQueue = [];
 	var has = {};
@@ -3998,7 +3998,7 @@
 	  runBatcherQueue(userQueue);
 	  // dev tool hook
 	  /* istanbul ignore if */
-	  if (devtools) {
+	  if (devtools && config.devtools) {
 	    devtools.emit('flush');
 	  }
 	  resetBatcherState();
@@ -4013,8 +4013,8 @@
 	function runBatcherQueue(queue) {
 	  // do not cache length because more watchers might be pushed
 	  // as we run existing watchers
-	  for (var i = 0; i < queue.length; i++) {
-	    var watcher = queue[i];
+	  for (queueIndex = 0; queueIndex < queue.length; queueIndex++) {
+	    var watcher = queue[queueIndex];
 	    var id = watcher.id;
 	    has[id] = null;
 	    watcher.run();
@@ -4043,20 +4043,20 @@
 	function pushWatcher(watcher) {
 	  var id = watcher.id;
 	  if (has[id] == null) {
-	    // if an internal watcher is pushed, but the internal
-	    // queue is already depleted, we run it immediately.
 	    if (internalQueueDepleted && !watcher.user) {
-	      watcher.run();
-	      return;
-	    }
-	    // push watcher into appropriate queue
-	    var q = watcher.user ? userQueue : queue;
-	    has[id] = q.length;
-	    q.push(watcher);
-	    // queue the flush
-	    if (!waiting) {
-	      waiting = true;
-	      nextTick(flushBatcherQueue);
+	      // an internal watcher triggered by a user watcher...
+	      // let's run it immediately after current user watcher is done.
+	      userQueue.splice(queueIndex + 1, 0, watcher);
+	    } else {
+	      // push watcher into appropriate queue
+	      var q = watcher.user ? userQueue : queue;
+	      has[id] = q.length;
+	      q.push(watcher);
+	      // queue the flush
+	      if (!waiting) {
+	        waiting = true;
+	        nextTick(flushBatcherQueue);
+	      }
 	    }
 	  }
 	}
@@ -4090,13 +4090,15 @@
 	  var isFn = typeof expOrFn === 'function';
 	  this.vm = vm;
 	  vm._watchers.push(this);
-	  this.expression = isFn ? expOrFn.toString() : expOrFn;
+	  this.expression = expOrFn;
 	  this.cb = cb;
 	  this.id = ++uid$2; // uid for batching
 	  this.active = true;
 	  this.dirty = this.lazy; // for lazy watchers
-	  this.deps = Object.create(null);
-	  this.newDeps = null;
+	  this.deps = [];
+	  this.newDeps = [];
+	  this.depIds = Object.create(null);
+	  this.newDepIds = null;
 	  this.prevError = null; // for async error stacks
 	  // parse expression for getter/setter
 	  if (isFn) {
@@ -4112,23 +4114,6 @@
 	  // watchers during vm._digest()
 	  this.queued = this.shallow = false;
 	}
-
-	/**
-	 * Add a dependency to this directive.
-	 *
-	 * @param {Dep} dep
-	 */
-
-	Watcher.prototype.addDep = function (dep) {
-	  var id = dep.id;
-	  if (!this.newDeps[id]) {
-	    this.newDeps[id] = dep;
-	    if (!this.deps[id]) {
-	      this.deps[id] = dep;
-	      dep.addSub(this);
-	    }
-	  }
-	};
 
 	/**
 	 * Evaluate the getter, and re-collect dependencies.
@@ -4205,7 +4190,25 @@
 
 	Watcher.prototype.beforeGet = function () {
 	  Dep.target = this;
-	  this.newDeps = Object.create(null);
+	  this.newDepIds = Object.create(null);
+	  this.newDeps.length = 0;
+	};
+
+	/**
+	 * Add a dependency to this directive.
+	 *
+	 * @param {Dep} dep
+	 */
+
+	Watcher.prototype.addDep = function (dep) {
+	  var id = dep.id;
+	  if (!this.newDepIds[id]) {
+	    this.newDepIds[id] = true;
+	    this.newDeps.push(dep);
+	    if (!this.depIds[id]) {
+	      dep.addSub(this);
+	    }
+	  }
 	};
 
 	/**
@@ -4214,15 +4217,17 @@
 
 	Watcher.prototype.afterGet = function () {
 	  Dep.target = null;
-	  var ids = Object.keys(this.deps);
-	  var i = ids.length;
+	  var i = this.deps.length;
 	  while (i--) {
-	    var id = ids[i];
-	    if (!this.newDeps[id]) {
-	      this.deps[id].removeSub(this);
+	    var dep = this.deps[i];
+	    if (!this.newDepIds[dep.id]) {
+	      dep.removeSub(this);
 	    }
 	  }
+	  this.depIds = this.newDepIds;
+	  var tmp = this.deps;
 	  this.deps = this.newDeps;
+	  this.newDeps = tmp;
 	};
 
 	/**
@@ -4310,10 +4315,9 @@
 	 */
 
 	Watcher.prototype.depend = function () {
-	  var depIds = Object.keys(this.deps);
-	  var i = depIds.length;
+	  var i = this.deps.length;
 	  while (i--) {
-	    this.deps[depIds[i]].depend();
+	    this.deps[i].depend();
 	  }
 	};
 
@@ -4330,10 +4334,9 @@
 	    if (!this.vm._isBeingDestroyed && !this.vm._vForRemoving) {
 	      this.vm._watchers.$remove(this);
 	    }
-	    var depIds = Object.keys(this.deps);
-	    var i = depIds.length;
+	    var i = this.deps.length;
 	    while (i--) {
-	      this.deps[depIds[i]].removeSub(this);
+	      this.deps[i].removeSub(this);
 	    }
 	    this.active = false;
 	    this.vm = this.cb = this.value = null;
@@ -4523,6 +4526,7 @@
 	 */
 
 	function cloneNode(node) {
+	  /* istanbul ignore if */
 	  if (!node.querySelectorAll) {
 	    return node.cloneNode();
 	  }
@@ -5113,7 +5117,7 @@
 	    // for two-way binding on alias
 	    scope.$forContext = this;
 	    // define scope properties
-	    defineReactive(scope, alias, value);
+	    defineReactive(scope, alias, value, true /* do not observe */);
 	    defineReactive(scope, '$index', index);
 	    if (key) {
 	      defineReactive(scope, '$key', key);
@@ -5497,12 +5501,11 @@
 	      var next = el.nextElementSibling;
 	      if (next && getAttr(next, 'v-else') !== null) {
 	        remove(next);
-	        this.elseFactory = new FragmentFactory(next._context || this.vm, next);
+	        this.elseEl = next;
 	      }
 	      // check main block
 	      this.anchor = createAnchor('v-if');
 	      replace(el, this.anchor);
-	      this.factory = new FragmentFactory(this.vm, el);
 	    } else {
 	      process.env.NODE_ENV !== 'production' && warn('v-if="' + this.expression + '" cannot be ' + 'used on an instance root element.');
 	      this.invalid = true;
@@ -5525,6 +5528,10 @@
 	      this.elseFrag.remove();
 	      this.elseFrag = null;
 	    }
+	    // lazy init factory
+	    if (!this.factory) {
+	      this.factory = new FragmentFactory(this.vm, this.el);
+	    }
 	    this.frag = this.factory.create(this._host, this._scope, this._frag);
 	    this.frag.before(this.anchor);
 	  },
@@ -5534,7 +5541,10 @@
 	      this.frag.remove();
 	      this.frag = null;
 	    }
-	    if (this.elseFactory && !this.elseFrag) {
+	    if (this.elseEl && !this.elseFrag) {
+	      if (!this.elseFactory) {
+	        this.elseFactory = new FragmentFactory(this.elseEl._context || this.vm, this.elseEl);
+	      }
 	      this.elseFrag = this.elseFactory.create(this._host, this._scope, this._frag);
 	      this.elseFrag.before(this.anchor);
 	    }
@@ -6070,7 +6080,7 @@
 	    }
 	    // key filter
 	    var keys = Object.keys(this.modifiers).filter(function (key) {
-	      return key !== 'stop' && key !== 'prevent';
+	      return key !== 'stop' && key !== 'prevent' && key !== 'self';
 	    });
 	    if (keys.length) {
 	      handler = keyFilter(handler, keys);
@@ -6696,6 +6706,7 @@
 	    if (!child || this.keepAlive) {
 	      if (child) {
 	        // remove ref
+	        child._inactive = true;
 	        child._updateRef(true);
 	      }
 	      return;
@@ -6748,10 +6759,8 @@
 	    var self = this;
 	    var current = this.childVM;
 	    // for devtool inspection
-	    if (process.env.NODE_ENV !== 'production') {
-	      if (current) current._inactive = true;
-	      target._inactive = false;
-	    }
+	    if (current) current._inactive = true;
+	    target._inactive = false;
 	    this.childVM = target;
 	    switch (self.params.transitionMode) {
 	      case 'in-out':
@@ -7400,7 +7409,7 @@
 	      vm._props[path] = prop;
 	      if (raw === null) {
 	        // initialize absent prop
-	        initProp(vm, prop, getDefault(vm, options));
+	        initProp(vm, prop, undefined);
 	      } else if (prop.dynamic) {
 	        // dynamic prop
 	        if (prop.mode === propBindingModes.ONE_TIME) {
@@ -7433,29 +7442,6 @@
 	      }
 	    }
 	  };
-	}
-
-	/**
-	 * Get the default value of a prop.
-	 *
-	 * @param {Vue} vm
-	 * @param {Object} options
-	 * @return {*}
-	 */
-
-	function getDefault(vm, options) {
-	  // no default, return undefined
-	  if (!hasOwn(options, 'default')) {
-	    // absent boolean value defaults to false
-	    return options.type === Boolean ? false : undefined;
-	  }
-	  var def = options['default'];
-	  // warn against non-factory defaults for Object & Array
-	  if (isObject(def)) {
-	    process.env.NODE_ENV !== 'production' && warn('Object/Array as default prop values will be shared ' + 'across multiple instances. Use a factory function ' + 'to return the default value instead.');
-	  }
-	  // call factory function for non-Function types
-	  return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
 	}
 
 	// special binding prefixes
@@ -8349,7 +8335,7 @@
 	    if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
 	      to.setAttribute(name, value);
 	    } else if (name === 'class' && !parseText(value)) {
-	      value.split(/\s+/).forEach(function (cls) {
+	      value.trim().split(/\s+/).forEach(function (cls) {
 	        addClass(to, cls);
 	      });
 	    }
@@ -8372,7 +8358,7 @@
 	    return;
 	  }
 	  var contents = vm._slotContents = {};
-	  var slots = template.querySelectorAll('slot');
+	  var slots = findSlots(template);
 	  if (slots.length) {
 	    var hasDefault, slot, name;
 	    for (var i = 0, l = slots.length; i < l; i++) {
@@ -8401,6 +8387,27 @@
 	      contents[name] = extractFragment(nodes, content);
 	    }
 	  }
+	}
+
+	/**
+	 * Find all slots in a template, including those nested under
+	 * a <template> element's content node.
+	 *
+	 * @param {Element} el
+	 * @return {Array|NodeList}
+	 */
+
+	function findSlots(el) {
+	  var slots = el.querySelectorAll('slot');
+	  /* istanbul ignore if */
+	  if (hasNativeTemplate) {
+	    slots = toArray(slots);
+	    var templates = el.querySelectorAll('template');
+	    for (var i = 0; i < templates.length; i++) {
+	      slots.push.apply(slots, findSlots(templates[i].content));
+	    }
+	  }
+	  return slots;
 	}
 
 	/**
@@ -10625,10 +10632,12 @@
 
 	// devtools global hook
 	/* istanbul ignore next */
-	if (devtools) {
-	  devtools.emit('init', Vue);
-	} else if (process.env.NODE_ENV !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
-	  console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+	if (config.devtools) {
+	  if (devtools) {
+	    devtools.emit('init', Vue);
+	  } else if (process.env.NODE_ENV !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
+	    console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+	  }
 	}
 
 	module.exports = Vue;

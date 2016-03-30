@@ -11,7 +11,9 @@ $(function() {
             currentIndex: 0,
             
             //纸样 
-            sample: [],
+            sample1: [],
+            sample2: [],
+            sample3: [],
             
             //唛架 
             marker1: [],
@@ -50,17 +52,14 @@ $(function() {
             }
         }
     })
-
-	// initAction();
     
-    //初始时获取第一项数据
-    // producerModel.toggle(4, [27], ['order1']);
+	// initAction();
     
 	// initSave();
 	bindEvent();
     
     //初始时获取第一项数据
-    techModel.toggle(0, [0], ['filing']);
+    techModel.toggle(0,[4,6,8],['sample1','sample2','sample3']);
 });
 
 function bindEvent() {
@@ -94,114 +93,68 @@ function bindEvent() {
 	});
 }
 
-function initAction(){
-	/**************头版样衣制作*************/
-	$('#sample-enter').on('click', function(event) {
-		var reqData1 = getDressByStatus(4);
-		var sample1 = avalon.define({
-			$id: "sample1",
-			dress: reqData1
-		});
+/**
+ * 时间格式转换过滤器
+ */
+Vue.filter('transTime', function (_time) {
+    var t = new Date(parseInt(_time)),
+        _year = t.getFullYear(),
+        _month = t.getMonth() + 1,
+        _day = t.getDate(),
+        _hour = t.getHours(),
+        _min = t.getMinutes(),
+        _sec = t.getSeconds(),
+        timeResult = _year + '-' + _month + '-' + _day + ' ' + _hour + ':' + _min + ':' + _sec; 
+    return timeResult;
+})
 
-		var reqData2 = getDressByStatus(6);
-		var sample2 = avalon.define({
-			$id: "sample2",
-			dress: reqData2
-		});
+/**
+ * 男女装过滤器
+ */
+Vue.filter('getGender', function (value) {
+    if(value == '1'){
+        return '男装'
+    }else if(value == '2'){
+        return '女装'
+    }else {
+        return '其他'
+    }
+})
 
-		var reqData3 = getDressByStatus(8);
-		var sample3 = avalon.define({
-			$id: "sample3",
-			dress: reqData3
-		});
-	}).click();
+/**
+ * 系列过滤器
+ */
+Vue.filter('getSeries', function (value) {
+    if(value == '1'){
+        return '贵尚'
+    }else if(value == '2'){
+        return '雅尚'
+    }else if(value == '3'){
+        return '器尚'
+    }else if(value == '4'){
+        return '风尚'
+    }else if(value == '5'){
+        return '外采'
+    }else {
+        return '其他'
+    }
+})
 
-	/*****************审版*****************/
-	$('#viewer-enter').on('click', function(){
-		//审版通过
-		var reqData1 = getDressByStatus(10);
-		var viewer1 = avalon.define({
-			$id: "viewer1",
-			dress: reqData1
-		});
-
-		//申请复版
-		var reqData2 = getDressByStatus(14);
-		var viewer2 = avalon.define({
-			$id: "viewer2",
-			dress: reqData2
-		});
-	}).click();
-
-	/*************复版**************/
-	$('#dubviewer-enter').on('click', function(){
-		//复版制作
-		var reqData1 = getDressByStatus(15);
-		var dubviewer1 = avalon.define({
-			$id: "dubviewer1",
-			dress: reqData1
-		});
-
-		//完成纸样
-		var reqData2 = getDressByStatus(17);
-		var dubviewer2 = avalon.define({
-			$id: "dubviewer2",
-			dress: reqData2
-		});
-
-		//复版完成
-		var reqData3 = getDressByStatus(18);
-		var dubviewer3 = avalon.define({
-			$id: "dubviewer3",
-			dress: reqData3
-		});
-	})
-}
+/**
+ * 生产方式过滤器
+ */
+Vue.filter('getSource', function (value) {
+    if(value == '1'){
+        return '自产'
+    }else if(value == '2'){
+        return '外采'
+    }else {
+        return '其他'
+    }
+})
 
 function initSave() {
-	//头版样衣制作
-	$('#sample1-save-button').on('click', function(){
-		selectNoArr = [];
-		var carversionName = $('.sampler-select').val();
-		$('#sample1 .list-checkbox input:checked').each(function(i, el){
-			var $el = $(el);
-			var dressId = $el.closest('dl').find('.design-no').html();
-			selectNoArr.push(parseInt(dressId));
-		});
-		if(selectNoArr.length == 0) {
-			selectNoArr.push(parseInt(chosenId));
-		}
-		adoptSampler(selectNoArr, samplerName);
-		updateDressStatus(5, selectNoArr, "allotpattern_time");
-	});
-	$('#carversion-save-button').on('click', function(){
-		selectNoArr = [];
-		var carversionName = $('.carversion-select').val();
-		$('#sample2 .list-checkbox input:checked').each(function(i, el){
-			var $el = $(el);
-			var dressId = $el.closest('dl').find('.design-no').html();
-			selectNoArr.push(parseInt(dressId));
-		});
-		if(selectNoArr.length == 0) {
-			selectNoArr.push(parseInt(chosenId));
-		}
-		adoptCarversion(selectNoArr, carversionName);
-		updateDressStatus(8, selectNoArr, "allotcarversion_time");
-	});
-	$('#score-save-button').on('click', function(){
-		selectNoArr = [];
-		var carversionScore = $('.carversion-score').val();
-		$('#sample3 .list-checkbox input:checked').each(function(i, el){
-			var $el = $(el);
-			var dressId = $el.closest('dl').find('.design-no').html();
-			selectNoArr.push(parseInt(dressId));
-		});
-		if(selectNoArr.length == 0) {
-			selectNoArr.push(parseInt(chosenId));
-		}
-		setCarversionScore(selectNoArr, carversionScore);
-		updateDressStatus(9, selectNoArr, "scoring_time");
-	});
+	
 
 	//审版-同意复版
 	$('#dubviewer-pass-button').on('click', function(){

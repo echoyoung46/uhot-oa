@@ -10,14 +10,14 @@
 		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#sample" id="sample-enter" v-on:click="toggle(0)">纸样制作</a></li>
+					<li role="presentation" class="active"><a href="#sample" id="sample-enter" v-on:click="toggle(0,[5,5],['sample1','sample2'])">纸样制作</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(1)">工艺单</a></li>
 					<li role="presentation"><a href="#marker" id="marker-enter" v-on:click="toggle(2, [39,50], ['maker','modifyMaker'])">唛架</a></li>
 				</ul>
 			</div>
 			<div class="page-list">
 				<div id="sample" class="list-box" v-show="currentIndex === 0">
-					<!--<div class="status-box" id="sample1">
+					<div class="status-box" id="sample1">
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -31,18 +31,18 @@
 								<dd class="operator">制作完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample1" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.allotpattern_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="operator-time">{{ item.allotpattern_time | transTime )}}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal1">完成</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal1" v-on:click="getChosenId( item.design_no )">完成</button>
 								</dd>
 							</dl>
 						</div>
@@ -60,7 +60,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-										<button type="button" class="btn btn-primary" id="sample-save-button">确定</button>
+										<button type="button" class="btn btn-primary"  v-on:click="updateStatus(6, 'finishpattern_time')">确定</button>
 									</div>
 								</div>
 							</div>
@@ -81,22 +81,22 @@
 								<dd class="operator">制作完成</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample2" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.filing_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="filing-modal" data-target="#filingModal">完成</button>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
 				</div>
 				<div id="process-sheet" class="list-box" v-show="currentIndex === 1">
 					<!--<div class="status-box" ms-controller="sample">
@@ -115,7 +115,7 @@
 								<dd class="remark">备注</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -150,7 +150,7 @@
 								<dd class="operator">申请审批</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
+						<div class="list-detail table table-hover">
 							<dl>
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
@@ -193,10 +193,10 @@
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{ item.design_no}}</dd>
-								<dd class="operator-time">{{ item.preedition_allsend_time }}</dd>
-								<dd class="gender">{{ item.d_gender }}</dd>
-								<dd class="series">{{ item.series_id }}</dd>
-								<dd class="source">{{ item.source }}</dd>
+								<dd class="operator-time">{{ item.preedition_allsend_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="reason">
 									<button class="btn btn-default btn-primary operator-button" type="submit" data-toggle="modal" data-target="#markerModal"  v-on:click="getChosenId( item.design_no )">申请</button>
 								</dd>

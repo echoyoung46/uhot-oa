@@ -1,3 +1,18 @@
+.form-control{
+    width: 50%;    
+    display: inline-block;
+}
+.input-group-addon{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+/*头版样衣制作*/
+#sample .detail{
+    width: 10%;
+}
+
+
 /*纸样*/
 #paper-sample .list-checkbox{
     width: 5%;

@@ -222,24 +222,22 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in sample2">
+							<dl v-for="item in sample2" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{ item.design_no}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
 								<dd class="operator-time">{{ item.scoring_time | transTime}}</dd>
 								<dd class="gender">{{ item.d_gender | getGender }}</dd>
 								<dd class="series">{{ item.series_id | getSeries }}</dd>
 								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#passModal">审版通过</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#passModal" v-on:click="getChosenId( item.design_no )" >审版通过</button>
 								</dd>
 								<dd class="operator">
 									<div class="input-group">
-										<input type="text" class="form-control check-opinion" placeholder="请输入审版意见">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewModal">申请复版</button>
-										</span>
+										<input type="text" class="form-control" placeholder="请输入审版意见">
+										<span class="btn btn-primary input-group-btn" data-toggle="modal" data-target="#dubviewModal">申请复版</span>
 									</div>
 								</dd>
 							</dl>
@@ -257,7 +255,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="sample-pass-button">提交</button>
+									<button type="button" class="btn btn-primary" id="sample-pass-button" v-on:click="updateStatus(10, 'passversion_time')">提交</button>
 								</div>
 							</div>
 						</div>
@@ -267,14 +265,14 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="myModalLabel">完成建档</h4>
+									<h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
 								</div>
 								<div class="modal-body">
 									确定申请复版吗?
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="sample-dubview-button">提交</button>
+									<button type="button" class="btn btn-primary" id="sample-dubview-button" v-on:click="updateStatus(14, 'dub_applyversion_time')">提交</button>
 								</div>
 							</div>
 						</div>
@@ -283,7 +281,7 @@
 
 				<div id="viewer" class="list-box" v-show="currentIndex === 3">
 					<div class="status-box">
-						<div class="status-title">制作中</div>
+						<div class="status-title">审版通过</div>
 						<div class="list-title">
 							<dl>
 								<dt class="list-checkbox">
@@ -299,7 +297,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in viewer">
+							<dl v-for="item in viewer" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -329,7 +327,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="viewer-button">提交</button>
+									<button type="button" class="btn btn-primary" id="viewer-button" v-on:click="updateStatus(11, 'adopt_admitcheck_time')">提交</button>
 								</div>
 							</div>
 						</div>
@@ -353,7 +351,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in dubviewer1">
+							<dl v-for="item in dubviewer1" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -421,7 +419,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchase1">
+							<dl v-for="item in repurchase1" v-if="item.source == 1">
 								<dt class="design-no">{{ item.design_no }}</dt>
 								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
 								<dd class="gender">{{ item.d_gender }}</dd>
@@ -447,7 +445,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchase2">
+							<dl v-for="item in repurchase2" v-if="item.source == 1">
 								<dt class="design-no">{{ item.design_no }}</dt>
 								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
 								<dd class="gender">{{ item.d_gender | getGender }}</dd>
@@ -460,6 +458,7 @@
 						</div>
 					</div>
 				</div>
+                
 				<div id="repurchase-list1" class="list-box" v-show="currentIndex === 6">
 					<div class="status-box" id="designer-check1">
 						<div class="status-title">待审批</div>
@@ -478,7 +477,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchaseD1">
+							<dl v-for="item in repurchaseD1" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -509,7 +508,7 @@
 							</div>
 							<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-							<button type="button" class="btn btn-primary" id="designer-check-button">确定</button>
+							<button type="button" class="btn btn-primary" id="designer-check-button" v-on:click="updateStatus(12, 'adopt_checked_time')">确定</button>
 							</div>
 						</div>
 						</div>
@@ -528,7 +527,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchaseD2">
+							<dl v-for="item in repurchaseD2" v-if="item.source == 1">
 								<dt class="design-no">{{item.design_no }}</dt>
 								<dd class="operator-time">{{item.filing_time | transTime }}</dd>
 								<dd class="gender">{{item.d_gender | getGender }}</dd>
@@ -554,7 +553,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchaseD3">
+							<dl v-for="item in repurchaseD3" v-if="item.source == 1">
 								<dt class="design-no">{{ item.design_no }}</dt>
 								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
 								<dd class="gender">{{ item.d_gender | getGender }}</dd>
@@ -567,6 +566,7 @@
 						</div>
 					</div>
 				</div>
+                
 				<div id="repurchase-list2" class="list-box" v-show="currentIndex === 7">
 					<div class="status-box">
 						<div class="status-title">审批中</div>
@@ -581,7 +581,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchaseM1">
+							<dl v-for="item in repurchaseM1" v-if="item.source == 1">
 								<dt class="design-no">{{ item.design_no }}</dt>
 								<dd class="operator-time">{{ item.filing_time | transTime }}</dd>
 								<dd class="gender">{{ item.d_gender | getGender }}</dd>
@@ -610,7 +610,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchaseM2">
+							<dl v-for="item in repurchaseM2" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
@@ -641,7 +641,7 @@
 								</div>
 								<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary" id="transmit-button">确定</button>
+								<button type="button" class="btn btn-primary" id="transmit-button" v-on:click="updateStatus(13, 'adopt_transfer_time')">确定</button>
 								</div>
 							</div>
 						</div>
@@ -659,7 +659,7 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in repurchaseM3">
+							<dl v-for="item in repurchaseM3" v-if="item.source == 1">
 								<dt class="design-no">{{ item.design_no }}</dt>
 								<dd class="operator-time">{{ item.adopt_transfer_time | transTime }}</dd>
 								<dd class="gender">{{ item.d_gender | getGender }}</dd>

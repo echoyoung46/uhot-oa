@@ -11,9 +11,9 @@
 		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  v-on:click="toggle(0,[4],['sample'])">头版样衣制作</a></li>
-					<li role="presentation"><a href="#viewer" id="viewer-enter"  v-on:click="toggle(1)">审版</a></li>
-					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2)">复版</a></li>
+					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  v-on:click="toggle(0,[4,6,8],['sample1','sample2','sample3'])">头版样衣制作</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter"  v-on:click="toggle(1,[10,14],['',''])">审版</a></li>
+					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2,[15,17,18],['','',''])">复版</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-enter"  v-on:click="toggle(3)">工艺单</a></li>
 					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  v-on:click="toggle(4, [34], ['sample'])">纸样</a></li>
 					<li role="presentation"><a href="#marker" id="marker-enter"  v-on:click="toggle(5, [40, 51], ['marker1','marker2'])">唛架</a></li>
@@ -22,7 +22,7 @@
 			</div>
 			<div class="page-list">
 				<div id="sample" class="list-box" v-show="currentIndex === 0">
-					<div class="status-box" ms-controller="sample1" id="sample1">
+					<div class="status-box" id="sample1">
 						<div class="status-title">申请制作</div>
 						<div class="list-title">
 							<dl>
@@ -38,23 +38,23 @@
 							</dl>
 						</div>
 						<div class="list-detail table table-hover">
-							<dl v-for="item in sample" v-if="item.source == 1">
+							<dl v-for="item in sample1" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
 								<dd class="design-no">{{ item.design_no }}</dd>
 								<dd class="operator-time">{{ item.apply_makefront_time | transTime  }}</dd>
 								<dd class="gender">{{ item.d_gender | getGender }}</dd>
-								<dd class="series">{{ item.series_id | getSerie}}</dd>
-								<dd class="source">{{ item.source }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="operator">
-									<select class="sampler-select">
+									<select class="form-control sampler-select">
 										<option value="汤胜辉1">纸样师——汤胜辉1</option>
 										<option value="汤胜辉2">纸样师——汤胜辉2</option>
 										<option value="汤胜辉3">纸样师——汤胜辉3</option>
 									</select>
 									
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal1">纸样分配</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal1" v-on:click="getChosenId( item.design_no )">纸样分配</button>
 								</dd>
 							</dl>
 						</div>
@@ -72,12 +72,12 @@
 								</div>
 								<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary" id="sample1-save-button">确定</button>
+								<button type="button" class="btn btn-primary"  v-on:click="updateStatus(5, 'allotpattern_time')">确定</button>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!--<div class="status-box" ms-controller="sample2" id="sample2">
+					<div class="status-box" id="sample2">
 						<div class="status-title">完成纸样</div>
 						<div class="list-title">
 							<dl>
@@ -93,48 +93,48 @@
 								<dd class="operator">车版分配</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample2" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.allotpattern_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="detail">{{el.sampler_name}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.allotpattern_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
+								<dd class="detail">{{ item.sampler_name }}</dd>
 								<dd class="operator">
-									<select class="carversion-select">
+									<select class="form-control carversion-select">
 										<option value="李四">车版师——李四</option>
-										<option value="张三">车版师——张三/option>
+										<option value="张三">车版师——张三</option>
 										<option value="王五">车版师——王五</option>
 									</select>
-									 <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal2">车版分配</button>
+									 <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal2" v-on:click="getChosenId( item.design_no )">车版分配</button>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
 					<!-- Modal -->
 					<div class="modal fade" id="sampleModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
-							</div>
-							<div class="modal-body">
-							确定分配车版师吗?
-							</div>
-							<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-							<button type="button" class="btn btn-primary" id="carversion-save-button">确定</button>
-							</div>
-						</div>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+                                </div>
+                                <div class="modal-body">
+                                确定分配车版师吗?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary"  v-on:click="updateStatus(8, 'allotcarversion_time')">确定</button>
+                                </div>
+                            </div>
 						</div>
 					</div>
 
-					<!--<div class="status-box" ms-controller="sample3" id="sample3">
+					<div class="status-box" id="sample3">
 						<div class="status-title">制作完成</div>
 						<div class="list-title">
 							<dl>
@@ -150,45 +150,44 @@
 								<dd class="operator">车版计分</dd>
 							</dl>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in sample3" v-if="item.source == 1">
 								<dt class="list-checkbox">
 									<input type="checkbox" name="" value="">
 								</dt>
-								<dd class="design-no">{{el.design_no}}</dd>
-								<dd class="operator-time">{{el.allotcarversion_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="detail">{{el.carversion_name}}</dd>
+								<dd class="design-no">{{ item.design_no }}</dd>
+								<dd class="operator-time">{{ item.allotcarversion_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
+								<dd class="detail">{{ item.carversion_name }}</dd>
 								<dd class="operator">
-									<div class="input-group">
-										<input type="text" class="form-control carversion-score" placeholder="请输入分数">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#sampleModal3">计分</button>
-										</span>
-									</div>
+									
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="请输入分数" aria-describedby="basic-addon2">
+                                        <span class="btn btn-primary input-group-addon" id="basic-addon2" data-toggle="modal" data-target="#sampleModal3" v-on:click="getChosenId( item.design_no )">计分</span>
+                                    </div>
 								</dd>
 							</dl>
 						</div>
-					</div>-->
-					<!--Modal-->
-					<div class="modal fade" id="sampleModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
-					      </div>
-					      <div class="modal-body">
-					        确定计分吗?
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					        <button type="button" class="btn btn-primary" id="score-save-button">确定</button>
-					      </div>
-					    </div>
-					  </div>
+                        <!--计分Modal-->
+                        <div class="modal fade" id="sampleModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">头版样衣制作</h4>
+                                </div>
+                                <div class="modal-body">
+                                确定提交计分吗?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary"  v-on:click="updateStatus(9, 'scoring_time')">确定</button>
+                                </div>
+                            </div>
+						</div>
+					</div>
 					</div>
 				</div>
 				<div id="viewer" class="list-box" v-show="currentIndex === 1">
