@@ -10,10 +10,14 @@ $(function() {
         data: {
             currentIndex: 0,
             
-            //纸样 
+            //头版样衣制作
             sample1: [],
             sample2: [],
             sample3: [],
+            
+            //审版
+            viewer1: [],
+            viewer2: [],
             
             //唛架 
             marker1: [],

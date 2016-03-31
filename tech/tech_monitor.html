@@ -12,7 +12,7 @@
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
 					<li role="presentation" class="active"><a href="#sample" id="sample-enter"  v-on:click="toggle(0,[4,6,8],['sample1','sample2','sample3'])">头版样衣制作</a></li>
-					<li role="presentation"><a href="#viewer" id="viewer-enter"  v-on:click="toggle(1,[10,14],['',''])">审版</a></li>
+					<li role="presentation"><a href="#viewer" id="viewer-enter"  v-on:click="toggle(1,[10,14],['viewer1','viewer2'])">审版</a></li>
 					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter"  v-on:click="toggle(2,[15,17,18],['','',''])">复版</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-enter"  v-on:click="toggle(3)">工艺单</a></li>
 					<li role="presentation"><a href="#paper-sample" id="paper-sample-enter"  v-on:click="toggle(4, [34], ['sample'])">纸样</a></li>
@@ -191,7 +191,7 @@
 					</div>
 				</div>
 				<div id="viewer" class="list-box" v-show="currentIndex === 1">
-					<!--<div class="status-box" ms-controller="viewer1" id="viewer1">
+					<div class="status-box" id="viewer1">
 						<div class="status-title">审版通过</div>
 						<div class="list-title">
 							<dt class="design-no">设计款号</dt>
@@ -201,18 +201,18 @@
 							<dd class="source">生产类型</dd>
 							<dd class="status">状态</dd>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.finish_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in viewer1" v-if="item.source==1">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.apply_makefront_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
 								<dd class="status">审版通过</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="status-box" ms-controller="viewer2" id="viewer2">
+					<div class="status-box" id="viewer2">
 						<div class="status-title">申请复版</div>
 						<div class="list-title">
 							<dt class="design-no">设计款号</dt>
@@ -224,21 +224,21 @@
 							<dd class="operator">同意复版</dd>
 							<dd class="dub-time">复版次数</dd>
 						</div>
-						<div class="list-detail table table-hover" ms-each="dress">
-							<dl>
-								<dt class="design-no">{{el.design_no}}</dt>
-								<dd class="operator-time">{{el.finish_transmaterial_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-								<dd class="gender">{{el.d_gender}}</dd>
-								<dd class="series">{{el.series_id}}</dd>
-								<dd class="source">{{el.source}}</dd>
-								<dd class="dub-option">{{el.source}}</dd>
+						<div class="list-detail table table-hover">
+							<dl v-for="item in viewer2" v-if="item.source==1">
+								<dt class="design-no">{{ item.design_no }}</dt>
+								<dd class="operator-time">{{ item.dub_applyversion_time | transTime }}</dd>
+								<dd class="gender">{{ item.d_gender | getGender }}</dd>
+								<dd class="series">{{ item.series_id | getSeries }}</dd>
+								<dd class="source">{{ item.source | getSource }}</dd>
+								<dd class="dub-option">{{ item.source }}</dd>
 								<dd class="operator">
-									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewModal">同意复版</button>
+									<button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#dubviewModal" v-on:click="getChosenId( item.design_no )">同意复版</button>
 								</dd>
-								<dd class="dub-time">{{el.source}}</dd>
+								<dd class="dub-time">{{ item.source }}</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
 					<div class="modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -251,7 +251,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="dubview-pass-button">确定</button>
+									<button type="button" class="btn btn-primary" id="dubview-pass-button" v-on:click="updateStatus(15, 'dub_agreeversion_time')">确定</button>
 								</div>
 							</div>
 						</div>

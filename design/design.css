@@ -1,3 +1,9 @@
+.input-group-addon{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+
 #basic-file .list-checkbox{
 	width: 5%;
 }
@@ -45,27 +51,6 @@
 	width: 30%;
 }
 
-#sample .list-checkbox{
-	width: 5%;
-}
-#sample .design-no{
-	width: 15%;
-}
-#sample .operator-time{
-	width: 15%;
-}
-#sample .gender{
-	width: 10%;
-}
-#sample .series{
-	width: 10%;
-}
-#sample .source{
-	width: 15%;
-}
-#sample .details{
-	width: 30%;
-}
 #sample .operator{
 	width: 15%;
 }

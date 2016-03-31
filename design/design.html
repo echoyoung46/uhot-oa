@@ -13,7 +13,7 @@
 				<ul class="list-inline nav nav-tabs">
 					<li role="presentation" class="active"><a href="#basic-file" id="basic-file-enter" v-on:click="toggle(0,[1],['basicFile'])">基础档案</a></li>
 					<li role="presentation"><a href="#season" id="season-enter" v-on:click="toggle(1,[2,3],['season1','season2'])">调料</a></li>
-					<li role="presentation"><a href="#sample" id="sample-enter" v-on:click="toggle(2,[4,9],['sample1','sample2'])">头版样衣制作</a></li>
+					<li role="presentation"><a href="#sample" id="sample-enter" v-on:click="toggle(2,[[4,14],9],['sample1','sample2'])">头版样衣制作</a></li>
 					<li role="presentation"><a href="#viewer" id="viewer-enter" v-on:click="toggle(3,[10],['viewer'])">审版</a></li>
 					<li role="presentation"><a href="#dubviewer" id="dubviewer-enter" v-on:click="toggle(4,[1,1],['dubviewer1','dubviewer2'])">复版</a></li>
 					<li role="presentation"><a href="#repurchase-list" id="repurchase-enter" v-on:click="toggle(5,[1,1],['repurchase1','repurchase2'])">设计助理-预采任务单</a></li>
@@ -236,8 +236,8 @@
 								</dd>
 								<dd class="operator">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="请输入审版意见">
-										<span class="btn btn-primary input-group-btn" data-toggle="modal" data-target="#dubviewModal">申请复版</span>
+										<input type="text" class="form-control" placeholder="请输入审版意见" aria-describedby="basic-addon2">
+										<span class="btn btn-primary input-group-addon" id="basic-addon2" data-toggle="modal" data-target="#dubviewModal" v-on:click="getChosenId( item.design_no )">申请复版</span>
 									</div>
 								</dd>
 							</dl>
