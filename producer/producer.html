@@ -11,7 +11,7 @@
 		<div class="page-content" id="menu">
 			<div class="page-menu">
 				<ul class="list-inline nav nav-tabs">
-					<li role="presentation" class="active"><a href="#apply-no" id="apply-no-enter" v-on:click="toggle(0)">申请款号</a></li>
+					<li role="presentation" class="active"><a href="#apply-no" id="apply-no-enter" v-on:click="toggle(0,[13],['applyno'])">申请款号</a></li>
 					<li role="presentation"><a href="#repurchase-list" id="repurchase-list-enter" v-on:click="toggle(1)">预采任务单</a></li>
 					<li role="presentation"><a href="#craftmaterial-list" id="craftmaterial-list-enter" v-on:click="toggle(2)">工艺配料单</a></li>
 					<li role="presentation"><a href="#process-sheet" id="process-sheet-enter" v-on:click="toggle(3, [[33, 38, 41]], ['craft'])">工艺单</a></li>
@@ -28,7 +28,7 @@
 			</div>
             <div class="page-list">
                 <div id="apply-no" class="list-box" v-show="currentIndex === 0">
-                    <!--<div class="status-box">
+                    <div class="status-box">
                         <div class="list-title">
                             <dl>
                                 <dt class="list-checkbox">
@@ -44,30 +44,28 @@
                             </dl>
                         </div>
                         <div class="list-detail table table-hover" id="apply">
-                            <dl>
+                            <dl v-for="item in applyno" v-if="item.source == 1">
                                 <dt class="list-checkbox">
                                     <input type="checkbox" name="" value="">
                                 </dt>
-                                <dd class="design-no">{{el.design_no}}</dd>
-                                <dd class="operator-time">{{el.adopt_transfer_time | date("yyyy/MM/dd HH:mm:ss")}}</dd>
-                                <dd class="gender">{{el.d_gender}}</dd>
-                                <dd class="series">{{el.series_id}}</dd>
-                                <dd class="source">{{el.source}}</dd>
+                                <dd class="design-no">{{ item.design_no}}</dd>
+                                <dd class="operator-time">{{ item.adopt_transfer_time | transTime }}</dd>
+                                <dd class="gender">{{ item.d_gender | getGender }}</dd>
+                                <dd class="series">{{ item.series_id | getSeries }}</dd>
+                                <dd class="source">{{ item.source }}</dd>
                                 <dd class="details">
                                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                                 </dd>
                                 <dd class="operator">
                                     <div class="input-group">
-                                        <input type="text" class="form-control cargo-no" placeholder="请输入大货款号">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-primary operator-button" data-toggle="modal" data-target="#cargoModal">提交</button>
-                                            </span>
+                                        <input type="text" class="form-control" placeholder="请输入大货款号">
+                                        <span class="btn btn-primary input-group-addon" data-toggle="modal" data-target="#cargoModal" v-on:click="getChosenId( item.design_no )">提交</span>
                                     </div>
                                 </dd>
                             </dl>
                         </div>
-                    </div>-->
-                    <!--<div class="modal fade" id="cargoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    </div>
+                    <div class="modal fade" id="cargoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -79,11 +77,11 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="button" class="btn btn-primary" id="cargono-save-button">确定</button>
+                                    <button type="button" class="btn btn-primary" id="cargono-save-button" v-on:click="updateStatus(20, 'finish_styleno_time')">确定</button>
                                 </div>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
 
                 <div id="repurchase-list" class="list-box" v-show="currentIndex === 1">

@@ -1,26 +1,15 @@
-#apply-no .list-checkbox{
-	width: 5%;
+.form-control{
+    width: 50%;    
+    display: inline-block;
 }
-#apply-no .design-no{
-	width: 15%;
+.input-group-addon{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
 }
-#apply-no .operator-time{
-	width: 15%;
-}
-#apply-no .gender{
-	width: 10%;
-}
-#apply-no .series{
-	width: 10%;
-}
-#apply-no .source{
-	width: 10%;
-}
-#apply-no .details{
-	width: 10%;
-}
+
 #apply-no .operator{
-	width: 25%;
+	width: 15%;
 }
 
 #repurchase-list .list-checkbox{

@@ -10,6 +10,9 @@ $(function() {
         data: {
             currentIndex: 0,
             
+            //申请款号 
+            applyno: [],
+            
             //下单表 
             order: [],
             
@@ -65,7 +68,7 @@ $(function() {
 	// initAction();
     
     //初始时获取第一项数据
-    // producerModel.toggle(4, [27], ['order1']);
+    producerModel.toggle(0,[13],['applyno']);
     
 	// initSave();
 	bindEvent();
@@ -91,6 +94,82 @@ function bindEvent() {
 		}
 	});
 }
+
+/**
+ * Vue 时间格式转换
+ */
+Vue.filter('transTime', function (_time) {
+    //时间格式转换
+    var t = _time,
+        _year = t.getFullYear(),
+        _month = t.getMonth() + 1,
+        _day = t.getDate(),
+        _hour = t.getHours(),
+        _min = t.getMinutes(),
+        _sec = t.getSeconds(),
+        timeResult = _year + '-' + _month + '-' + _day + ' ' + _hour + ':' + _min + ':' + _sec; 
+    return timeResult;
+})
+
+/**
+ * 时间格式转换过滤器
+ */
+Vue.filter('transTime', function (_time) {
+    var t = new Date(parseInt(_time)),
+        _year = t.getFullYear(),
+        _month = t.getMonth() + 1,
+        _day = t.getDate(),
+        _hour = t.getHours(),
+        _min = t.getMinutes(),
+        _sec = t.getSeconds(),
+        timeResult = _year + '-' + _month + '-' + _day + ' ' + _hour + ':' + _min + ':' + _sec; 
+    return timeResult;
+})
+
+/**
+ * 男女装过滤器
+ */
+Vue.filter('getGender', function (value) {
+    if(value == '1'){
+        return '男装'
+    }else if(value == '2'){
+        return '女装'
+    }else {
+        return '其他'
+    }
+})
+
+/**
+ * 系列过滤器
+ */
+Vue.filter('getSeries', function (value) {
+    if(value == '1'){
+        return '贵尚'
+    }else if(value == '2'){
+        return '雅尚'
+    }else if(value == '3'){
+        return '器尚'
+    }else if(value == '4'){
+        return '风尚'
+    }else if(value == '5'){
+        return '外采'
+    }else {
+        return '其他'
+    }
+})
+
+/**
+ * 生产方式过滤器
+ */
+Vue.filter('getSource', function (value) {
+    if(value == '1'){
+        return '自产'
+    }else if(value == '2'){
+        return '外采'
+    }else {
+        return '其他'
+    }
+})
 
 function initSave() {
 	$('#cargono-save-button').on('click', function () {
